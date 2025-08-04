@@ -14,91 +14,96 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-GHHdFNrJaxVnY+uJDRK7+e+OFf7AqQG7Ge0XEtWkdP5TcX49hKhi2ut3W+h+LiT709lUIwxgsHNRD3+wL1Oj+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
+    :root {
+      /* Brand palette (pulled from logo) */
+      --teal-dark: #0f617b;
+      --teal-light: #c7e3e8;
+      --orange: #f28c2f;
+      --offwhite: #f4f8fc;
+    }
+
     /* ---------- Reset & Base ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      height: 100%;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #e8f0ff 0%, #fdfbff 50%, #ffeefb 100%);
-      color: #1a1a1a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-rendering: optimizeLegibility;
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Poppins",sans-serif;
+      min-height:100vh;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--teal-light) 0%,var(--offwhite) 40%,#ffffff 60%,var(--teal-light) 100%);
+      color:#1a1a1a;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* ---------- Container ---------- */
-    .card {
-      background: #ffffffcc;
-      backdrop-filter: blur(15px);
-      border-radius: 1.5rem;
-      padding: 2.5rem 1.75rem;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.25rem;
+    /* ---------- Card ---------- */
+    .card{
+      position:relative;
+      padding:3.2rem 2.2rem 2.7rem;
+      width:100%;max-width:460px;
+      border-radius:2rem;
+      background:#fff;
+      border:4px solid var(--teal-dark);
+      box-shadow:0 22px 45px rgba(0,0,0,0.14);
+      display:flex;flex-direction:column;align-items:center;gap:1.65rem;
+      transition:transform .35s cubic-bezier(.34,1.56,.64,1);
     }
+    .card:hover{transform:translateY(-8px)}
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      text-align: center;
+    /* ---------- Logo ---------- */
+    .logo{
+      width:108px;height:108px;
+      border-radius:50%;
+      object-fit:cover;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+      animation:float 6s ease-in-out infinite;
     }
-    .tagline {
-      font-size: 0.95rem;
-      color: #5f5f5f;
-      text-align: center;
-    }
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+    h1{font-size:2.25rem;font-weight:700;text-align:center;letter-spacing:-.4px;color:var(--teal-dark)}
+    .tagline{font-size:1rem;color:#555;text-align:center;margin-top:-.4rem}
 
     /* ---------- Buttons ---------- */
-    .btn {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      background: #ffffff;
-      border: 2px solid #1a1a1a;
-      border-radius: 0.75rem;
-      padding: 0.9rem 1.2rem;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #1a1a1a;
-      text-decoration: none;
-      transition: all 0.25s ease;
+    .btn{
+      position:relative;overflow:hidden;
+      width:100%;text-align:center;
+      padding:1rem 1.25rem;
+      border:none;
+      border-radius:1rem;
+      background:var(--teal-dark);
+      font-size:1.05rem;font-weight:600;color:#fff;
+      text-decoration:none;
+      display:flex;align-items:center;justify-content:center;gap:.6rem;
+      transition:all .25s ease;
     }
-    .btn:hover {
-      background: #1a1a1a;
-      color: #fff;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
-    }
+    .btn:hover{background:var(--orange);transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.20)}
+    .btn:active{transform:translateY(0) scale(.96)}
+
+    /* Ripple effect */
+    .ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.4);animation:ripple .6s linear}
+    @keyframes ripple{to{transform:scale(4);opacity:0}}
+
+    /* ---------- Pop‑up Modal ---------- */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;z-index:999;opacity:0;pointer-events:none;transition:opacity .35s ease}
+    .modal.show{opacity:1;pointer-events:auto}
+    .modal-content{background:#fff;width:90%;max-width:380px;padding:2rem 1.5rem 2.2rem;border-radius:1.25rem;text-align:center;box-shadow:0 12px 28px rgba(0,0,0,.2);position:relative;animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
+    @keyframes pop{0%{transform:scale(.7)}100%{transform:scale(1)}}
+    .close-btn{position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.25rem;cursor:pointer;color:#444}
+    .modal h2{font-size:1.45rem;color:var(--teal-dark);margin-bottom:.6rem}
+    .modal p{font-size:.95rem;color:#555;margin-bottom:1.2rem}
 
     /* ---------- Footer ---------- */
-    footer {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 0.5rem;
-      text-align: center;
-    }
+    footer{font-size:.82rem;color:#666;text-align:center;margin-top:.15rem}
   </style>
 </head>
 <body>
   <main class="card">
+    <!-- Place your logo file in the same folder and name it logo.png or adjust src -->
+    <img src="logo.png" alt="HecCollects Logo" class="logo"/>
     <h1>HecCollects</h1>
     <p class="tagline">Quality • Collectibles • Community</p>
 
     <a class="btn" href="https://ebay.us/m/TjPzD2" target="_blank">
       <i class="fa-brands fa-ebay"></i>
-      Leave a Review on eBay
+      Shop / Review on eBay
     </a>
 
     <a class="btn" href="https://offerup.co/3D5QQbGZyVb" target="_blank">
@@ -111,12 +116,38 @@
       Email / Business Inquiries
     </a>
 
-    <footer>© 2025 HecCollects – All rights reserved.</footer>
+    <footer>© 2025 HecCollects – All rights reserved.</footer>
   </main>
 
+  <!-- Modal CTA -->
+  <div class="modal" id="ctaModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <h2>Join the HecCollects Fam!</h2>
+      <p>Leave a review on eBay or OfferUp and snag <strong>5% off</strong> your next order.</p>
+      <a href="https://ebay.us/m/TjPzD2" class="btn" style="max-width:260px;margin:0 auto;">
+        <i class="fa-brands fa-ebay"></i> Leave Review
+      </a>
+    </div>
+  </div>
+
   <script>
-    // Simple console log – you can expand this for analytics or copy‑to‑clipboard
-    console.log("HecCollects link page loaded 🚀");
-  </script>
-</body>
-</html>
+    // ---------- Ripple Effect ---------- //
+    document.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('click',function(e){
+        const circle=document.createElement('span');
+        const diameter=Math.max(this.clientWidth,this.clientHeight);
+        const radius=diameter/2;
+        circle.style.width=circle.style.height=`${diameter}px`;
+        circle.style.left=`${e.clientX-this.getBoundingClientRect().left-radius}px`;
+        circle.style.top=`${e.clientY-this.getBoundingClientRect().top-radius}px`;
+        circle.classList.add('ripple');
+        const ripple=this.querySelector('.ripple');
+        if(ripple) ripple.remove();
+        this.appendChild(circle);
+      });
+    });
+
+    // ---------- Modal Logic ---------- //
+    const modal=document.getElementById('ctaModal');
+    const closeBtn=document.getElementById
