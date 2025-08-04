@@ -1,19 +1,122 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<title>HecCollects – Links</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HecCollects – Links</title>
 
-<link href="style.css" rel="stylesheet"/></head>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-GHHdFNrJaxVnY+uJDRK7+e+OFf7AqQG7Ge0XEtWkdP5TcX49hKhi2ut3W+h+LiT709lUIwxgsHNRD3+wL1Oj+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* ---------- Reset & Base ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #e8f0ff 0%, #fdfbff 50%, #ffeefb 100%);
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ---------- Container ---------- */
+    .card {
+      background: #ffffffcc;
+      backdrop-filter: blur(15px);
+      border-radius: 1.5rem;
+      padding: 2.5rem 1.75rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-align: center;
+    }
+    .tagline {
+      font-size: 0.95rem;
+      color: #5f5f5f;
+      text-align: center;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: #ffffff;
+      border: 2px solid #1a1a1a;
+      border-radius: 0.75rem;
+      padding: 0.9rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn:hover {
+      background: #1a1a1a;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
 <body>
-<h1>HecCollects</h1>
-<p class="tagline">Trading cards • Collectibles • Community</p>
-<a class="btn" href="https://ebay.us/m/TjPzD2" target="_blank">⭐ Leave a Review on eBay</a>
-<a class="btn" href="https://offerup.co/3D5QQbGZyVb" target="_blank">🛒 Shop / Review on OfferUp</a>
-<a class="btn" href="mailto:hectorsandoval1402@gmail.com" target="_blank">✉️ Email / Business Inquiries</a>
-<footer>© 2025 HecCollects – All rights reserved.</footer>
-<script defer="" src="script.js"></script></body>
+  <main class="card">
+    <h1>HecCollects</h1>
+    <p class="tagline">Trading Cards • Collectibles • Community</p>
+
+    <a class="btn" href="https://ebay.us/m/TjPzD2" target="_blank">
+      <i class="fa-brands fa-ebay"></i>
+      Leave a Review on eBay
+    </a>
+
+    <a class="btn" href="https://offerup.co/3D5QQbGZyVb" target="_blank">
+      <i class="fa-solid fa-store"></i>
+      Shop / Review on OfferUp
+    </a>
+
+    <a class="btn" href="mailto:hectorsandoval1402@gmail.com" target="_blank">
+      <i class="fa-solid fa-envelope"></i>
+      Email / Business Inquiries
+    </a>
+
+    <footer>© 2025 HecCollects – All rights reserved.</footer>
+  </main>
+
+  <script>
+    // Simple console log – you can expand this for analytics or copy‑to‑clipboard
+    console.log("HecCollects link page loaded 🚀");
+  </script>
+</body>
 </html>
