@@ -44,7 +44,7 @@
 
     /* ---------- Buttons ---------- */
     .links{display:flex;flex-direction:column;gap:1rem;width:100%}
-    .btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.85rem 1.3rem;font-size:1rem;font-weight:600;color:#fff;background:var(--teal-dark);border:none;border-radius:1rem;text-decoration:none;transition:.25s;position:relative;overflow:hidden}
+    .btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.85rem 1.3rem;font-size:1rem;font-weight:600;color:#fff;background:var(--teal-dark);border:none;border-radius:1rem;text-decoration:none;transition:.25s;position:relative;overflow:hidden;cursor:pointer}
     .btn:hover{background:var(--orange);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
 
     /* Ripple */
@@ -91,40 +91,6 @@
     #contact{background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=60')}
   </style>
 </head>
-  <script>
-  // -------------------------------
-  // Burger / overlay menu toggle
-  // -------------------------------
-  const burger  = document.querySelector('.nav-toggle');
-  const navMenu = document.querySelector('.nav-menu');
-
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');   // animate lines
-    navMenu.classList.toggle('open');  // slide overlay
-  });
-
-  // Close overlay when a menu link is chosen
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      burger.classList.remove('open');
-      navMenu.classList.remove('open');
-    });
-  });
-
-  // Optional: ripple effect for all .btn
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      const circle  = document.createElement('span');
-      const size    = Math.max(btn.clientWidth, btn.clientHeight);
-      circle.style.width = circle.style.height = `${size}px`;
-      circle.style.left  = `${e.clientX - btn.getBoundingClientRect().left - size/2}px`;
-      circle.style.top   = `${e.clientY - btn.getBoundingClientRect().top  - size/2}px`;
-      circle.classList.add('ripple');
-      btn.appendChild(circle);
-      setTimeout(() => circle.remove(), 600);
-    });
-  });
-</script>
 <body>
   <!-- Navbar -->
   <header class="navbar">
@@ -174,7 +140,7 @@
       <div class="section-content">
         <div class="card">
           <h2>Local Deals on OfferUp</h2>
-          <p>Prefer local pickup? Check our OfferUp inventory for quick deals and meet-ups in SoCal.</p>
+          <p>Prefer local pickup? Check our OfferUp inventory for quick deals and meet‑ups in SoCal.</p>
           <div class="links">
             <a href="https://offerup.co/3D5QQbGZyVb" target="_blank" class="btn"><i class="fa-solid fa-store"></i> Visit OfferUp</a>
           </div>
@@ -187,7 +153,7 @@
       <div class="section-content">
         <div class="card">
           <h2>About HecCollects</h2>
-          <p>Hey! I’m Hector—collector, curator, and all-around hobby nerd. From childhood nostalgia to investment-grade assets, I live and breathe trading cards. Let’s share the hobby love!</p>
+          <p>Hey! I’m Hector—collector, curator, and all‑around hobby nerd. From childhood nostalgia to investment‑grade assets, I live and breathe trading cards. Let’s share the hobby love!</p>
         </div>
       </div>
       <span class="scroll-cue">Swipe / scroll ↓</span>
@@ -199,4 +165,46 @@
           <h2>Business Inquiries</h2>
           <p>Have a question, bulk lot, or collaboration idea? Shoot me an email and I’ll get back within 24 hours.</p>
           <div class="links">
-            <a href="mailto:hectorsandoval1402
+            <a href="mailto:hectorsandoval1402@gmail.com" class="btn"><i class="fa-solid fa-envelope"></i> Email Me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- -------------------------------
+       Burger / overlay menu toggle
+       ------------------------------- -->
+  <script>
+    const burger  = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');   // animate lines
+      navMenu.classList.toggle('open');  // slide overlay
+    });
+
+    // Close overlay when a menu link is chosen
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('open');
+        navMenu.classList.remove('open');
+      });
+    });
+
+    // Optional: ripple effect for all .btn
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const circle  = document.createElement('span');
+        const size    = Math.max(btn.clientWidth, btn.clientHeight);
+        circle.style.width = circle.style.height = `${size}px`;
+        circle.style.left  = `${e.clientX - btn.getBoundingClientRect().left - size/2}px`;
+        circle.style.top   = `${e.clientY - btn.getBoundingClientRect().top  - size/2}px`;
+        circle.classList.add('ripple');
+        btn.appendChild(circle);
+        setTimeout(() => circle.remove(), 600);
+      });
+    });
+  </script>
+</body>
+</html>
