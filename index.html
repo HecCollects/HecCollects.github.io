@@ -91,6 +91,40 @@
     #contact{background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=60')}
   </style>
 </head>
+  <script>
+  // -------------------------------
+  // Burger / overlay menu toggle
+  // -------------------------------
+  const burger  = document.querySelector('.nav-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');   // animate lines
+    navMenu.classList.toggle('open');  // slide overlay
+  });
+
+  // Close overlay when a menu link is chosen
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  });
+
+  // Optional: ripple effect for all .btn
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const circle  = document.createElement('span');
+      const size    = Math.max(btn.clientWidth, btn.clientHeight);
+      circle.style.width = circle.style.height = `${size}px`;
+      circle.style.left  = `${e.clientX - btn.getBoundingClientRect().left - size/2}px`;
+      circle.style.top   = `${e.clientY - btn.getBoundingClientRect().top  - size/2}px`;
+      circle.classList.add('ripple');
+      btn.appendChild(circle);
+      setTimeout(() => circle.remove(), 600);
+    });
+  });
+</script>
 <body>
   <!-- Navbar -->
   <header class="navbar">
