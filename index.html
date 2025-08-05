@@ -10,35 +10,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-GHHdFNrJaxVnY+uJDRK7+e+OFf7AqQG7Ge0XEtWkdP5TcX49hKhi2ut3W+h+LiT709lUIwxgsHNRD3+wL1Oj+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-GHHdFNrJaxVnY+uJDRK7+e+OFf7AqQG7Ge0XEtWkdP5TcX49hKhi2ut3W+h+LiT709lUIwxgsHNRD3+wL1Oj+w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     :root{
       --teal-dark:#0f617b;
-      --teal-light:#c7e3e8;
       --orange:#f28c2f;
       --black:#151515;
       --white:#ffffff;
     }
+
     /* ---------- Reset & Base ---------- */
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{font-family:'Poppins',sans-serif;background:var(--black);color:var(--white);overflow:hidden}
 
-    /* ---------- Wrapper with snap ---------- */
+    /* ---------- Wrapper & Sections ---------- */
     .wrapper{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
-    section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center;background-size:cover;background-repeat:no-repeat}
+    section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
     section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
-    .section-content{position:relative;z-index:1;width:100%;display:flex;align-items:center;justify-content:center;padding:2rem}
+    .section-content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2rem;margin-top:12vh}
 
     /* ---------- Card ---------- */
-    .card{background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.18);border-radius:1.6rem;padding:2rem 1.4rem;width:100%;max-width:460px;box-shadow:0 25px 50px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.34,1.56,.64,1);display:flex;flex-direction:column;align-items:center;gap:1.4rem;perspective:1000px}
+    .card{background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.18);border-radius:1.6rem;padding:2rem 1.4rem;width:100%;max-width:460px;box-shadow:0 25px 50px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.34,1.56,.64,1);display:flex;flex-direction:column;align-items:center;gap:1.4rem}
     .card:hover{transform:translateY(-10px) rotateX(5deg) rotateY(-5deg)}
 
-    /* ---------- Text & Logo ---------- */
+    /* ---------- Typography ---------- */
     .logo{width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,.5)}
-    h1{font-size:2.4rem;color:var(--white);text-shadow:0 3px 8px rgba(0,0,0,.4)}
+    h1{font-size:2.4rem;text-shadow:0 3px 8px rgba(0,0,0,.4)}
     h2{font-size:1.9rem;color:var(--orange)}
     p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 
@@ -52,22 +55,24 @@
     @keyframes ripple{to{transform:scale(4);opacity:0}}
 
     /* ---------- Scroll cue ---------- */
-    .scroll-cue{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);font-size:.8rem;color:#fff;opacity:.8;animation:cues 4s ease-in-out infinite;z-index:1}
+    .scroll-cue{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);font-size:.8rem;opacity:.8;animation:cues 4s ease-in-out infinite;z-index:1}
     @keyframes cues{0%,100%{opacity:.2;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,6px)}}
 
     /* ---------- Navbar ---------- */
-    .navbar{position:fixed;top:0;left:0;width:100%;padding:.7rem 1.2rem;display:flex;justify-content:space-between;align-items:center;z-index:9999;backdrop-filter:blur(6px)}
-    .brand{font-size:1.3rem;font-weight:700;color:#fff}
-    .nav-toggle{width:38px;height:28px;display:flex;flex-direction:column;justify-content:space-between;background:none;border:none;cursor:pointer;z-index:10001}
-    .line{height:3px;background:#fff;border-radius:2px;transition:.3s}
-    .nav-menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;background:rgba(21,21,21,.94);transform:translateY(-100%);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
-    .nav-menu.open{transform:translateY(0)}
-    .nav-menu a{color:#fff;font-size:1.6rem;font-weight:600;text-decoration:none}
-    .nav-menu a:hover{color:var(--orange)}
-    /* burger animation */
-    .nav-toggle.open .line:nth-child(1){transform:translateY(12px) rotate(45deg)}
+    .navbar{position:fixed;top:0;left:0;width:100%;padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);z-index:10000}
+    .brand{font-size:1.3rem;font-weight:700}
+
+    .nav-toggle{width:32px;height:24px;display:flex;flex-direction:column;justify-content:space-between;background:none;border:none;cursor:pointer;z-index:10001}
+    .line{width:100%;height:3px;background:var(--white);border-radius:2px;transition:transform .3s,opacity .3s}
+    .nav-toggle.open .line:nth-child(1){transform:translateY(9px) rotate(45deg)}
     .nav-toggle.open .line:nth-child(2){opacity:0}
-    .nav-toggle.open .line:nth-child(3){transform:translateY(-12px) rotate(-45deg)}
+    .nav-toggle.open .line:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+
+    /* Overlay Menu (desktop & mobile) */
+    .nav-menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;background:rgba(21,21,21,.95);transform:translateY(-100%);pointer-events:none;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .3s}
+    .nav-menu.open{transform:translateY(0);pointer-events:auto;opacity:1}
+    .nav-menu a{color:var(--white);font-size:1.8rem;font-weight:600;text-decoration:none}
+    .nav-menu a:hover{color:var(--orange)}
 
     /* ---------- Responsive tweaks ---------- */
     @media(max-width:640px){
@@ -77,13 +82,7 @@
       .btn{font-size:.95rem;padding:.8rem 1rem}
     }
 
-    @media(min-width:768px){
-      .card{max-width:680px}
-      .links{flex-direction:row;flex-wrap:wrap}
-      .links .btn{width:auto;flex:1 1 calc(50% - .5rem)}
-    }
-
-    /* ---------- Backgrounds ---------- */
+    /* ---------- Background Images ---------- */
     #home{background-image:url('https://freerangestock.com/sample/160887/stormtrooper-toy-figure-against-blue-sky.jpg')}
     #ebay{background-image:url('https://storage.needpix.com/rsynced_images/shoping-on-line.jpg')}
     #offerup{background-image:url('https://images.stockcake.com/public/2/9/9/299ab51b-a36e-4ad5-a759-b2877a7607cb_large/friendly-handshake-meeting-stockcake.jpg')}
@@ -95,20 +94,25 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="brand">HecCollects</div>
+
     <button class="nav-toggle" aria-label="Menu">
-      <span class="line"></span><span class="line"></span><span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
     </button>
-    <nav class="nav-menu">
-      <a href="#home">Home</a>
-      <a href="#ebay">eBay</a>
-      <a href="#offerup">OfferUp</a>
+
+    <!-- Overlay menu -->
+    <nav class="nav-menu" aria-hidden="true">
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="#offerup">OfferUp</a>
+      <a href="#ebay">eBay</a>
     </nav>
   </header>
 
   <!-- Sections -->
   <main class="wrapper">
+    <!-- HOME -->
     <section id="home">
       <div class="section-content">
         <div class="card">
@@ -123,6 +127,7 @@
       <span class="scroll-cue">Swipe / scroll ↓</span>
     </section>
 
+    <!-- EBAY -->
     <section id="ebay">
       <div class="section-content">
         <div class="card">
@@ -136,6 +141,7 @@
       <span class="scroll-cue">Swipe / scroll ↓</span>
     </section>
 
+    <!-- OFFERUP -->
     <section id="offerup">
       <div class="section-content">
         <div class="card">
@@ -149,16 +155,18 @@
       <span class="scroll-cue">Swipe / scroll ↓</span>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
       <div class="section-content">
         <div class="card">
           <h2>About HecCollects</h2>
-          <p>Hey! I’m Hector - collector, curator, and all‑around hobby nerd. From childhood nostalgia to investment‑grade assets, I've always looked for the value in products and why they compare the way they do in their respective hobby/niche. I live and breathe trading, but have shifted to selling to maintain my love for learning new hobbies. I price just under market online (with bigger breaks in person) to keep the hobby fun and accessible. Let’s share the passion!</p>
+          <p>Hey! I’m Hector – collector, curator, and all‑around hobby nerd. From childhood nostalgia to investment‑grade assets, I've always looked for the value in products and why they compare the way they do in their respective hobby/niche. I live and breathe trading, but have shifted to selling to maintain my love for learning new hobbies. I price just under market online (with bigger breaks in person) to keep the hobby fun and accessible. Let’s share the passion!</p>
         </div>
       </div>
       <span class="scroll-cue">Swipe / scroll ↓</span>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
       <div class="section-content">
         <div class="card">
@@ -172,27 +180,29 @@
     </section>
   </main>
 
-  <!-- -------------------------------
-       Burger / overlay menu toggle
-       ------------------------------- -->
+  <!-- ---------- JS: burger & ripple ---------- -->
   <script>
     const burger  = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
     burger.addEventListener('click', () => {
-      burger.classList.toggle('open');   // animate lines
-      navMenu.classList.toggle('open');  // slide overlay
+      burger.classList.toggle('open');
+      navMenu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', burger.classList.contains('open'));
+      navMenu.setAttribute('aria-hidden', !navMenu.classList.contains('open'));
     });
 
-    // Close overlay when a menu link is chosen
+    // Close after link click
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('open');
         navMenu.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        navMenu.setAttribute('aria-hidden', 'true');
       });
     });
 
-    // Optional: ripple effect for all .btn
+    // Ripple
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('click', e => {
         const circle  = document.createElement('span');
