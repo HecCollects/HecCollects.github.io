@@ -32,7 +32,7 @@
 
     /* ---------- Wrapper & Sections ---------- */
     .wrapper{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
-    section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}
+    section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
     section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
     .section-content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2rem;margin-top:12vh}
 
@@ -86,6 +86,10 @@
       h1{font-size:1.9rem}
       h2{font-size:1.65rem}
       .btn{font-size:.95rem;padding:.8rem 1rem}
+    }
+
+    @media(min-width:641px){
+      section{background-attachment:fixed}
     }
 
     /* ---------- Background Images ---------- */
