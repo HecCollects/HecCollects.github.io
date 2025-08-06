@@ -66,14 +66,14 @@
     .navbar{position:fixed;top:0;left:0;width:100%;padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);z-index:10000;box-shadow:0 4px 12px rgba(0,0,0,.3)}
     .brand{font-size:1.3rem;font-weight:700}
 
-    .nav-toggle{width:32px;height:24px;display:flex;flex-direction:column;justify-content:space-between;background:none;border:none;cursor:pointer;z-index:10001}
+    .nav-toggle{width:32px;height:24px;display:flex;flex-direction:column;justify-content:space-between;background:none;border:none;cursor:pointer;z-index:10002}
     .line{width:100%;height:3px;background:var(--white);border-radius:2px;transition:transform .3s,opacity .3s}
     .nav-toggle.open .line:nth-child(1){transform:translateY(9px) rotate(45deg)}
     .nav-toggle.open .line:nth-child(2){opacity:0}
     .nav-toggle.open .line:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
 
     /* Overlay Menu (desktop & mobile) */
-    .nav-menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;background:rgba(21,21,21,.95);transform:translateY(-100%);pointer-events:none;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .3s}
+    .nav-menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:5rem;gap:2.4rem;background:rgba(21,21,21,.95);transform:translateY(-100%);pointer-events:none;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .3s;z-index:10001}
     .nav-menu.open{transform:translateY(0);pointer-events:auto;opacity:1}
     .nav-menu a{color:var(--white);font-size:1.8rem;font-weight:600;text-decoration:none;position:relative}
     .nav-menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--orange);transition:width .3s}
@@ -114,8 +114,8 @@
 
     <!-- Overlay menu -->
     <nav class="nav-menu" aria-hidden="true">
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#about">About Me</a>
+      <a href="#contact">Business Inquiries</a>
       <a href="#offerup">OfferUp</a>
       <a href="#ebay">eBay</a>
     </nav>
