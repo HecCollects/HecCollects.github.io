@@ -27,17 +27,21 @@
     /* ---------- Reset & Base ---------- */
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{font-family:'Poppins',sans-serif;background:var(--black);color:var(--white);overflow:hidden}
+    body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#151515,#0f617b,#151515);background-size:400% 400%;animation:bg-shift 20s ease infinite;color:var(--white);overflow:hidden}
+    @keyframes bg-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 
     /* ---------- Wrapper & Sections ---------- */
     .wrapper{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
-    section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
+    section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}
     section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
     .section-content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2rem;margin-top:12vh}
 
     /* ---------- Card ---------- */
     .card{background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.18);border-radius:1.6rem;padding:2rem 1.4rem;width:100%;max-width:460px;box-shadow:0 25px 50px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.34,1.56,.64,1);display:flex;flex-direction:column;align-items:center;gap:1.4rem}
     .card:hover{transform:translateY(-10px) rotateX(5deg) rotateY(-5deg)}
+    .tilt:hover{transform:none}
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity .6s ease-out,transform .6s ease-out}
+    .reveal.visible{opacity:1;transform:translateY(0)}
 
     /* ---------- Typography ---------- */
     .logo{width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,.5)}
@@ -59,7 +63,7 @@
     @keyframes cues{0%,100%{opacity:.2;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,6px)}}
 
     /* ---------- Navbar ---------- */
-    .navbar{position:fixed;top:0;left:0;width:100%;padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);z-index:10000}
+    .navbar{position:fixed;top:0;left:0;width:100%;padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);z-index:10000;box-shadow:0 4px 12px rgba(0,0,0,.3)}
     .brand{font-size:1.3rem;font-weight:700}
 
     .nav-toggle{width:32px;height:24px;display:flex;flex-direction:column;justify-content:space-between;background:none;border:none;cursor:pointer;z-index:10001}
@@ -71,8 +75,10 @@
     /* Overlay Menu (desktop & mobile) */
     .nav-menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;background:rgba(21,21,21,.95);transform:translateY(-100%);pointer-events:none;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .3s}
     .nav-menu.open{transform:translateY(0);pointer-events:auto;opacity:1}
-    .nav-menu a{color:var(--white);font-size:1.8rem;font-weight:600;text-decoration:none}
-    .nav-menu a:hover{color:var(--orange)}
+    .nav-menu a{color:var(--white);font-size:1.8rem;font-weight:600;text-decoration:none;position:relative}
+    .nav-menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--orange);transition:width .3s}
+    .nav-menu a:hover::after{width:100%}
+    .nav-menu a.active{color:var(--orange)}
 
     /* ---------- Responsive tweaks ---------- */
     @media(max-width:640px){
@@ -88,9 +94,14 @@
     #offerup{background-image:url('https://images.stockcake.com/public/2/9/9/299ab51b-a36e-4ad5-a759-b2877a7607cb_large/friendly-handshake-meeting-stockcake.jpg')}
     #about{background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=60')}
     #contact{background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=60')}
+    #preloader{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:100000;transition:opacity .6s}
+    #preloader.hide{opacity:0;pointer-events:none}
+    .spinner{width:64px;height:64px;border:4px solid rgba(255,255,255,.2);border-top-color:var(--orange);border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
+  <div id="preloader"><div class="spinner"></div></div>
   <!-- Navbar -->
   <header class="navbar">
     <div class="brand">HecCollects</div>
@@ -115,7 +126,7 @@
     <!-- HOME -->
     <section id="home">
       <div class="section-content">
-        <div class="card">
+        <div class="card tilt reveal">
           <img src="logo.png" alt="HecCollects Logo" class="logo">
           <h1>Welcome to HecCollects</h1>
           <p>Quality • Collectibles • Community. Scroll or use the menu to explore my marketplaces and story.</p>
@@ -130,7 +141,7 @@
     <!-- EBAY -->
     <section id="ebay">
       <div class="section-content">
-        <div class="card">
+        <div class="card reveal">
           <h2>Shop on eBay</h2>
           <p>Browse curated listings, graded cards, and exclusive bundles at competitive prices.</p>
           <div class="links">
@@ -144,7 +155,7 @@
     <!-- OFFERUP -->
     <section id="offerup">
       <div class="section-content">
-        <div class="card">
+        <div class="card reveal">
           <h2>Local Deals on OfferUp</h2>
           <p>Prefer local pickup? Check out my OfferUp inventory for quick deals and meet‑ups in SoCal.</p>
           <div class="links">
@@ -158,7 +169,7 @@
     <!-- ABOUT -->
     <section id="about">
       <div class="section-content">
-        <div class="card">
+        <div class="card reveal">
           <h2>About HecCollects</h2>
           <p>Hey! I’m Hector – collector, curator, and all‑around hobby nerd. From childhood nostalgia to investment‑grade assets, I've always looked for the value in products and why they compare the way they do in their respective hobby/niche. I live and breathe trading, but have shifted to selling to maintain my love for learning new hobbies. I price just under market online (with bigger breaks in person) to keep the hobby fun and accessible. Let’s share the passion!</p>
         </div>
@@ -169,7 +180,7 @@
     <!-- CONTACT -->
     <section id="contact">
       <div class="section-content">
-        <div class="card">
+        <div class="card reveal">
           <h2>Business Inquiries</h2>
           <p>Have a question, bulk lot, or collaboration idea? Shoot me an email and I’ll get back within 24 hours.</p>
           <div class="links">
@@ -180,7 +191,7 @@
     </section>
   </main>
 
-  <!-- ---------- JS: burger & ripple ---------- -->
+  <!-- ---------- JS: interactions & animations ---------- -->
   <script>
     const burger  = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -215,6 +226,52 @@
         setTimeout(() => circle.remove(), 600);
       });
     });
+
+    // Preloader
+    window.addEventListener('load', () => {
+      const pre = document.getElementById('preloader');
+      pre.classList.add('hide');
+      setTimeout(() => pre.remove(), 600);
+    });
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold:0.3 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Active nav link
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    const sectionObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+          });
+        }
+      });
+    }, { threshold:0.6 });
+    sections.forEach(sec => sectionObs.observe(sec));
+
+    // 3D tilt on hero card
+    const heroCard = document.querySelector('#home .card.tilt');
+    if(heroCard){
+      heroCard.addEventListener('mousemove', e => {
+        const rect = heroCard.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+        heroCard.style.transform = `rotateY(${x/25}deg) rotateX(${-y/25}deg)`;
+      });
+      heroCard.addEventListener('mouseleave', () => {
+        heroCard.style.transform = '';
+      });
+    }
   </script>
 </body>
 </html>
