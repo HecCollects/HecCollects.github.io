@@ -14,12 +14,12 @@
     links[0]?.focus();
   };
 
-  const closeMenu = () => {
+  const closeMenu = (focusBurger = true) => {
     burger.classList.remove('open');
     navMenu.classList.remove('open');
     burger.setAttribute('aria-expanded', 'false');
     navMenu.setAttribute('aria-hidden', 'true');
-    burger.focus();
+    if (focusBurger) burger.focus();
   };
 
   burger.addEventListener('click', () => {
@@ -31,7 +31,7 @@
   });
 
   links.forEach(link => {
-    link.addEventListener('click', closeMenu);
+    link.addEventListener('click', () => closeMenu(false));
   });
 
   document.addEventListener('keydown', (e) => {
