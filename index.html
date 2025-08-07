@@ -224,8 +224,10 @@
     // Preloader
     window.addEventListener('load', () => {
       const pre = document.getElementById('preloader');
-      pre.classList.add('hide');
-      setTimeout(() => pre.remove(), 600);
+      if (pre) {
+        pre.classList.add('hide');
+        setTimeout(() => pre.remove(), 600);
+      }
     });
 
     // Reveal on scroll
