@@ -1,6 +1,6 @@
 (() => {
   const burger = document.querySelector('.nav-toggle');
-  const navMenu = document.querySelector('.nav-menu');
+  const navMenu = document.getElementById('nav-menu');
 
   if (!burger || !navMenu) return;
 
