@@ -73,7 +73,7 @@
     .nav-toggle.open .line:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
 
     /* Overlay Menu (desktop & mobile) */
-    .nav-menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;background:rgba(21,21,21,.85);backdrop-filter:blur(8px);box-shadow:0 0 0 100vmax rgba(0,0,0,.55);transform:translateY(-100%);pointer-events:none;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .3s;z-index:10000}
+      .nav-menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;background:rgba(21,21,21,.85);backdrop-filter:blur(8px);box-shadow:0 0 0 100vmax rgba(0,0,0,.55);transform:translateY(-100%);pointer-events:none;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .3s;z-index:10001}
     .nav-menu.open{transform:translateY(0);pointer-events:auto;opacity:1}
     .nav-menu a{color:var(--white);font-size:1.8rem;font-weight:600;text-decoration:none;position:relative}
     .nav-menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--orange);transition:width .3s}
@@ -115,16 +115,16 @@
       <span class="line"></span>
       <span class="line"></span>
     </button>
-
-    <!-- Overlay menu -->
-    <nav class="nav-menu" aria-hidden="true">
-      <a href="#home">Home</a>
-      <a href="https://ebay.us/m/TjPzD2" target="_blank" rel="noopener noreferrer">eBay Store</a>
-      <a href="#offerup">OfferUp</a>
-      <a href="#about">About Me</a>
-      <a href="#contact">Business Inquiries</a>
-    </nav>
   </header>
+
+  <!-- Overlay menu -->
+  <nav class="nav-menu" aria-hidden="true">
+    <a href="#home">Home</a>
+    <a href="#ebay">eBay</a>
+    <a href="#offerup">OfferUp</a>
+    <a href="#about">About Me</a>
+    <a href="#contact">Business Inquiries</a>
+  </nav>
 
   <!-- Sections -->
   <main class="wrapper">
@@ -176,7 +176,7 @@
       <div class="section-content">
         <div class="card reveal">
           <h2>About HecCollects</h2>
-          <p>Hey! I’m Hector – collector, curator, and all‑around hobby nerd. From childhood nostalgia to investment‑grade assets, I've always looked for the value in products and why they compare the way they do in their respective hobby/niche. I live and breathe trading, but have shifted to selling to maintain my love for learning new hobbies. I price just under market online (with bigger breaks in person) to keep the hobby fun and accessible. Let’s share the passion!</p>
+          <p>Hey! I’m Hector – collector, curator, and all‑around hobby nerd. From childhood nostalgia to investment‑grade assets, I've always looked for the value in products and how they compare within their respective hobbies. I live and breathe trading, but have shifted to selling to maintain my love for learning new hobbies. I price just under market online (with bigger breaks in person) to keep the hobby fun and accessible. Let’s share the passion!</p>
         </div>
       </div>
       <span class="scroll-cue">Swipe / scroll ↓</span>
