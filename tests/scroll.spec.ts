@@ -16,12 +16,15 @@ test('navigation links scroll to correct sections', async ({ page }) => {
     }, target);
     await page.waitForTimeout(1000);
 
-    const { scrollY, offsetTop } = await page.evaluate((selector) => {
+    const { scrollTop, expectedTop } = await page.evaluate((selector) => {
+      const wrapper = document.querySelector('.wrapper') as HTMLElement;
       const el = document.querySelector(selector)! as HTMLElement;
-      return { scrollY: window.scrollY, offsetTop: el.offsetTop };
+      const marginTop = parseFloat(getComputedStyle(el).scrollMarginTop || '0');
+      const expectedTop = Math.max(el.offsetTop - marginTop, 0);
+      return { scrollTop: wrapper.scrollTop, expectedTop };
     }, target);
 
-    const diff = Math.abs(scrollY - offsetTop);
+    const diff = Math.abs(scrollTop - expectedTop);
     expect(diff, `${target} is off by ${diff}px`).toBeLessThanOrEqual(1);
   }
 });
