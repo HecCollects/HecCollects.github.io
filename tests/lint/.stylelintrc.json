@@ -1,0 +1,6 @@
+{
+  "customSyntax": "postcss-html",
+  "rules": {
+    "block-no-empty": true
+  }
+}

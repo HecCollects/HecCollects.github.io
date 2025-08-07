@@ -1,0 +1,20 @@
+{
+  "name": "heccollects.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint:html": "htmlhint index.html --config tests/lint/.htmlhintrc",
+    "lint:style": "stylelint index.html --config tests/lint/.stylelintrc.json",
+    "test": "npm run lint:html && npm run lint:style"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "htmlhint": "^1.6.3",
+    "postcss-html": "^1.8.0",
+    "stylelint": "^16.23.0"
+  }
+}
