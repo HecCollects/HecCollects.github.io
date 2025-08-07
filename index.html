@@ -197,27 +197,8 @@
   </main>
 
   <!-- ---------- JS: interactions & animations ---------- -->
+  <script src="main.js"></script>
   <script>
-    const burger  = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('open');
-      navMenu.classList.toggle('open');
-      burger.setAttribute('aria-expanded', burger.classList.contains('open'));
-      navMenu.setAttribute('aria-hidden', !navMenu.classList.contains('open'));
-    });
-
-    // Close after link click
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        burger.classList.remove('open');
-        navMenu.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        navMenu.setAttribute('aria-hidden', 'true');
-      });
-    });
-
     // Ripple
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('click', e => {
