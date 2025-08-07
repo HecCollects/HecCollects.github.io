@@ -102,6 +102,12 @@
     #preloader.hide{opacity:0;pointer-events:none}
     .spinner{width:64px;height:64px;border:4px solid rgba(255,255,255,.2);border-top-color:var(--orange);border-radius:50%;animation:spin 1s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion: reduce){
+      *{
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
