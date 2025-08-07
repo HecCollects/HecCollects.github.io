@@ -1,6 +1,9 @@
 (() => {
   const burger = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
+
+  if (!burger || !navMenu) return;
+
   const links = Array.from(navMenu.querySelectorAll('a'));
 
   const openMenu = () => {
@@ -36,7 +39,7 @@
 
     if (e.key === 'Escape') {
       closeMenu();
-    } else if (e.key === 'Tab') {
+    } else if (e.key === 'Tab' && links.length) {
       const first = links[0];
       const last = links[links.length - 1];
 
