@@ -28,13 +28,12 @@
 
     /* ---------- Reset & Base ---------- */
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#151515,#0f617b,#151515);background-size:100% 100%;background-repeat:no-repeat;animation:bg-shift 20s ease infinite;color:var(--white)}
+      html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+      body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#151515,#0f617b,#151515);background-size:100% 100%;background-repeat:no-repeat;animation:bg-shift 20s ease infinite;color:var(--white)}
     @keyframes bg-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 
-    /* ---------- Wrapper & Sections ---------- */
-    .wrapper{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
-    section{position:relative;height:100vh;scroll-snap-align:start;scroll-margin-top:80px;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
+      /* ---------- Sections ---------- */
+      section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
     section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
     .section-content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
 
@@ -135,7 +134,7 @@
   </header>
 
   <!-- Sections -->
-  <main class="wrapper">
+  <main>
     <!-- HOME -->
     <section id="home">
       <div class="section-content">
