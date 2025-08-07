@@ -148,7 +148,6 @@
           </div>
         </div>
       </div>
-      <span class="scroll-cue">Swipe / scroll ↓</span>
     </section>
 
     <!-- EBAY -->
@@ -162,7 +161,6 @@
           </div>
         </div>
       </div>
-      <span class="scroll-cue">Swipe / scroll ↓</span>
     </section>
 
     <!-- OFFERUP -->
@@ -176,7 +174,6 @@
           </div>
         </div>
       </div>
-      <span class="scroll-cue">Swipe / scroll ↓</span>
     </section>
 
     <!-- ABOUT -->
@@ -187,7 +184,6 @@
           <p>Hey! I’m Hector – collector, curator, and all‑around hobby nerd. From childhood nostalgia to investment‑grade assets, I've always looked for the value in products and how they compare within their respective hobbies. I live and breathe trading, but have shifted to selling to maintain my love for learning new hobbies. I price just under market online (with bigger breaks in person) to keep the hobby fun and accessible. Let’s share the passion!</p>
         </div>
       </div>
-      <span class="scroll-cue">Swipe / scroll ↓</span>
     </section>
 
     <!-- CONTACT -->
@@ -207,6 +203,14 @@
   <!-- ---------- JS: interactions & animations ---------- -->
   <script src="main.js"></script>
   <script>
+    // Scroll cues
+    document.querySelectorAll('section:not(:last-of-type)').forEach(section => {
+      const cue = document.createElement('span');
+      cue.className = 'scroll-cue';
+      cue.textContent = 'Swipe / scroll ↓';
+      section.appendChild(cue);
+    });
+
     // Ripple
     document.querySelectorAll('.btn').forEach(btn => {
       const showRipple = (x, y) => {
