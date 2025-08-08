@@ -7,134 +7,11 @@
   <meta name="keywords" content="HecCollects, collectibles, marketplace, eBay, OfferUp, contact" />
   <title>HecCollects – Landing Page</title>
 
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts and icons removed for offline testing -->
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-GHHdFNrJaxVnY+uJDRK7+e+OFf7AqQG7Ge0XEtWkdP5TcX49hKhi2ut3W+h+LiT709lUIwxgsHNRD3+wL1Oj+w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Google Analytics (replace G-XXXXXXXXXX with real ID) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-
-  <style>
-    :root{
-      --teal-dark:#0f617b;
-      --orange:#f28c2f;
-      --black:#151515;
-      --white:#ffffff;
-    }
-
-    /* ---------- Reset & Base ---------- */
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-      html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
-      body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#151515,#0f617b,#151515);background-size:100% 100%;background-repeat:no-repeat;animation:bg-shift 20s ease infinite;color:var(--white)}
-    @keyframes bg-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-
-      /* ---------- Sections ---------- */
-      section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
-    section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
-    .section-content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
-
-    /* ---------- Card ---------- */
-    .card{background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.18);border-radius:1.6rem;padding:2rem 1.4rem;width:100%;max-width:460px;box-shadow:0 25px 50px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.34,1.56,.64,1);display:flex;flex-direction:column;align-items:center;gap:1.4rem}
-    .card:hover{transform:translateY(-10px) rotateX(5deg) rotateY(-5deg)}
-    .tilt:hover{transform:none}
-    .reveal{opacity:0;transform:translateY(40px);transition:opacity .6s ease-out,transform .6s ease-out}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-
-    /* ---------- Typography ---------- */
-    .logo{width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,.5)}
-    h1{font-size:2.4rem;text-shadow:0 3px 8px rgba(0,0,0,.4)}
-    h2{font-size:1.9rem;color:var(--orange)}
-    p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
-
-    /* ---------- Buttons ---------- */
-    .links{display:flex;flex-direction:column;gap:1rem;width:100%}
-    .btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.85rem 1.3rem;font-size:1rem;font-weight:600;color:#fff;background:var(--teal-dark);border:none;border-radius:1rem;text-decoration:none;transition:.25s;position:relative;overflow:hidden;cursor:pointer}
-    .btn:hover{background:var(--orange);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
-
-    /* Featured listings */
-    .featured{margin-top:1rem;width:100%;text-align:left}
-    .featured h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--orange)}
-    .featured-items{display:flex;gap:1rem;overflow-x:auto}
-    .featured-items a{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--white);min-width:100px}
-    .featured-items img{width:100px;height:100px;object-fit:cover;border-radius:.6rem;margin-bottom:.25rem}
-    .promo{margin-top:.8rem;font-size:.9rem;color:var(--orange)}
-
-    /* Testimonials */
-    .testimonials blockquote{font-style:italic;margin-bottom:.6rem}
-
-    /* Subscribe form */
-    .subscribe-form{display:flex;flex-direction:column;gap:.7rem;width:100%}
-    .subscribe-form input{padding:.8rem 1rem;border-radius:.8rem;border:none;font-size:1rem}
-    .subscribe-form button{align-self:flex-end}
-
-    /* Ripple */
-    .ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.35);animation:ripple .6s linear}
-    @keyframes ripple{to{transform:scale(4);opacity:0}}
-
-    /* ---------- Scroll cue ---------- */
-    .scroll-cue{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);font-size:.8rem;opacity:.8;animation:cues 4s ease-in-out infinite;z-index:1}
-    @keyframes cues{0%,100%{opacity:.2;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,6px)}}
-
-    /* ---------- Navbar ---------- */
-    .navbar{position:fixed;top:0;left:0;width:100%;padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);z-index:10000;box-shadow:0 4px 12px rgba(0,0,0,.3)}
-    .brand{font-size:1.3rem;font-weight:700}
-
-    .nav-toggle{width:32px;height:24px;display:flex;flex-direction:column;justify-content:space-between;background:none;border:none;cursor:pointer;z-index:10001}
-    .line{width:100%;height:3px;background:var(--white);border-radius:2px;transition:transform .3s,opacity .3s}
-    .nav-toggle.open .line:nth-child(1){transform:translateY(9px) rotate(45deg)}
-    .nav-toggle.open .line:nth-child(2){opacity:0}
-    .nav-toggle.open .line:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
-
-    /* Overlay Menu (desktop & mobile) */
-    .nav-menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;background:rgba(21,21,21,.85);backdrop-filter:blur(8px);box-shadow:0 0 0 100vmax rgba(0,0,0,.55);transform:translateY(-100%);pointer-events:none;opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .3s;z-index:10001}
-    .nav-menu.open{transform:translateY(0);pointer-events:auto;opacity:1}
-    .nav-menu a{color:var(--white);font-size:1.8rem;font-weight:600;text-decoration:none;position:relative}
-    .nav-menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--orange);transition:width .3s}
-    .nav-menu a:hover::after{width:100%}
-    .nav-menu a.active{color:var(--orange)}
-
-    /* ---------- Responsive tweaks ---------- */
-    @media(max-width:640px){
-      .card{padding:1.6rem 1.2rem;gap:1rem}
-      h1{font-size:1.9rem}
-      h2{font-size:1.65rem}
-      .btn{font-size:.95rem;padding:.8rem 1rem}
-    }
-
-    @media(min-width:641px){
-      section{background-attachment:fixed}
-    }
-
-    /* ---------- Background Images ---------- */
-    #home{background-image:url('https://freerangestock.com/sample/160887/stormtrooper-toy-figure-against-blue-sky.jpg')}
-    #ebay{background-image:url('https://storage.needpix.com/rsynced_images/shoping-on-line.jpg')}
-    #offerup{background-image:url('https://images.stockcake.com/public/2/9/9/299ab51b-a36e-4ad5-a759-b2877a7607cb_large/friendly-handshake-meeting-stockcake.jpg')}
-    #about{background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=60')}
-    #contact{background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=60')}
-    #preloader{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:100000;transition:opacity .6s}
-    #preloader.hide{opacity:0;pointer-events:none}
-    .spinner{width:64px;height:64px;border:4px solid rgba(255,255,255,.2);border-top-color:var(--orange);border-radius:50%;animation:spin 1s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    @media (prefers-reduced-motion: reduce){
-      *{
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script src="analytics.js"></script>
 </head>
 <body>
   <div id="preloader"><div class="spinner"></div></div>
@@ -166,7 +43,7 @@
     <section id="home">
       <div class="section-content">
         <div class="card tilt reveal">
-          <img src="logo.png" alt="HecCollects Logo" class="logo">
+          <img src="logo.png" alt="HecCollects Logo" class="logo" loading="lazy">
           <h1>Welcome to HecCollects</h1>
           <p>Quality • Collectibles • Community. Scroll or use the menu to explore my marketplaces and story.</p>
           <div class="links">
@@ -189,11 +66,11 @@
             <h3>Featured Items</h3>
             <div class="featured-items">
               <a href="https://ebay.us/m/TjPzD2" target="_blank" rel="noopener noreferrer">
-                <img src="https://via.placeholder.com/100" alt="Featured eBay Item 1">
+                <img src="logo.png" alt="Featured eBay Item 1" loading="lazy">
                 <span>Hot Listing #1</span>
               </a>
               <a href="https://ebay.us/m/TjPzD2" target="_blank" rel="noopener noreferrer">
-                <img src="https://via.placeholder.com/100" alt="Featured eBay Item 2">
+                <img src="logo.png" alt="Featured eBay Item 2" loading="lazy">
                 <span>Hot Listing #2</span>
               </a>
             </div>
@@ -216,11 +93,11 @@
             <h3>Featured Items</h3>
             <div class="featured-items">
               <a href="https://offerup.co/3D5QQbGZyVb" target="_blank" rel="noopener noreferrer">
-                <img src="https://via.placeholder.com/100" alt="Featured OfferUp Item 1">
+                <img src="logo.png" alt="Featured OfferUp Item 1" loading="lazy">
                 <span>Local Deal #1</span>
               </a>
               <a href="https://offerup.co/3D5QQbGZyVb" target="_blank" rel="noopener noreferrer">
-                <img src="https://via.placeholder.com/100" alt="Featured OfferUp Item 2">
+                <img src="logo.png" alt="Featured OfferUp Item 2" loading="lazy">
                 <span>Local Deal #2</span>
               </a>
             </div>
@@ -285,91 +162,5 @@
 
   <!-- ---------- JS: interactions & animations ---------- -->
   <script src="main.js"></script>
-  <script>
-    // Scroll cues
-    document.querySelectorAll('section:not(:last-of-type)').forEach(section => {
-      const cue = document.createElement('span');
-      cue.className = 'scroll-cue';
-      cue.textContent = 'Swipe / scroll ↓';
-      section.appendChild(cue);
-    });
-
-    // Ripple
-    document.querySelectorAll('.btn').forEach(btn => {
-      const showRipple = (x, y) => {
-        const circle = document.createElement('span');
-        const size = Math.max(btn.clientWidth, btn.clientHeight);
-        circle.style.width = circle.style.height = `${size}px`;
-        circle.style.left = `${x - size / 2}px`;
-        circle.style.top = `${y - size / 2}px`;
-        circle.classList.add('ripple');
-        btn.appendChild(circle);
-        setTimeout(() => circle.remove(), 600);
-      };
-
-      btn.addEventListener('click', e => {
-        const rect = btn.getBoundingClientRect();
-        const hasCoords = typeof e.clientX === 'number' && typeof e.clientY === 'number' && (e.clientX !== 0 || e.clientY !== 0);
-        const x = hasCoords ? e.clientX - rect.left : rect.width / 2;
-        const y = hasCoords ? e.clientY - rect.top : rect.height / 2;
-        showRipple(x, y);
-      });
-
-      btn.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          btn.click();
-        }
-      });
-    });
-
-    // Preloader
-    window.addEventListener('load', () => {
-      const pre = document.getElementById('preloader');
-      if (pre) {
-        pre.classList.add('hide');
-        setTimeout(() => pre.remove(), 600);
-      }
-    });
-
-    // Reveal on scroll
-    const revealEls = document.querySelectorAll('.reveal');
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold:0.3 });
-    revealEls.forEach(el => revealObs.observe(el));
-
-    // Active nav link
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    const sectionObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-          });
-        }
-      });
-    }, { threshold:0.6 });
-    sections.forEach(sec => sectionObs.observe(sec));
-
-    // 3D tilt on hero card
-    const heroCard = document.querySelector('#home .card.tilt');
-    if(heroCard){
-      heroCard.addEventListener('mousemove', e => {
-        const rect = heroCard.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width/2;
-        const y = e.clientY - rect.top - rect.height/2;
-        heroCard.style.transform = `rotateY(${x/25}deg) rotateX(${-y/25}deg)`;
-      });
-      heroCard.addEventListener('mouseleave', () => {
-        heroCard.style.transform = '';
-      });
-    }
-  </script>
 </body>
 </html>
