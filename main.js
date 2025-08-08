@@ -52,4 +52,18 @@
       }
     }
   });
+
+  // Outbound click tracking
+  const trackables = document.querySelectorAll('[data-analytics]');
+  trackables.forEach(link => {
+    link.addEventListener('click', () => {
+      const label = link.getAttribute('data-analytics');
+      if (window.gtag) {
+        window.gtag('event', 'click', {
+          event_category: 'outbound',
+          event_label: label,
+        });
+      }
+    });
+  });
 })();

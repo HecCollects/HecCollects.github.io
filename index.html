@@ -18,6 +18,15 @@
         integrity="sha512-GHHdFNrJaxVnY+uJDRK7+e+OFf7AqQG7Ge0XEtWkdP5TcX49hKhi2ut3W+h+LiT709lUIwxgsHNRD3+wL1Oj+w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+  <!-- Google Analytics (replace G-XXXXXXXXXX with real ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <style>
     :root{
       --teal-dark:#0f617b;
@@ -54,6 +63,22 @@
     .links{display:flex;flex-direction:column;gap:1rem;width:100%}
     .btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.85rem 1.3rem;font-size:1rem;font-weight:600;color:#fff;background:var(--teal-dark);border:none;border-radius:1rem;text-decoration:none;transition:.25s;position:relative;overflow:hidden;cursor:pointer}
     .btn:hover{background:var(--orange);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+
+    /* Featured listings */
+    .featured{margin-top:1rem;width:100%;text-align:left}
+    .featured h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--orange)}
+    .featured-items{display:flex;gap:1rem;overflow-x:auto}
+    .featured-items a{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--white);min-width:100px}
+    .featured-items img{width:100px;height:100px;object-fit:cover;border-radius:.6rem;margin-bottom:.25rem}
+    .promo{margin-top:.8rem;font-size:.9rem;color:var(--orange)}
+
+    /* Testimonials */
+    .testimonials blockquote{font-style:italic;margin-bottom:.6rem}
+
+    /* Subscribe form */
+    .subscribe-form{display:flex;flex-direction:column;gap:.7rem;width:100%}
+    .subscribe-form input{padding:.8rem 1rem;border-radius:.8rem;border:none;font-size:1rem}
+    .subscribe-form button{align-self:flex-end}
 
     /* Ripple */
     .ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.35);animation:ripple .6s linear}
@@ -130,6 +155,8 @@
     <a href="#ebay">eBay</a>
     <a href="#offerup">OfferUp</a>
     <a href="#about">About Me</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#subscribe">Subscribe</a>
     <a href="#contact">Business Inquiries</a>
   </nav>
 
@@ -156,8 +183,22 @@
           <h2>Shop on eBay</h2>
           <p>Browse curated listings, graded cards, and exclusive bundles at competitive prices.</p>
           <div class="links">
-            <a href="https://ebay.us/m/TjPzD2" target="_blank" rel="noopener noreferrer" class="btn"><i class="fa-brands fa-ebay"></i> Visit eBay Store</a>
+            <a href="https://ebay.us/m/TjPzD2" target="_blank" rel="noopener noreferrer" class="btn" data-analytics="ebay"><i class="fa-brands fa-ebay"></i> Visit eBay Store</a>
           </div>
+          <div class="featured">
+            <h3>Featured Items</h3>
+            <div class="featured-items">
+              <a href="https://ebay.us/m/TjPzD2" target="_blank" rel="noopener noreferrer">
+                <img src="https://via.placeholder.com/100" alt="Featured eBay Item 1">
+                <span>Hot Listing #1</span>
+              </a>
+              <a href="https://ebay.us/m/TjPzD2" target="_blank" rel="noopener noreferrer">
+                <img src="https://via.placeholder.com/100" alt="Featured eBay Item 2">
+                <span>Hot Listing #2</span>
+              </a>
+            </div>
+          </div>
+          <p class="promo">Use code <strong>HEC10</strong> for 10% off orders over $50.</p>
         </div>
       </div>
     </section>
@@ -169,8 +210,22 @@
           <h2>Local Deals on OfferUp</h2>
           <p>Prefer local pickup? Check out my OfferUp inventory for quick deals and meet‑ups in SoCal.</p>
           <div class="links">
-            <a href="https://offerup.co/3D5QQbGZyVb" target="_blank" rel="noopener noreferrer" class="btn"><i class="fa-solid fa-store"></i> Visit OfferUp</a>
+            <a href="https://offerup.co/3D5QQbGZyVb" target="_blank" rel="noopener noreferrer" class="btn" data-analytics="offerup"><i class="fa-solid fa-store"></i> Visit OfferUp</a>
           </div>
+          <div class="featured">
+            <h3>Featured Items</h3>
+            <div class="featured-items">
+              <a href="https://offerup.co/3D5QQbGZyVb" target="_blank" rel="noopener noreferrer">
+                <img src="https://via.placeholder.com/100" alt="Featured OfferUp Item 1">
+                <span>Local Deal #1</span>
+              </a>
+              <a href="https://offerup.co/3D5QQbGZyVb" target="_blank" rel="noopener noreferrer">
+                <img src="https://via.placeholder.com/100" alt="Featured OfferUp Item 2">
+                <span>Local Deal #2</span>
+              </a>
+            </div>
+          </div>
+          <p class="promo">Show this code <strong>HECLOCAL</strong> for a bundle discount at meet‑ups.</p>
         </div>
       </div>
     </section>
@@ -181,6 +236,35 @@
         <div class="card reveal">
           <h2>About HecCollects</h2>
           <p>Hey! I’m Hector – collector, curator, and all‑around hobby nerd. From childhood nostalgia to investment‑grade assets, I've always looked for the value in products and how they compare within their respective hobbies. I live and breathe trading, but have shifted to selling to maintain my love for learning new hobbies. I price just under market online (with bigger breaks in person) to keep the hobby fun and accessible. Let’s share the passion!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="section-content">
+        <div class="card reveal">
+          <h2>Testimonials</h2>
+          <p>What buyers are saying:</p>
+          <div class="testimonials">
+            <blockquote>“Great seller! Fast shipping.” – Alex</blockquote>
+            <blockquote>“Items exactly as described.” – Maria</blockquote>
+            <blockquote>“Will buy again!” – Lee</blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBSCRIBE -->
+    <section id="subscribe">
+      <div class="section-content">
+        <div class="card reveal">
+          <h2>Get Updates</h2>
+          <p>Join the mailing list for new drops and exclusive deals.</p>
+          <form action="https://formspree.io/f/mzzdeork" method="POST" class="subscribe-form">
+            <input type="email" name="email" placeholder="Email address" required>
+            <button type="submit" class="btn">Subscribe</button>
+          </form>
         </div>
       </div>
     </section>

@@ -3,16 +3,16 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'desktop-chromium',
+      use: { browserName: 'chromium', viewport: { width: 1440, height: 900 } },
     },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'mobile-iphone',
+      use: { ...devices['iPhone 12'] },
     },
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'mobile-android',
+      use: { ...devices['Pixel 5'], viewport: { width: 360, height: 640 } },
     },
   ],
 });
