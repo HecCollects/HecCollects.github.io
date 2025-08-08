@@ -3,10 +3,16 @@ import path from 'path';
 
 const filePath = path.resolve(__dirname, '../index.html');
 
-const navTargets = ['#home', '#ebay', '#offerup', '#about', '#contact'];
+const navTargets = ['#home', '#ebay', '#offerup', '#about', '#testimonials', '#subscribe', '#contact'];
 
 test('navigation links scroll to correct sections', async ({ page }) => {
   await page.goto('file://' + filePath);
+
+  page.on('console', msg => {
+    if (msg.type() === 'error') {
+      throw new Error(msg.text());
+    }
+  });
 
   for (const target of navTargets) {
     await page.click('.nav-toggle');

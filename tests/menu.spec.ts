@@ -6,6 +6,12 @@ const filePath = path.resolve(__dirname, '../index.html');
 test('menu supports keyboard navigation', async ({ page }) => {
   await page.goto('file://' + filePath);
 
+  page.on('console', msg => {
+    if (msg.type() === 'error') {
+      throw new Error(msg.text());
+    }
+  });
+
   await page.click('.nav-toggle');
   await page.locator('.nav-menu.open').waitFor();
 
