@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 
+test.use({ viewport: { width: 375, height: 667 } });
+
 const filePath = path.resolve(__dirname, '../index.html');
 
 test('menu supports keyboard navigation', async ({ page }) => {

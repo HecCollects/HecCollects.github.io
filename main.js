@@ -13,6 +13,7 @@
   if (!burger || !navMenu) return;
 
   const links = Array.from(navMenu.querySelectorAll('a'));
+  const mql = window.matchMedia('(min-width: 1024px)');
 
   const openMenu = () => {
     burger.classList.add('open');
@@ -23,6 +24,7 @@
   };
 
   const closeMenu = (focusBurger = true) => {
+    if (mql.matches) return;
     burger.classList.remove('open');
     navMenu.classList.remove('open');
     burger.setAttribute('aria-expanded', 'false');
@@ -43,7 +45,7 @@
   });
 
   document.addEventListener('keydown', (e) => {
-    if (!navMenu.classList.contains('open')) return;
+    if (!navMenu.classList.contains('open') || mql.matches) return;
 
     if (e.key === 'Escape') {
       closeMenu();
@@ -60,6 +62,24 @@
       }
     }
   });
+
+  const handleBreakpoint = (e) => {
+    if (e.matches) {
+      navMenu.classList.add('open');
+      navMenu.setAttribute('aria-hidden', 'false');
+      burger.style.display = 'none';
+      burger.setAttribute('aria-hidden', 'true');
+      burger.tabIndex = -1;
+    } else {
+      navMenu.classList.remove('open');
+      navMenu.setAttribute('aria-hidden', 'true');
+      burger.style.display = '';
+      burger.setAttribute('aria-hidden', 'false');
+      burger.tabIndex = 0;
+    }
+  };
+  handleBreakpoint(mql);
+  mql.addEventListener('change', handleBreakpoint);
 
   // Outbound click tracking
   const trackables = document.querySelectorAll('[data-analytics]');
