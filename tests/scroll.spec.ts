@@ -20,10 +20,20 @@ test('navigation links scroll to correct sections', async ({ page }) => {
     await page.evaluate((selector) => {
       (document.querySelector(`.nav-menu a[href="${selector}"]`) as HTMLElement).click();
     }, target);
-    await page.waitForFunction(
-      sel => Math.abs(window.scrollY - document.querySelector(sel).offsetTop) <= 1,
-      target
-    );
+    // Wait until the window is scrolled close to the target element
+    await page.evaluate(selector => {
+      return new Promise<void>(resolve => {
+        const el = document.querySelector(selector) as HTMLElement;
+        const check = () => {
+          if (Math.abs(window.scrollY - el.offsetTop) <= 1) {
+            resolve();
+          } else {
+            requestAnimationFrame(check);
+          }
+        };
+        check();
+      });
+    }, target);
 
     const { scrollY, offsetTop } = await page.evaluate((selector) => {
       const el = document.querySelector(selector)! as HTMLElement;
