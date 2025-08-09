@@ -77,6 +77,15 @@ h2{font-size:1.65rem}
 @media(min-width:641px){
 section{background-attachment:fixed}
 }
+@media(min-width:1024px){
+  .nav-toggle{display:none}
+  .nav-menu{position:static;transform:none;opacity:1;pointer-events:auto;flex-direction:row;gap:2rem;background:none;backdrop-filter:none;box-shadow:none;height:auto}
+  .nav-menu a{font-size:1rem}
+  .card{max-width:900px;padding:3rem 4rem}
+  .featured-items{flex-wrap:wrap;overflow:visible;gap:1rem}
+  .featured-items a{flex:0 1 calc(33% - 1rem);scroll-snap-align:none}
+  .featured-items img{height:200px}
+}
 /* ---------- Background Images ---------- */
 #home,#ebay,#offerup,#about,#contact{background-image:none}
 #preloader{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:100000;transition:opacity .6s}
