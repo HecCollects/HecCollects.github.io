@@ -144,6 +144,31 @@
   }, { threshold:0.6 });
   sections.forEach(sec => sectionObs.observe(sec));
 
+  // Load featured items
+  fetch('items.json')
+    .then(res => res.json())
+    .then(data => {
+      const buildItems = (key, containerId) => {
+        const container = document.getElementById(containerId);
+        if (!container || !data[key]) return;
+        data[key].forEach(item => {
+          const link = document.createElement('a');
+          link.href = item.link;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          const img = document.createElement('img');
+          img.src = item.image;
+          img.alt = item.alt;
+          img.loading = 'lazy';
+          link.appendChild(img);
+          container.appendChild(link);
+        });
+      };
+      buildItems('ebay', 'ebay-items');
+      buildItems('offerup', 'offerup-items');
+    })
+    .catch(() => {});
+
   // 3D tilt on hero card
   const heroCard = document.querySelector('#home .card.tilt');
   if(heroCard){
