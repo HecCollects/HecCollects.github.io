@@ -149,7 +149,10 @@
           <p>Join the mailing list for new drops and exclusive deals.</p>
           <form action="https://formspree.io/f/mzzdeork" method="POST" class="subscribe-form">
             <input type="email" name="email" placeholder="Email address" required>
+            <input type="text" name="hp" class="honeypot" autocomplete="off" tabindex="-1">
+            <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
             <button type="submit" class="btn">Subscribe</button>
+            <p id="subscribe-msg" class="form-msg" aria-live="polite"></p>
           </form>
         </div>
       </div>

@@ -1,4 +1,12 @@
 (() => {
+  if(location.protocol !== 'file:'){
+    const s = document.createElement('script');
+    s.src = 'https://hcaptcha.com/1/api.js';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
   const burger = document.querySelector('.nav-toggle');
   const navMenu = document.getElementById('nav-menu');
 
@@ -155,6 +163,44 @@
     });
     heroCard.addEventListener('mouseleave', () => {
       heroCard.style.transform = '';
+    });
+  }
+
+  // Subscribe form handling with honeypot and hCaptcha
+  const subscribeForm = document.querySelector('.subscribe-form');
+  if(subscribeForm){
+    const msg = document.getElementById('subscribe-msg');
+    subscribeForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      msg.textContent = '';
+      const hp = subscribeForm.querySelector('input[name="hp"]');
+      if(hp && hp.value){
+        msg.textContent = 'Submission rejected.';
+        return;
+      }
+      const token = window.hcaptcha?.getResponse();
+      if(!token){
+        msg.textContent = 'Please complete the captcha.';
+        return;
+      }
+      try{
+        const formData = new FormData(subscribeForm);
+        formData.append('h-captcha-response', token);
+        const res = await fetch(subscribeForm.action, {
+          method:'POST',
+          body:formData,
+          headers:{Accept:'application/json'}
+        });
+        if(res.ok){
+          msg.textContent = 'Thanks for subscribing!';
+          subscribeForm.reset();
+          window.hcaptcha?.reset();
+        }else{
+          msg.textContent = 'Submission failed. Please try again later.';
+        }
+      }catch{
+        msg.textContent = 'Submission failed. Please try again later.';
+      }
     });
   }
 })();
