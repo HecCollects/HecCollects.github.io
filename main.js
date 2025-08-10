@@ -178,11 +178,21 @@
         const buildItems = (key, containerId) => {
           const container = document.getElementById(containerId);
           if (!container || !data[key]) return;
-          data[key].forEach(item => {
+          data[key].forEach((item, i) => {
             const link = document.createElement('a');
             link.href = item.link;
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
+            link.setAttribute('data-analytics', `${key}-item-${i + 1}`);
+            link.addEventListener('click', () => {
+              const label = link.getAttribute('data-analytics');
+              if (window.gtag) {
+                window.gtag('event', 'click', {
+                  event_category: 'featured',
+                  event_label: label,
+                });
+              }
+            });
             const img = document.createElement('img');
             img.src = item.image;
             img.alt = item.alt;
@@ -302,14 +312,17 @@
           body:formData,
           headers:{Accept:'application/json'}
         });
-        if(res.ok){
-          msg.textContent = 'Thanks for subscribing!';
-          subscribeForm.reset();
-          disableBtn();
-          window.turnstile?.reset();
-        }else{
-          msg.textContent = 'Submission failed. Please try again later.';
-        }
+          if(res.ok){
+            msg.textContent = 'Thanks for subscribing!';
+            if(window.gtag){
+              window.gtag('event','subscribe');
+            }
+            subscribeForm.reset();
+            disableBtn();
+            window.turnstile?.reset();
+          }else{
+            msg.textContent = 'Submission failed. Please try again later.';
+          }
       }catch{
         msg.textContent = 'Submission failed. Please try again later.';
       }
