@@ -39,9 +39,17 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .featured-items a:hover img{transform:scale(1.08);box-shadow:0 8px 16px rgba(0,0,0,.4)}
 .promo{margin-top:.8rem;font-size:.9rem;color:var(--orange)}
 /* Testimonials */
-.testimonials figure{margin-bottom:1.2rem}
+.testimonials{position:relative;overflow:hidden}
+.testimonial-track{display:flex;transition:transform .6s ease}
+.testimonial-track figure{flex:0 0 100%;margin:0;padding-bottom:1.2rem;opacity:0;transition:opacity .6s ease}
+.testimonial-track figure.active{opacity:1}
 .testimonials blockquote{font-style:italic;margin-bottom:.4rem}
 .testimonials figcaption{font-size:.9rem;color:var(--orange)}
+.testimonial-controls{position:absolute;top:50%;left:0;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);pointer-events:none}
+.testimonial-controls button{background:rgba(0,0,0,.45);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;pointer-events:auto}
+.testimonial-pagination{display:flex;gap:.5rem;justify-content:center;margin-top:.8rem}
+.testimonial-pagination button{width:10px;height:10px;border-radius:50%;border:none;background:rgba(255,255,255,.4);cursor:pointer}
+.testimonial-pagination button[aria-selected="true"]{background:var(--orange)}
 /* Subscribe form */
 .subscribe-form{display:flex;flex-direction:column;gap:.7rem;width:100%}
 .subscribe-form input{padding:.8rem 1rem;border-radius:.8rem;border:none;font-size:1rem}
