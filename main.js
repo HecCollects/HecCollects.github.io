@@ -13,6 +13,9 @@
     burger.setAttribute('aria-expanded', 'true');
     navMenu.setAttribute('aria-hidden', 'false');
     links[0]?.focus();
+    if (window.gtag) {
+      window.gtag('event', 'menu_open');
+    }
   };
 
   const closeMenu = (focusBurger = true) => {
@@ -22,6 +25,9 @@
     burger.setAttribute('aria-expanded', 'false');
     navMenu.setAttribute('aria-hidden', 'true');
     if (focusBurger) burger.focus();
+    if (window.gtag) {
+      window.gtag('event', 'menu_close');
+    }
   };
 
   burger.addEventListener('click', () => {
@@ -33,7 +39,15 @@
   });
 
   links.forEach(link => {
-    link.addEventListener('click', () => closeMenu(false));
+    link.addEventListener('click', () => {
+      closeMenu(false);
+      if (window.gtag) {
+        window.gtag('event', 'navigate', {
+          event_category: 'nav',
+          event_label: link.textContent?.trim() || ''
+        });
+      }
+    });
   });
 
   document.addEventListener('keydown', (e) => {
@@ -164,6 +178,34 @@
   }, { threshold:0.6 });
   sections.forEach(sec => sectionObs.observe(sec));
 
+  const initFeaturedCarousels = () => {
+    document.querySelectorAll('.featured .carousel').forEach(carousel => {
+      const track = carousel.querySelector('.featured-items');
+      const prev = carousel.querySelector('.carousel-prev');
+      const next = carousel.querySelector('.carousel-next');
+      const items = track ? Array.from(track.querySelectorAll('a')) : [];
+      if (!items.length) return;
+      let idx = 0;
+      const go = (i) => {
+        idx = (i + items.length) % items.length;
+        items[idx]?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      };
+      prev?.addEventListener('click', () => {
+        go(idx - 1);
+        if (window.gtag) {
+          window.gtag('event','carousel_nav',{event_label:'prev'});
+        }
+      });
+      next?.addEventListener('click', () => {
+        go(idx + 1);
+        if (window.gtag) {
+          window.gtag('event','carousel_nav',{event_label:'next'});
+        }
+      });
+      setInterval(() => go(idx + 1), 5000);
+    });
+  };
+
   // Load featured items
   if (location.protocol !== 'file:') {
     fetch('items.json')
@@ -197,8 +239,11 @@
         };
         buildItems('ebay', 'ebay-items');
         buildItems('offerup', 'offerup-items');
+        initFeaturedCarousels();
       })
       .catch(() => {});
+  } else {
+    initFeaturedCarousels();
   }
 
   // Testimonials slider
@@ -244,6 +289,9 @@
       dot.addEventListener('click', () => {
         select(i);
         reset();
+        if (window.gtag) {
+          window.gtag('event','testimonial_nav',{event_label:`dot_${i+1}`});
+        }
       });
       pagination?.appendChild(dot);
     });
@@ -251,11 +299,17 @@
     prevBtn?.addEventListener('click', () => {
       select(index - 1);
       reset();
+      if (window.gtag) {
+        window.gtag('event','testimonial_nav',{event_label:'prev'});
+      }
     });
 
     nextBtn?.addEventListener('click', () => {
       select(index + 1);
       reset();
+      if (window.gtag) {
+        window.gtag('event','testimonial_nav',{event_label:'next'});
+      }
     });
 
     select(0);
@@ -288,14 +342,19 @@
     subscribeForm.addEventListener('submit', async e => {
       e.preventDefault();
       msg.textContent = '';
+      msg.className = 'form-msg';
       const hp = subscribeForm.querySelector('input[name="hp"]');
       if(hp && hp.value){
         msg.textContent = 'Submission rejected.';
+        msg.className = 'form-msg error';
+        if(window.gtag){ window.gtag('event','subscribe_error'); }
         return;
       }
       const token = window.grecaptcha?.getResponse();
       if(!token){
         msg.textContent = 'Please complete the captcha.';
+        msg.className = 'form-msg error';
+        if(window.gtag){ window.gtag('event','subscribe_error'); }
         return;
       }
       try{
@@ -308,17 +367,22 @@
         });
           if(res.ok){
             msg.textContent = 'Thanks for subscribing!';
+            msg.className = 'form-msg success';
             if(window.gtag){
-              window.gtag('event','subscribe');
+              window.gtag('event','subscribe_success');
             }
             subscribeForm.reset();
             disableBtn();
             window.grecaptcha?.reset();
           }else{
             msg.textContent = 'Submission failed. Please try again later.';
+            msg.className = 'form-msg error';
+            if(window.gtag){ window.gtag('event','subscribe_error'); }
           }
       }catch{
         msg.textContent = 'Submission failed. Please try again later.';
+        msg.className = 'form-msg error';
+        if(window.gtag){ window.gtag('event','subscribe_error'); }
       }
     });
   }

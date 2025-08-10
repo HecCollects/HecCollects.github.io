@@ -38,6 +38,11 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .featured-items img{width:100%;aspect-ratio:16/9;height:auto;object-fit:contain;border-radius:.6rem;margin-bottom:.25rem;transition:transform .3s,box-shadow .3s}
 .featured-items a:hover img{transform:scale(1.08);box-shadow:0 8px 16px rgba(0,0,0,.4)}
 .promo{margin-top:.8rem;font-size:.9rem;color:var(--orange)}
+/* Carousel */
+.carousel{position:relative;display:flex;align-items:center}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:2}
+.carousel-prev{left:.2rem}
+.carousel-next{right:.2rem}
 /* Testimonials */
 .testimonials{position:relative;overflow:hidden}
 .testimonial-track{display:flex;transition:transform .6s ease}
@@ -50,13 +55,18 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .testimonial-pagination{display:flex;gap:.5rem;justify-content:center;margin-top:.8rem}
 .testimonial-pagination button{width:10px;height:10px;border-radius:50%;border:none;background:rgba(255,255,255,.4);cursor:pointer}
 .testimonial-pagination button[aria-selected="true"]{background:var(--orange)}
+/* Rating */
+.rating{color:var(--orange);margin-bottom:.4rem}
 /* Subscribe form */
 .subscribe-form{display:flex;flex-direction:column;gap:.7rem;width:100%}
 .subscribe-form input{padding:.8rem 1rem;border-radius:.8rem;border:none;font-size:1rem}
 .subscribe-form button{align-self:flex-end}
 .cf-turnstile{align-self:center}
 .honeypot{display:none}
+.incentive{font-size:.95rem;margin-bottom:.5rem;color:var(--orange);font-weight:600}
 .form-msg{font-size:.9rem;color:var(--orange)}
+.form-msg.success{color:#4caf50}
+.form-msg.error{color:#f44336}
 /* Ripple */
 .ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.35);animation:ripple .6s linear}
 @keyframes ripple{to{transform:scale(4);opacity:0}}
@@ -97,7 +107,13 @@ section{background-attachment:fixed}
   .featured-items a{flex:0 0 250px}
 }
 /* ---------- Background Images ---------- */
-#home,#ebay,#offerup,#about,#contact{background-image:none}
+#home{background-image:linear-gradient(135deg,#1e3c72,#2a5298)}
+#ebay{background-image:linear-gradient(135deg,#ff512f,#dd2476)}
+#offerup{background-image:linear-gradient(135deg,#1d976c,#93f9b9)}
+#about{background-image:linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b)}
+#testimonials{background-image:linear-gradient(135deg,#20002c,#cbb4d4)}
+#subscribe{background-image:linear-gradient(135deg,#f7971e,#ffd200)}
+#contact{background-image:linear-gradient(135deg,#16222a,#3a6073)}
 #preloader{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:100000;transition:opacity .6s}
 #preloader.hide{opacity:0;pointer-events:none}
 .spinner{width:64px;height:64px;border:4px solid rgba(255,255,255,.2);border-top-color:var(--orange);border-radius:50%;animation:spin 1s linear infinite}
