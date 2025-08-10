@@ -1,10 +1,4 @@
 (() => {
-  const s = document.createElement('script');
-  s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-  s.async = true;
-  s.defer = true;
-  document.head.appendChild(s);
-
   const burger = document.querySelector('.nav-toggle');
   const navMenu = document.getElementById('nav-menu');
 
@@ -282,7 +276,7 @@
     });
   }
 
-  // Subscribe form handling with honeypot and Turnstile
+  // Subscribe form handling with honeypot and reCAPTCHA
   const subscribeForm = document.querySelector('.subscribe-form');
   if(subscribeForm){
     const msg = document.getElementById('subscribe-msg');
@@ -299,14 +293,14 @@
         msg.textContent = 'Submission rejected.';
         return;
       }
-      const token = window.turnstile?.getResponse();
+      const token = window.grecaptcha?.getResponse();
       if(!token){
         msg.textContent = 'Please complete the captcha.';
         return;
       }
       try{
         const formData = new FormData(subscribeForm);
-        formData.append('cf-turnstile-response', token);
+        formData.append('g-recaptcha-response', token);
         const res = await fetch(subscribeForm.action, {
           method:'POST',
           body:formData,
@@ -319,7 +313,7 @@
             }
             subscribeForm.reset();
             disableBtn();
-            window.turnstile?.reset();
+            window.grecaptcha?.reset();
           }else{
             msg.textContent = 'Submission failed. Please try again later.';
           }
