@@ -1,15 +1,15 @@
 {
   "ebay": [
     {
-      "image": "https://i.ebayimg.com/images/g/PJkAAeSwqElomAoX/s-l400.jpg",
-      "link": "https://www.ebay.com/itm/376470198032",
+      "image": "https://i.ebayimg.com/images/g/hgUAAeSwI2pomADM/s-l400.jpg",
+      "link": "https://www.ebay.com/itm/376470178564",
       "alt": "Featured eBay collectible"
     }
   ],
   "offerup": [
     {
-      "image": "https://images.offerup.com/gibOyZLRsEMaDznSr5iwK3UpCMc=/800x800/smart/7542/75424d3ed81d46228f0dde5a7c77cf02.jpg",
-      "link": "https://offerup.co/3D5QQbGZyVb",
+      "image": "https://images.offerup.com/cPlHCpzdBgF0I6ekZA4ET_9SlIY=/1600x1600/5f6d/5f6d2720999a48e5b5046b28d7fb577d.jpg",
+      "link": "https://offerup.co/xluJorjDIVb",
       "alt": "Featured OfferUp item"
     }
   ]
