@@ -197,6 +197,67 @@
       .catch(() => {});
   }
 
+  // Testimonials slider
+  const testimonialWrapper = document.querySelector('.testimonials');
+  if (testimonialWrapper) {
+    const track = testimonialWrapper.querySelector('.testimonial-track');
+    const slides = Array.from(track.querySelectorAll('figure'));
+    const prevBtn = testimonialWrapper.querySelector('.testimonial-prev');
+    const nextBtn = testimonialWrapper.querySelector('.testimonial-next');
+    const pagination = testimonialWrapper.querySelector('.testimonial-pagination');
+    let index = 0;
+    let timer;
+
+    const select = (i) => {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === index);
+      });
+      pagination?.querySelectorAll('button').forEach((dot, idx) => {
+        dot.setAttribute('aria-selected', idx === index ? 'true' : 'false');
+      });
+    };
+
+    const start = () => {
+      timer = setInterval(() => {
+        select(index + 1);
+      }, 5000);
+    };
+
+    const reset = () => {
+      clearInterval(timer);
+      start();
+    };
+
+    slides.forEach((slide, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'testimonial-dot';
+      dot.setAttribute('role', 'tab');
+      if (slide.id) dot.setAttribute('aria-controls', slide.id);
+      dot.setAttribute('aria-label', `Show testimonial ${i + 1}`);
+      dot.addEventListener('click', () => {
+        select(i);
+        reset();
+      });
+      pagination?.appendChild(dot);
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      select(index - 1);
+      reset();
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      select(index + 1);
+      reset();
+    });
+
+    select(0);
+    start();
+  }
+
   // 3D tilt on hero card
   const heroCard = document.querySelector('#home .card.tilt');
   if(heroCard){
