@@ -1,11 +1,9 @@
 (() => {
-  if(location.protocol !== 'file:'){
-    const s = document.createElement('script');
-    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-    s.async = true;
-    s.defer = true;
-    document.head.appendChild(s);
-  }
+  const s = document.createElement('script');
+  s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+  s.async = true;
+  s.defer = true;
+  document.head.appendChild(s);
 
   const burger = document.querySelector('.nav-toggle');
   const navMenu = document.getElementById('nav-menu');
