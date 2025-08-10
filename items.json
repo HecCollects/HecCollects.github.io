@@ -4,6 +4,16 @@
       "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=750",
       "link": "https://www.ebay.com/itm/376470178564",
       "alt": "Featured eBay collectible"
+    },
+    {
+      "image": "https://placehold.co/750x750?text=eBay+Item+2",
+      "link": "https://www.ebay.com/itm/1234567890",
+      "alt": "Featured eBay collectible 2"
+    },
+    {
+      "image": "https://placehold.co/750x750?text=eBay+Item+3",
+      "link": "https://www.ebay.com/itm/0987654321",
+      "alt": "Featured eBay collectible 3"
     }
   ],
   "offerup": [
@@ -11,6 +21,16 @@
       "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=750",
       "link": "https://offerup.co/44T5cRnMIVb",
       "alt": "Featured OfferUp item"
+    },
+    {
+      "image": "https://placehold.co/750x750?text=OfferUp+Item+2",
+      "link": "https://offerup.co/abc123",
+      "alt": "Featured OfferUp item 2"
+    },
+    {
+      "image": "https://placehold.co/750x750?text=OfferUp+Item+3",
+      "link": "https://offerup.co/def456",
+      "alt": "Featured OfferUp item 3"
     }
   ]
 }
