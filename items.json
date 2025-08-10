@@ -1,20 +1,15 @@
 {
   "ebay": [
     {
- < wkxbwl-codex/update-featured-items-and-check-urls
       "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=750",
-
- main
       "link": "https://www.ebay.com/itm/376470178564",
       "alt": "Featured eBay collectible"
     }
   ],
   "offerup": [
     {
-< wkxbwl-codex/update-featured-items-and-check-urls
       "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=750",
- main
-      "link": "https://offerup.co/xluJorjDIVb",
+      "link": "https://offerup.com/item/detail/6ce9a7b2-fd73-3b66-a474-8c93c37a87e0",
       "alt": "Featured OfferUp item"
     }
   ]
