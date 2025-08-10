@@ -46,6 +46,7 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .subscribe-form{display:flex;flex-direction:column;gap:.7rem;width:100%}
 .subscribe-form input{padding:.8rem 1rem;border-radius:.8rem;border:none;font-size:1rem}
 .subscribe-form button{align-self:flex-end}
+.cf-turnstile{align-self:center}
 .honeypot{display:none}
 .form-msg{font-size:.9rem;color:var(--orange)}
 /* Ripple */

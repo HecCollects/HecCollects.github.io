@@ -1,7 +1,7 @@
 (() => {
   if(location.protocol !== 'file:'){
     const s = document.createElement('script');
-    s.src = 'https://hcaptcha.com/1/api.js';
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
     s.async = true;
     s.defer = true;
     document.head.appendChild(s);
@@ -213,7 +213,7 @@
     });
   }
 
-  // Subscribe form handling with honeypot and hCaptcha
+  // Subscribe form handling with honeypot and Turnstile
   const subscribeForm = document.querySelector('.subscribe-form');
   if(subscribeForm){
     const msg = document.getElementById('subscribe-msg');
@@ -230,14 +230,14 @@
         msg.textContent = 'Submission rejected.';
         return;
       }
-      const token = window.hcaptcha?.getResponse();
+      const token = window.turnstile?.getResponse();
       if(!token){
         msg.textContent = 'Please complete the captcha.';
         return;
       }
       try{
         const formData = new FormData(subscribeForm);
-        formData.append('h-captcha-response', token);
+        formData.append('cf-turnstile-response', token);
         const res = await fetch(subscribeForm.action, {
           method:'POST',
           body:formData,
@@ -247,7 +247,7 @@
           msg.textContent = 'Thanks for subscribing!';
           subscribeForm.reset();
           disableBtn();
-          window.hcaptcha?.reset();
+          window.turnstile?.reset();
         }else{
           msg.textContent = 'Submission failed. Please try again later.';
         }
