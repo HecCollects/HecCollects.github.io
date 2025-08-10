@@ -217,6 +217,11 @@
   const subscribeForm = document.querySelector('.subscribe-form');
   if(subscribeForm){
     const msg = document.getElementById('subscribe-msg');
+    const btn = subscribeForm.querySelector('button[type="submit"]');
+    const disableBtn = () => { if(btn) btn.disabled = true; };
+    disableBtn();
+    window.enableSubscribe = () => { if(btn) btn.disabled = false; };
+    window.disableSubscribe = disableBtn;
     subscribeForm.addEventListener('submit', async e => {
       e.preventDefault();
       msg.textContent = '';
@@ -241,6 +246,7 @@
         if(res.ok){
           msg.textContent = 'Thanks for subscribing!';
           subscribeForm.reset();
+          disableBtn();
           window.hcaptcha?.reset();
         }else{
           msg.textContent = 'Submission failed. Please try again later.';
