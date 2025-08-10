@@ -1,36 +1,16 @@
 {
   "ebay": [
     {
-      "image": "https://images.unsplash.com/photo-1606813902777-c5a64d40d7f8?auto=format&fit=crop&w=300&h=300",
-      "link": "https://ebay.us/m/TjPzD2",
-      "alt": "Assorted trading cards in sleeves"
-    },
-    {
-      "image": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=300&h=300",
-      "link": "https://ebay.us/m/TjPzD2",
-      "alt": "Vintage action figure on display"
-    },
-    {
-      "image": "https://images.unsplash.com/photo-1583511655826-057b20021a10?auto=format&fit=crop&w=300&h=300",
-      "link": "https://ebay.us/m/TjPzD2",
-      "alt": "Retro video game controller"
+      "image": "https://i.ebayimg.com/images/g/PJkAAeSwqElomAoX/s-l400.jpg",
+      "link": "https://www.ebay.com/itm/376470198032",
+      "alt": "Featured eBay collectible"
     }
   ],
   "offerup": [
     {
-      "image": "https://images.unsplash.com/photo-1606819726060-59b7f06f25a1?auto=format&fit=crop&w=300&h=300",
+      "image": "https://images.offerup.com/gibOyZLRsEMaDznSr5iwK3UpCMc=/800x800/smart/7542/75424d3ed81d46228f0dde5a7c77cf02.jpg",
       "link": "https://offerup.co/3D5QQbGZyVb",
-      "alt": "Stack of classic comic books"
-    },
-    {
-      "image": "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=300&h=300",
-      "link": "https://offerup.co/3D5QQbGZyVb",
-      "alt": "Polaroid camera with film"
-    },
-    {
-      "image": "https://images.unsplash.com/photo-1599507593362-650bdc06e1af?auto=format&fit=crop&w=300&h=300",
-      "link": "https://offerup.co/3D5QQbGZyVb",
-      "alt": "Toy collectible car"
+      "alt": "Featured OfferUp item"
     }
   ]
 }
