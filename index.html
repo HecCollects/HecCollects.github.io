@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Landing page for HecCollects featuring marketplace links and contact info." />
   <meta name="keywords" content="HecCollects, collectibles, marketplace, eBay, OfferUp, contact" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://hcaptcha.com https://*.hcaptcha.com; img-src 'self' https://www.marchingdogs.com" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com; img-src 'self' https://www.marchingdogs.com" />
   <title>HecCollects – Landing Page</title>
 
   <!-- Fonts and icons removed for offline testing -->
@@ -130,7 +130,7 @@
           <form action="https://formspree.io/f/mzzdeork" method="POST" class="subscribe-form">
             <input type="email" name="email" placeholder="Email address" required>
             <input type="text" name="hp" class="honeypot" autocomplete="off" tabindex="-1">
-            <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001" data-callback="enableSubscribe" data-expired-callback="disableSubscribe" data-error-callback="disableSubscribe"></div>
+              <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-callback="enableSubscribe"></div>
             <button type="submit" class="btn" disabled>Subscribe</button>
             <p id="subscribe-msg" class="form-msg" aria-live="polite"></p>
           </form>
