@@ -7,7 +7,6 @@
     } else {
       recaptcha.classList.add('hidden');
     }
-codex/update-comments-and-readme-for-ga_id-and-phone_number
   }
 
   if (!window.GA_ID) {
@@ -15,7 +14,6 @@ codex/update-comments-and-readme-for-ga_id-and-phone_number
   }
   if (!window.PHONE_NUMBER) {
     console.warn('window.PHONE_NUMBER is not set; phone link will be hidden.');
-main
   }
 
   const phoneLink = document.getElementById('phone-link');
@@ -153,6 +151,8 @@ main
       const cue = document.createElement('span');
       cue.className = 'scroll-cue';
       cue.textContent = 'Swipe / scroll ↓';
+      cue.setAttribute('aria-hidden', 'true');
+      cue.setAttribute('role', 'presentation');
       section.appendChild(cue);
     });
 
