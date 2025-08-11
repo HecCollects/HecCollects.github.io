@@ -1,4 +1,18 @@
 (() => {
+  const recaptcha = document.querySelector('.g-recaptcha');
+  if (recaptcha && window.RECAPTCHA_SITE_KEY) {
+    recaptcha.setAttribute('data-sitekey', window.RECAPTCHA_SITE_KEY);
+  }
+
+  const phoneLink = document.getElementById('phone-link');
+  if (phoneLink) {
+    if (window.PHONE_NUMBER) {
+      phoneLink.href = `tel:${window.PHONE_NUMBER}`;
+    } else {
+      phoneLink.classList.add('hidden');
+    }
+  }
+
   const burger = document.querySelector('.nav-toggle');
   const navMenu = document.getElementById('nav-menu');
 
@@ -72,13 +86,13 @@
       if (e.matches) {
         navMenu.classList.add('open');
         navMenu.setAttribute('aria-hidden', 'false');
-        burger.style.display = 'none';
+        burger.classList.add('hidden');
         burger.setAttribute('aria-hidden', 'true');
         burger.tabIndex = -1;
       } else {
         navMenu.classList.remove('open');
         navMenu.setAttribute('aria-hidden', 'true');
-        burger.style.display = '';
+        burger.classList.remove('hidden');
         burger.setAttribute('aria-hidden', 'false');
         burger.tabIndex = 0;
       }
@@ -405,7 +419,7 @@
     if(localStorage.getItem('cookieConsent')){
       cookieBanner.remove();
     }else{
-      cookieBanner.style.display = 'flex';
+      cookieBanner.classList.remove('hidden');
       cookieBtn.addEventListener('click', () => {
         localStorage.setItem('cookieConsent','yes');
         cookieBanner.remove();
