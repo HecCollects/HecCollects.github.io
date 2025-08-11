@@ -32,15 +32,15 @@
   <div id="preloader"><div class="spinner"></div></div>
   <!-- Navbar -->
   <header class="navbar">
-    <a href="#home" class="brand">HecCollects</a>
+    <a href="#home" class="brand" tabindex="0">HecCollects</a>
     <nav id="nav-menu" class="nav-menu" aria-hidden="true">
-      <a href="#home">Home</a>
-      <a href="#ebay">eBay</a>
-      <a href="#offerup">OfferUp</a>
-      <a href="#about">About Me</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#subscribe">Subscribe</a>
-      <a href="#contact">Business Inquiries</a>
+      <a href="#home" tabindex="0">Home</a>
+      <a href="#ebay" tabindex="0">eBay</a>
+      <a href="#offerup" tabindex="0">OfferUp</a>
+      <a href="#about" tabindex="0">About Me</a>
+      <a href="#testimonials" tabindex="0">Testimonials</a>
+      <a href="#subscribe" tabindex="0">Subscribe</a>
+      <a href="#contact" tabindex="0">Business Inquiries</a>
     </nav>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
       <span class="line"></span>
@@ -55,7 +55,10 @@
     <section id="home">
       <div class="section-content">
         <div class="card tilt reveal">
-          <img src="logo.png" alt="HecCollects Logo" class="logo" loading="lazy">
+          <span>
+            <img src="logo.png" alt="" class="logo" loading="lazy" aria-hidden="true">
+            <span class="sr-only">HecCollects</span>
+          </span>
           <h1>Welcome to HecCollects</h1>
           <p>Quality • Collectibles • Community. Scroll or use the menu to explore my marketplaces and story.</p>
           <div class="links">
