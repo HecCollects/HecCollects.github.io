@@ -238,6 +238,15 @@
             img.alt = item.alt;
             img.loading = 'lazy';
             link.appendChild(img);
+            if (item.badge || item.stock) {
+              const meta = document.createElement('span');
+              meta.className = 'item-meta';
+              const parts = [];
+              if (item.badge) parts.push(item.badge);
+              if (item.stock) parts.push(`Only ${item.stock} left`);
+              meta.textContent = parts.join(' – ');
+              link.appendChild(meta);
+            }
             container.appendChild(link);
           });
         };
@@ -389,5 +398,21 @@
         if(window.gtag){ window.gtag('event','subscribe_error'); }
       }
     });
+  }
+
+  // Cookie/analytics notice
+  const cookieBanner = document.getElementById('cookie-banner');
+  const cookieBtn = document.getElementById('cookie-btn');
+  if(cookieBanner && cookieBtn){
+    if(localStorage.getItem('cookieConsent')){
+      cookieBanner.remove();
+    }else{
+      cookieBanner.style.display = 'flex';
+      cookieBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent','yes');
+        cookieBanner.remove();
+        if(window.gtag){ window.gtag('event','cookie_consent'); }
+      });
+    }
   }
 })();
