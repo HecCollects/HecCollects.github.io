@@ -13,10 +13,10 @@
     }
   }
 
-  const initListClones = () => {
-    if (window.__listClonesInitialized) return;
-    window.__listClonesInitialized = true;
-    document.querySelectorAll('ul').forEach(list => {
+    const initListClones = () => {
+      if (window.__listClonesInitialized) return;
+      window.__listClonesInitialized = true;
+    document.querySelectorAll('.feature-marquee').forEach(list => {
       const originals = Array.from(list.children);
       originals.forEach(li => {
         const clone = li.cloneNode(true);
@@ -140,12 +140,6 @@
       cue.className = 'scroll-cue';
       cue.textContent = 'Swipe / scroll ↓';
       section.appendChild(cue);
-    });
-
-    // Feature marquee: duplicate items for seamless scroll
-    document.querySelectorAll('.feature-marquee').forEach(list => {
-      const items = Array.from(list.children);
-      items.forEach(item => list.appendChild(item.cloneNode(true)));
     });
 
     // Ripple
