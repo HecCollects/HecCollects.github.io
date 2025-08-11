@@ -156,6 +156,3 @@ transition: none !important;
 }
 }
 
-.feature-marquee{overflow:hidden}
-.feature-marquee ul{list-style:none;white-space:nowrap}
-.feature-marquee li{display:inline-block;padding:0 1rem}
