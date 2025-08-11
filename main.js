@@ -129,7 +129,11 @@
       }
     };
     handleBreakpoint(mql);
-    mql.addEventListener('change', handleBreakpoint);
+    if (typeof mql.addEventListener === 'function') {
+      mql.addEventListener('change', handleBreakpoint);
+    } else if (mql.addListener) {
+      mql.addListener(handleBreakpoint);
+    }
   }
 
   // Outbound click tracking
@@ -438,13 +442,18 @@
       vantaEffect = null;
     };
 
-    motionQuery.addEventListener('change', e => {
+    const handleMotionChange = (e) => {
       if (e.matches) {
         destroyVanta();
       } else {
         initVanta();
       }
-    });
+    };
+    if (typeof motionQuery.addEventListener === 'function') {
+      motionQuery.addEventListener('change', handleMotionChange);
+    } else if (motionQuery.addListener) {
+      motionQuery.addListener(handleMotionChange);
+    }
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initVanta, { once: true });
