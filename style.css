@@ -23,6 +23,7 @@ section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z
 /* ---------- Typography ---------- */
 .logo{width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,.5)}
 h1{font-size:2.4rem;text-shadow:0 3px 8px rgba(0,0,0,.4)}
+.hero-title{background:linear-gradient(45deg,#fff,#d5d8f6 80%,#fdf7fe);-webkit-background-clip:text;color:transparent}
 h2{font-size:1.9rem;color:var(--orange)}
 p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 /* ---------- Buttons ---------- */
