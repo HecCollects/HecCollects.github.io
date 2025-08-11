@@ -72,6 +72,10 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .testimonial-pagination button[aria-selected="true"]{background:var(--orange)}
 /* Rating */
 .rating{color:var(--orange);margin-bottom:.4rem}
+/* Trust badges */
+.trust-badges{display:flex;gap:.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.trust-badges .badge{display:flex;align-items:center;gap:.3rem;border:1px solid var(--orange);border-radius:.4rem;padding:.25rem .5rem;font-size:.8rem}
+.trust-badges .badge i{color:var(--orange)}
 /* Subscribe form */
 .subscribe-form{display:flex;flex-direction:column;gap:.7rem;width:100%}
 .subscribe-form input[type="email"],.subscribe-form input[type="text"]{padding:.8rem 1rem;border-radius:.8rem;border:none;font-size:1rem}
