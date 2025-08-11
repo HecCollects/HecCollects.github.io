@@ -241,6 +241,12 @@
     });
   };
 
+  const showFallbackMessage = () => {
+    document.querySelectorAll('.featured-items').forEach(container => {
+      container.textContent = 'Unable to load items at this time.';
+    });
+  };
+
   // Load featured items
   if (location.protocol !== 'file:') {
     fetch('items.json')
@@ -285,7 +291,10 @@
         buildItems('offerup', 'offerup-items');
         initFeaturedCarousels();
       })
-      .catch(() => {});
+      .catch(err => {
+        console.error(err);
+        showFallbackMessage();
+      });
   } else {
     initFeaturedCarousels();
   }
