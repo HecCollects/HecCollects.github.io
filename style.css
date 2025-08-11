@@ -131,7 +131,7 @@ section{background-attachment:fixed}
   .featured-items a{flex:0 0 250px}
 }
 /* ---------- Background Images ---------- */
-#home{background-image:linear-gradient(135deg,#1e3c72,#2a5298)}
+#home{position:relative;overflow:hidden;background-image:linear-gradient(135deg,#1e3c72,#2a5298)}
 #ebay{background-image:linear-gradient(135deg,#ff512f,#dd2476)}
 #offerup{background-image:linear-gradient(135deg,#1d976c,#93f9b9)}
 #about{background-image:linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b)}
