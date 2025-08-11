@@ -35,6 +35,10 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .border-fade{position:relative}
 .border-fade::before{content:"";position:absolute;inset:0;border:2px solid rgba(255,255,255,.4);border-radius:inherit;opacity:0;transition:opacity .2s}
 .border-fade:hover::before{opacity:1}
+.cta-glow{position:relative;z-index:0}
+.cta-glow::before,.cta-glow::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.cta-glow::before{z-index:-1;background:transparent;box-shadow:0 0 16px var(--orange)}
+.cta-glow::after{z-index:0;mix-blend-mode:overlay}
 /* Featured listings */
 .featured{margin-top:1rem;width:100%;text-align:left}
 .featured h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--orange)}
