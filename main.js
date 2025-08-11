@@ -412,6 +412,12 @@
     });
   }
 
+  // Duplicate marquee items for seamless loop
+  const featureMarquee = document.querySelector('.feature-marquee ul');
+  if(featureMarquee){
+    featureMarquee.innerHTML += featureMarquee.innerHTML;
+  }
+
   // Cookie/analytics notice
   const cookieBanner = document.getElementById('cookie-banner');
   const cookieBtn = document.getElementById('cookie-btn');
