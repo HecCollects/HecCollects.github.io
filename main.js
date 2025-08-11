@@ -226,6 +226,7 @@ main
   sections.forEach(sec => sectionObs.observe(sec));
 
   const initFeaturedCarousels = () => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     document.querySelectorAll('.featured .carousel').forEach(carousel => {
       const track = carousel.querySelector('.featured-items');
       const prev = carousel.querySelector('.carousel-prev');
@@ -251,7 +252,17 @@ main
           window.gtag('event','carousel_nav',{event_label:'next'});
         }
       });
-      setInterval(() => go(idx + 1), 5000);
+      let timer;
+      const start = () => { timer = setInterval(() => go(idx + 1), 5000); };
+      const stop = () => clearInterval(timer);
+      if (!motionQuery.matches) start();
+      motionQuery.addEventListener('change', e => {
+        if (e.matches) {
+          stop();
+        } else {
+          start();
+        }
+      });
     });
   };
 
@@ -316,6 +327,7 @@ main
   // Testimonials slider
   const testimonialWrapper = document.querySelector('.testimonials');
   if (testimonialWrapper) {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const track = testimonialWrapper.querySelector('.testimonial-track');
     const slides = Array.from(track.querySelectorAll('figure'));
     const prevBtn = testimonialWrapper.querySelector('.testimonial-prev');
@@ -336,6 +348,7 @@ main
     };
 
     const start = () => {
+      if (motionQuery.matches) return;
       timer = setInterval(() => {
         select(index + 1);
       }, 5000);
@@ -376,6 +389,14 @@ main
       reset();
       if (window.gtag) {
         window.gtag('event','testimonial_nav',{event_label:'next'});
+      }
+    });
+
+    motionQuery.addEventListener('change', e => {
+      if (e.matches) {
+        clearInterval(timer);
+      } else {
+        start();
       }
     });
 
