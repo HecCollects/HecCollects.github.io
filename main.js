@@ -7,6 +7,7 @@
     } else {
       recaptcha.classList.add('hidden');
     }
+codex/update-comments-and-readme-for-ga_id-and-phone_number
   }
 
   if (!window.GA_ID) {
@@ -14,6 +15,7 @@
   }
   if (!window.PHONE_NUMBER) {
     console.warn('window.PHONE_NUMBER is not set; phone link will be hidden.');
+main
   }
 
   const phoneLink = document.getElementById('phone-link');
