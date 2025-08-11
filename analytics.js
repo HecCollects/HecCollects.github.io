@@ -4,7 +4,6 @@
   const script = document.createElement('script');
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-  script.integrity = 'sha256-Otare2YpYU85tTuCOT36b10VBDtZIGOpaDskQaLvDCA=';
   script.crossOrigin = 'anonymous';
   document.head.appendChild(script);
 
