@@ -1,0 +1,11 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "HecCollects",
+  "url": "https://heccollects.github.io/",
+  "logo": "https://heccollects.github.io/logo.png",
+  "sameAs": [
+    "https://ebay.us/m/HoUY1I",
+    "https://offerup.co/xluJorjDIVb"
+  ]
+}
