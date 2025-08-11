@@ -59,7 +59,7 @@
           <h1>Welcome to HecCollects</h1>
           <p>Quality • Collectibles • Community. Scroll or use the menu to explore my marketplaces and story.</p>
           <div class="links">
-            <a href="#ebay" class="btn"><i class="fa-solid fa-arrow-down"></i> Dive In</a>
+            <a href="#ebay" class="btn"><i class="fa-brands fa-ebay"></i> Browse eBay Deals</a>
           </div>
         </div>
       </div>
@@ -168,8 +168,13 @@
           <p class="incentive">Subscribers get early access and exclusive discounts.</p>
           <form action="https://formspree.io/f/mzzdeork" method="POST" class="subscribe-form">
             <input type="email" name="email" placeholder="Email address" required>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="interests" value="trading-cards"> Trading Cards</label>
+              <label><input type="checkbox" name="interests" value="electronics"> Electronics</label>
+            </div>
+            <p class="privacy">We’ll never sell your data. <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></p>
             <input type="text" name="hp" class="honeypot" autocomplete="off" tabindex="-1">
-              <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY" data-callback="enableSubscribe"></div>
+            <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY" data-callback="enableSubscribe"></div>
             <button type="submit" class="btn" disabled>Subscribe</button>
             <p id="subscribe-msg" class="form-msg" aria-live="polite"></p>
           </form>
@@ -182,14 +187,21 @@
       <div class="section-content">
         <div class="card reveal">
           <h2>Business Inquiries</h2>
-          <p>Have a question, bulk lot, or collaboration idea? Shoot me an email and I’ll get back within 24 hours.</p>
+          <p>Have a question, bulk lot, or collaboration idea? Reach out and I’ll get back within 24 hours.</p>
           <div class="links">
-            <a href="mailto:hectorsandoval1402@gmail.com" class="btn"><i class="fa-solid fa-envelope"></i> Email Me</a>
+            <a href="mailto:hectorsandoval1402@gmail.com" class="btn" data-analytics="email"><i class="fa-solid fa-envelope"></i> Email Me</a>
+            <a href="https://instagram.com/heccollects" target="_blank" rel="noopener noreferrer" class="btn" data-analytics="instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="tel:5551234567" class="btn" data-analytics="phone"><i class="fa-solid fa-phone"></i> Call Me</a>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" style="display:none;">
+    <span>This site uses cookies and analytics to improve your experience.</span>
+    <button id="cookie-btn">OK</button>
+  </div>
 
   <!-- ---------- JS: interactions & animations ---------- -->
   <script src="main.js"></script>
