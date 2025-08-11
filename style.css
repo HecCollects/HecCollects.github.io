@@ -50,6 +50,9 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .item-meta{position:absolute;top:.4rem;left:.4rem;background:var(--orange);color:var(--black);padding:.2rem .4rem;border-radius:.4rem;font-size:.7rem;font-weight:600}
 .featured-items a:hover img{transform:scale(1.08);box-shadow:0 8px 16px rgba(0,0,0,.4)}
 .promo{margin-top:.8rem;font-size:.9rem;color:var(--orange)}
+/* Feature marquee */
+.feature-marquee{display:flex;overflow:hidden;list-style:none;gap:2rem;padding:0;margin:1rem 0;width:100%}
+.feature-marquee li{white-space:nowrap;flex:0 0 auto}
 /* Carousel */
 .carousel{position:relative;display:flex;align-items:center}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:2}
