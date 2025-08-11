@@ -18,6 +18,7 @@
 
   if (burger && navMenu) {
     const links = Array.from(navMenu.querySelectorAll('a'));
+    const groups = Array.from(navMenu.querySelectorAll('.group > a'));
     const mql = window.matchMedia('(min-width: 1024px)');
 
     const openMenu = () => {
@@ -26,6 +27,7 @@
       burger.setAttribute('aria-expanded', 'true');
       navMenu.setAttribute('aria-hidden', 'false');
       links[0]?.focus();
+      groups.forEach(g => g.parentElement?.classList.add('open'));
       if (window.gtag) {
         window.gtag('event', 'menu_open');
       }
@@ -37,6 +39,7 @@
       navMenu.classList.remove('open');
       burger.setAttribute('aria-expanded', 'false');
       navMenu.setAttribute('aria-hidden', 'true');
+      groups.forEach(g => g.parentElement?.classList.remove('open'));
       if (focusBurger) burger.focus();
       if (window.gtag) {
         window.gtag('event', 'menu_close');
@@ -49,6 +52,16 @@
       } else {
         openMenu();
       }
+    });
+
+    groups.forEach(trigger => {
+      trigger.addEventListener('click', e => {
+        if (window.matchMedia('(hover: none)').matches) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          trigger.parentElement?.classList.toggle('open');
+        }
+      });
     });
 
     links.forEach(link => {

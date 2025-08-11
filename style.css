@@ -95,6 +95,11 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .nav-menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--orange);transition:width .3s}
 .nav-menu a:hover::after{width:100%}
 .nav-menu a.active{color:var(--orange)}
+.nav-menu ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:2.4rem}
+.nav-menu li{position:relative}
+.submenu{position:absolute;top:100%;left:0;opacity:0;visibility:hidden;display:flex;flex-direction:column;background:rgba(21,21,21,.85);padding:.6rem 0;gap:.5rem;transition:opacity .3s,visibility .3s}
+.submenu a{font-size:1.2rem;padding:.4rem 1rem;white-space:nowrap}
+.group:hover .submenu,.group.open .submenu{opacity:1;visibility:visible}
 /* ---------- Responsive tweaks ---------- */
 @media(max-width:640px){
 .card{padding:1.6rem 1.2rem;gap:1rem}
@@ -108,6 +113,7 @@ section{background-attachment:fixed}
 @media(min-width:1024px){
   .nav-toggle{display:none}
   .nav-menu{position:static;transform:none;opacity:1;pointer-events:auto;flex-direction:row;gap:2rem;background:none;backdrop-filter:none;box-shadow:none;height:auto}
+  .nav-menu ul{flex-direction:row;gap:2rem}
   .nav-menu a{font-size:1rem}
   .card{max-width:900px;padding:3rem 4rem}
   .featured-items{gap:1rem;justify-content:flex-start;padding-inline:calc((100% - 250px)/2);scroll-padding-inline:calc((100% - 250px)/2)}
