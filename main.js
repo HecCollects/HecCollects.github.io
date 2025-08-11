@@ -1,7 +1,12 @@
 (() => {
+  const recaptchaEnabled = !!window.RECAPTCHA_SITE_KEY;
   const recaptcha = document.querySelector('.g-recaptcha');
-  if (recaptcha && window.RECAPTCHA_SITE_KEY) {
-    recaptcha.setAttribute('data-sitekey', window.RECAPTCHA_SITE_KEY);
+  if (recaptcha) {
+    if (recaptchaEnabled) {
+      recaptcha.setAttribute('data-sitekey', window.RECAPTCHA_SITE_KEY);
+    } else {
+      recaptcha.classList.add('hidden');
+    }
   }
 
   if (!window.GA_ID) {
@@ -447,49 +452,75 @@
     disableBtn();
     window.enableSubscribe = () => { if(btn) btn.disabled = false; };
     window.disableSubscribe = disableBtn;
+    if(!recaptchaEnabled){
+      window.enableSubscribe();
+      if(msg){
+        msg.textContent = 'reCAPTCHA disabled in test/local builds.';
+        msg.className = 'form-msg';
+      }
+    }
     subscribeForm.addEventListener('submit', async e => {
       e.preventDefault();
-      msg.textContent = '';
-      msg.className = 'form-msg';
+      if(msg){
+        msg.textContent = '';
+        msg.className = 'form-msg';
+      }
       const hp = subscribeForm.querySelector('input[name="hp"]');
       if(hp && hp.value){
-        msg.textContent = 'Submission rejected.';
-        msg.className = 'form-msg error';
+        if(msg){
+          msg.textContent = 'Submission rejected.';
+          msg.className = 'form-msg error';
+        }
         if(window.gtag){ window.gtag('event','subscribe_error'); }
         return;
       }
-      const token = window.grecaptcha?.getResponse();
-      if(!token){
-        msg.textContent = 'Please complete the captcha.';
-        msg.className = 'form-msg error';
-        if(window.gtag){ window.gtag('event','subscribe_error'); }
-        return;
+      let token = '';
+      if(recaptchaEnabled){
+        token = window.grecaptcha?.getResponse();
+        if(!token){
+          if(msg){
+            msg.textContent = 'Please complete the captcha.';
+            msg.className = 'form-msg error';
+          }
+          if(window.gtag){ window.gtag('event','subscribe_error'); }
+          return;
+        }
       }
       try{
         const formData = new FormData(subscribeForm);
-        formData.append('g-recaptcha-response', token);
+        if(recaptchaEnabled){
+          formData.append('g-recaptcha-response', token);
+        }
         const res = await fetch(subscribeForm.action, {
           method:'POST',
           body:formData,
           headers:{Accept:'application/json'}
         });
           if(res.ok){
-            msg.textContent = 'Thanks for subscribing!';
-            msg.className = 'form-msg success';
+            if(msg){
+              msg.textContent = 'Thanks for subscribing!';
+              msg.className = 'form-msg success';
+            }
             if(window.gtag){
               window.gtag('event','subscribe_success');
             }
             subscribeForm.reset();
             disableBtn();
-            window.grecaptcha?.reset();
+            if(recaptchaEnabled){
+              window.grecaptcha?.reset();
+            }
           }else{
-            msg.textContent = 'Submission failed. Please try again later.';
-            msg.className = 'form-msg error';
+            if(msg){
+              msg.textContent = 'Submission failed. Please try again later.';
+              msg.className = 'form-msg error';
+            }
             if(window.gtag){ window.gtag('event','subscribe_error'); }
           }
       }catch{
-        msg.textContent = 'Submission failed. Please try again later.';
-        msg.className = 'form-msg error';
+        if(msg){
+          msg.textContent = 'Submission failed. Please try again later.';
+          msg.className = 'form-msg error';
+        }
         if(window.gtag){ window.gtag('event','subscribe_error'); }
       }
     });
