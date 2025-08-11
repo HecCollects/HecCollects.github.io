@@ -25,9 +25,9 @@
     }
   }
 
-    const initListClones = () => {
-      if (window.__listClonesInitialized) return;
-      window.__listClonesInitialized = true;
+  const initListClones = () => {
+    if (window.__listClonesInitialized) return;
+    window.__listClonesInitialized = true;
     document.querySelectorAll('.feature-marquee').forEach(list => {
       const originals = Array.from(list.children);
       originals.forEach(li => {
