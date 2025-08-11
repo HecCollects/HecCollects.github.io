@@ -135,15 +135,21 @@
   });
 
   // Scroll cues
-  document.querySelectorAll('section:not(:last-of-type)').forEach(section => {
-    const cue = document.createElement('span');
-    cue.className = 'scroll-cue';
-    cue.textContent = 'Swipe / scroll ↓';
-    section.appendChild(cue);
-  });
+    document.querySelectorAll('section:not(:last-of-type)').forEach(section => {
+      const cue = document.createElement('span');
+      cue.className = 'scroll-cue';
+      cue.textContent = 'Swipe / scroll ↓';
+      section.appendChild(cue);
+    });
 
-  // Ripple
-  document.querySelectorAll('.btn').forEach(btn => {
+    // Feature marquee: duplicate items for seamless scroll
+    document.querySelectorAll('.feature-marquee').forEach(list => {
+      const items = Array.from(list.children);
+      items.forEach(item => list.appendChild(item.cloneNode(true)));
+    });
+
+    // Ripple
+    document.querySelectorAll('.btn').forEach(btn => {
     const showRipple = (x, y) => {
       const circle = document.createElement('span');
       const size = Math.max(btn.clientWidth, btn.clientHeight);
