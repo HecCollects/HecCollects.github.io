@@ -369,7 +369,55 @@
     start();
   }
 
-  // 3D tilt on hero card
+    // Hero background animation
+    const heroSection = document.getElementById('home');
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let vantaEffect;
+
+    const initVanta = () => {
+      if (!heroSection || motionQuery.matches || !window.VANTA) return;
+      vantaEffect = window.VANTA.NET({
+        el: heroSection,
+        mouseControls: false,
+        touchControls: false,
+        gyroControls: false,
+        color: 0xffffff,
+        backgroundAlpha: 0
+      });
+      heroSection.querySelector('canvas')?.setAttribute('aria-hidden', 'true');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!vantaEffect) return;
+          if (entry.isIntersecting) {
+            vantaEffect.play?.();
+          } else {
+            vantaEffect.pause?.();
+          }
+        });
+      });
+      observer.observe(heroSection);
+    };
+
+    const destroyVanta = () => {
+      vantaEffect?.destroy();
+      vantaEffect = null;
+    };
+
+    motionQuery.addEventListener('change', e => {
+      if (e.matches) {
+        destroyVanta();
+      } else {
+        initVanta();
+      }
+    });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVanta, { once: true });
+    } else {
+      initVanta();
+    }
+
+    // 3D tilt on hero card
   const heroCard = document.querySelector('#home .card.tilt');
   if(heroCard){
     heroCard.addEventListener('mousemove', e => {
