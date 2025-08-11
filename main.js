@@ -7,6 +7,15 @@
     } else {
       recaptcha.classList.add('hidden');
     }
+codex/update-comments-and-readme-for-ga_id-and-phone_number
+  }
+
+  if (!window.GA_ID) {
+    console.warn('window.GA_ID is not set; analytics will be disabled.');
+  }
+  if (!window.PHONE_NUMBER) {
+    console.warn('window.PHONE_NUMBER is not set; phone link will be hidden.');
+main
   }
 
   const phoneLink = document.getElementById('phone-link');
@@ -18,9 +27,9 @@
     }
   }
 
-    const initListClones = () => {
-      if (window.__listClonesInitialized) return;
-      window.__listClonesInitialized = true;
+  const initListClones = () => {
+    if (window.__listClonesInitialized) return;
+    window.__listClonesInitialized = true;
     document.querySelectorAll('.feature-marquee').forEach(list => {
       const originals = Array.from(list.children);
       originals.forEach(li => {
