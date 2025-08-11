@@ -188,7 +188,11 @@
       let idx = 0;
       const go = (i) => {
         idx = (i + items.length) % items.length;
-        items[idx]?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        items[idx]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
       };
       prev?.addEventListener('click', () => {
         go(idx - 1);
