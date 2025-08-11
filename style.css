@@ -10,7 +10,7 @@ html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
 body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#151515,#0f617b,#151515);background-size:100% 100%;background-repeat:no-repeat;animation:bg-shift 20s ease infinite;color:var(--white)}
 @keyframes bg-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 /* ---------- Sections ---------- */
-section{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
+section{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
 section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
 .section-content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
 /* ---------- Card ---------- */
@@ -19,6 +19,7 @@ section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z
 .tilt:hover{transform:none}
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .6s ease-out,transform .6s ease-out}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.hidden{display:none!important}
 /* ---------- Typography ---------- */
 .logo{width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,.5)}
 h1{font-size:2.4rem;text-shadow:0 3px 8px rgba(0,0,0,.4)}
@@ -72,6 +73,7 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .checkbox-group label{display:flex;align-items:center;gap:.25rem}
 .privacy{font-size:.8rem}
 .privacy a{color:var(--orange)}
+.privacy-content{padding:2rem;max-width:800px;margin:auto;color:var(--white)}
 /* Ripple */
 .ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.35);animation:ripple .6s linear}
 @keyframes ripple{to{transform:scale(4);opacity:0}}
