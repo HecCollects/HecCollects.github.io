@@ -188,11 +188,9 @@
       let idx = 0;
       const go = (i) => {
         idx = (i + items.length) % items.length;
-        items[idx]?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
+        const item = items[idx];
+        const offset = item.offsetLeft + item.offsetWidth / 2 - track.clientWidth / 2;
+        track.scrollTo({ left: offset, behavior: 'smooth' });
       };
       prev?.addEventListener('click', () => {
         go(idx - 1);
