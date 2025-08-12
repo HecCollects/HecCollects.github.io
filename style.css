@@ -51,8 +51,7 @@ p{font-size:1.05rem;max-width:680px;margin-bottom:.2rem}
 .featured-items a:hover img{transform:scale(1.08);box-shadow:0 8px 16px rgba(0,0,0,.4)}
 .promo{margin-top:.8rem;font-size:.9rem;color:var(--orange)}
 /* Feature marquee */
-.feature-marquee{display:flex;overflow:hidden;list-style:none;gap:2rem;padding:0;margin:1rem 0;width:100%}
-.feature-marquee li{white-space:nowrap;flex:0 0 auto}
+
 /* Carousel */
 .carousel{position:relative;display:flex;align-items:center}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:2}
@@ -166,3 +165,11 @@ transition: none !important;
 .package-anim canvas{width:100%;height:100%}
 .package-anim .logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;opacity:0;transition:opacity .5s}
 .package-anim.show-logo .logo{opacity:1}
+
+/* Background feature marquee */
+.feature-marquee-container{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.feature-marquee{position:absolute;inset:0;margin:0;padding:0;list-style:none;color:var(--orange);opacity:.15;perspective:1000px;transform-style:preserve-3d}
+@keyframes marquee-depth{from{transform:translateZ(-600px) translate(0,0)}to{transform:translateZ(0) translate(100px,-100px)}}
+.feature-marquee li{position:absolute;animation:marquee-depth 20s linear infinite}
+.feature-marquee li:nth-child(2n){animation-delay:5s}
+.feature-marquee li:nth-child(3n){animation-delay:10s}
