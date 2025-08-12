@@ -130,14 +130,15 @@ section{background-attachment:fixed}
   .featured-items{gap:1rem;justify-content:flex-start;padding-inline:calc((100% - 250px)/2);scroll-padding-inline:calc((100% - 250px)/2)}
   .featured-items a{flex:0 0 250px}
 }
+:root{--section-gradient-primary:linear-gradient(135deg,#1e3c72,#2a5298);--section-gradient-ebay:linear-gradient(135deg,#ff512f,#dd2476);--section-gradient-offerup:linear-gradient(135deg,#1d976c,#93f9b9);--section-gradient-about:linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b);--section-gradient-testimonials:linear-gradient(135deg,#20002c,#cbb4d4);--section-gradient-subscribe:linear-gradient(135deg,#f7971e,#ffd200);--section-gradient-contact:linear-gradient(135deg,#16222a,#3a6073);}
 /* ---------- Background Images ---------- */
-#home{position:relative;overflow:hidden;background-image:linear-gradient(135deg,#1e3c72,#2a5298)}
-#ebay{background-image:linear-gradient(135deg,#ff512f,#dd2476)}
-#offerup{background-image:linear-gradient(135deg,#1d976c,#93f9b9)}
-#about{background-image:linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b)}
-#testimonials{background-image:linear-gradient(135deg,#20002c,#cbb4d4)}
-#subscribe{background-image:linear-gradient(135deg,#f7971e,#ffd200)}
-#contact{background-image:linear-gradient(135deg,#16222a,#3a6073)}
+#home{position:relative;overflow:hidden;background-image:var(--section-gradient-primary)}
+#ebay{background-image:var(--section-gradient-ebay)}
+#offerup{background-image:var(--section-gradient-offerup)}
+#about{background-image:var(--section-gradient-about)}
+#testimonials{background-image:var(--section-gradient-testimonials)}
+#subscribe{background-image:var(--section-gradient-subscribe)}
+#contact{background-image:var(--section-gradient-contact)}
 #preloader{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:100000;transition:opacity .6s}
 #preloader.hide{opacity:0;pointer-events:none}
 .dotted-loader{color:var(--orange);width:0.8rem;aspect-ratio:1;border-radius:50%;animation:dotted-loader 1.1s ease infinite}
