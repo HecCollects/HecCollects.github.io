@@ -198,3 +198,7 @@ transition: none !important;
   .feature-marquee li:nth-child(3) { animation-delay: 8s; }
 @supports not (height:100dvh){section{height:100vh;min-height:100vh}}
 main
+
+.site-footer{padding:1rem;text-align:center;color:var(--white);}
+.site-footer a{color:var(--color-accent);margin:0 .5rem;text-decoration:none;}
+.site-footer a:hover{text-decoration:underline;}
