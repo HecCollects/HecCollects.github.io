@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "build:css": "node build-css.js"
   },
   "keywords": [],
   "author": "",

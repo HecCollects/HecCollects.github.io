@@ -12,7 +12,16 @@
 
    This installs Playwright and downloads the necessary browser binaries.
 
-3. Run the test suite:
+3. Generate the bundled CSS and decode fonts:
+
+   ```bash
+   npm run build:css
+   ```
+
+   This script reconstructs the `myfont.woff2` file from its Base64 source and
+   writes the concatenated `style.css`.
+
+4. Run the test suite:
 
    ```bash
    npm test

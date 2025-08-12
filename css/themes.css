@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'MyFont';
+  src: url('fonts/myfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root{
+--teal-dark:#0f617b;
+--orange:#f28c2f;
+--black:#151515;
+--white:#ffffff;
+}
+
+/* ---------- Background Images ---------- */
+#home{position:relative;overflow:hidden;background-image:linear-gradient(135deg,#1e3c72,#2a5298)}
+#ebay{background-image:linear-gradient(135deg,#ff512f,#dd2476)}
+#offerup{background-image:linear-gradient(135deg,#1d976c,#93f9b9)}
+#about{background-image:linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b)}
+#testimonials{background-image:linear-gradient(135deg,#20002c,#cbb4d4)}
+#subscribe{background-image:linear-gradient(135deg,#f7971e,#ffd200)}
+#contact{background-image:linear-gradient(135deg,#16222a,#3a6073)}
