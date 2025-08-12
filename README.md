@@ -40,3 +40,22 @@ Evaluated libraries for a lightweight animated hero background:
 
 The prototype uses `VANTA.NET` to render a low-poly particle network behind the hero section. Scripts load deferred and the animation respects `prefers-reduced-motion`, pausing when off‑screen to minimize performance impact.
 
+
+## Theme Customization
+
+Brand gradients for major sections are centralized as CSS variables in `style.css`. Adjust the values in the `:root` block to tweak colors across the site:
+
+```css
+:root {
+  --section-gradient-primary: linear-gradient(135deg, #1e3c72, #2a5298);
+  --section-gradient-ebay: linear-gradient(135deg, #ff512f, #dd2476);
+  --section-gradient-offerup: linear-gradient(135deg, #1d976c, #93f9b9);
+  --section-gradient-about: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+  --section-gradient-testimonials: linear-gradient(135deg, #20002c, #cbb4d4);
+  --section-gradient-subscribe: linear-gradient(135deg, #f7971e, #ffd200);
+  --section-gradient-contact: linear-gradient(135deg, #16222a, #3a6073);
+}
+```
+
+Updating any of these variables will automatically update the corresponding section background without editing individual rules.
+
