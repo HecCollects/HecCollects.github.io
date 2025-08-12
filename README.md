@@ -12,21 +12,13 @@
 
    This installs Playwright and downloads the necessary browser binaries.
 
-3. Build the bundled stylesheet:
-
-   ```bash
-   npm run build:css
-   ```
-
-4. Run the test suite:
+3. Run the test suite:
 
    ```bash
    npm test
    ```
 
 Playwright Test will execute the browser-based tests.
-
-`style.css` is generated from the CSS modules in the `css/` directory. Edit those sources and rerun `npm run build:css` rather than modifying `style.css` directly.
 
 ## Configuration
 
