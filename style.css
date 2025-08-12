@@ -8,11 +8,11 @@
 }
 /* ---------- Reset & Base ---------- */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}@media (max-width:640px){html{scroll-snap-type:y proximity}}
 body{font-family:'MyFont','Poppins',sans-serif;background:linear-gradient(135deg,var(--black),var(--color-primary),var(--black));background-size:100% 100%;background-repeat:no-repeat;animation:bg-shift 20s ease infinite;color:var(--white)}
 @keyframes bg-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 /* ---------- Sections ---------- */
-section{position:relative;min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
+section{position:relative;height:100dvh;min-height:100dvh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat}
 section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
 .section-content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
 /* ---------- Card ---------- */
@@ -194,3 +194,8 @@ transition: none !important;
     transform-style: preserve-3d;
     animation-delay: calc(var(--i) * 4s);
   }
+ codex/update-feature-marquee-animations-and-styles
+  .feature-marquee li:nth-child(2) { animation-delay: 4s; }
+  .feature-marquee li:nth-child(3) { animation-delay: 8s; }
+@supports not (height:100dvh){section{height:100vh;min-height:100vh}}
+main
