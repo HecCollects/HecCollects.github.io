@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
-  body.classList.add('fade-in');
+
+  const show = () => {
+    body.classList.remove('fade-out');
+    body.classList.add('fade-in');
+  };
+
+  show();
+  window.addEventListener('pageshow', show);
 
   document.querySelectorAll('a[href]').forEach(link => {
     const target = link.getAttribute('target');
