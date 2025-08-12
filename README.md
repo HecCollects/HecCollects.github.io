@@ -43,19 +43,15 @@ The prototype uses `VANTA.NET` to render a low-poly particle network behind the 
 
 ## Theme Customization
 
-Brand gradients for major sections are centralized as CSS variables in `style.css`. Adjust the values in the `:root` block to tweak colors across the site:
+Brand colors are centralized as CSS variables in `style.css`. Adjust the values in the `:root` block to tweak colors across the site:
 
 ```css
 :root {
-  --section-gradient-primary: linear-gradient(135deg, #1e3c72, #2a5298);
-  --section-gradient-ebay: linear-gradient(135deg, #ff512f, #dd2476);
-  --section-gradient-offerup: linear-gradient(135deg, #1d976c, #93f9b9);
-  --section-gradient-about: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
-  --section-gradient-testimonials: linear-gradient(135deg, #20002c, #cbb4d4);
-  --section-gradient-subscribe: linear-gradient(135deg, #f7971e, #ffd200);
-  --section-gradient-contact: linear-gradient(135deg, #16222a, #3a6073);
+  --color-primary: #1e3c72;
+  --color-secondary: #2a5298;
+  --color-accent: #f28c2f;
 }
 ```
 
-Updating any of these variables will automatically update the corresponding section background without editing individual rules.
+Sections derive their backgrounds from these core colors using shared gradients, so updating any variable will update the styling across the site.
 
