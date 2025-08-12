@@ -50,25 +50,28 @@
     </script>
  main
   </head>
-<body>
+  <body data-theme="light">
     <div id="preloader"><div class="dotted-loader"></div></div>
   <!-- Navbar -->
   <header class="navbar">
     <a href="#home" class="brand" tabindex="0">HecCollects</a>
-    <nav id="nav-menu" class="nav-menu" aria-hidden="true">
-      <a href="#home" tabindex="0">Home</a>
-      <a href="#ebay" tabindex="0">eBay</a>
-      <a href="#offerup" tabindex="0">OfferUp</a>
-      <a href="#about" tabindex="0">About Me</a>
-      <a href="#testimonials" tabindex="0">Testimonials</a>
-      <a href="#subscribe" tabindex="0">Subscribe</a>
-      <a href="#contact" tabindex="0">Business Inquiries</a>
-    </nav>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-      <span class="line"></span>
-      <span class="line"></span>
-      <span class="line"></span>
-    </button>
+      <nav id="nav-menu" class="nav-menu" aria-hidden="true">
+        <a href="#home" tabindex="0">Home</a>
+        <a href="#ebay" tabindex="0">eBay</a>
+        <a href="#offerup" tabindex="0">OfferUp</a>
+        <a href="#about" tabindex="0">About Me</a>
+        <a href="#testimonials" tabindex="0">Testimonials</a>
+        <a href="#subscribe" tabindex="0">Subscribe</a>
+        <a href="#contact" tabindex="0">Business Inquiries</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </button>
   </header>
 
   <!-- Sections -->
@@ -242,9 +245,10 @@
   </div>
 
   <!-- ---------- JS: interactions & animations ---------- -->
-    <script src="vendor/three.min.js" defer></script>
-    <script src="vendor/vanta.net.min.js" defer></script>
-    <script src="main.js" defer></script>
-    <script src="page-transitions.js" defer></script>
+      <script src="vendor/three.min.js" defer></script>
+      <script src="vendor/vanta.net.min.js" defer></script>
+      <script src="theme-toggle.js" defer></script>
+      <script src="main.js" defer></script>
+      <script src="page-transitions.js" defer></script>
   </body>
 </html>

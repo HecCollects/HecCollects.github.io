@@ -198,3 +198,5 @@ transition: none !important;
   .feature-marquee li:nth-child(3) { animation-delay: 8s; }
 @supports not (height:100dvh){section{height:100vh;min-height:100vh}}
 main
+
+[data-theme="dark"]{--color-primary:#0d1117;--color-secondary:#161b22;--color-accent:#f28c2f;--white:#e6edf3;--black:#010409}.theme-toggle{background:none;border:none;color:var(--white);cursor:pointer;font-size:1.25rem;margin-left:1rem}
