@@ -192,7 +192,10 @@ transition: none !important;
     position: absolute;
     animation: marquee-depth 12s linear infinite;
     transform-style: preserve-3d;
+    animation-delay: calc(var(--i) * 4s);
   }
+ codex/update-feature-marquee-animations-and-styles
   .feature-marquee li:nth-child(2) { animation-delay: 4s; }
   .feature-marquee li:nth-child(3) { animation-delay: 8s; }
 @supports not (height:100dvh){section{height:100vh;min-height:100vh}}
+main

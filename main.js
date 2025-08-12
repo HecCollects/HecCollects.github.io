@@ -30,9 +30,12 @@
     window.__listClonesInitialized = true;
     document.querySelectorAll('.feature-marquee').forEach(list => {
       const originals = Array.from(list.children);
-      originals.forEach(li => {
+      originals.forEach((li, index) => {
         const clone = li.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
+        const delayIndex = originals.length + index;
+        clone.style.setProperty('--i', delayIndex);
+        clone.style.animationDelay = `${delayIndex * 4}s`;
         list.appendChild(clone);
       });
     });
