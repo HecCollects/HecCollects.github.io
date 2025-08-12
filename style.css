@@ -161,3 +161,8 @@ transition: none !important;
 }
 }
 
+
+.package-anim{position:relative;width:200px;height:200px;margin:0 auto 1rem}
+.package-anim canvas{width:100%;height:100%}
+.package-anim .logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;opacity:0;transition:opacity .5s}
+.package-anim.show-logo .logo{opacity:1}
