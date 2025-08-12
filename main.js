@@ -475,6 +475,87 @@
     });
   }
 
+  // Package reveal animation
+  const packageContainer = document.getElementById('package-anim');
+  if (packageContainer && window.THREE) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      packageContainer.classList.add('show-logo');
+    } else {
+      let renderer, scene, camera, lid, logoMesh, animId, startTime, progress = 0;
+      const init = () => {
+        const { clientWidth: w, clientHeight: h } = packageContainer;
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(w, h);
+        packageContainer.appendChild(renderer.domElement);
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+        camera.position.set(0, 1.5, 4);
+        const material = new THREE.MeshStandardMaterial({ color: 0x8b4513 });
+        const box = new THREE.Mesh(new THREE.BoxGeometry(2, 1, 2), material);
+        box.position.y = -0.5;
+        scene.add(box);
+        lid = new THREE.Mesh(new THREE.BoxGeometry(2, 0.1, 2), material);
+        lid.position.y = 0.05;
+        scene.add(lid);
+        const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+        scene.add(light);
+        const tex = new THREE.TextureLoader().load('logo.png');
+        const plane = new THREE.PlaneGeometry(1.2, 1.2);
+        const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true });
+        logoMesh = new THREE.Mesh(plane, mat);
+        logoMesh.rotation.x = -Math.PI / 2;
+        logoMesh.position.y = -0.1;
+        logoMesh.visible = false;
+        scene.add(logoMesh);
+        renderer.render(scene, camera);
+      };
+      const step = (t) => {
+        if (!startTime) startTime = t;
+        const delta = t - startTime;
+        startTime = t;
+        progress = Math.min(progress + delta / 1000, 1);
+        lid.rotation.x = -Math.PI / 2 * progress;
+        if (progress >= 1) {
+          logoMesh.visible = true;
+          packageContainer.classList.add('show-logo');
+        }
+        renderer.render(scene, camera);
+        if (progress < 1) animId = requestAnimationFrame(step);
+        else animId = null;
+      };
+      const play = () => {
+        if (animId || progress >= 1) return;
+        startTime = null;
+        animId = requestAnimationFrame(step);
+      };
+      const pause = () => {
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!renderer) init();
+            play();
+          } else {
+            pause();
+          }
+        });
+      }, { threshold: 0.5 });
+      observer.observe(packageContainer);
+      packageContainer.addEventListener('click', () => {
+        lid.rotation.x = 0;
+        logoMesh.visible = false;
+        packageContainer.classList.remove('show-logo');
+        progress = 0;
+        play();
+      });
+    }
+  }
+
   // Subscribe form handling with honeypot and reCAPTCHA
   const subscribeForm = document.querySelector('.subscribe-form');
   if(subscribeForm){
