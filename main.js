@@ -482,7 +482,8 @@
   const packageContainer = document.getElementById('package-anim');
   if (packageContainer && window.THREE) {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
+    const isLocal = window.location.protocol === 'file:';
+    if (reduced || isLocal) {
       packageContainer.classList.add('show-logo');
     } else {
       let renderer, scene, camera, lid, logoMesh, animId, startTime, progress = 0;
