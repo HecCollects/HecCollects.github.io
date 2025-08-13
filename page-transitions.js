@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const show = () => {
     body.classList.remove('fade-out');
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sameHost = link.host === window.location.host;
     if (sameHost && target !== '_blank' && href && !href.startsWith('#')) {
       link.addEventListener('click', e => {
+        if (reducedMotion.matches) return;
         e.preventDefault();
         body.classList.remove('fade-in');
         body.classList.add('fade-out');
