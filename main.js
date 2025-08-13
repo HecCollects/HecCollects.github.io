@@ -306,6 +306,19 @@
             img.src = item.image;
             img.alt = item.alt;
             img.loading = 'lazy';
+            try {
+              const url = new URL(item.image);
+              const widthParam = url.searchParams.get('width');
+              if (widthParam) {
+                const width = parseInt(widthParam, 10);
+                const half = Math.round(width / 2);
+                const small = new URL(item.image);
+                small.searchParams.set('width', String(half));
+                img.width = width;
+                img.height = width;
+                img.srcset = `${small.toString()} ${half}w, ${item.image} ${width}w`;
+              }
+            } catch {}
             link.appendChild(img);
             if (item.badge || item.stock) {
               const meta = document.createElement('span');
