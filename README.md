@@ -16,9 +16,10 @@
 
    ```bash
    node scripts/decode-font.js
+   node scripts/decode-logo.js
    ```
 
-   Fonts are stored in base64 form (`.b64`) and must be decoded before serving or testing.
+   Fonts and images are stored in base64 form (`.b64`) and must be decoded before serving or testing.
 
 4. Run the test suite:
 
