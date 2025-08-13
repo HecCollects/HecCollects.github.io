@@ -12,7 +12,15 @@
 
    This installs Playwright and downloads the necessary browser binaries.
 
-3. Run the test suite:
+3. Decode binary assets:
+
+   ```bash
+   node scripts/decode-font.js
+   ```
+
+   Fonts are stored in base64 form (`.b64`) and must be decoded before serving or testing.
+
+4. Run the test suite:
 
    ```bash
    npm test
