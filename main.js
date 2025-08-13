@@ -25,6 +25,8 @@
     }
   }
 
+  const canHover = window.matchMedia('(hover: hover)').matches;
+
   const initListClones = () => {
     if (window.__listClonesInitialized) return;
     window.__listClonesInitialized = true;
@@ -164,33 +166,35 @@
     });
 
     // Ripple
-    document.querySelectorAll('.btn').forEach(btn => {
-    const showRipple = (x, y) => {
-      const circle = document.createElement('span');
-      const size = Math.max(btn.clientWidth, btn.clientHeight);
-      circle.style.width = circle.style.height = `${size}px`;
-      circle.style.left = `${x - size / 2}px`;
-      circle.style.top = `${y - size / 2}px`;
-      circle.classList.add('ripple');
-      btn.appendChild(circle);
-      setTimeout(() => circle.remove(), 600);
-    };
+    if (canHover) {
+      document.querySelectorAll('.btn').forEach(btn => {
+        const showRipple = (x, y) => {
+          const circle = document.createElement('span');
+          const size = Math.max(btn.clientWidth, btn.clientHeight);
+          circle.style.width = circle.style.height = `${size}px`;
+          circle.style.left = `${x - size / 2}px`;
+          circle.style.top = `${y - size / 2}px`;
+          circle.classList.add('ripple');
+          btn.appendChild(circle);
+          setTimeout(() => circle.remove(), 600);
+        };
 
-    btn.addEventListener('click', e => {
-      const rect = btn.getBoundingClientRect();
-      const hasCoords = typeof e.clientX === 'number' && typeof e.clientY === 'number' && (e.clientX !== 0 || e.clientY !== 0);
-      const x = hasCoords ? e.clientX - rect.left : rect.width / 2;
-      const y = hasCoords ? e.clientY - rect.top : rect.height / 2;
-      showRipple(x, y);
-    });
+        btn.addEventListener('click', e => {
+          const rect = btn.getBoundingClientRect();
+          const hasCoords = typeof e.clientX === 'number' && typeof e.clientY === 'number' && (e.clientX !== 0 || e.clientY !== 0);
+          const x = hasCoords ? e.clientX - rect.left : rect.width / 2;
+          const y = hasCoords ? e.clientY - rect.top : rect.height / 2;
+          showRipple(x, y);
+        });
 
-    btn.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        btn.click();
-      }
-    });
-  });
+        btn.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      });
+    }
 
   // Preloader
   window.addEventListener('load', () => {
@@ -466,12 +470,12 @@
 
     // 3D tilt on hero card
   const heroCard = document.querySelector('#home .card.tilt');
-  if(heroCard){
+  if (canHover && heroCard) {
     heroCard.addEventListener('mousemove', e => {
       const rect = heroCard.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width/2;
-      const y = e.clientY - rect.top - rect.height/2;
-      heroCard.style.transform = `rotateY(${x/25}deg) rotateX(${-y/25}deg)`;
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      heroCard.style.transform = `rotateY(${x / 25}deg) rotateX(${-y / 25}deg)`;
     });
     heroCard.addEventListener('mouseleave', () => {
       heroCard.style.transform = '';
