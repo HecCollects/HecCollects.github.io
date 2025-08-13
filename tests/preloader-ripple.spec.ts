@@ -13,6 +13,9 @@ test('preloader is removed and ripple cleans up', async ({ page }) => {
   await page.goto('file://' + filePath);
   await page.waitForLoadState('load');
 
+  const canHover = await page.evaluate(() => window.matchMedia('(hover: hover)').matches);
+  test.skip(!canHover, 'hover not supported');
+
   await page.waitForSelector('#preloader', { state: 'detached' });
   await expect(page.locator('#preloader')).toHaveCount(0);
 
