@@ -1,5 +1,11 @@
+ codex/create-tests-for-apple-touch-icon
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="32" ry="32" fill="#1e3c72"/>
+  <text x="90" y="115" font-size="100" text-anchor="middle" fill="#fff">H</text>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
   <rect width="180" height="180" fill="#1e3c72"/>
   <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="90" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">HC</text>
+ main
 </svg>
