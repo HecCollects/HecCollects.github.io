@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "pretest": "playwright install",
     "test": "playwright test"
   },
   "keywords": [],
