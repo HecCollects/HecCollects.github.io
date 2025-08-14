@@ -26,6 +26,7 @@
   }
 
   const canHover = window.matchMedia('(hover: hover)').matches;
+  const webglSupported = !!window.WebGLRenderingContext;
 
   const initListClones = () => {
     if (window.__listClonesInitialized) return;
@@ -434,7 +435,7 @@
     let vantaEffect;
 
     const initVanta = () => {
-      if (!heroSection || motionQuery.matches || !window.VANTA) return;
+      if (!heroSection || motionQuery.matches || !window.VANTA || !webglSupported) return;
       vantaEffect = window.VANTA.NET({
         el: heroSection,
         mouseControls: false,
@@ -497,10 +498,10 @@
 
   // Package reveal animation
   const packageContainer = document.getElementById('package-anim');
-  if (packageContainer && window.THREE) {
+  if (packageContainer) {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isLocal = window.location.protocol === 'file:';
-    if (reduced || isLocal) {
+    if (!webglSupported || !window.THREE || reduced || isLocal) {
       packageContainer.classList.add('show-logo');
     } else {
       let renderer, scene, camera, lid, logoMesh, animId, startTime, progress = 0;
