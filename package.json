@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "pretest": "node scripts/decode-font.js && node scripts/decode-logo.js && node scripts/decode-snapshots.js && playwright install",
+    "pretest": "node scripts/decode-font.js && node scripts/decode-logo.js && node scripts/decode-snapshots.js && playwright install --with-deps",
     "test": "playwright test"
   },
   "keywords": [],
