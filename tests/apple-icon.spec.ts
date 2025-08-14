@@ -9,7 +9,7 @@ for (const name of pages) {
     await page.goto('file://' + filePath);
 
     const icon = page.locator('link[rel="apple-touch-icon"]');
-    await expect(icon).toHaveAttribute('href', /logo\.svg$/);
+    await expect(icon).toHaveAttribute('href', /logo-apple-touch\.png$/);
 
     await expect(page.locator('meta[name="apple-mobile-web-app-capable"]')).toHaveCount(1);
     await expect(page.locator('meta[name="apple-mobile-web-app-status-bar-style"]')).toHaveCount(1);
