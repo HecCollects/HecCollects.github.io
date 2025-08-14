@@ -201,3 +201,7 @@ main
 .site-footer{padding:1rem;text-align:center;color:var(--white);}
 .site-footer a{color:var(--color-accent);margin:0 .5rem;text-decoration:none;}
 .site-footer a:hover{text-decoration:underline;}
+
+.page-nav{padding:1rem;text-align:center;}
+.page-nav a{color:var(--color-accent);margin:0 .5rem;text-decoration:none;}
+.page-nav a[aria-current="page"]{font-weight:600;text-decoration:underline;}
