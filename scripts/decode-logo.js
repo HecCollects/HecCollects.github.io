@@ -1,11 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 
-const src = path.resolve(__dirname, '..', 'logo.png.b64');
-const dest = path.resolve(__dirname, '..', 'logo.png');
+const files = [
+  { src: 'logo.png.b64', dest: 'logo.png' },
+  { src: 'logo-apple-touch.png.b64', dest: 'logo-apple-touch.png' }
+];
 
-const base64 = fs.readFileSync(src, 'utf8');
-const buffer = Buffer.from(base64, 'base64');
-fs.writeFileSync(dest, buffer);
+files.forEach(({ src, dest }) => {
+  const srcPath = path.resolve(__dirname, '..', src);
+  if (fs.existsSync(srcPath)) {
+    const destPath = path.resolve(__dirname, '..', dest);
+    const base64 = fs.readFileSync(srcPath, 'utf8');
+    const buffer = Buffer.from(base64, 'base64');
+    fs.writeFileSync(destPath, buffer);
+    console.log(`Decoded ${destPath}`);
+  }
+});
 
-console.log(`Decoded ${dest}`);
