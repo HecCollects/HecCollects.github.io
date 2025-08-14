@@ -33,6 +33,21 @@
     window.__listClonesInitialized = true;
     document.querySelectorAll('.feature-marquee').forEach(list => {
       const originals = Array.from(list.children);
+
+      const positions = [
+        { x: '15%', y: '25%' },
+        { x: '60%', y: '30%' },
+        { x: '35%', y: '70%' }
+      ];
+
+      originals.forEach((li, index) => {
+        const pos = positions[index % positions.length];
+        li.style.setProperty('--i', index);
+        li.style.setProperty('--x', pos.x);
+        li.style.setProperty('--y', pos.y);
+        li.style.animationDelay = `${index * 4}s`;
+      });
+
       originals.forEach((li, index) => {
         const clone = li.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
