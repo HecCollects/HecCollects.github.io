@@ -169,7 +169,6 @@ transition: none !important;
 
 /* Background feature marquee */
 .feature-marquee-container{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.marquee-background{position:absolute;z-index:-1;inset:0;pointer-events:none}
 .feature-marquee {
     position: absolute;
     inset: 0;
@@ -190,12 +189,12 @@ transition: none !important;
 
   .feature-marquee li {
     position: absolute;
+    top: var(--y, 50%);
+    left: var(--x, 50%);
     animation: marquee-depth 12s linear infinite;
     transform-style: preserve-3d;
     animation-delay: calc(var(--i) * 4s);
   }
-  .feature-marquee li:nth-child(2) { animation-delay: 4s; }
-  .feature-marquee li:nth-child(3) { animation-delay: 8s; }
 @supports not (height:100dvh){section{height:100vh;min-height:100vh}}
 main
 

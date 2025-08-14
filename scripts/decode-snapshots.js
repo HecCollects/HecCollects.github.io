@@ -1,7 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const snapshotsDir = path.resolve(__dirname, '..', 'tests', '__screenshots__');
+// Decode any Base64-encoded snapshot assets under the tests directory.
+// Playwright stores visual snapshot files alongside their respective test
+// suites (e.g., `navbar-visual.spec.ts-snapshots`). Previously this script
+// only decoded files within a `__screenshots__` folder, which meant snapshots
+// in other locations were missed and tests failed because the PNGs were
+// absent at runtime.
+const snapshotsDir = path.resolve(__dirname, '..', 'tests');
 
 function decodeDir(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
