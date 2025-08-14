@@ -40,3 +40,19 @@ body.fade-in {
 body.fade-out {
   opacity: 0;
 }
+
+/* Page-specific theme overrides */
+body.privacy-page {
+  --bg-start: #0b3d91;
+  --bg-end: #1e90ff;
+}
+
+body.returns-page {
+  --bg-start: #5e2e2e;
+  --bg-end: #b34747;
+}
+
+body.faq-page {
+  --bg-start: #005f73;
+  --bg-end: #0a9396;
+}
