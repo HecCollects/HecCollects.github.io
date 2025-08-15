@@ -8,7 +8,7 @@ test('favicon loads', async ({ page }) => {
   await page.goto('file://' + filePath);
 
   const href = await page.getAttribute('link[rel="icon"]', 'href');
-  expect(href?.startsWith('data:image/png;base64,')).toBe(true);
+  expect(href).toBe('favicon.svg');
 
   const loaded = await page.evaluate(() => {
     return new Promise<boolean>(resolve => {
