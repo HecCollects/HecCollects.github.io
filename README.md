@@ -1,5 +1,9 @@
 # HecCollects.github.io
 
+## Logo
+
+The site uses a premium gradient “HC” emblem stored as SVG and base64-encoded PNGs for deployment.
+
 ## Development Setup
 
 1. Ensure you have **Node.js 18+** installed.
