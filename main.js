@@ -25,6 +25,15 @@
     }
   }
 
+  document.querySelectorAll('details').forEach(d => {
+    const summary = d.querySelector('summary');
+    if (!summary) return;
+    summary.setAttribute('aria-expanded', d.open ? 'true' : 'false');
+    d.addEventListener('toggle', () => {
+      summary.setAttribute('aria-expanded', d.open ? 'true' : 'false');
+    });
+  });
+
   const canHover = window.matchMedia('(hover: hover)').matches;
   const webglSupported = !!window.WebGLRenderingContext;
 
