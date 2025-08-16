@@ -9,17 +9,35 @@
   <title>FAQ - HecCollects</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="theme.css">
+  <script src="config.js" defer></script>
+  <script src="analytics.js" defer></script>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="HecCollects">
 </head>
 <body class="faq-page">
-  <nav class="page-nav" aria-label="Page navigation">
-    <a href="index.html">Home</a>
-    <a href="faq.html" aria-current="page">FAQ</a>
-    <a href="returns.html">Returns</a>
-    <a href="privacy.html">Privacy Policy</a>
-  </nav>
+  <header class="navbar">
+    <a href="index.html#home" class="brand" tabindex="0">
+      <img src="logo.svg" alt="HecCollects logo" width="40" height="40">
+    </a>
+    <nav id="nav-menu" class="nav-menu" aria-hidden="true">
+      <a href="index.html#home" tabindex="0">Home</a>
+      <a href="index.html#ebay" tabindex="0">eBay</a>
+      <a href="index.html#offerup" tabindex="0">OfferUp</a>
+      <a href="index.html#about" tabindex="0">About Me</a>
+      <a href="index.html#testimonials" tabindex="0">Testimonials</a>
+      <a href="index.html#subscribe" tabindex="0">Subscribe</a>
+      <a href="index.html#contact" tabindex="0">Business Inquiries</a>
+      <a href="faq.html" tabindex="0" aria-current="page">FAQ</a>
+      <a href="returns.html" tabindex="0">Returns</a>
+      <a href="privacy.html" tabindex="0">Privacy Policy</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+      <span class="line" aria-hidden="true"></span>
+      <span class="line" aria-hidden="true"></span>
+      <span class="line" aria-hidden="true"></span>
+    </button>
+  </header>
   <main class="faq-content">
     <h1>Frequently Asked Questions</h1>
     <section>
@@ -73,6 +91,7 @@
     ]
   }
   </script>
+  <script src="main.js" defer></script>
   <script src="page-transitions.js" defer></script>
 </body>
 </html>
