@@ -537,7 +537,13 @@
         scene.add(lid);
         const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
         scene.add(light);
-        const tex = new THREE.TextureLoader().load('logo.png');
+        const loader = new THREE.TextureLoader();
+        const tex = loader.load('logo.png', undefined, undefined, () => {
+          packageContainer.classList.add('show-logo');
+          if (renderer && renderer.domElement) {
+            renderer.domElement.remove();
+          }
+        });
         const plane = new THREE.PlaneGeometry(1.2, 1.2);
         const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true });
         logoMesh = new THREE.Mesh(plane, mat);
