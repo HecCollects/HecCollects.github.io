@@ -43,10 +43,18 @@
     <details>
       <summary aria-expanded="false">Shipping Policy</summary>
       <p>Orders ship within 2 business days via trusted carriers. Tracking information is provided as soon as it's available, and delivery times may vary by destination.</p>
+      <p>For common questions about delivery, see the <a href="faq.html#orders-shipping">Orders &amp; Shipping FAQ</a>.</p>
     </details>
     <details>
       <summary aria-expanded="false">Returns Policy</summary>
       <p>Returns are accepted within 30 days of delivery. Items must be in original condition. Buyers pay return shipping unless the item arrived damaged or incorrect.</p>
+      <h2>Initiating a Return</h2>
+      <p>To start a return, reach out via the <a href="index.html#contact">contact form</a> with your order details. I will provide instructions within 24 hours.</p>
+      <h2>Packaging Expectations</h2>
+      <p>Securely repackage items to prevent damage in transit and include all original accessories or documentation.</p>
+      <h2>Refund Timeline</h2>
+      <p>Refunds are issued to the original payment method within 2 business days after the item is received and inspected.</p>
+      <p>Additional details are available in the <a href="faq.html#returns-refunds">Returns &amp; Refunds FAQ</a>.</p>
     </details>
     <details>
       <summary aria-expanded="false">Refund Exceptions</summary>
@@ -67,6 +75,18 @@
     <a href="returns.html">Returns</a>
     <a href="privacy.html">Privacy Policy</a>
   </footer>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MerchantReturnPolicy",
+    "returnPolicyCategory": "https://schema.org/Returnable",
+    "merchantReturnDays": 30,
+    "returnMethod": "https://schema.org/ReturnByMail",
+    "returnFees": "https://schema.org/ReturnShippingFees",
+    "inStoreReturnsOffered": false,
+    "applicableCountry": "US"
+  }
+  </script>
   <script src="main.js" defer></script>
   <script src="page-transitions.js" defer></script>
 </body>
