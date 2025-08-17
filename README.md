@@ -36,14 +36,14 @@ Playwright Test will execute the browser-based tests.
 
 ## Configuration
 
-`config.js` reads optional values from the global `window` object.
-Provide these at deploy time by defining them before the script loads or by
-replacing them during your build (for example via environment variables).
+`config.js` reads optional values from its `<script>` tag's `data-` attributes or existing `window` properties.
+Provide these at deploy time by setting the attributes in HTML or defining globals before the script loads (for example via environment variables).
 
-- `window.GA_ID` – Google Analytics tracking ID.
-- `window.PHONE_NUMBER` – Contact number used for the phone link.
+- `data-ga-id` or `window.GA_ID` – Google Analytics tracking ID.
+- `data-recaptcha-site-key` or `window.RECAPTCHA_SITE_KEY` – reCAPTCHA site key.
+- `data-phone-number` or `window.PHONE_NUMBER` – Contact number used for the phone link.
 
-If left unset, analytics is disabled and the phone link will be hidden.
+If left unset (or left as placeholder tokens like `%GA_ID%`), analytics is disabled, reCAPTCHA is hidden, and the phone link will be hidden.
 
 ## Animated Background Prototype
 
