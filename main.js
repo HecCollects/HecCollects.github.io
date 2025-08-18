@@ -4,6 +4,8 @@
   if (recaptcha) {
     if (recaptchaEnabled) {
       recaptcha.setAttribute('data-sitekey', window.RECAPTCHA_SITE_KEY);
+      recaptcha.style.minHeight = '78px';
+      recaptcha.style.minWidth = '302px';
     } else {
       recaptcha.classList.add('hidden');
     }
