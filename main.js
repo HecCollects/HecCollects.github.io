@@ -354,10 +354,7 @@
             if (item.badge || item.stock) {
               const meta = document.createElement('span');
               meta.className = 'item-meta';
-              const parts = [];
-              if (item.badge) parts.push(item.badge);
-              if (item.stock) parts.push(`Only ${item.stock} left`);
-              meta.textContent = parts.join(' – ');
+              meta.textContent = item.badge ? item.badge : `Only ${item.stock} left`;
               link.appendChild(meta);
             }
             container.appendChild(link);
