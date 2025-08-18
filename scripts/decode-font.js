@@ -1,11 +1,24 @@
 const fs = require('fs');
 const path = require('path');
 
-const src = path.resolve(__dirname, '..', 'fonts', 'myfont.woff2.b64');
-const dest = path.resolve(__dirname, '..', 'fonts', 'myfont.woff2');
+function decodeFile(srcPath) {
+  const destPath = srcPath.replace(/\.b64$/, '');
+  const base64 = fs.readFileSync(srcPath, 'utf8');
+  const buffer = Buffer.from(base64, 'base64');
+  fs.writeFileSync(destPath, buffer);
+  console.log(`Decoded ${destPath}`);
+}
 
-const base64 = fs.readFileSync(src, 'utf8');
-const buffer = Buffer.from(base64, 'base64');
-fs.writeFileSync(dest, buffer);
+const dirs = [
+  path.resolve(__dirname, '..', 'fonts'),
+  path.resolve(__dirname, '..', 'vendor', 'fontawesome'),
+  path.resolve(__dirname, '..', 'vendor', 'fontawesome', 'webfonts')
+];
 
-console.log(`Decoded ${dest}`);
+dirs.forEach(dir => {
+  if (fs.existsSync(dir)) {
+    fs.readdirSync(dir)
+      .filter(file => file.endsWith('.b64'))
+      .forEach(file => decodeFile(path.join(dir, file)));
+  }
+});
