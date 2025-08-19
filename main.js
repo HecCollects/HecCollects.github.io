@@ -346,7 +346,7 @@
                 const small = new URL(item.image);
                 small.searchParams.set('width', String(half));
                 img.width = width;
-                img.height = width;
+                img.height = Math.round(width * 9 / 16);
                 img.srcset = `${small.toString()} ${half}w, ${item.image} ${width}w`;
               }
             } catch {}
