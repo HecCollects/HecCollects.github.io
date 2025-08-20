@@ -6,7 +6,7 @@
   <link rel="apple-touch-icon" href="logo-apple-touch.png">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" href="logo.png">
-  <title>Market History - HecCollects</title>
+  <title>Sold Listings - HecCollects</title>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://www.googletagmanager.com https://challenges.cloudflare.com https://www.google.com https://www.gstatic.com; img-src 'self' https://www.marchingdogs.com data:; frame-src 'self' https://challenges.cloudflare.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="theme.css">
@@ -25,6 +25,7 @@
       <a href="index.html#testimonials">Testimonials</a>
       <a href="index.html#subscribe">Subscribe</a>
       <a href="index.html#contact">Business Inquiries</a>
+      <a href="sold.html" aria-current="page">Sold Listings</a>
       <a href="faq.html">FAQ</a>
       <a href="returns.html">Returns</a>
       <a href="privacy.html">Privacy Policy</a>
@@ -36,22 +37,23 @@
     </button>
   </header>
   <main class="policy-content">
-    <h1>Market History</h1>
+    <h1>Sold Listings</h1>
     <p id="sold-status" role="status"></p>
     <table id="sold-table" aria-label="Sold items">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Date</th>
-          <th>Price</th>
+          <th scope="col">Item</th>
+          <th scope="col"><button id="price-header" type="button">Price</button></th>
+          <th scope="col"><button id="date-header" type="button">Date</button></th>
+          <th scope="col">Location</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
-    <canvas id="price-chart" aria-label="Price history chart"></canvas>
   </main>
   <footer class="site-footer">
     <a href="index.html">Home</a>
+    <a href="sold.html">Sold Listings</a>
     <a href="faq.html">FAQ</a>
     <a href="returns.html">Returns</a>
     <a href="privacy.html">Privacy Policy</a>
