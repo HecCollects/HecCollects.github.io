@@ -3,16 +3,24 @@
     "title": "Vintage Camera",
     "image": "https://example.com/images/camera.jpg",
     "link": "https://example.com/vintage-camera",
-    "price": "$150",
+    "price": {
+      "value": 150,
+      "currency": "USD"
+    },
     "date": "2024-03-01",
-    "location": "New York, NY"
+    "location": "New York, NY",
+    "platform": "ebay"
   },
   {
     "title": "Retro Game Console",
     "image": "https://example.com/images/console.jpg",
     "link": "https://example.com/retro-console",
-    "price": "$80",
+    "price": {
+      "value": 80,
+      "currency": "USD"
+    },
     "date": "2024-02-15",
-    "location": "Los Angeles, CA"
+    "location": "Los Angeles, CA",
+    "platform": "tcgplayer"
   }
 ]

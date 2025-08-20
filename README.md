@@ -34,6 +34,24 @@ The site uses a premium gradient “HC” emblem stored as SVG and base64-encode
 
 Playwright Test will execute the browser-based tests.
 
+## Updating Sold Items
+
+`scripts/update-sold.js` pulls recent sales data from eBay and TCGplayer and
+writes `sold-items.json`.
+
+Set the following environment variables before running the script:
+
+- `EBAY_APP_ID` – eBay developer application ID.
+- `TCG_PUBLIC_KEY` and `TCG_PRIVATE_KEY` – TCGplayer API credentials.
+- `SOLD_SEARCH_TERM` – optional keyword to search for (default `collectible`).
+- `SOLD_LIMIT` – optional maximum number of results to fetch (default `10`).
+
+Run the script with:
+
+```bash
+npm run update-sold
+```
+
 ## Configuration
 
 `config.js` reads optional values from its `<script>` tag's `data-` attributes or existing `window` properties.

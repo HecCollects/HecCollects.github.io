@@ -14,6 +14,10 @@ async function fetchEbaySold() {
     return [];
   }
 
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 90);
+  const now = new Date();
+
   const params = new URLSearchParams({
     'OPERATION-NAME': 'findCompletedItems',
     'SERVICE-VERSION': '1.13.0',
@@ -23,7 +27,11 @@ async function fetchEbaySold() {
     keywords: SEARCH_TERM,
     'paginationInput.entriesPerPage': String(LIMIT),
     'itemFilter(0).name': 'SoldItemsOnly',
-    'itemFilter(0).value': 'true'
+    'itemFilter(0).value': 'true',
+    'itemFilter(1).name': 'EndTimeFrom',
+    'itemFilter(1).value': cutoff.toISOString(),
+    'itemFilter(2).name': 'EndTimeTo',
+    'itemFilter(2).value': now.toISOString()
   });
 
   const url = `https://svcs.ebay.com/services/search/FindingService/v1?${params}`;
@@ -44,7 +52,8 @@ async function fetchEbaySold() {
       date: item.listingInfo?.[0]?.endTime?.[0] || '',
       location: item.location?.[0] || '',
       url: item.viewItemURL?.[0] || '',
-      image: item.galleryURL?.[0] || ''
+      image: item.galleryURL?.[0] || '',
+      platform: 'ebay'
     }));
   } catch (err) {
     console.warn('eBay sold fetch error', err);
@@ -52,8 +61,75 @@ async function fetchEbaySold() {
   }
 }
 
+async function fetchTcgPlayerSold() {
+  const publicKey = process.env.TCG_PUBLIC_KEY;
+  const privateKey = process.env.TCG_PRIVATE_KEY;
+  if (!publicKey || !privateKey) {
+    console.warn('TCG_PUBLIC_KEY or TCG_PRIVATE_KEY not set; skipping TCGplayer sold fetch');
+    return [];
+  }
+
+  try {
+    const tokenRes = await fetch('https://api.tcgplayer.com/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: publicKey,
+        client_secret: privateKey
+      })
+    });
+    if (!tokenRes.ok) {
+      console.warn('TCGplayer token request failed', tokenRes.status);
+      return [];
+    }
+    const tokenJson = await tokenRes.json();
+    const accessToken = tokenJson.access_token;
+
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 90);
+    const params = new URLSearchParams({
+      limit: String(LIMIT),
+      startDate: cutoff.toISOString()
+    });
+
+    const res = await fetch(`https://api.tcgplayer.com/storesales/orders?${params}`, {
+      headers: {
+        Authorization: `bearer ${accessToken}`
+      }
+    });
+    if (!res.ok) {
+      console.warn('TCGplayer sold request failed', res.status);
+      return [];
+    }
+    const json = await res.json();
+    const orders = json?.results || [];
+    return orders.slice(0, LIMIT).map(order => ({
+      title: order.productName || order.product?.name || '',
+      price: {
+        value: Number(order.totalPrice?.amount || order.price?.amount || 0),
+        currency: order.totalPrice?.currencyCode || order.price?.currencyCode || ''
+      },
+      date: order.orderDate || order.createdOn || '',
+      location: order.address?.region || '',
+      url: '',
+      image: '',
+      platform: 'tcgplayer'
+    }));
+  } catch (err) {
+    console.warn('TCGplayer sold fetch error', err);
+    return [];
+  }
+}
+
 async function main() {
-  const sold = await fetchEbaySold();
+  const [ebay, tcgplayer] = await Promise.all([
+    fetchEbaySold(),
+    fetchTcgPlayerSold()
+  ]);
+  const sold = [...ebay, ...tcgplayer];
   await fs.writeFile(OUTPUT, JSON.stringify(sold, null, 2));
   console.log(`Wrote ${OUTPUT}`);
 }
