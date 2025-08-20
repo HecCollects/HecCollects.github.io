@@ -52,18 +52,21 @@
       <p id="avg-price"></p>
       <ul id="monthly-sales"></ul>
     </div>
-    <canvas id="sales-chart" aria-label="Sales chart"></canvas>
-    <table id="sold-table" aria-label="Sold items">
-      <thead>
-        <tr>
-          <th scope="col">Item</th>
-          <th scope="col">Price</th>
-          <th scope="col">Date</th>
-          <th scope="col">Location</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <canvas id="sales-chart" aria-label="Sales chart" role="img"></canvas>
+    <div class="table-container">
+      <table id="sold-table" aria-labelledby="sold-table-caption">
+        <caption id="sold-table-caption">Sold items with prices, dates, and locations</caption>
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+            <th scope="col">Date</th>
+            <th scope="col">Location</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </main>
   <footer class="site-footer">
     <a href="index.html">Home</a>
