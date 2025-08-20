@@ -39,6 +39,20 @@
   <main class="policy-content">
     <h1>Sold Listings</h1>
     <p id="sold-status" role="status"></p>
+    <div class="controls">
+      <label for="date-filter">Date Range:</label>
+      <select id="date-filter">
+        <option value="all">All Time</option>
+        <option value="30">Last 30 Days</option>
+        <option value="90">Last 90 Days</option>
+        <option value="365">Last Year</option>
+      </select>
+    </div>
+    <div id="summary">
+      <p id="avg-price"></p>
+      <ul id="monthly-sales"></ul>
+    </div>
+    <canvas id="sales-chart" aria-label="Sales chart"></canvas>
     <table id="sold-table" aria-label="Sold items">
       <thead>
         <tr>
@@ -60,6 +74,7 @@
   </footer>
   <script src="main.js" defer></script>
   <script src="page-transitions.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
   <script type="module" src="scripts/sold.js"></script>
 </body>
 </html>
