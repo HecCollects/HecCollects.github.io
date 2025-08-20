@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "title": "Vintage Camera",
+    "image": "https://example.com/images/camera.jpg",
+    "link": "https://example.com/vintage-camera",
+    "price": "$150",
+    "date": "2024-03-01",
+    "location": "New York, NY"
+  },
+  {
+    "title": "Retro Game Console",
+    "image": "https://example.com/images/console.jpg",
+    "link": "https://example.com/retro-console",
+    "price": "$80",
+    "date": "2024-02-15",
+    "location": "Los Angeles, CA"
+  }
+]
