@@ -3,7 +3,9 @@ const tableBody = document.querySelector('#sold-table tbody');
 const avgPriceEl = document.getElementById('avg-price');
 const monthlySalesEl = document.getElementById('monthly-sales');
 const dateFilterEl = document.getElementById('date-filter');
-const chartCtx = document.getElementById('sales-chart').getContext('2d');
+const chartCanvas = document.getElementById('sales-chart');
+chartCanvas.height = 300;
+const chartCtx = chartCanvas.getContext('2d');
 
 let allItems = [];
 let chart;
@@ -137,7 +139,8 @@ function updateChart(items) {
             beginAtZero: false
           }
         }
-      }
+      },
+      height: 300
     });
   }
 }

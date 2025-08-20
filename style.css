@@ -234,8 +234,16 @@ select:focus-visible {
 }
 
 /* Sold listings table and chart */
-.table-container{
+.sold-page .policy-content{
+  display:flex;
+  flex-direction:column;
+  max-height:calc(100vh - var(--navbar-height));
+  overflow:hidden;
+}
+.sold-page .table-container{
   overflow-x:auto;
+  overflow-y:auto;
+  flex:1;
 }
 #sold-table{
   width:100%;
@@ -247,10 +255,11 @@ select:focus-visible {
   text-align:left;
   border-bottom:1px solid rgba(255,255,255,.2);
 }
-#sales-chart{
+.sold-page #sales-chart{
   max-width:100%;
-  height:auto;
+  height:300px;
   margin-top:1rem;
+  flex:0 0 auto;
 }
 @media(max-width:640px){
   #sold-table th,#sold-table td{
