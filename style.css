@@ -232,3 +232,29 @@ select:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+
+/* Sold listings table and chart */
+.table-container{
+  overflow-x:auto;
+}
+#sold-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:1rem;
+}
+#sold-table th,#sold-table td{
+  padding:.5rem;
+  text-align:left;
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
+#sales-chart{
+  max-width:100%;
+  height:auto;
+  margin-top:1rem;
+}
+@media(max-width:640px){
+  #sold-table th,#sold-table td{
+    font-size:.9rem;
+    white-space:nowrap;
+  }
+}
