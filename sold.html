@@ -42,9 +42,8 @@
     <div class="controls">
       <label for="date-filter">Date Range:</label>
       <select id="date-filter">
-        <option value="all">All Time</option>
         <option value="30">Last 30 Days</option>
-        <option value="90">Last 90 Days</option>
+        <option value="90" selected>Last 90 Days</option>
         <option value="365">Last Year</option>
       </select>
     </div>
@@ -55,12 +54,13 @@
     <canvas id="sales-chart" aria-label="Sales chart" role="img"></canvas>
     <div class="table-container">
       <table id="sold-table" aria-labelledby="sold-table-caption">
-        <caption id="sold-table-caption">Sold items with prices, dates, and locations</caption>
+        <caption id="sold-table-caption">Sold items with prices, dates, platforms, and locations</caption>
         <thead>
           <tr>
             <th scope="col">Item</th>
             <th scope="col">Price</th>
             <th scope="col">Date</th>
+            <th scope="col">Platform</th>
             <th scope="col">Location</th>
           </tr>
         </thead>

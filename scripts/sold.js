@@ -12,6 +12,17 @@ function parsePrice(priceStr) {
   return Number(priceStr?.replace(/[^0-9.-]+/g, ''));
 }
 
+function formatPlatform(platform) {
+  switch ((platform || '').toLowerCase()) {
+    case 'ebay':
+      return 'eBay';
+    case 'tcgplayer':
+      return 'TCGplayer';
+    default:
+      return platform || '';
+  }
+}
+
 function filterItems(items) {
   const value = dateFilterEl.value;
   if (value === 'all') return items;
@@ -54,10 +65,13 @@ function renderTable(items) {
     const date = item.date ? new Date(item.date) : null;
     dateTd.textContent = date && !isNaN(date) ? date.toLocaleDateString() : '';
 
+    const platformTd = document.createElement('td');
+    platformTd.textContent = formatPlatform(item.platform);
+
     const locationTd = document.createElement('td');
     locationTd.textContent = item.location || '';
 
-    tr.append(itemTd, priceTd, dateTd, locationTd);
+    tr.append(itemTd, priceTd, dateTd, platformTd, locationTd);
     return tr;
   });
 
@@ -147,7 +161,18 @@ async function loadSoldItems() {
       return;
     }
 
-    allItems = items;
+    allItems = items.map(item => ({
+      title: item.title || '',
+      image: item.image || '',
+      link: item.link || item.url || '',
+      price:
+        item.price && typeof item.price === 'object'
+          ? `${item.price.currency || ''} ${item.price.value}`.trim()
+          : item.price || '',
+      date: item.date || '',
+      location: item.location || '',
+      platform: item.platform || ''
+    }));
     statusEl.textContent = '';
     render();
   } catch (err) {
@@ -157,6 +182,7 @@ async function loadSoldItems() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  dateFilterEl.value = '90';
   loadSoldItems();
   dateFilterEl.addEventListener('change', render);
 });
