@@ -42,12 +42,14 @@ test('renders price points when data available', async ({ page }) => {
         {
           title: 'A',
           price: { value: 100, currency: 'USD' },
-          date: '2024-04-10'
+          date: '2099-04-10',
+          condition: 'Near Mint'
         },
         {
           title: 'B',
           price: { value: 80, currency: 'USD' },
-          date: '2024-04-01'
+          date: '2099-04-01',
+          condition: 'Near Mint'
         }
       ],
       listings: [
@@ -79,4 +81,8 @@ test('renders price points when data available', async ({ page }) => {
   await page.evaluate(() => (document as any).fonts.ready);
 
   await expect(page.locator('#price-points .price-card')).toHaveCount(5);
+  await expect(page.locator('#condition-comparison tbody tr')).toHaveCount(1);
+  const row = page.locator('#condition-comparison tbody tr').first();
+  await expect(row.locator('td').nth(0)).toHaveText('Near Mint');
+  await expect(row.locator('td').nth(1)).toHaveText('$90.00');
 });

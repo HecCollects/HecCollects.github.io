@@ -299,6 +299,21 @@ select:focus-visible {
   text-align:left;
   border-bottom:1px solid rgba(255,255,255,.2);
 }
+.sold-page #condition-comparison{
+  margin-top:1rem;
+}
+#condition-comparison .table-container{
+  overflow-x:auto;
+}
+#condition-comparison table{
+  width:100%;
+  border-collapse:collapse;
+}
+#condition-comparison th,#condition-comparison td{
+  padding:.5rem;
+  text-align:left;
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
 .sold-page #sales-chart{
   max-width:100%;
   height:300px;
@@ -332,7 +347,8 @@ select:focus-visible {
   font-weight:600;
 }
 @media(max-width:640px){
-  #sold-table th,#sold-table td{
+  #sold-table th,#sold-table td,
+  #condition-comparison th,#condition-comparison td{
     font-size:.9rem;
     white-space:nowrap;
   }
