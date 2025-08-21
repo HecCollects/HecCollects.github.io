@@ -5,6 +5,7 @@ const monthlySalesEl = document.getElementById('monthly-sales');
 const dateFilterEl = document.getElementById('date-filter');
 const chartCanvas = document.getElementById('sales-chart');
 const pricePointsEl = document.getElementById('price-points');
+const conditionTableBody = document.querySelector('#condition-comparison tbody');
 chartCanvas.height = 300;
 const chartCtx = chartCanvas.getContext('2d');
 let rangeButtons;
@@ -107,6 +108,35 @@ function renderTable(items) {
   });
 
   rows.forEach(row => tableBody.appendChild(row));
+}
+
+function updateConditionTable(items) {
+  conditionTableBody.innerHTML = '';
+  const groups = {};
+  items.forEach(item => {
+    if (!item.condition) return;
+    const price = parsePrice(item.price);
+    if (isNaN(price)) return;
+    if (!groups[item.condition]) groups[item.condition] = [];
+    groups[item.condition].push(price);
+  });
+  const conditions = new Set(Object.keys(groups));
+  conditions.add('Near Mint');
+  Array.from(conditions)
+    .sort()
+    .forEach(cond => {
+      const prices = groups[cond] || [];
+      const avg = prices.length
+        ? prices.reduce((a, b) => a + b, 0) / prices.length
+        : null;
+      const tr = document.createElement('tr');
+      const condTd = document.createElement('td');
+      condTd.textContent = cond;
+      const priceTd = document.createElement('td');
+      priceTd.textContent = avg != null ? `$${avg.toFixed(2)}` : 'N/A';
+      tr.append(condTd, priceTd);
+      conditionTableBody.appendChild(tr);
+    });
 }
 
 function updateSummary(items) {
@@ -270,6 +300,7 @@ function render() {
   const filtered = filterItems(allItems);
   renderTable(filtered);
   updateSummary(filtered);
+  updateConditionTable(filtered);
   updateChart(filtered);
 }
 
@@ -309,7 +340,8 @@ async function loadSoldItems() {
           : item.price || '',
       date: item.date || '',
       location: item.location || '',
-      platform: item.platform || ''
+      platform: item.platform || '',
+      condition: item.condition || ''
     }));
     statusEl.textContent = '';
     render();
