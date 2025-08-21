@@ -46,6 +46,8 @@
         <option value="90" selected>Last 90 Days</option>
         <option value="365">Last Year</option>
       </select>
+      <label for="sold-search">Search:</label>
+      <input type="search" id="sold-search" placeholder="Search listings">
     </div>
     <div id="summary">
       <p id="avg-price"></p>
@@ -59,19 +61,8 @@
     </div>
     <canvas id="sales-chart" aria-label="Sales chart" role="img"></canvas>
     <section id="price-points" aria-label="Price points"></section>
-    <section id="condition-comparison" aria-label="Condition comparison">
-      <div class="table-container">
-        <table aria-label="Average market price by condition">
-          <thead>
-            <tr>
-              <th scope="col">Condition</th>
-              <th scope="col">Market Price</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
+    <section id="condition-comparison" aria-label="Condition comparison"></section>
+    <section id="three-month-snapshot" aria-label="Three month snapshot"></section>
     <div class="table-container">
       <table id="sold-table" aria-labelledby="sold-table-caption">
         <caption id="sold-table-caption">Sold items with prices, dates, platforms, and locations</caption>
