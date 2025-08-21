@@ -39,6 +39,19 @@ Playwright Test will execute the browser-based tests.
 `scripts/update-sold.js` pulls recent sales data from eBay and TCGplayer and
 writes `sold-items.json`.
 
+Each entry in `sold-items.json` contains:
+
+- `title` – item title.
+- `image` – thumbnail image URL.
+- `url` – link to the listing.
+- `price` – object with `value` and `currency`.
+- `date` – sale completion date.
+- `location` – item location.
+- `platform` – source marketplace (`ebay` or `tcgplayer`).
+- `condition` – item condition when available.
+- `quantitySold` – number of units sold when available.
+- `sellerCount` – number of sellers offering the item if provided by the API, otherwise `null`.
+
 Set the following environment variables before running the script:
 
 - `EBAY_APP_ID` – eBay developer application ID.
