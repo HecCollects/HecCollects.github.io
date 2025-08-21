@@ -34,3 +34,49 @@ test('sold page defaults to last 90 days and 3 month range, allows range change'
   await expect(page.locator('#range-1m')).toHaveClass(/active/);
   await expect(page.locator('#sold-table thead th').nth(3)).toHaveText('Platform');
 });
+
+test('renders price points when data available', async ({ page }) => {
+  await page.addInitScript(() => {
+    const sample = {
+      items: [
+        {
+          title: 'A',
+          price: { value: 100, currency: 'USD' },
+          date: '2024-04-10'
+        },
+        {
+          title: 'B',
+          price: { value: 80, currency: 'USD' },
+          date: '2024-04-01'
+        }
+      ],
+      listings: [
+        { price: { value: 120, currency: 'USD' }, quantity: 2, sellerId: 'x' },
+        { price: { value: 110, currency: 'USD' }, quantity: 3, sellerId: 'y' }
+      ]
+    };
+    const originalFetch = window.fetch;
+    window.fetch = (url, options) => {
+      if (typeof url === 'string' && url.endsWith('sold-items.json')) {
+        return Promise.resolve(
+          new Response(JSON.stringify(sample), {
+            headers: { 'Content-Type': 'application/json' }
+          })
+        );
+      }
+      return originalFetch(url, options);
+    };
+    window.Chart = function () {
+      return {
+        data: { labels: [], datasets: [{ data: [] }] },
+        update() {},
+        destroy() {},
+      };
+    };
+  });
+
+  await page.goto('file://' + filePath);
+  await page.evaluate(() => (document as any).fonts.ready);
+
+  await expect(page.locator('#price-points .price-card')).toHaveCount(5);
+});

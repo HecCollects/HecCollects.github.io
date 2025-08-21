@@ -4,6 +4,7 @@ const avgPriceEl = document.getElementById('avg-price');
 const monthlySalesEl = document.getElementById('monthly-sales');
 const dateFilterEl = document.getElementById('date-filter');
 const chartCanvas = document.getElementById('sales-chart');
+const pricePointsEl = document.getElementById('price-points');
 chartCanvas.height = 300;
 const chartCtx = chartCanvas.getContext('2d');
 let rangeButtons;
@@ -18,8 +19,11 @@ rangeButtons.forEach(btn => {
 let allItems = [];
 let chart;
 
-function parsePrice(priceStr) {
-  return Number(priceStr?.replace(/[^0-9.-]+/g, ''));
+function parsePrice(price) {
+  if (price && typeof price === 'object') {
+    return Number(price.value);
+  }
+  return Number(String(price || '').replace(/[^0-9.-]+/g, ''));
 }
 
 function formatPlatform(platform) {
@@ -170,6 +174,98 @@ function updateChart(items) {
   }
 }
 
+function updatePricePoints(items, listings = [], quantity = null, sellers = null) {
+  if (!pricePointsEl) return;
+
+  pricePointsEl.innerHTML = '';
+  if (!items.length) return;
+
+  const sorted = items
+    .filter(it => it.date)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  const prices = sorted.map(it => parsePrice(it.price)).filter(n => !isNaN(n));
+
+  const lastTen = prices.slice(0, 10);
+  const market = lastTen.length
+    ? lastTen.reduce((a, b) => a + b, 0) / lastTen.length
+    : null;
+  const recent = prices.length ? prices[0] : null;
+
+  let listingPrices = Array.isArray(listings)
+    ? listings
+        .map(l =>
+          parsePrice(l.price || l.currentPrice || l.listingPrice)
+        )
+        .filter(n => !isNaN(n))
+    : [];
+  let listedMedian = null;
+  if (listingPrices.length) {
+    listingPrices.sort((a, b) => a - b);
+    const mid = Math.floor(listingPrices.length / 2);
+    listedMedian =
+      listingPrices.length % 2
+        ? listingPrices[mid]
+        : (listingPrices[mid - 1] + listingPrices[mid]) / 2;
+  }
+
+  let qty = quantity;
+  if (qty == null && Array.isArray(listings)) {
+    qty = listings.reduce(
+      (sum, l) =>
+        sum +
+        Number(
+          l.quantity ??
+            l.quantityAvailable ??
+            l.currentQuantity ??
+            l.quantitySold ??
+            0
+        ),
+      0
+    );
+  }
+
+  let sellerCount = sellers;
+  if (sellerCount == null && Array.isArray(listings)) {
+    const set = new Set();
+    listings.forEach(l => {
+      if (l.sellerId) set.add(l.sellerId);
+      else if (l.seller) set.add(l.seller);
+      else if (l.sellerName) set.add(l.sellerName);
+    });
+    sellerCount = set.size || listings.length;
+  }
+
+  const points = [
+    { label: 'Market Price', value: market ? `$${market.toFixed(2)}` : 'N/A' },
+    { label: 'Most Recent Sale', value: recent ? `$${recent.toFixed(2)}` : 'N/A' },
+    {
+      label: 'Listed Median',
+      value: listedMedian ? `$${listedMedian.toFixed(2)}` : 'N/A'
+    },
+    {
+      label: 'Quantity Available',
+      value: qty != null && !isNaN(qty) ? String(qty) : 'N/A'
+    },
+    {
+      label: 'Seller Count',
+      value: sellerCount != null && !isNaN(sellerCount)
+        ? String(sellerCount)
+        : 'N/A'
+    }
+  ];
+
+  points.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'price-card';
+    const h3 = document.createElement('h3');
+    h3.textContent = p.label;
+    const val = document.createElement('p');
+    val.textContent = p.value;
+    card.append(h3, val);
+    pricePointsEl.appendChild(card);
+  });
+}
+
 function render() {
   const filtered = filterItems(allItems);
   renderTable(filtered);
@@ -182,9 +278,23 @@ async function loadSoldItems() {
   try {
     const res = await fetch('sold-items.json');
     if (!res.ok) throw new Error('Network response was not ok');
-    const items = await res.json();
+    const data = await res.json();
 
-    if (!Array.isArray(items) || items.length === 0) {
+    let items = [];
+    let listings = [];
+    let qty = null;
+    let sellerCount = null;
+
+    if (Array.isArray(data)) {
+      items = data;
+    } else if (data && typeof data === 'object') {
+      items = Array.isArray(data.items) ? data.items : Array.isArray(data.sold) ? data.sold : [];
+      listings = Array.isArray(data.listings) ? data.listings : [];
+      qty = data.currentQuantity ?? data.quantity ?? null;
+      sellerCount = data.sellerCount ?? null;
+    }
+
+    if (!items.length) {
       statusEl.textContent = 'No sold items found.';
       return;
     }
@@ -204,6 +314,7 @@ async function loadSoldItems() {
     statusEl.textContent = '';
     render();
     filterByRange('3m');
+    updatePricePoints(allItems, listings, qty, sellerCount);
   } catch (err) {
     console.error(err);
     statusEl.textContent = 'Failed to load sold items.';
