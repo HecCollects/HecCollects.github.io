@@ -5,7 +5,9 @@ const monthlySalesEl = document.getElementById('monthly-sales');
 const dateFilterEl = document.getElementById('date-filter');
 const chartCanvas = document.getElementById('sales-chart');
 const pricePointsEl = document.getElementById('price-points');
-const conditionTableBody = document.querySelector('#condition-comparison tbody');
+const conditionComparisonEl = document.getElementById('condition-comparison');
+const searchEl = document.getElementById('sold-search');
+const tableHeaders = document.querySelectorAll('#sold-table thead th');
 const snapshotEl = document.getElementById('three-month-snapshot');
 chartCanvas.height = 300;
 const chartCtx = chartCanvas.getContext('2d');
@@ -17,6 +19,28 @@ rangeButtons.forEach(btn => {
     filterByRange(range);
   });
 });
+
+let sortKey = null;
+let sortAsc = true;
+
+const sortFields = ['title', 'price', 'date', 'platform', 'location'];
+
+tableHeaders.forEach((th, idx) => {
+  th.style.cursor = 'pointer';
+  th.setAttribute('aria-sort', 'none');
+  th.addEventListener('click', () => {
+    const key = sortFields[idx];
+    if (sortKey === key) {
+      sortAsc = !sortAsc;
+    } else {
+      sortKey = key;
+      sortAsc = true;
+    }
+    render();
+  });
+});
+
+searchEl.addEventListener('input', render);
 
 let allItems = [];
 let chart;
@@ -48,6 +72,48 @@ function filterItems(items) {
   return items.filter(item => {
     const date = item.date ? new Date(item.date) : null;
     return date && !isNaN(date) && date >= cutoff;
+  });
+}
+
+function applyFilters(items) {
+  let filtered = filterItems(items);
+  const query = searchEl.value.trim().toLowerCase();
+  if (query) {
+    filtered = filtered.filter(item => {
+      return (
+        item.title.toLowerCase().includes(query) ||
+        item.platform.toLowerCase().includes(query) ||
+        item.location.toLowerCase().includes(query)
+      );
+    });
+  }
+  if (sortKey) {
+    filtered.sort((a, b) => {
+      let aVal = a[sortKey];
+      let bVal = b[sortKey];
+      if (sortKey === 'price') {
+        aVal = parsePrice(aVal);
+        bVal = parsePrice(bVal);
+      } else if (sortKey === 'date') {
+        aVal = new Date(aVal);
+        bVal = new Date(bVal);
+      } else {
+        aVal = String(aVal).toLowerCase();
+        bVal = String(bVal).toLowerCase();
+      }
+      if (aVal < bVal) return sortAsc ? -1 : 1;
+      if (aVal > bVal) return sortAsc ? 1 : -1;
+      return 0;
+    });
+  }
+  return filtered;
+}
+
+function updateSortIndicators() {
+  tableHeaders.forEach((th, idx) => {
+    const key = sortFields[idx];
+    const state = key === sortKey ? (sortAsc ? 'ascending' : 'descending') : 'none';
+    th.setAttribute('aria-sort', state);
   });
 }
 
@@ -111,8 +177,8 @@ function renderTable(items) {
   rows.forEach(row => tableBody.appendChild(row));
 }
 
-function updateConditionTable(items) {
-  conditionTableBody.innerHTML = '';
+function updateConditionComparison(items) {
+  conditionComparisonEl.innerHTML = '';
   const groups = {};
   items.forEach(item => {
     if (!item.condition) return;
@@ -130,13 +196,14 @@ function updateConditionTable(items) {
       const avg = prices.length
         ? prices.reduce((a, b) => a + b, 0) / prices.length
         : null;
-      const tr = document.createElement('tr');
-      const condTd = document.createElement('td');
-      condTd.textContent = cond;
-      const priceTd = document.createElement('td');
-      priceTd.textContent = avg != null ? `$${avg.toFixed(2)}` : 'N/A';
-      tr.append(condTd, priceTd);
-      conditionTableBody.appendChild(tr);
+      const card = document.createElement('div');
+      card.className = 'condition-card';
+      const h3 = document.createElement('h3');
+      h3.textContent = cond;
+      const val = document.createElement('p');
+      val.textContent = avg != null ? `$${avg.toFixed(2)}` : 'N/A';
+      card.append(h3, val);
+      conditionComparisonEl.appendChild(card);
     });
 }
 
@@ -339,11 +406,12 @@ function updateSnapshot(items) {
 }
 
 function render() {
-  const filtered = filterItems(allItems);
+  const filtered = applyFilters(allItems.slice());
   renderTable(filtered);
   updateSummary(filtered);
-  updateConditionTable(filtered);
+  updateConditionComparison(filtered);
   updateChart(filtered);
+  updateSortIndicators();
 }
 
 async function loadSoldItems() {

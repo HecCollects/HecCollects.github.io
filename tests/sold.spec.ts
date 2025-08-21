@@ -81,10 +81,10 @@ test('renders price points when data available', async ({ page }) => {
   await page.evaluate(() => (document as any).fonts.ready);
 
   await expect(page.locator('#price-points .price-card')).toHaveCount(5);
-  await expect(page.locator('#condition-comparison tbody tr')).toHaveCount(1);
-  const row = page.locator('#condition-comparison tbody tr').first();
-  await expect(row.locator('td').nth(0)).toHaveText('Near Mint');
-  await expect(row.locator('td').nth(1)).toHaveText('$90.00');
+  await expect(page.locator('#condition-comparison .condition-card')).toHaveCount(1);
+  const card = page.locator('#condition-comparison .condition-card').first();
+  await expect(card.locator('h3')).toHaveText('Near Mint');
+  await expect(card.locator('p')).toHaveText('$90.00');
 });
 
 test('three month snapshot reflects recent sales', async ({ page }) => {
