@@ -85,4 +85,45 @@ test('renders price points when data available', async ({ page }) => {
   const card = page.locator('#condition-comparison .condition-card').first();
   await expect(card.locator('h3')).toHaveText('Near Mint');
   await expect(card.locator('p')).toHaveText('$90.00');
+ codex/add-three-month-snapshot-section-and-metrics
+});
+
+test('three month snapshot reflects recent sales', async ({ page }) => {
+  await page.addInitScript(() => {
+    const sample = [
+      { title: 'A', price: { value: 20, currency: 'USD' }, date: '2099-05-20' },
+      { title: 'B', price: { value: 10, currency: 'USD' }, date: '2099-05-10' },
+      { title: 'C', price: { value: 5, currency: 'USD' }, date: '2000-01-01' }
+    ];
+    const originalFetch = window.fetch;
+    window.fetch = (url, options) => {
+      if (typeof url === 'string' && url.endsWith('sold-items.json')) {
+        return Promise.resolve(
+          new Response(JSON.stringify(sample), {
+            headers: { 'Content-Type': 'application/json' }
+          })
+        );
+      }
+      return originalFetch(url, options);
+    };
+    window.Chart = function () {
+      return {
+        data: { labels: [], datasets: [{ data: [] }] },
+        update() {},
+        destroy() {},
+      };
+    };
+  });
+
+  await page.goto('file://' + filePath);
+  await page.evaluate(() => (document as any).fonts.ready);
+
+  const cards = page.locator('#three-month-snapshot .snapshot-card');
+  await expect(cards).toHaveCount(3);
+  await expect(cards.nth(0).locator('h3')).toHaveText('Low Price');
+  await expect(cards.nth(0).locator('p')).toHaveText('$10.00');
+  await expect(cards.nth(1).locator('h3')).toHaveText('High Sale Price');
+  await expect(cards.nth(1).locator('p')).toHaveText('$20.00');
+  await expect(cards.nth(2).locator('h3')).toHaveText('Total Sold');
+  await expect(cards.nth(2).locator('p')).toHaveText('2');
 });

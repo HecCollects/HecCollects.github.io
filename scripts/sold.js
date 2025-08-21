@@ -8,6 +8,8 @@ const pricePointsEl = document.getElementById('price-points');
 const conditionComparisonEl = document.getElementById('condition-comparison');
 const searchEl = document.getElementById('sold-search');
 const tableHeaders = document.querySelectorAll('#sold-table thead th');
+ codex/add-three-month-snapshot-section-and-metrics
+const snapshotEl = document.getElementById('three-month-snapshot');
 chartCanvas.height = 300;
 const chartCtx = chartCanvas.getContext('2d');
 let rangeButtons;
@@ -363,6 +365,47 @@ function updatePricePoints(items, listings = [], quantity = null, sellers = null
   });
 }
 
+function updateSnapshot(items) {
+  if (!snapshotEl) return;
+
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 90);
+
+  const recent = items.filter(item => {
+    const date = item.date ? new Date(item.date) : null;
+    return date && !isNaN(date) && date >= cutoff;
+  });
+
+  const prices = recent
+    .map(item => parsePrice(item.price))
+    .filter(n => !isNaN(n));
+
+  const low = prices.length ? Math.min(...prices) : null;
+  const high = prices.length ? Math.max(...prices) : null;
+  const total = recent.length;
+
+  snapshotEl.innerHTML = '';
+  const metrics = [
+    { label: 'Low Price', value: low != null ? `$${low.toFixed(2)}` : 'N/A' },
+    {
+      label: 'High Sale Price',
+      value: high != null ? `$${high.toFixed(2)}` : 'N/A'
+    },
+    { label: 'Total Sold', value: String(total) }
+  ];
+
+  metrics.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'snapshot-card';
+    const h3 = document.createElement('h3');
+    h3.textContent = m.label;
+    const p = document.createElement('p');
+    p.textContent = m.value;
+    card.append(h3, p);
+    snapshotEl.appendChild(card);
+  });
+}
+
 function render() {
   const filtered = applyFilters(allItems.slice());
   renderTable(filtered);
@@ -415,6 +458,7 @@ async function loadSoldItems() {
     render();
     filterByRange('3m');
     updatePricePoints(allItems, listings, qty, sellerCount);
+    updateSnapshot(allItems);
   } catch (err) {
     console.error(err);
     statusEl.textContent = 'Failed to load sold items.';
