@@ -85,6 +85,7 @@ test('renders price points when data available', async ({ page }) => {
   const card = page.locator('#condition-comparison .condition-card').first();
   await expect(card.locator('h3')).toHaveText('Near Mint');
   await expect(card.locator('p')).toHaveText('$90.00');
+ codex/add-three-month-snapshot-section-and-metrics
 });
 
 test('three month snapshot reflects recent sales', async ({ page }) => {

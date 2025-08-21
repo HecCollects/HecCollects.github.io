@@ -8,6 +8,7 @@ const pricePointsEl = document.getElementById('price-points');
 const conditionComparisonEl = document.getElementById('condition-comparison');
 const searchEl = document.getElementById('sold-search');
 const tableHeaders = document.querySelectorAll('#sold-table thead th');
+ codex/add-three-month-snapshot-section-and-metrics
 const snapshotEl = document.getElementById('three-month-snapshot');
 chartCanvas.height = 300;
 const chartCtx = chartCanvas.getContext('2d');
