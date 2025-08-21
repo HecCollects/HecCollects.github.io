@@ -267,6 +267,23 @@ select:focus-visible {
   max-height:calc(100vh - var(--navbar-height));
   overflow:hidden;
 }
+.range-buttons{
+  display:flex;
+  gap:.5rem;
+  margin-top:.5rem;
+}
+.range-buttons button{
+  padding:.3rem .6rem;
+  background:var(--color-primary);
+  color:var(--white);
+  border:none;
+  border-radius:.3rem;
+  cursor:pointer;
+}
+.range-buttons button.active{
+  background:var(--color-accent);
+  color:var(--black);
+}
 .sold-page .table-container{
   overflow-x:auto;
   overflow-y:auto;

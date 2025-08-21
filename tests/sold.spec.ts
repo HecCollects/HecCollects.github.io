@@ -3,7 +3,7 @@ import path from 'path';
 
 const filePath = path.resolve(__dirname, '../sold.html');
 
-test('sold page defaults to last 90 days and shows platform column', async ({ page }) => {
+test('sold page defaults to last 90 days and 3 month range, allows range change', async ({ page }) => {
   await page.addInitScript(() => {
     const originalFetch = window.fetch;
     window.fetch = (url, options) => {
@@ -29,5 +29,8 @@ test('sold page defaults to last 90 days and shows platform column', async ({ pa
   await page.evaluate(() => (document as any).fonts.ready);
 
   await expect(page.locator('#date-filter')).toHaveValue('90');
+  await expect(page.locator('#range-3m')).toHaveClass(/active/);
+  await page.click('#range-1m');
+  await expect(page.locator('#range-1m')).toHaveClass(/active/);
   await expect(page.locator('#sold-table thead th').nth(3)).toHaveText('Platform');
 });

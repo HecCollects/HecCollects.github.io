@@ -51,6 +51,12 @@
       <p id="avg-price"></p>
       <ul id="monthly-sales"></ul>
     </div>
+    <div class="range-buttons" role="group" aria-label="Chart range">
+      <button id="range-1m" type="button">1M</button>
+      <button id="range-3m" type="button" class="active">3M</button>
+      <button id="range-6m" type="button">6M</button>
+      <button id="range-1y" type="button">1Y</button>
+    </div>
     <canvas id="sales-chart" aria-label="Sales chart" role="img"></canvas>
     <div class="table-container">
       <table id="sold-table" aria-labelledby="sold-table-caption">
@@ -78,6 +84,6 @@
   <script src="main.js" defer></script>
   <script src="page-transitions.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-  <script type="module" src="scripts/sold.js"></script>
+  <script src="scripts/sold.js" defer></script>
 </body>
 </html>
