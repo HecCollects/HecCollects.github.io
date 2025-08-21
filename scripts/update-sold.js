@@ -53,7 +53,13 @@ async function fetchEbaySold() {
       location: item.location?.[0] || '',
       url: item.viewItemURL?.[0] || '',
       image: item.galleryURL?.[0] || '',
-      platform: 'ebay'
+      platform: 'ebay',
+      condition:
+        item.condition?.[0]?.conditionDisplayName?.[0] ||
+        item.conditionId?.[0] ||
+        '',
+      quantitySold: Number(item.sellingStatus?.[0]?.quantitySold?.[0] || 0),
+      sellerCount: item.sellerInfo?.[0]?.sellerUserName ? 1 : null
     }));
   } catch (err) {
     console.warn('eBay sold fetch error', err);
@@ -116,7 +122,19 @@ async function fetchTcgPlayerSold() {
       location: order.address?.region || '',
       url: '',
       image: '',
-      platform: 'tcgplayer'
+      platform: 'tcgplayer',
+      condition:
+        order.condition ||
+        order.product?.conditionName ||
+        order.productConditionId ||
+        '',
+      quantitySold: Number(
+        order.quantity ||
+        order.quantitySold ||
+        order.orderItems?.[0]?.quantity ||
+        0
+      ),
+      sellerCount: Number(order.sellerCount || (order.storeSellerId ? 1 : 0))
     }));
   } catch (err) {
     console.warn('TCGplayer sold fetch error', err);
