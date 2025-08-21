@@ -6,6 +6,14 @@ const dateFilterEl = document.getElementById('date-filter');
 const chartCanvas = document.getElementById('sales-chart');
 chartCanvas.height = 300;
 const chartCtx = chartCanvas.getContext('2d');
+let rangeButtons;
+rangeButtons = document.querySelectorAll('.range-buttons button');
+rangeButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const range = btn.id.replace('range-', '');
+    filterByRange(range);
+  });
+});
 
 let allItems = [];
 let chart;
@@ -35,6 +43,23 @@ function filterItems(items) {
     const date = item.date ? new Date(item.date) : null;
     return date && !isNaN(date) && date >= cutoff;
   });
+}
+
+function filterByRange(range) {
+  const daysMap = { '1m': 30, '3m': 90, '6m': 180, '1y': 365 };
+  const days = daysMap[range] || 90;
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - days);
+  const filtered = allItems.filter(item => {
+    const date = item.date ? new Date(item.date) : null;
+    return date && !isNaN(date) && date >= cutoff;
+  });
+  if (rangeButtons) {
+    rangeButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.id === `range-${range}`);
+    });
+  }
+  updateChart(filtered);
 }
 
 function renderTable(items) {
@@ -178,6 +203,7 @@ async function loadSoldItems() {
     }));
     statusEl.textContent = '';
     render();
+    filterByRange('3m');
   } catch (err) {
     console.error(err);
     statusEl.textContent = 'Failed to load sold items.';
