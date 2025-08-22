@@ -3,9 +3,27 @@ const suggestions = document.getElementById('search-suggestions');
 
 if (input && suggestions) {
   const index = [];
+  let highlighted = -1;
 
   const clearSuggestions = () => {
     suggestions.innerHTML = '';
+    highlighted = -1;
+    input.removeAttribute('aria-activedescendant');
+  };
+
+  const updateHighlight = () => {
+    const items = suggestions.querySelectorAll('li');
+    items.forEach((li, i) => {
+      if (i === highlighted) {
+        li.classList.add('active');
+        input.setAttribute('aria-activedescendant', li.id);
+      } else {
+        li.classList.remove('active');
+      }
+    });
+    if (highlighted === -1) {
+      input.removeAttribute('aria-activedescendant');
+    }
   };
 
   const loadItems = () => {
@@ -48,6 +66,7 @@ if (input && suggestions) {
       if (item.text.includes(query)) {
         const li = document.createElement('li');
         li.setAttribute('role', 'option');
+        li.id = `search-option-${count}`;
         const a = document.createElement('a');
         a.href = item.link;
         a.textContent = item.label;
@@ -64,7 +83,32 @@ if (input && suggestions) {
         if (++count >= 5) break;
       }
     }
+    updateHighlight();
   });
 
   input.addEventListener('blur', () => setTimeout(clearSuggestions, 100));
+
+  input.addEventListener('keydown', e => {
+    const items = suggestions.querySelectorAll('li');
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      highlighted = (highlighted + 1) % items.length;
+      updateHighlight();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      highlighted = (highlighted - 1 + items.length) % items.length;
+      updateHighlight();
+    } else if (e.key === 'Enter' && highlighted >= 0) {
+      e.preventDefault();
+      const link = items[highlighted].querySelector('a');
+      if (link) {
+        input.value = link.textContent;
+        clearSuggestions();
+        window.location.assign(link.href);
+        document.dispatchEvent(new CustomEvent('search-navigate', { detail: link.href }));
+      }
+    }
+  });
 }
