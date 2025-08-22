@@ -135,6 +135,8 @@ summary:focus{outline:2px solid var(--color-accent);outline-offset:.2rem}
 .brand{font-size:1.3rem;font-weight:700;text-decoration:none;color:inherit}
 .nav-toggle{width:32px;height:24px;display:flex;flex-direction:column;justify-content:space-between;background:none;border:none;cursor:pointer;z-index:10001}
 .line{width:100%;height:3px;background:var(--white);border-radius:2px;transition:transform .3s,opacity .3s}
+#theme-toggle{background:none;border:none;color:var(--white);cursor:pointer;font-size:1.2rem;margin-left:1rem}
+#theme-toggle:focus{outline:2px solid var(--color-accent);outline-offset:2px}
 .nav-toggle.open .line:nth-child(1){transform:translateY(9px) rotate(45deg)}
 .nav-toggle.open .line:nth-child(2){opacity:0}
 .nav-toggle.open .line:nth-child(3){transform:translateY(-9px) rotate(-45deg)}

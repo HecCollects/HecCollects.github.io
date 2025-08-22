@@ -1,4 +1,25 @@
 (() => {
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('theme-toggle');
+  let storedTheme = 'dark';
+  try {
+    storedTheme = localStorage.getItem('theme') || 'dark';
+  } catch {}
+  const applyTheme = (t) => {
+    root.setAttribute('data-theme', t);
+    if (themeToggle) {
+      themeToggle.textContent = t === 'light' ? '🌙' : '☀️';
+    }
+  };
+  applyTheme(storedTheme);
+  themeToggle?.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(current);
+    try {
+      localStorage.setItem('theme', current);
+    } catch {}
+  });
+
   const recaptchaEnabled = !!window.RECAPTCHA_SITE_KEY;
   const recaptcha = document.querySelector('.g-recaptcha');
   if (recaptcha) {
