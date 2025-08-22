@@ -24,6 +24,9 @@ section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z
 .hidden{display:none!important}
 /* Screen reader only */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}
+/* Skip link */
+.skip-link{position:absolute;top:-40px;left:0;padding:.5rem 1rem;background:var(--color-accent);color:var(--black);text-decoration:none;z-index:100}
+.skip-link:focus{top:0}
 /* ---------- Typography ---------- */
 .logo{width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,.5)}
 h1{font-size:2.4rem;text-shadow:0 3px 8px rgba(0,0,0,.4)}
