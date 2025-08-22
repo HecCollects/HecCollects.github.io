@@ -311,6 +311,16 @@ select:focus-visible {
   margin-top:1rem;
   flex:0 0 auto;
 }
+.skeleton-chart,.skeleton-table{
+  width:100%;
+  background:linear-gradient(90deg,rgba(255,255,255,.1),rgba(255,255,255,.3),rgba(255,255,255,.1));
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:.5rem;
+}
+.skeleton-chart{height:300px;margin-top:1rem;}
+.skeleton-table{height:200px;margin-top:1rem;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 #price-points,#condition-comparison,#three-month-snapshot{
   display:grid;

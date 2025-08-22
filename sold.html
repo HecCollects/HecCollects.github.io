@@ -71,12 +71,14 @@
       <button id="range-6m" type="button">6M</button>
       <button id="range-1y" type="button">1Y</button>
     </div>
-    <canvas id="sales-chart" aria-label="Sales chart" role="img"></canvas>
+    <div class="skeleton-chart"></div>
+    <canvas id="sales-chart" aria-label="Sales chart" role="img" class="hidden"></canvas>
     <section id="price-points" aria-label="Price points"></section>
     <section id="condition-comparison" aria-label="Condition comparison"></section>
     <section id="three-month-snapshot" aria-label="Three month snapshot"></section>
     <div class="table-container">
-      <table id="sold-table" aria-labelledby="sold-table-caption">
+      <div class="skeleton-table"></div>
+      <table id="sold-table" aria-labelledby="sold-table-caption" class="hidden">
         <caption id="sold-table-caption">Sold items with prices, dates, platforms, and locations</caption>
         <thead>
           <tr>

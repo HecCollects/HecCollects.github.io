@@ -9,6 +9,9 @@ const conditionComparisonEl = document.getElementById('condition-comparison');
 const searchEl = document.getElementById('sold-search');
 const tableHeaders = document.querySelectorAll('#sold-table thead th');
 const snapshotEl = document.getElementById('three-month-snapshot');
+const tableEl = document.getElementById('sold-table');
+const skeletonChart = document.querySelector('.skeleton-chart');
+const skeletonTable = document.querySelector('.skeleton-table');
 chartCanvas.height = 300;
 const chartCtx = chartCanvas.getContext('2d');
 let rangeButtons;
@@ -454,6 +457,10 @@ async function loadSoldItems() {
       condition: item.condition || ''
     }));
     statusEl.textContent = '';
+    skeletonChart?.classList.add('hidden');
+    skeletonTable?.classList.add('hidden');
+    chartCanvas.classList.remove('hidden');
+    tableEl.classList.remove('hidden');
     render();
     filterByRange('3m');
     updatePricePoints(allItems, listings, qty, sellerCount);
@@ -461,6 +468,8 @@ async function loadSoldItems() {
   } catch (err) {
     console.error(err);
     statusEl.textContent = 'Failed to load sold items.';
+    skeletonChart?.classList.add('hidden');
+    skeletonTable?.classList.add('hidden');
   }
 }
 
