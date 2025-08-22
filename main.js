@@ -690,6 +690,22 @@
     });
   }
 
+  const backToTop = document.getElementById('back-to-top');
+  if (backToTop) {
+    const toggleBackToTop = () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    };
+    window.addEventListener('scroll', toggleBackToTop);
+    toggleBackToTop();
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   // Cookie/analytics notice
   const cookieBanner = document.getElementById('cookie-banner');
   const cookieBtn = document.getElementById('cookie-btn');

@@ -344,3 +344,5 @@ select:focus-visible {
 
 #sold-table th[aria-sort='ascending']::after{content:'\25B2';margin-left:.25rem;}
 #sold-table th[aria-sort='descending']::after{content:'\25BC';margin-left:.25rem;}
+.back-to-top{position:fixed;bottom:1.5rem;right:1.5rem;display:none;background:var(--color-accent);color:var(--black);border:none;border-radius:50%;width:2.5rem;height:2.5rem;font-size:1.2rem;cursor:pointer;z-index:1000}
+.back-to-top.show{display:flex;align-items:center;justify-content:center}
