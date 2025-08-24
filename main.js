@@ -402,6 +402,9 @@
     const prevBtn = testimonialWrapper.querySelector('.testimonial-prev');
     const nextBtn = testimonialWrapper.querySelector('.testimonial-next');
     const pagination = testimonialWrapper.querySelector('.testimonial-pagination');
+    slides.forEach(s => {
+      s.setAttribute('role', 'tabpanel');
+    });
     let index = 0;
     let timer;
 
@@ -409,7 +412,9 @@
       index = (i + slides.length) % slides.length;
       track.style.transform = `translateX(-${index * 100}%)`;
       slides.forEach((s, idx) => {
-        s.classList.toggle('active', idx === index);
+        const active = idx === index;
+        s.classList.toggle('active', active);
+        s.setAttribute('aria-hidden', active ? 'false' : 'true');
       });
       pagination?.querySelectorAll('button').forEach((dot, idx) => {
         dot.setAttribute('aria-selected', idx === index ? 'true' : 'false');
@@ -433,6 +438,7 @@
       dot.type = 'button';
       dot.className = 'testimonial-dot';
       dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-selected', 'false');
       if (slide.id) dot.setAttribute('aria-controls', slide.id);
       dot.setAttribute('aria-label', `Show testimonial ${i + 1}`);
       dot.addEventListener('click', () => {
