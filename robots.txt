@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://heccollects.github.io/sitemap.xml
