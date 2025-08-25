@@ -83,6 +83,12 @@ if (input && suggestions) {
         if (++count >= 5) break;
       }
     }
+    if (count === 0) {
+      const li = document.createElement('li');
+      li.setAttribute('aria-disabled', 'true');
+      li.textContent = 'No results found';
+      suggestions.appendChild(li);
+    }
     updateHighlight();
   });
 
