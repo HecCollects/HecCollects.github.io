@@ -5,7 +5,7 @@ test.use({ viewport: { width: 375, height: 667 } });
 
 const filePath = path.resolve(__dirname, '../index.html');
 
-const navTargets = ['#home', '#testimonials', '#why', '#how', '#ebay', '#offerup', '#subscribe', '#contact'];
+const navTargets = ['#home', '#testimonials', '#story', '#approach', '#ebay', '#offerup', '#subscribe', '#contact'];
 
 test('sections scroll into view correctly', async ({ page }) => {
   await page.goto('file://' + filePath);

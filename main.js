@@ -279,6 +279,17 @@
             link.removeAttribute('aria-current');
           }
         });
+        if(entry.target.id === 'story'){
+          entry.target.classList.add('story-bg-animate');
+        } else if(entry.target.id === 'approach'){
+          entry.target.classList.add('approach-bg-animate');
+        }
+      } else {
+        if(entry.target.id === 'story'){
+          entry.target.classList.remove('story-bg-animate');
+        } else if(entry.target.id === 'approach'){
+          entry.target.classList.remove('approach-bg-animate');
+        }
       }
     });
   }, { threshold:0.6 });
