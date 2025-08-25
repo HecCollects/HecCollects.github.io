@@ -36,6 +36,7 @@
   if (phoneLink) {
     if (window.PHONE_NUMBER) {
       phoneLink.href = `tel:${window.PHONE_NUMBER}`;
+      phoneLink.classList.remove('hidden');
     } else {
       phoneLink.classList.add('hidden');
     }
