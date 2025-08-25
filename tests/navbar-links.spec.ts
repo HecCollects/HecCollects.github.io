@@ -3,7 +3,7 @@ import path from 'path';
 
 const filePath = path.resolve(__dirname, '../index.html');
 
-const expected = ['Testimonials', 'Why', 'How', 'eBay', 'OfferUp', 'Subscribe', 'Business Inquiries'];
+const expected = ['Success Stories', 'Why', 'How', 'eBay', 'OfferUp', 'Subscribe', 'Business Inquiries'];
 
 test('navbar links are in expected order', async ({ page }) => {
   await page.goto('file://' + filePath);

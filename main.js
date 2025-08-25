@@ -394,7 +394,7 @@
   }
 
   // Testimonials slider
-  const testimonialWrapper = document.querySelector('.testimonials');
+  const testimonialWrapper = document.querySelector('#testimonials .testimonials');
   if (testimonialWrapper) {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const track = testimonialWrapper.querySelector('.testimonial-track');
