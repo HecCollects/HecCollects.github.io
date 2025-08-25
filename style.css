@@ -12,7 +12,7 @@ html{scroll-behavior:smooth;scroll-snap-type:y mandatory}@media (max-width:640px
 body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,var(--black),var(--color-primary),var(--black));background-size:100% 100%;background-repeat:no-repeat;animation:bg-shift 20s ease infinite;color:var(--white)}
 @keyframes bg-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 /* ---------- Sections ---------- */
-section{position:relative;height:100dvh;min-height:100dvh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat;background-attachment:scroll}
+section{position:relative;min-height:100dvh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;text-align:center;background-position:center 20%;background-size:cover;background-repeat:no-repeat;background-attachment:scroll}
 section::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
 .section-content{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem calc(env(safe-area-inset-right) + 2.5rem) 2.5rem calc(env(safe-area-inset-left) + 2.5rem)}@media(prefers-reduced-motion:no-preference){.story-bg-animate,.approach-bg-animate{background-size:200% 200%;animation:bg-shift 15s ease infinite}.approach-bg-animate{animation-direction:reverse}}
 /* ---------- Card ---------- */
@@ -242,7 +242,7 @@ transition: none !important;
     transform-style: preserve-3d;
     animation-delay: calc(var(--i) * 4s);
   }
-@supports not (height:100dvh){section{height:100vh;min-height:100vh}}
+@supports not (height:100dvh){section{min-height:100vh}}
 
 .site-footer{padding:
     1rem
