@@ -19,3 +19,10 @@ test('reCAPTCHA and phone link use provided window values', async ({ page }) => 
   await expect(phoneLink).toBeVisible();
   await expect(phoneLink).toHaveAttribute('href', 'tel:5551234');
 });
+
+test('phone link hidden when no phone number provided', async ({ page }) => {
+  await page.goto('file://' + filePath);
+
+  const phoneLink = page.locator('#phone-link');
+  await expect(phoneLink).toBeHidden();
+});
