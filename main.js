@@ -32,13 +32,6 @@
     }
   }
 
-  if (!window.GA_ID) {
-    console.warn('window.GA_ID is not set; analytics will be disabled.');
-  }
-  if (!window.PHONE_NUMBER) {
-    console.warn('window.PHONE_NUMBER is not set; phone link will be hidden.');
-  }
-
   const phoneLink = document.getElementById('phone-link');
   if (phoneLink) {
     if (window.PHONE_NUMBER) {

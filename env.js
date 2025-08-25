@@ -1,0 +1,3 @@
+window.GA_ID = window.GA_ID || "%GA_ID%";
+window.RECAPTCHA_SITE_KEY = window.RECAPTCHA_SITE_KEY || "%RECAPTCHA_SITE_KEY%";
+window.PHONE_NUMBER = window.PHONE_NUMBER || "%PHONE_NUMBER%";
