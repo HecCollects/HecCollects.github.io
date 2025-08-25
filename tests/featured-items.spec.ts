@@ -19,8 +19,23 @@ test('featured items are in viewport and clickable', async ({ page }) => {
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         const img = document.createElement('img');
-        img.src = item.image;
+        const small = item.imageSmall || item.imageLarge;
+        const large = item.imageLarge || item.imageSmall;
+        const getWidth = (u: string) => {
+          try {
+            return parseInt(new URL(u).searchParams.get('width') || '0', 10);
+          } catch {
+            return 0;
+          }
+        };
+        const smallW = getWidth(small);
+        const largeW = getWidth(large);
+        img.src = small;
         img.alt = item.alt;
+        if (smallW && largeW) {
+          img.srcset = `${small} ${smallW}w, ${large} ${largeW}w`;
+          img.sizes = `(max-width: ${largeW}px) 100vw, ${largeW}px`;
+        }
         container.appendChild(link);
         link.appendChild(img);
       });

@@ -1,19 +1,22 @@
 {
   "ebay": [
     {
-      "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=750",
+      "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=375",
+      "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=750",
       "link": "https://www.ebay.com/itm/376470178564",
       "alt": "Featured eBay collectible",
       "badge": "Only 1 left"
     },
     {
-      "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=750",
+      "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=375",
+      "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=750",
       "link": "https://ebay.us/m/vs5p1e",
       "alt": "Featured eBay collectible 2",
       "stock": 1
     },
     {
-      "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=700",
+      "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=350",
+      "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=700",
       "link": "https://ebay.us/m/VTMaDx",
       "alt": "Featured eBay collectible 3",
       "badge": "Only 1 left"
@@ -21,19 +24,22 @@
   ],
   "offerup": [
     {
-      "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=750",
+      "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=375",
+      "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=750",
       "link": "https://offerup.co/44T5cRnMIVb",
       "alt": "Featured OfferUp item",
       "stock": 1
     },
     {
-      "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=750",
+      "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=375",
+      "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=750",
       "link": "https://offerup.co/UR4k8b1RIVb",
       "alt": "Featured OfferUp item 2",
       "badge": "Only 1 left"
     },
     {
-      "image": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=700",
+      "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=350",
+      "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=700",
       "link": "https://offerup.co/iAT3Vh4RIVb",
       "alt": "Featured OfferUp item 3",
       "stock": 1

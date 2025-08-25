@@ -360,20 +360,26 @@
               }
             });
             const img = document.createElement('img');
-            img.src = item.image;
+            const small = item.imageSmall || item.imageLarge || '';
+            const large = item.imageLarge || item.imageSmall || '';
+            img.src = small;
             img.alt = item.alt;
             img.loading = 'lazy';
             try {
-              const url = new URL(item.image);
-              const widthParam = url.searchParams.get('width');
-              if (widthParam) {
-                const width = parseInt(widthParam, 10);
-                const half = Math.round(width / 2);
-                const small = new URL(item.image);
-                small.searchParams.set('width', String(half));
-                img.width = width;
-                img.height = Math.round(width * 9 / 16);
-                img.srcset = `${small.toString()} ${half}w, ${item.image} ${width}w`;
+              const getWidth = (u) => {
+                try {
+                  return parseInt(new URL(u).searchParams.get('width') || '0', 10);
+                } catch {
+                  return 0;
+                }
+              };
+              const smallW = getWidth(small);
+              const largeW = getWidth(large);
+              if (smallW && largeW) {
+                img.width = largeW;
+                img.height = Math.round(largeW * 9 / 16);
+                img.srcset = `${small} ${smallW}w, ${large} ${largeW}w`;
+                img.sizes = `(max-width: ${largeW}px) 100vw, ${largeW}px`;
               }
             } catch {}
             link.appendChild(img);
@@ -755,9 +761,28 @@
       link.rel = 'noopener noreferrer';
       link.setAttribute('aria-label', item.alt || 'Featured item');
       const img = document.createElement('img');
-      img.src = item.image;
+      const small = item.imageSmall || item.imageLarge || '';
+      const large = item.imageLarge || item.imageSmall || '';
+      img.src = small;
       img.alt = item.alt || '';
       img.loading = 'lazy';
+      try {
+        const getWidth = (u) => {
+          try {
+            return parseInt(new URL(u).searchParams.get('width') || '0', 10);
+          } catch {
+            return 0;
+          }
+        };
+        const smallW = getWidth(small);
+        const largeW = getWidth(large);
+        if (smallW && largeW) {
+          img.width = largeW;
+          img.height = Math.round(largeW * 9 / 16);
+          img.srcset = `${small} ${smallW}w, ${large} ${largeW}w`;
+          img.sizes = `(max-width: ${largeW}px) 100vw, ${largeW}px`;
+        }
+      } catch {}
       link.appendChild(img);
       display.appendChild(link);
       if (window.gtag) {
