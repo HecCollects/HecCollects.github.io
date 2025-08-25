@@ -717,6 +717,77 @@
     });
   }
 
+  // Featured item of the week
+  const initWeeklyFeature = () => {
+    const container = document.getElementById('weekly-feature');
+    if (!container) return;
+    const display = document.getElementById('weekly-item');
+    const btn = document.getElementById('weekly-refresh');
+    if (!display || !btn) return;
+
+    let items = [];
+    const loadItems = async () => {
+      if (location.protocol === 'file:') {
+        display.textContent = 'Unable to load item.';
+        items = [];
+        return;
+      }
+      try {
+        const res = await fetch('items.json');
+        const data = await res.json();
+        items = [...(data.ebay || []), ...(data.offerup || [])];
+      } catch {
+        items = [];
+        display.textContent = 'Unable to load item.';
+      }
+    };
+
+    const showRandom = () => {
+      if (!items.length) {
+        display.textContent = 'Unable to load item.';
+        return;
+      }
+      const item = items[Math.floor(Math.random() * items.length)];
+      display.innerHTML = '';
+      const link = document.createElement('a');
+      link.href = item.link;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', item.alt || 'Featured item');
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.alt || '';
+      img.loading = 'lazy';
+      link.appendChild(img);
+      display.appendChild(link);
+      if (window.gtag) {
+        window.gtag('event', 'featured_week_view', { event_label: item.link || item.alt || '' });
+      }
+    };
+
+    btn.addEventListener('click', () => {
+      showRandom();
+      if (window.gtag) {
+        window.gtag('event', 'featured_week_click');
+      }
+    });
+
+    btn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+
+    loadItems().then(showRandom);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWeeklyFeature, { once: true });
+  } else {
+    initWeeklyFeature();
+  }
+
   const backToTop = document.getElementById('back-to-top');
   if (backToTop) {
     const toggleBackToTop = () => {
