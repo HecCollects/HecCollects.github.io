@@ -76,6 +76,10 @@ Provide these at deploy time by setting the attributes in HTML or defining globa
 
 If left unset (or left as placeholder tokens like `%GA_ID%`), analytics is disabled, reCAPTCHA is hidden, and the phone link will be hidden.
 
+Run `npm run build` before deploying to replace the `%GA_ID%`, `%RECAPTCHA_SITE_KEY%`, and `%PHONE_NUMBER%` tokens in `env.js` with the
+values from the `GA_ID`, `RECAPTCHA_SITE_KEY`, and `PHONE_NUMBER` environment variables. The build step validates that no
+placeholder tokens remain and fails otherwise.
+
 ## Animated Background Prototype
 
 Evaluated libraries for a lightweight animated hero background:
