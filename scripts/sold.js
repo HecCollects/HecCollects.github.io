@@ -165,7 +165,10 @@ function renderTable(items) {
 
     const dateTd = document.createElement('td');
     const date = item.date ? new Date(item.date) : null;
-    dateTd.textContent = date && !isNaN(date) ? date.toLocaleDateString() : '';
+    dateTd.textContent =
+      date && !isNaN(date)
+        ? date.toLocaleDateString('en-US', { timeZone: 'UTC' })
+        : '';
 
     const platformTd = document.createElement('td');
     platformTd.textContent = formatPlatform(item.platform);
@@ -239,7 +242,9 @@ function updateChart(items) {
   const sorted = items
     .filter(item => item.date)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
-  const labels = sorted.map(item => new Date(item.date).toLocaleDateString());
+  const labels = sorted.map(item =>
+    new Date(item.date).toLocaleDateString('en-US', { timeZone: 'UTC' })
+  );
   const data = sorted.map(item => parsePrice(item.price));
 
   if (chart) {
