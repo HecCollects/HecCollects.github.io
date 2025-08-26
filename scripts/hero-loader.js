@@ -18,10 +18,9 @@
 
   const init = async () => {
     try {
-      await Promise.all([
-        loadScript('vendor/three.min.js'),
-        loadScript('vendor/vanta.net.min.js')
-      ]);
+      // Load Three.js first to ensure Vanta has its dependency available
+      await loadScript('vendor/three.min.js');
+      await loadScript('vendor/vanta.net.min.js');
     } finally {
       window.initVanta?.();
       window.initPackageAnimation?.();
