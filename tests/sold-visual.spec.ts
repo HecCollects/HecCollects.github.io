@@ -38,7 +38,7 @@ test('sold page layout should match snapshot', async ({ page }) => {
 
   await page.goto('file://' + filePath);
   await page.evaluate(() => (document as any).fonts.ready);
-  await page.addStyleTag({ content: '* { transition: none !important; animation: none !important; }' });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
   const main = page.locator('main');
   await main.waitFor();
   expect(await main.screenshot()).toMatchSnapshot('sold-layout.png', { maxDiffPixelRatio: 0.01 });
