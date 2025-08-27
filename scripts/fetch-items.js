@@ -7,6 +7,18 @@ const OUTPUT = path.join(ROOT, 'items.json');
 const SEARCH_TERM = process.env.SEARCH_TERM || 'collectible';
 const LIMIT = parseInt(process.env.ITEM_LIMIT || '3', 10);
 
+function addUtm(url) {
+  if (!url) return url;
+  try {
+    const u = new URL(url);
+    u.searchParams.set('utm_source', 'site');
+    u.searchParams.set('utm_medium', 'referral');
+    return u.toString();
+  } catch {
+    return url;
+  }
+}
+
 async function fetchEbay() {
   const appId = process.env.EBAY_APP_ID;
   if (!appId) {
@@ -23,7 +35,7 @@ async function fetchEbay() {
   const items = json?.findItemsByKeywordsResponse?.[0]?.searchResult?.[0]?.item || [];
   return items.slice(0, LIMIT).map(item => ({
     image: item.galleryURL?.[0],
-    link: item.viewItemURL?.[0],
+    link: addUtm(item.viewItemURL?.[0]),
     alt: item.title?.[0],
     badge: item.condition?.[0]?.conditionDisplayName?.[0] || '',
     stock: Number(item.sellingStatus?.[0]?.quantity || 1)
@@ -42,7 +54,7 @@ async function fetchOfferUp() {
     const items = json?.data?.items || json?.response?.sections?.[0]?.items || [];
     return items.slice(0, LIMIT).map(it => ({
       image: it?.images?.[0]?.images?.[0]?.url || it?.image?.url || it?.picture?.url,
-      link: it?.web_url || `https://offerup.com/item/detail/${it?.id}`,
+      link: addUtm(it?.web_url || `https://offerup.com/item/detail/${it?.id}`),
       alt: it?.title || '',
       badge: it?.badges?.[0]?.name || '',
       stock: 1

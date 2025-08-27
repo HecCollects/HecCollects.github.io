@@ -7,6 +7,18 @@ const OUTPUT = path.join(ROOT, 'sold-items.json');
 const SEARCH_TERM = process.env.SOLD_SEARCH_TERM || 'collectible';
 const LIMIT = parseInt(process.env.SOLD_LIMIT || '10', 10);
 
+function addUtm(url) {
+  if (!url) return url;
+  try {
+    const u = new URL(url);
+    u.searchParams.set('utm_source', 'site');
+    u.searchParams.set('utm_medium', 'referral');
+    return u.toString();
+  } catch {
+    return url;
+  }
+}
+
 async function fetchEbaySold() {
   const appId = process.env.EBAY_APP_ID;
   if (!appId) {
@@ -51,7 +63,7 @@ async function fetchEbaySold() {
       },
       date: item.listingInfo?.[0]?.endTime?.[0] || '',
       location: item.location?.[0] || '',
-      url: item.viewItemURL?.[0] || '',
+      url: addUtm(item.viewItemURL?.[0] || ''),
       image: item.galleryURL?.[0] || '',
       platform: 'ebay',
       condition:
