@@ -312,12 +312,13 @@
           <h2 id="get-updates">Get Updates</h2>
           <p>Join the mailing list for new drops and exclusive deals.</p>
           <p class="incentive">Subscribers get early access and exclusive discounts.</p>
-          <form action="https://formspree.io/f/mzzdeork" method="POST" class="subscribe-form">
+          <form action="https://usX.api.mailchimp.com/3.0/lists/YOUR_LIST_ID/members" method="POST" class="subscribe-form">
             <input type="email" name="email" placeholder="Email address" required>
             <div class="checkbox-group">
               <label><input type="checkbox" name="interests" value="trading-cards"> Trading Cards</label>
               <label><input type="checkbox" name="interests" value="electronics"> Electronics</label>
             </div>
+            <input type="hidden" name="source" value="homepage">
             <p class="privacy">We’ll never sell your data. <a href="privacy.html">Privacy Policy</a></p>
             <input type="text" name="hp" class="honeypot" autocomplete="off" tabindex="-1">
             <div class="g-recaptcha" data-sitekey="" data-callback="enableSubscribe"></div>
@@ -357,5 +358,6 @@
     <script src="page-transitions.js" defer></script>
     <script src="scripts/search.js" defer></script>
     <script src="scripts/hero-loader.js" defer></script>
+    <script src="scripts/newsletter.js" defer></script>
   </body>
 </html>

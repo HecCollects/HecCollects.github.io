@@ -65,6 +65,35 @@ Run the script with:
 npm run update-sold
 ```
 
+## Newsletter Workflow
+
+The `#subscribe` form posts signups to a Mailchimp list via `scripts/newsletter.js`.
+User interests and a hidden `source` field are sent alongside the email address for tracking.
+
+`scripts/send-newsletter.js` composes update emails from `items.json` and `sold-items.json`.
+Run it with:
+
+```bash
+npm run send-newsletter            # new arrivals
+npm run send-newsletter sales     # recent sales
+```
+
+Set environment variables before running:
+
+- `MAILCHIMP_API_KEY` – Mailchimp API key.
+- `MAILCHIMP_CAMPAIGN_URL` – endpoint that accepts `{ subject, html }` payloads.
+
+### Scheduling
+
+To deliver newsletters regularly, schedule the script via cron or a CI workflow.
+Example cron entry sending Monday at 9 AM:
+
+```
+0 9 * * 1 cd /path/to/repo && npm run send-newsletter
+```
+
+In GitHub Actions, use a `schedule` trigger with the same command to automate delivery.
+
 ## Configuration
 
 `config.js` reads optional values from its `<script>` tag's `data-` attributes or existing `window` properties.
