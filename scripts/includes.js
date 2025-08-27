@@ -37,6 +37,15 @@
   document.querySelectorAll('[data-include]').forEach(el => {
     const file = el.getAttribute('data-include');
     if (!file) return;
+
+    // When running from the filesystem, XHR requests to local files
+    // trigger CORS errors. Use the inline templates instead to avoid
+    // noisy console errors that would fail tests.
+    if (location.protocol === 'file:' && templates[file]) {
+      el.outerHTML = templates[file];
+      return;
+    }
+
     const xhr = new XMLHttpRequest();
     try {
       xhr.open('GET', file, false);
@@ -45,6 +54,8 @@
         el.outerHTML = xhr.responseText;
       } else if (templates[file]) {
         el.outerHTML = templates[file];
+      } else {
+        console.error('Failed to load include', file);
       }
     } catch {
       if (templates[file]) {
