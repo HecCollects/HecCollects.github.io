@@ -94,6 +94,14 @@ Example cron entry sending Monday at 9 AM:
 
 In GitHub Actions, use a `schedule` trigger with the same command to automate delivery.
 
+## Referral Codes
+
+Visitors can share a `ref` code by appending `?ref=CODE` to the site URL. The code is stored in `localStorage`, included with `#subscribe` form submissions via a hidden `referrer` field, and appended to outbound links marked with `data-share-link`. This allows referrals to persist across sessions and be tracked when links are shared.
+
+Visiting the site with an empty `?ref=` parameter clears any previously stored code.
+
+Rewards can be granted when a referral leads to a newsletter signup or purchase. For example, a user might earn a discount or credit after a set number of successful referrals.
+
 ## Configuration
 
 `config.js` reads optional values from its `<script>` tag's `data-` attributes or existing `window` properties.

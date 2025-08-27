@@ -1,6 +1,52 @@
 (() => {
   const root = document.documentElement;
   const themeToggle = document.getElementById('theme-toggle');
+  let refCode = '';
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('ref')) {
+      const ref = params.get('ref') || '';
+      if (ref) {
+        localStorage.setItem('ref', ref);
+        refCode = ref;
+      } else {
+        localStorage.removeItem('ref');
+        refCode = '';
+      }
+    } else {
+      refCode = localStorage.getItem('ref') || '';
+    }
+  } catch {}
+
+  if (refCode) {
+    document.querySelectorAll('a[data-share-link]').forEach(link => {
+      try {
+        const url = new URL(link.href, location.href);
+        if (!url.searchParams.get('ref')) {
+          url.searchParams.set('ref', refCode);
+        }
+        link.href = url.toString();
+      } catch {}
+    });
+  }
+
+  const subscribeForm = document.querySelector('#subscribe form');
+  if (subscribeForm) {
+    const refField = subscribeForm.querySelector('#referrer-field');
+    try {
+      if (refField && refCode) {
+        refField.value = refCode;
+      }
+    } catch {}
+    subscribeForm.addEventListener('submit', () => {
+      if (refField && !refField.value) {
+        try {
+          refField.value = localStorage.getItem('ref') || '';
+        } catch {}
+      }
+    });
+  }
+
   let storedTheme = 'dark';
   try {
     storedTheme = localStorage.getItem('theme') || 'dark';
