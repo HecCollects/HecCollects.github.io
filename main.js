@@ -409,87 +409,136 @@
   if (testimonialWrapper) {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const track = testimonialWrapper.querySelector('.testimonial-track');
-    const slides = Array.from(track.querySelectorAll('figure'));
     const prevBtn = testimonialWrapper.querySelector('.testimonial-prev');
     const nextBtn = testimonialWrapper.querySelector('.testimonial-next');
     const pagination = testimonialWrapper.querySelector('.testimonial-pagination');
-    slides.forEach(s => {
-      s.setAttribute('role', 'tabpanel');
-    });
-    let index = 0;
-    let timer;
 
-    const select = (i) => {
-      index = (i + slides.length) % slides.length;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      slides.forEach((s, idx) => {
-        const active = idx === index;
-        s.classList.toggle('active', active);
-        s.setAttribute('aria-hidden', active ? 'false' : 'true');
+    const buildSlides = (reviews) => {
+      track.innerHTML = '';
+      reviews.forEach((rev, i) => {
+        const fig = document.createElement('figure');
+        fig.id = 'testimonial-' + (i + 1);
+        const quote = document.createElement('blockquote');
+        quote.textContent = '“' + rev.text + '”';
+        fig.appendChild(quote);
+        const rating = document.createElement('div');
+        rating.className = 'rating';
+        const stars = Math.round(Number(rev.rating) || 0);
+        rating.setAttribute('aria-label', stars + ' out of 5 stars');
+        for (let s = 0; s < stars; s++) {
+          const star = document.createElement('i');
+          star.className = 'fa-solid fa-star';
+          star.setAttribute('aria-hidden', 'true');
+          rating.appendChild(star);
+        }
+        fig.appendChild(rating);
+        const cap = document.createElement('figcaption');
+        cap.textContent = '— ' + (rev.source || '');
+        fig.appendChild(cap);
+        track.appendChild(fig);
       });
-      pagination?.querySelectorAll('button').forEach((dot, idx) => {
-        dot.setAttribute('aria-selected', idx === index ? 'true' : 'false');
-      });
+      return Array.from(track.querySelectorAll('figure'));
     };
 
-    const start = () => {
-      if (motionQuery.matches) return;
-      timer = setInterval(() => {
+    const initCarousel = (slides) => {
+      slides.forEach(s => { s.setAttribute('role', 'tabpanel'); });
+      let index = 0;
+      let timer;
+
+      const select = (i) => {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        slides.forEach((s, idx) => {
+          const active = idx === index;
+          s.classList.toggle('active', active);
+          s.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+        pagination?.querySelectorAll('button').forEach((dot, idx) => {
+          dot.setAttribute('aria-selected', idx === index ? 'true' : 'false');
+        });
+      };
+
+      const start = () => {
+        if (motionQuery.matches) return;
+        timer = setInterval(() => {
+          select(index + 1);
+        }, 5000);
+      };
+
+      const reset = () => {
+        clearInterval(timer);
+        start();
+      };
+
+      slides.forEach((slide, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'testimonial-dot';
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-selected', 'false');
+        if (slide.id) dot.setAttribute('aria-controls', slide.id);
+        dot.setAttribute('aria-label', 'Show testimonial ' + (i + 1));
+        dot.addEventListener('click', () => {
+          select(i);
+          reset();
+          if (window.gtag) {
+            window.gtag('event','testimonial_nav',{event_label: 'dot_' + (i + 1)});
+          }
+        });
+        pagination?.appendChild(dot);
+      });
+
+      prevBtn?.addEventListener('click', () => {
+        select(index - 1);
+        reset();
+        if (window.gtag) {
+          window.gtag('event','testimonial_nav',{event_label:'prev'});
+        }
+      });
+
+      nextBtn?.addEventListener('click', () => {
         select(index + 1);
-      }, 5000);
-    };
+        reset();
+        if (window.gtag) {
+          window.gtag('event','testimonial_nav',{event_label:'next'});
+        }
+      });
 
-    const reset = () => {
-      clearInterval(timer);
+      if (typeof motionQuery.addEventListener === 'function') {
+        motionQuery.addEventListener('change', e => {
+          if (e.matches) {
+            clearInterval(timer);
+          } else {
+            start();
+          }
+        });
+      }
+
+      select(0);
       start();
     };
 
-    slides.forEach((slide, i) => {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'testimonial-dot';
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-selected', 'false');
-      if (slide.id) dot.setAttribute('aria-controls', slide.id);
-      dot.setAttribute('aria-label', `Show testimonial ${i + 1}`);
-      dot.addEventListener('click', () => {
-        select(i);
-        reset();
-        if (window.gtag) {
-          window.gtag('event','testimonial_nav',{event_label:`dot_${i+1}`});
+    const load = async () => {
+      try {
+        if (location.protocol === 'file:') return;
+        const src = testimonialWrapper.dataset.src || 'reviews.json';
+        const res = await fetch(src);
+        if (!res.ok) return;
+        const data = await res.json();
+        const reviews = Array.isArray(data) ? data : data.reviews || [];
+        const slides = buildSlides(reviews);
+        if (slides.length) {
+          initCarousel(slides);
+        } else {
+          track.innerHTML = '<p>No reviews yet.</p>';
         }
-      });
-      pagination?.appendChild(dot);
-    });
-
-    prevBtn?.addEventListener('click', () => {
-      select(index - 1);
-      reset();
-      if (window.gtag) {
-        window.gtag('event','testimonial_nav',{event_label:'prev'});
+      } catch (err) {
+        console.warn('Unable to load testimonials', err);
       }
-    });
+    };
 
-    nextBtn?.addEventListener('click', () => {
-      select(index + 1);
-      reset();
-      if (window.gtag) {
-        window.gtag('event','testimonial_nav',{event_label:'next'});
-      }
-    });
-
-    motionQuery.addEventListener('change', e => {
-      if (e.matches) {
-        clearInterval(timer);
-      } else {
-        start();
-      }
-    });
-
-    select(0);
-    start();
+    load();
   }
-
     // Hero background animation
     const heroSection = document.getElementById('home');
     const heroMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
