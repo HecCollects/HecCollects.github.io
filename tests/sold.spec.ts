@@ -126,3 +126,51 @@ test('three month snapshot reflects recent sales', async ({ page }) => {
   await expect(cards.nth(2).locator('h3')).toHaveText('Total Sold');
   await expect(cards.nth(2).locator('p')).toHaveText('2');
 });
+
+test('renders links with rel and plain text when link absent', async ({ page }) => {
+  await page.addInitScript(() => {
+    const sample = [
+      {
+        title: 'Has Link',
+        link: 'https://example.com',
+        price: { value: 10, currency: 'USD' },
+        date: '2099-01-01'
+      },
+      {
+        title: 'No Link',
+        price: { value: 5, currency: 'USD' },
+        date: '2099-01-02'
+      }
+    ];
+    const originalFetch = window.fetch;
+    window.fetch = (url, options) => {
+      if (typeof url === 'string' && url.endsWith('sold-items.json')) {
+        return Promise.resolve(
+          new Response(JSON.stringify(sample), {
+            headers: { 'Content-Type': 'application/json' }
+          })
+        );
+      }
+      return originalFetch(url, options);
+    };
+    window.Chart = function () {
+      return {
+        data: { labels: [], datasets: [{ data: [] }] },
+        update() {},
+        destroy() {},
+      };
+    };
+  });
+
+  await page.goto('file://' + filePath);
+  await page.evaluate(() => (document as any).fonts.ready);
+
+  const rows = page.locator('#sold-table tbody tr');
+  const firstLink = rows.nth(0).locator('td').first().locator('a');
+  await expect(firstLink).toHaveAttribute('href', 'https://example.com');
+  await expect(firstLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+  const secondCell = rows.nth(1).locator('td').first();
+  await expect(secondCell.locator('a')).toHaveCount(0);
+  await expect(secondCell).toContainText('No Link');
+});
