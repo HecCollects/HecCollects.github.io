@@ -17,7 +17,10 @@ jobs:
         env:
           EBAY_APP_ID: ${{ secrets.EBAY_APP_ID }}
         run: npm ci && npm run update-sold
+      - name: Run tests
+        run: npm test
       - name: Commit and push if sold items changed
+        if: success()
         run: |
           if [ -n "$(git status --porcelain sold-items.json)" ]; then
             git config user.name "github-actions[bot]"
