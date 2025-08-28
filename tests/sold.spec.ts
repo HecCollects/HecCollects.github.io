@@ -178,3 +178,59 @@ test('renders links with rel and plain text when link absent', async ({ page }) 
   await expect(secondCell.locator('a')).toHaveCount(0);
   await expect(secondCell).toContainText('No Link');
 });
+
+test('debounces render on rapid search input', async ({ page }) => {
+  await page.addInitScript(() => {
+    const sample = [
+      {
+        title: 'A',
+        price: { value: 10, currency: 'USD' },
+        date: '2099-01-01',
+        platform: 'ebay',
+        location: ''
+      }
+    ];
+    const originalFetch = window.fetch;
+    window.fetch = (url, options) => {
+      if (typeof url === 'string' && url.endsWith('sold-items.json')) {
+        return Promise.resolve(
+          new Response(JSON.stringify(sample), {
+            headers: { 'Content-Type': 'application/json' }
+          })
+        );
+      }
+      return originalFetch(url, options);
+    };
+    window.Chart = function () {
+      return {
+        data: { labels: [], datasets: [{ data: [] }] },
+        update() {},
+        destroy() {},
+      };
+    };
+    (window as any).__renderCallCount = 0;
+    Object.defineProperty(window, 'render', {
+      configurable: true,
+      set(fn) {
+        const wrapped = function (...args) {
+          (window as any).__renderCallCount++;
+          return fn.apply(this, args);
+        };
+        Object.defineProperty(window, 'render', {
+          value: wrapped,
+          configurable: true,
+          writable: true,
+        });
+      },
+    });
+  });
+
+  await page.goto('file://' + filePath);
+  await page.evaluate(() => (document as any).fonts.ready);
+
+  await page.evaluate(() => ((window as any).__renderCallCount = 0));
+  await page.type('#sold-search', 'abc', { delay: 50 });
+  await page.waitForTimeout(400);
+  const count = await page.evaluate(() => (window as any).__renderCallCount);
+  expect(count).toBe(1);
+});
