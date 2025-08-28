@@ -3,6 +3,7 @@ const tableBody = document.querySelector('#sold-table tbody');
 const avgPriceEl = document.getElementById('avg-price');
 const monthlySalesEl = document.getElementById('monthly-sales');
 const dateFilterEl = document.getElementById('date-filter');
+const platformFilterEl = document.getElementById('platform-filter');
 const chartCanvas = document.getElementById('sales-chart');
 const pricePointsEl = document.getElementById('price-points');
 const conditionComparisonEl = document.getElementById('condition-comparison');
@@ -66,6 +67,23 @@ function formatPlatform(platform) {
   }
 }
 
+function populatePlatformFilter(items) {
+  const prev = platformFilterEl.value;
+  const platforms = Array.from(
+    new Set(items.map(i => (i.platform || '').toLowerCase()).filter(Boolean))
+  ).sort();
+  platformFilterEl.innerHTML = '<option value="">All Platforms</option>';
+  platforms.forEach(p => {
+    const option = document.createElement('option');
+    option.value = p;
+    option.textContent = formatPlatform(p);
+    platformFilterEl.appendChild(option);
+  });
+  if (platforms.includes(prev)) {
+    platformFilterEl.value = prev;
+  }
+}
+
 function filterItems(items) {
   const value = dateFilterEl.value;
   if (value === 'all') return items;
@@ -81,6 +99,7 @@ function filterItems(items) {
 function applyFilters(items) {
   let filtered = filterItems(items);
   const query = searchEl.value.trim().toLowerCase();
+  const platform = platformFilterEl.value;
   if (query) {
     filtered = filtered.filter(item => {
       return (
@@ -89,6 +108,11 @@ function applyFilters(items) {
         item.location.toLowerCase().includes(query)
       );
     });
+  }
+  if (platform) {
+    filtered = filtered.filter(
+      item => (item.platform || '').toLowerCase() === platform
+    );
   }
   if (sortKey) {
     filtered.sort((a, b) => {
@@ -417,6 +441,7 @@ function updateSnapshot(items) {
 }
 
 function render() {
+  populatePlatformFilter(allItems);
   const filtered = applyFilters(allItems.slice());
   renderTable(filtered);
   updateSummary(filtered);
@@ -485,4 +510,5 @@ document.addEventListener('DOMContentLoaded', () => {
   dateFilterEl.value = '90';
   loadSoldItems();
   dateFilterEl.addEventListener('change', render);
+  platformFilterEl.addEventListener('change', render);
 });
