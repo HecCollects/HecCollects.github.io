@@ -29,6 +29,14 @@ let sortAsc = true;
 
 const sortFields = ['title', 'price', 'date', 'platform', 'location'];
 
+function debounce(fn, delay) {
+  let t;
+  return function (...args) {
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
 tableHeaders.forEach((th, idx) => {
   th.style.cursor = 'pointer';
   th.setAttribute('aria-sort', 'none');
@@ -44,7 +52,8 @@ tableHeaders.forEach((th, idx) => {
   });
 });
 
-searchEl.addEventListener('input', render);
+const debouncedRender = debounce(render, 250);
+searchEl.addEventListener('input', debouncedRender);
 
 let allItems = [];
 let chart;
