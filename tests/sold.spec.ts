@@ -85,6 +85,10 @@ test('renders price points when data available', async ({ page }) => {
   const card = page.locator('#condition-comparison .condition-card').first();
   await expect(card.locator('h3')).toHaveText('Near Mint');
   await expect(card.locator('p')).toHaveText('$90.00');
+  await expect(page.locator('#avg-price')).toHaveText('Average price: $90.00');
+  await expect(page.locator('#monthly-sales li').first()).toHaveText(
+    'Apr 2099: $180.00'
+  );
 });
 
 test('three month snapshot reflects recent sales', async ({ page }) => {
