@@ -160,7 +160,18 @@ async function main() {
     fetchTcgPlayerSold()
   ]);
   const sold = [...ebay, ...tcgplayer];
-  await fs.writeFile(OUTPUT, JSON.stringify(sold, null, 2));
+
+  sold.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const seen = new Set();
+  const deduped = sold.filter(item => {
+    const key = `${item.title}__${item.date}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  await fs.writeFile(OUTPUT, JSON.stringify(deduped, null, 2));
   console.log(`Wrote ${OUTPUT}`);
 }
 
