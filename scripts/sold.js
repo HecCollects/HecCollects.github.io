@@ -143,9 +143,12 @@ function renderTable(items) {
     const tr = document.createElement('tr');
 
     const itemTd = document.createElement('td');
-    const link = document.createElement('a');
-    link.href = item.link;
-    link.target = '_blank';
+    const content = item.link ? document.createElement('a') : document.createElement('span');
+    if (item.link) {
+      content.href = item.link;
+      content.target = '_blank';
+      content.rel = 'noopener noreferrer';
+    }
     if (item.image) {
       const img = document.createElement('img');
       img.src = item.image;
@@ -153,12 +156,12 @@ function renderTable(items) {
       img.loading = 'lazy';
       img.width = 40;
       img.height = 40;
-      link.appendChild(img);
+      content.appendChild(img);
     }
     const titleSpan = document.createElement('span');
     titleSpan.textContent = item.title || '';
-    link.appendChild(titleSpan);
-    itemTd.appendChild(link);
+    content.appendChild(titleSpan);
+    itemTd.appendChild(content);
 
     const priceTd = document.createElement('td');
     priceTd.textContent = item.price || '';
