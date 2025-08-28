@@ -13,15 +13,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-      - name: Fetch sold items
+      - name: Install and update sold items
         env:
           EBAY_APP_ID: ${{ secrets.EBAY_APP_ID }}
-        run: npm run update-sold
-      - name: Commit and push if changed
+        run: npm ci && npm run update-sold
+      - name: Commit and push if sold items changed
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
+          if [ -n "$(git status --porcelain sold-items.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git commit -am "chore: update sold items"
+            git add sold-items.json
+            git commit -m "chore: update sold items"
             git push
           fi
