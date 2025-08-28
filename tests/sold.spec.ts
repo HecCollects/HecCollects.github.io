@@ -87,7 +87,7 @@ test('renders price points when data available', async ({ page }) => {
   await expect(card.locator('p')).toHaveText('$90.00');
   await expect(page.locator('#avg-price')).toHaveText('Average price: $90.00');
   await expect(page.locator('#monthly-sales li').first()).toHaveText(
-    'Apr 2099: $180.00'
+    'April 2099: $180.00'
   );
 });
 
@@ -129,6 +129,59 @@ test('three month snapshot reflects recent sales', async ({ page }) => {
   await expect(cards.nth(1).locator('p')).toHaveText('$20.00');
   await expect(cards.nth(2).locator('h3')).toHaveText('Total Sold');
   await expect(cards.nth(2).locator('p')).toHaveText('2');
+});
+
+test('filters listings by selected platform', async ({ page }) => {
+  await page.addInitScript(() => {
+    const sample = [
+      {
+        title: 'Ebay Item',
+        price: { value: 10, currency: 'USD' },
+        date: '2099-01-01',
+        platform: 'ebay',
+        location: ''
+      },
+      {
+        title: 'TCG Item',
+        price: { value: 15, currency: 'USD' },
+        date: '2099-01-02',
+        platform: 'tcgplayer',
+        location: ''
+      }
+    ];
+    const originalFetch = window.fetch;
+    window.fetch = (url, options) => {
+      if (typeof url === 'string' && url.endsWith('sold-items.json')) {
+        return Promise.resolve(
+          new Response(JSON.stringify(sample), {
+            headers: { 'Content-Type': 'application/json' }
+          })
+        );
+      }
+      return originalFetch(url, options);
+    };
+    window.Chart = function () {
+      return {
+        data: { labels: [], datasets: [{ data: [] }] },
+        update() {},
+        destroy() {},
+      };
+    };
+  });
+
+  await page.goto('file://' + filePath);
+  await page.evaluate(() => (document as any).fonts.ready);
+
+  const options = page.locator('#platform-filter option');
+  await expect(options).toHaveCount(3);
+  await expect(options.nth(1)).toHaveText('eBay');
+  await expect(options.nth(2)).toHaveText('TCGplayer');
+
+  const rows = page.locator('#sold-table tbody tr');
+  await expect(rows).toHaveCount(2);
+  await page.selectOption('#platform-filter', 'tcgplayer');
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first().locator('td').nth(3)).toHaveText('TCGplayer');
 });
 
 test('renders links with rel and plain text when link absent', async ({ page }) => {
@@ -208,27 +261,18 @@ test('debounces render on rapid search input', async ({ page }) => {
         destroy() {},
       };
     };
-    (window as any).__renderCallCount = 0;
-    Object.defineProperty(window, 'render', {
-      configurable: true,
-      set(fn) {
-        const wrapped = function (...args) {
-          (window as any).__renderCallCount++;
-          return fn.apply(this, args);
-        };
-        Object.defineProperty(window, 'render', {
-          value: wrapped,
-          configurable: true,
-          writable: true,
-        });
-      },
-    });
   });
 
   await page.goto('file://' + filePath);
   await page.evaluate(() => (document as any).fonts.ready);
 
-  await page.evaluate(() => ((window as any).__renderCallCount = 0));
+  await page.evaluate(() => {
+    const tbody = document.querySelector('#sold-table tbody');
+    (window as any).__renderCallCount = 0;
+    new MutationObserver(() => (window as any).__renderCallCount++)
+      .observe(tbody, { childList: true });
+  });
+
   await page.type('#sold-search', 'abc', { delay: 50 });
   await page.waitForTimeout(400);
   const count = await page.evaluate(() => (window as any).__renderCallCount);

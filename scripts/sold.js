@@ -271,7 +271,7 @@ function updateSummary(items) {
       (monthlyTotals[monthKey] || 0) + parsePrice(item.price);
   });
   const formatter = new Intl.DateTimeFormat('en-US', {
-    month: 'short',
+    month: 'long',
     year: 'numeric',
     timeZone: 'UTC'
   });
