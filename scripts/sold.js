@@ -249,20 +249,34 @@ function updateSummary(items) {
   const prices = items.map(item => parsePrice(item.price)).filter(n => !isNaN(n));
   const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
   avgPriceEl.textContent = `Average price: $${avg.toFixed(2)}`;
-
   const monthlyTotals = {};
   items.forEach(item => {
     const date = item.date ? new Date(item.date) : null;
     if (!date || isNaN(date)) return;
-    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-    monthlyTotals[key] = (monthlyTotals[key] || 0) + parsePrice(item.price);
+    const monthKey = Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      1
+    );
+    monthlyTotals[monthKey] =
+      (monthlyTotals[monthKey] || 0) + parsePrice(item.price);
+  });
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC'
   });
   monthlySalesEl.innerHTML = '';
-  Object.keys(monthlyTotals).sort().forEach(key => {
-    const li = document.createElement('li');
-    li.textContent = `${key}: $${monthlyTotals[key].toFixed(2)}`;
-    monthlySalesEl.appendChild(li);
-  });
+  Object.keys(monthlyTotals)
+    .map(Number)
+    .sort((a, b) => a - b)
+    .forEach(key => {
+      const li = document.createElement('li');
+      li.textContent = `${formatter.format(new Date(Number(key)))}: $${
+        monthlyTotals[key].toFixed(2)
+      }`;
+      monthlySalesEl.appendChild(li);
+    });
 }
 
 function updateChart(items) {
