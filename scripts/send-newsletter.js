@@ -47,23 +47,22 @@ async function sendNewsletter(type = 'new') {
     return;
   }
 
-  try {
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
-      },
-      body: JSON.stringify(payload)
-    });
-    if (!res.ok) {
-      throw new Error(`Request failed: ${res.status}`);
-    }
-    console.log('Newsletter sent');
-  } catch (err) {
-    console.error('Failed to send newsletter', err);
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    throw new Error(`Request failed: ${res.status}`);
   }
+  console.log('Newsletter sent');
 }
 
 const type = process.argv[2] === 'sales' ? 'sales' : 'new';
-sendNewsletter(type);
+sendNewsletter(type).catch(err => {
+  console.error('Failed to send newsletter', err);
+  process.exit(1);
+});

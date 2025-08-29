@@ -47,36 +47,30 @@ async function fetchEbaySold() {
   });
 
   const url = `https://svcs.ebay.com/services/search/FindingService/v1?${params}`;
-  try {
-    const res = await fetch(url);
-    if (!res.ok) {
-      console.warn('eBay sold request failed', res.status);
-      return [];
-    }
-    const json = await res.json();
-    const items = json?.findCompletedItemsResponse?.[0]?.searchResult?.[0]?.item || [];
-    return items.slice(0, LIMIT).map(item => ({
-      title: item.title?.[0] || '',
-      price: {
-        value: Number(item.sellingStatus?.[0]?.currentPrice?.[0]?.__value__ || 0),
-        currency: item.sellingStatus?.[0]?.currentPrice?.[0]?.['@currencyId'] || ''
-      },
-      date: item.listingInfo?.[0]?.endTime?.[0] || '',
-      location: item.location?.[0] || '',
-      url: addUtm(item.viewItemURL?.[0] || ''),
-      image: item.galleryURL?.[0] || '',
-      platform: 'ebay',
-      condition:
-        item.condition?.[0]?.conditionDisplayName?.[0] ||
-        item.conditionId?.[0] ||
-        '',
-      quantitySold: Number(item.sellingStatus?.[0]?.quantitySold?.[0] || 0),
-      sellerCount: item.sellerInfo?.[0]?.sellerUserName ? 1 : null
-    }));
-  } catch (err) {
-    console.warn('eBay sold fetch error', err);
-    return [];
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`eBay sold request failed: ${res.status}`);
   }
+  const json = await res.json();
+  const items = json?.findCompletedItemsResponse?.[0]?.searchResult?.[0]?.item || [];
+  return items.slice(0, LIMIT).map(item => ({
+    title: item.title?.[0] || '',
+    price: {
+      value: Number(item.sellingStatus?.[0]?.currentPrice?.[0]?.__value__ || 0),
+      currency: item.sellingStatus?.[0]?.currentPrice?.[0]?.['@currencyId'] || ''
+    },
+    date: item.listingInfo?.[0]?.endTime?.[0] || '',
+    location: item.location?.[0] || '',
+    url: addUtm(item.viewItemURL?.[0] || ''),
+    image: item.galleryURL?.[0] || '',
+    platform: 'ebay',
+    condition:
+      item.condition?.[0]?.conditionDisplayName?.[0] ||
+      item.conditionId?.[0] ||
+      '',
+    quantitySold: Number(item.sellingStatus?.[0]?.quantitySold?.[0] || 0),
+    sellerCount: item.sellerInfo?.[0]?.sellerUserName ? 1 : null
+  }));
 }
 
 async function fetchTcgPlayerSold() {
@@ -86,72 +80,64 @@ async function fetchTcgPlayerSold() {
     console.warn('TCG_PUBLIC_KEY or TCG_PRIVATE_KEY not set; skipping TCGplayer sold fetch');
     return [];
   }
-
-  try {
-    const tokenRes = await fetch('https://api.tcgplayer.com/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new URLSearchParams({
-        grant_type: 'client_credentials',
-        client_id: publicKey,
-        client_secret: privateKey
-      })
-    });
-    if (!tokenRes.ok) {
-      console.warn('TCGplayer token request failed', tokenRes.status);
-      return [];
-    }
-    const tokenJson = await tokenRes.json();
-    const accessToken = tokenJson.access_token;
-
-    const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - 90);
-    const params = new URLSearchParams({
-      limit: String(LIMIT),
-      startDate: cutoff.toISOString()
-    });
-
-    const res = await fetch(`https://api.tcgplayer.com/storesales/orders?${params}`, {
-      headers: {
-        Authorization: `bearer ${accessToken}`
-      }
-    });
-    if (!res.ok) {
-      console.warn('TCGplayer sold request failed', res.status);
-      return [];
-    }
-    const json = await res.json();
-    const orders = json?.results || [];
-    return orders.slice(0, LIMIT).map(order => ({
-      title: order.productName || order.product?.name || '',
-      price: {
-        value: Number(order.totalPrice?.amount || order.price?.amount || 0),
-        currency: order.totalPrice?.currencyCode || order.price?.currencyCode || ''
-      },
-      date: order.orderDate || order.createdOn || '',
-      location: order.address?.region || '',
-      url: '',
-      image: '',
-      platform: 'tcgplayer',
-      condition:
-        order.condition ||
-        order.product?.conditionName ||
-        order.productConditionId ||
-        '',
-      quantitySold: Number(
-        order.quantity ||
-        order.quantitySold ||
-        order.orderItems?.[0]?.quantity ||
-        0
-      ),
-      sellerCount: Number(order.sellerCount || (order.storeSellerId ? 1 : 0))
-    }));
-  } catch (err) {
-    console.warn('TCGplayer sold fetch error', err);
-    return [];
+  const tokenRes = await fetch('https://api.tcgplayer.com/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: publicKey,
+      client_secret: privateKey
+    })
+  });
+  if (!tokenRes.ok) {
+    throw new Error(`TCGplayer token request failed: ${tokenRes.status}`);
   }
+  const tokenJson = await tokenRes.json();
+  const accessToken = tokenJson.access_token;
+
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 90);
+  const params = new URLSearchParams({
+    limit: String(LIMIT),
+    startDate: cutoff.toISOString()
+  });
+
+  const res = await fetch(`https://api.tcgplayer.com/storesales/orders?${params}`, {
+    headers: {
+      Authorization: `bearer ${accessToken}`
+    }
+  });
+  if (!res.ok) {
+    throw new Error(`TCGplayer sold request failed: ${res.status}`);
+  }
+  const json = await res.json();
+  const orders = json?.results || [];
+  return orders.slice(0, LIMIT).map(order => ({
+    title: order.productName || order.product?.name || '',
+    price: {
+      value: Number(order.totalPrice?.amount || order.price?.amount || 0),
+      currency: order.totalPrice?.currencyCode || order.price?.currencyCode || ''
+    },
+    date: order.orderDate || order.createdOn || '',
+    location: order.address?.region || '',
+    url: '',
+    image: '',
+    platform: 'tcgplayer',
+    condition:
+      order.condition ||
+      order.product?.conditionName ||
+      order.productConditionId ||
+      '',
+    quantitySold: Number(
+      order.quantity ||
+      order.quantitySold ||
+      order.orderItems?.[0]?.quantity ||
+      0
+    ),
+    sellerCount: Number(order.sellerCount || (order.storeSellerId ? 1 : 0))
+  }));
 }
 
 async function main() {

@@ -14,28 +14,23 @@ async function fetchEbayReviews() {
   }
   const results = [];
   for (const id of ids) {
-    try {
-      const res = await fetch(`https://api.ebay.com/buy/browse/v1/item/${id}/reviews?limit=${LIMIT}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (!res.ok) {
-        console.warn('eBay reviews request failed', res.status);
-        continue;
-      }
-      const json = await res.json();
-      const reviews = json?.reviews || [];
-      for (const r of reviews) {
-        results.push({
-          source: 'eBay',
-          text: r.review || r.comment || '',
-          rating: Number(r.rating || r.ratingValue || 0)
-        });
-        if (results.length >= LIMIT) break;
-      }
-      if (results.length >= LIMIT) break;
-    } catch (err) {
-      console.warn('eBay review fetch error', err);
+    const res = await fetch(`https://api.ebay.com/buy/browse/v1/item/${id}/reviews?limit=${LIMIT}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) {
+      throw new Error(`eBay reviews request failed: ${res.status}`);
     }
+    const json = await res.json();
+    const reviews = json?.reviews || [];
+    for (const r of reviews) {
+      results.push({
+        source: 'eBay',
+        text: r.review || r.comment || '',
+        rating: Number(r.rating || r.ratingValue || 0)
+      });
+      if (results.length >= LIMIT) break;
+    }
+    if (results.length >= LIMIT) break;
   }
   return results;
 }
@@ -46,24 +41,18 @@ async function fetchOfferUpReviews() {
     console.warn('OFFERUP_SELLER not set; skipping OfferUp reviews');
     return [];
   }
-  try {
-    const url = `https://offerup.com/api/shops/v1/profiles/${seller}/reviews?limit=${LIMIT}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      console.warn('OfferUp reviews request failed', res.status);
-      return [];
-    }
-    const json = await res.json();
-    const reviews = json?.reviews || json?.data?.reviews || [];
-    return reviews.slice(0, LIMIT).map(r => ({
-      source: 'OfferUp',
-      text: r.comment || r.text || '',
-      rating: Number(r.rating || r.score || 0)
-    }));
-  } catch (err) {
-    console.warn('OfferUp review fetch error', err);
-    return [];
+  const url = `https://offerup.com/api/shops/v1/profiles/${seller}/reviews?limit=${LIMIT}`;
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`OfferUp reviews request failed: ${res.status}`);
   }
+  const json = await res.json();
+  const reviews = json?.reviews || json?.data?.reviews || [];
+  return reviews.slice(0, LIMIT).map(r => ({
+    source: 'OfferUp',
+    text: r.comment || r.text || '',
+    rating: Number(r.rating || r.score || 0)
+  }));
 }
 
 async function main() {
