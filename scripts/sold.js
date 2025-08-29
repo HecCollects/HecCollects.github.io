@@ -14,16 +14,19 @@ const tableEl = document.getElementById('sold-table');
 const skeletonChart = document.querySelector('.skeleton-chart');
 const skeletonTable = document.querySelector('.skeleton-table');
 const suggestionsEl = document.getElementById('sold-suggestions');
-chartCanvas.height = 300;
-const chartCtx = chartCanvas.getContext('2d');
+let chartCtx;
 let rangeButtons;
-rangeButtons = document.querySelectorAll('.range-buttons button');
-rangeButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const range = btn.id.replace('range-', '');
-    filterByRange(range);
+if (chartCanvas) {
+  chartCanvas.height = 300;
+  chartCtx = chartCanvas.getContext('2d');
+  rangeButtons = document.querySelectorAll('.range-buttons button');
+  rangeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const range = btn.id.replace('range-', '');
+      filterByRange(range);
+    });
   });
-});
+}
 
 let sortKey = null;
 let sortAsc = true;
@@ -54,7 +57,9 @@ tableHeaders.forEach((th, idx) => {
 });
 
 const debouncedRender = debounce(render, 250);
-searchEl.addEventListener('input', debouncedRender);
+if (searchEl) {
+  searchEl.addEventListener('input', debouncedRender);
+}
 
 let allItems = [];
 let chart;
@@ -289,6 +294,7 @@ function updateSummary(items) {
 }
 
 function updateChart(items) {
+  if (!chartCtx) return;
   const sorted = items
     .filter(item => item.date)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -529,7 +535,7 @@ async function loadSoldItems() {
     statusEl.textContent = '';
     skeletonChart?.classList.add('hidden');
     skeletonTable?.classList.add('hidden');
-    chartCanvas.classList.remove('hidden');
+    chartCanvas?.classList.remove('hidden');
     tableEl.classList.remove('hidden');
     filterByRange('3m');
     updatePricePoints(allItems, listings, qty, sellerCount);
