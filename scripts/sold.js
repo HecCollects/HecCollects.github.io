@@ -58,6 +58,7 @@ searchEl.addEventListener('input', debouncedRender);
 
 let allItems = [];
 let chart;
+let currentRange = '3m';
 
 function parsePrice(price) {
   if (price && typeof price === 'object') {
@@ -165,20 +166,8 @@ function updateSortIndicators() {
 }
 
 function filterByRange(range) {
-  const daysMap = { '1m': 30, '3m': 90, '6m': 180, '1y': 365 };
-  const days = daysMap[range] || 90;
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - days);
-  const filtered = allItems.filter(item => {
-    const date = item.date ? new Date(item.date) : null;
-    return date && !isNaN(date) && date >= cutoff;
-  });
-  if (rangeButtons) {
-    rangeButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.id === `range-${range}`);
-    });
-  }
-  updateChart(filtered);
+  currentRange = range;
+  render();
 }
 
 function renderTable(items) {
@@ -476,12 +465,25 @@ function updateSnapshot(items) {
 
 function render() {
   populatePlatformFilter(allItems);
-  const filtered = applyFilters(allItems.slice());
+  let filtered = applyFilters(allItems.slice());
+  const daysMap = { '1m': 30, '3m': 90, '6m': 180, '1y': 365 };
+  const days = daysMap[currentRange] || 90;
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - days);
+  filtered = filtered.filter(item => {
+    const date = item.date ? new Date(item.date) : null;
+    return date && !isNaN(date) && date >= cutoff;
+  });
   renderTable(filtered);
   updateSummary(filtered);
   updateConditionComparison(filtered);
   updateChart(filtered);
   updateSortIndicators();
+  if (rangeButtons) {
+    rangeButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.id === `range-${currentRange}`);
+    });
+  }
 }
 
 async function loadSoldItems() {
@@ -529,7 +531,6 @@ async function loadSoldItems() {
     skeletonTable?.classList.add('hidden');
     chartCanvas.classList.remove('hidden');
     tableEl.classList.remove('hidden');
-    render();
     filterByRange('3m');
     updatePricePoints(allItems, listings, qty, sellerCount);
     updateSnapshot(allItems);
