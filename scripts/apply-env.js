@@ -14,3 +14,10 @@ for (const [token, value] of Object.entries(replacements)) {
 }
 
 fs.writeFileSync(envPath, content);
+
+const finalContent = fs.readFileSync(envPath, 'utf8');
+const remainingTokens = Object.keys(replacements).filter((token) => finalContent.includes(token));
+if (remainingTokens.length > 0) {
+  console.error(`The following placeholders were not replaced in ${envPath}: ${remainingTokens.join(', ')}`);
+  process.exit(1);
+}
