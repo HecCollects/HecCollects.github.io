@@ -34,11 +34,12 @@
 </footer>`
   };
 
+  const includePromises = [];
   document.querySelectorAll('[data-include]').forEach(el => {
     const file = el.getAttribute('data-include');
     if (!file) return;
 
-    // When running from the filesystem, XHR requests to local files
+    // When running from the filesystem, fetch requests to local files
     // trigger CORS errors. Use the inline templates instead to avoid
     // noisy console errors that would fail tests.
     if (location.protocol === 'file:' && templates[file]) {
@@ -46,39 +47,45 @@
       return;
     }
 
-    const xhr = new XMLHttpRequest();
-    try {
-      xhr.open('GET', file, false);
-      xhr.send();
-      if (xhr.status >= 200 && xhr.status < 300) {
-        el.outerHTML = xhr.responseText;
-      } else if (templates[file]) {
-        el.outerHTML = templates[file];
-      } else {
-        console.error('Failed to load include', file);
-      }
-    } catch {
-      if (templates[file]) {
-        el.outerHTML = templates[file];
-      } else {
-        console.error('Failed to load include', file);
-      }
+    const p = fetch(file)
+      .then(resp => {
+        if (resp.ok) {
+          return resp.text().then(html => {
+            el.outerHTML = html;
+          });
+        }
+        if (templates[file]) {
+          el.outerHTML = templates[file];
+        } else {
+          console.error('Failed to load include', file);
+        }
+      })
+      .catch(() => {
+        if (templates[file]) {
+          el.outerHTML = templates[file];
+        } else {
+          console.error('Failed to load include', file);
+        }
+      });
+    includePromises.push(p);
+  });
+
+  Promise.all(includePromises).then(() => {
+    if (!isHome) {
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        const href = a.getAttribute('href');
+        if (href === '#home') {
+          a.setAttribute('href', a.classList.contains('brand') ? 'index.html#home' : 'index.html');
+        } else {
+          a.setAttribute('href', `index.html${href}`);
+        }
+      });
+      const currentPage = location.pathname.split('/').pop();
+      document.querySelectorAll('.nav-menu a').forEach(a => {
+        if (a.getAttribute('href') === currentPage) {
+          a.setAttribute('aria-current', 'page');
+        }
+      });
     }
   });
-  if (!isHome) {
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      const href = a.getAttribute('href');
-      if (href === '#home') {
-        a.setAttribute('href', a.classList.contains('brand') ? 'index.html#home' : 'index.html');
-      } else {
-        a.setAttribute('href', `index.html${href}`);
-      }
-    });
-    const currentPage = location.pathname.split('/').pop();
-    document.querySelectorAll('.nav-menu a').forEach(a => {
-      if (a.getAttribute('href') === currentPage) {
-        a.setAttribute('aria-current', 'page');
-      }
-    });
-  }
 })();
