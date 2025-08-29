@@ -27,11 +27,17 @@ if (input && suggestions) {
   };
 
   const loadItems = () => {
-    const isNativeFetch = window.fetch.toString().includes('[native code]');
-    if (location.protocol === 'file:' && isNativeFetch) {
+    if (location.protocol === 'file:' && typeof fetch === 'function') {
       window.searchIndexLoaded = true;
       return Promise.resolve();
     }
+
+    if (typeof fetch !== 'function') {
+      console.warn('Search index not loaded: fetch is unavailable');
+      window.searchIndexLoaded = true;
+      return Promise.resolve();
+    }
+
     return fetch('items.json')
       .then(response => response.json())
       .then(data => {
@@ -48,7 +54,9 @@ if (input && suggestions) {
           });
         });
       })
-      .catch(() => {})
+      .catch(err => {
+        console.warn('Failed to load search index', err);
+      })
       .finally(() => {
         window.searchIndexLoaded = true;
       });
