@@ -28,8 +28,7 @@ async function fetchEbay() {
   const url = `https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SECURITY-APPNAME=${appId}&RESPONSE-DATA-FORMAT=JSON&keywords=${encodeURIComponent(SEARCH_TERM)}&paginationInput.entriesPerPage=${LIMIT}`;
   const res = await fetch(url);
   if (!res.ok) {
-    console.warn('eBay request failed', res.status);
-    return [];
+    throw new Error(`eBay request failed: ${res.status}`);
   }
   const json = await res.json();
   const items = json?.findItemsByKeywordsResponse?.[0]?.searchResult?.[0]?.item || [];
@@ -44,25 +43,19 @@ async function fetchEbay() {
 
 async function fetchOfferUp() {
   const url = `https://api.offerup.com/api/webapi/browse/search/?search=${encodeURIComponent(SEARCH_TERM)}&limit=${LIMIT}`;
-  try {
-    const res = await fetch(url);
-    if (!res.ok) {
-      console.warn('OfferUp request failed', res.status);
-      return [];
-    }
-    const json = await res.json();
-    const items = json?.data?.items || json?.response?.sections?.[0]?.items || [];
-    return items.slice(0, LIMIT).map(it => ({
-      image: it?.images?.[0]?.images?.[0]?.url || it?.image?.url || it?.picture?.url,
-      link: addUtm(it?.web_url || `https://offerup.com/item/detail/${it?.id}`),
-      alt: it?.title || '',
-      badge: it?.badges?.[0]?.name || '',
-      stock: 1
-    }));
-  } catch (err) {
-    console.warn('OfferUp fetch error', err);
-    return [];
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`OfferUp request failed: ${res.status}`);
   }
+  const json = await res.json();
+  const items = json?.data?.items || json?.response?.sections?.[0]?.items || [];
+  return items.slice(0, LIMIT).map(it => ({
+    image: it?.images?.[0]?.images?.[0]?.url || it?.image?.url || it?.picture?.url,
+    link: addUtm(it?.web_url || `https://offerup.com/item/detail/${it?.id}`),
+    alt: it?.title || '',
+    badge: it?.badges?.[0]?.name || '',
+    stock: 1
+  }));
 }
 
 async function main() {

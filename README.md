@@ -34,6 +34,16 @@ The site uses a premium gradient “HC” emblem stored as SVG and base64-encode
 
 Playwright Test will execute the browser-based tests.
 
+## Data Fetch Scripts
+
+The Node utilities for fetching external data exit with a non-zero code if a required API request fails. Run them with:
+
+- `npm run fetch-items`
+- `npm run update-reviews`
+- `npm run update-sold`
+
+In CI or other automated environments, these failures will surface in the build logs.
+
 ## Updating Sold Items
 
 `scripts/update-sold.js` pulls recent sales data from eBay and TCGplayer and
@@ -77,6 +87,8 @@ Run it with:
 npm run send-newsletter            # new arrivals
 npm run send-newsletter sales     # recent sales
 ```
+
+The command exits with a non-zero status if the Mailchimp request fails, ensuring send errors appear in CI logs.
 
 Set environment variables before running:
 
