@@ -13,6 +13,7 @@ const snapshotEl = document.getElementById('three-month-snapshot');
 const tableEl = document.getElementById('sold-table');
 const skeletonChart = document.querySelector('.skeleton-chart');
 const skeletonTable = document.querySelector('.skeleton-table');
+const suggestionsEl = document.getElementById('sold-suggestions');
 chartCanvas.height = 300;
 const chartCtx = chartCanvas.getContext('2d');
 let rangeButtons;
@@ -91,6 +92,16 @@ function populatePlatformFilter(items) {
   if (platforms.includes(prev)) {
     platformFilterEl.value = prev;
   }
+}
+
+function populateSearchSuggestions(items) {
+  const titles = Array.from(new Set(items.map(i => i.title).filter(Boolean)));
+  suggestionsEl.innerHTML = '';
+  titles.forEach(title => {
+    const option = document.createElement('option');
+    option.value = title;
+    suggestionsEl.appendChild(option);
+  });
 }
 
 function filterItems(items) {
@@ -512,6 +523,7 @@ async function loadSoldItems() {
       platform: item.platform || '',
       condition: item.condition || ''
     }));
+    populateSearchSuggestions(allItems);
     statusEl.textContent = '';
     skeletonChart?.classList.add('hidden');
     skeletonTable?.classList.add('hidden');
