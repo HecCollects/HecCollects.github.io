@@ -2,17 +2,14 @@
   --black: #111111;
   --white: #ffffff;
   --bg-start: var(--white);
-  --bg-end: var(--color-secondary);
+  --bg-end: #e5e5e5;
 }
 
 :root[data-theme="dark"] {
-  --black: #f6f0ed;
-  --white: #26536b;
-  --color-primary: #26536b;
-  --color-secondary: #7ea8be;
-  --color-accent: #c2948a;
-  --bg-start: #26536b;
-  --bg-end: #7ea8be;
+  --black: #ffffff;
+  --white: #111111;
+  --bg-start: var(--white);
+  --bg-end: #e5e5e5;
 }
 
 body {
