@@ -25,7 +25,7 @@ test('shows suggestions for matching input', async ({ page }) => {
   });
 
   await page.goto('file://' + filePath);
-  await page.waitForTimeout(500);
+  await page.waitForFunction(() => (window as any).searchIndexLoaded);
   await page.fill('#product-search', 'mag');
   const options = page.locator('#search-suggestions li');
   await expect(options).toHaveCount(1);
@@ -62,12 +62,12 @@ test('allows keyboard navigation of suggestions', async ({ page }) => {
   });
 
   await page.goto('file://' + filePath);
-  await page.waitForTimeout(500);
+  await page.waitForFunction(() => (window as any).searchIndexLoaded);
   await page.fill('#product-search', 'mag');
   await page.keyboard.press('ArrowDown');
   const active = page.locator('#search-suggestions li.active');
   await expect(active).toHaveText('Magic Card');
   await page.keyboard.press('Enter');
-  await page.waitForTimeout(100);
+  await expect.poll(() => assigned).toBeDefined();
   expect(assigned).toBe('https://example.com/magic');
 });
