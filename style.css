@@ -1,9 +1,10 @@
+/* Global color variables use a light palette by default */
 :root {
-  --black: #151515;
+  --black: #111111;
   --white: #ffffff;
-  --color-primary: #1e3c72;
-  --color-secondary: #2a5298;
-  --color-accent: #f28c2f;
+  --color-primary: #7ea8be;
+  --color-secondary: #bbb193;
+  --color-accent: #c2948a;
   --navbar-height: calc(env(safe-area-inset-top) + 5rem);
 }
 /* ---------- Reset & Base ---------- */
@@ -27,14 +28,14 @@ body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(
     135deg,
-    var(--black),
-    var(--color-primary),
-    var(--black)
+    var(--white),
+    #e5e5e5,
+    var(--white)
   );
   background-size: 100% 100%;
   background-repeat: no-repeat;
   animation: bg-shift 20s ease infinite;
-  color: var(--white);
+  color: var(--black);
   overflow-x: hidden;
 }
 @keyframes bg-shift {
@@ -144,7 +145,7 @@ section::after {
   top: -40px;
   left: 0;
   padding: 0.5rem 1rem;
-  background: var(--color-accent);
+  background: var(--color-primary);
   color: var(--black);
   text-decoration: none;
   z-index: 100;
@@ -166,7 +167,7 @@ h1 {
 }
 h2 {
   font-size: 1.9rem;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 h1[id],
 h2[id],
@@ -200,14 +201,14 @@ summary {
   cursor: pointer;
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-primary);
   list-style: none;
 }
 summary::-webkit-details-marker {
   display: none;
 }
 summary:focus {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-primary);
   outline-offset: 0.2rem;
 }
 /* ---------- Table of Contents ---------- */
@@ -232,7 +233,7 @@ summary:focus {
 }
 .toc a {
   text-decoration: none;
-  color: var(--color-accent);
+  color: var(--color-primary);
   font-weight: 600;
 }
 @media (min-width: 768px) {
@@ -322,7 +323,7 @@ summary:focus {
 .featured h3 {
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 .featured-items {
   display: flex;
@@ -368,7 +369,7 @@ summary:focus {
   position: absolute;
   top: 0.4rem;
   left: 0.4rem;
-  background: var(--color-accent);
+  background: var(--color-primary);
   color: var(--black);
   padding: 0.1rem 0.3rem;
   border-radius: 0.3rem;
@@ -386,7 +387,7 @@ summary:focus {
 .promo {
   margin-top: 0.8rem;
   font-size: 0.9rem;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 /* Feature marquee */
 
@@ -440,7 +441,7 @@ summary:focus {
 }
 .testimonials figcaption {
   font-size: 0.9rem;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 .testimonial-controls {
   position: absolute;
@@ -477,11 +478,11 @@ summary:focus {
   cursor: pointer;
 }
 .testimonial-pagination button[aria-selected="true"] {
-  background: var(--color-accent);
+  background: var(--color-primary);
 }
 /* Rating */
 .rating {
-  color: var(--color-accent);
+  color: var(--color-primary);
   margin-bottom: 0.4rem;
 }
 /* Trust badges */
@@ -496,17 +497,17 @@ summary:focus {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--color-primary);
   border-radius: 0.4rem;
   padding: 0.25rem 0.5rem;
   font-size: 0.8rem;
 }
 .trust-badges .badge i {
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 /* Story and Approach blocks */
 #story .card {
-  border-inline-start: 4px solid var(--color-accent);
+  border-inline-start: 4px solid var(--color-primary);
 }
 #approach .card {
   border-inline-start: 4px solid var(--color-secondary);
@@ -521,7 +522,7 @@ summary:focus {
   margin-bottom: 0.5rem;
 }
 #approach .how-list li strong {
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 /* Product search */
 #search-form {
@@ -534,7 +535,7 @@ summary:focus {
 #product-search {
   width: 100%;
   padding: 0.8rem 1rem;
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--color-primary);
   border-radius: 0.6rem;
   background: rgba(255, 255, 255, 0.1);
   color: var(--white);
@@ -594,15 +595,15 @@ summary:focus {
 .incentive {
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
-  color: var(--color-accent);
+  color: var(--color-primary);
   font-weight: 600;
 }
 .form-msg {
   font-size: 0.9rem;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 .form-msg.success {
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 .form-msg.error {
   color: var(--color-secondary);
@@ -622,7 +623,7 @@ summary:focus {
   font-size: 0.8rem;
 }
 .privacy a {
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 .policy-content {
   padding: var(--navbar-height) calc(env(safe-area-inset-right) + 2rem) 2rem
@@ -679,7 +680,7 @@ summary:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 10000;
@@ -706,7 +707,7 @@ summary:focus {
 .line {
   width: 100%;
   height: 3px;
-  background: var(--white);
+  background: var(--black);
   border-radius: 2px;
   transition:
     transform 0.3s,
@@ -715,13 +716,13 @@ summary:focus {
 #theme-toggle {
   background: none;
   border: none;
-  color: var(--white);
+  color: var(--black);
   cursor: pointer;
   font-size: 1.2rem;
   margin-left: 1rem;
 }
 #theme-toggle:focus {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 .nav-toggle.open .line:nth-child(1) {
@@ -744,7 +745,7 @@ summary:focus {
   gap: 2.4rem;
   overflow-y: auto;
   padding: 2rem;
-  background: rgba(21, 21, 21, 0.85);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.55);
@@ -762,7 +763,7 @@ summary:focus {
   opacity: 1;
 }
 .nav-menu a {
-  color: var(--white);
+  color: var(--black);
   font-size: 1.8rem;
   font-weight: 600;
   text-decoration: none;
@@ -775,14 +776,14 @@ summary:focus {
   bottom: -6px;
   width: 0;
   height: 2px;
-  background: var(--color-accent);
+  background: var(--color-primary);
   transition: width 0.3s;
 }
 .nav-menu a:hover::after {
   width: 100%;
 }
 .nav-menu a.active {
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 /* ---------- Responsive tweaks ---------- */
 @media (max-width: 640px) {
@@ -868,7 +869,7 @@ summary:focus {
   background-image: linear-gradient(
     135deg,
     var(--color-primary),
-    var(--color-accent)
+    var(--color-primary)
   );
 }
 #approach {
@@ -882,13 +883,13 @@ summary:focus {
   background-image: linear-gradient(
     135deg,
     var(--color-secondary),
-    var(--color-accent)
+    var(--color-primary)
   );
 }
 #offerup {
   background-image: linear-gradient(
     135deg,
-    var(--color-accent),
+    var(--color-primary),
     var(--color-primary)
   );
 }
@@ -896,7 +897,7 @@ summary:focus {
   background-image: linear-gradient(
     135deg,
     var(--color-primary),
-    var(--color-accent)
+    var(--color-primary)
   );
 }
 #testimonials {
@@ -909,7 +910,7 @@ summary:focus {
 #subscribe {
   background-image: linear-gradient(
     135deg,
-    var(--color-accent),
+    var(--color-primary),
     var(--color-secondary)
   );
 }
@@ -917,7 +918,7 @@ summary:focus {
   background-image: linear-gradient(
     135deg,
     var(--color-primary),
-    var(--color-accent)
+    var(--color-primary)
   );
 }
 #preloader {
@@ -935,7 +936,7 @@ summary:focus {
   pointer-events: none;
 }
 .dotted-loader {
-  color: var(--color-accent);
+  color: var(--color-primary);
   width: 0.8rem;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -945,7 +946,7 @@ summary:focus {
   0%,
   100% {
     box-shadow:
-      0 -2.6em 0 0 var(--color-accent),
+      0 -2.6em 0 0 var(--color-primary),
       1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2),
       2.5em 0 0 0 rgba(242, 140, 47, 0.2),
       1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
@@ -957,7 +958,7 @@ summary:focus {
   12.5% {
     box-shadow:
       0 -2.6em 0 0 rgba(242, 140, 47, 0.7),
-      1.8em -1.8em 0 0 var(--color-accent),
+      1.8em -1.8em 0 0 var(--color-primary),
       2.5em 0 0 0 rgba(242, 140, 47, 0.2),
       1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
       0 2.5em 0 0 rgba(242, 140, 47, 0.2),
@@ -969,7 +970,7 @@ summary:focus {
     box-shadow:
       0 -2.6em 0 0 rgba(242, 140, 47, 0.5),
       1.8em -1.8em 0 0 rgba(242, 140, 47, 0.7),
-      2.5em 0 0 0 var(--color-accent),
+      2.5em 0 0 0 var(--color-primary),
       1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
       0 2.5em 0 0 rgba(242, 140, 47, 0.2),
       -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.2),
@@ -981,7 +982,7 @@ summary:focus {
       0 -2.6em 0 0 rgba(242, 140, 47, 0.2),
       1.8em -1.8em 0 0 rgba(242, 140, 47, 0.5),
       2.5em 0 0 0 rgba(242, 140, 47, 0.7),
-      1.75em 1.75em 0 0 var(--color-accent),
+      1.75em 1.75em 0 0 var(--color-primary),
       0 2.5em 0 0 rgba(242, 140, 47, 0.2),
       -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.2),
       -2.6em 0 0 0 rgba(242, 140, 47, 0.2),
@@ -993,7 +994,7 @@ summary:focus {
       1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2),
       2.5em 0 0 0 rgba(242, 140, 47, 0.5),
       1.75em 1.75em 0 0 rgba(242, 140, 47, 0.7),
-      0 2.5em 0 0 var(--color-accent),
+      0 2.5em 0 0 var(--color-primary),
       -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.2),
       -2.6em 0 0 0 rgba(242, 140, 47, 0.2),
       -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2);
@@ -1005,7 +1006,7 @@ summary:focus {
       2.5em 0 0 0 rgba(242, 140, 47, 0.2),
       1.75em 1.75em 0 0 rgba(242, 140, 47, 0.5),
       0 2.5em 0 0 rgba(242, 140, 47, 0.7),
-      -1.8em 1.8em 0 0 var(--color-accent),
+      -1.8em 1.8em 0 0 var(--color-primary),
       -2.6em 0 0 0 rgba(242, 140, 47, 0.2),
       -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2);
   }
@@ -1017,7 +1018,7 @@ summary:focus {
       1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
       0 2.5em 0 0 rgba(242, 140, 47, 0.5),
       -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.7),
-      -2.6em 0 0 0 var(--color-accent),
+      -2.6em 0 0 0 var(--color-primary),
       -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2);
   }
   87.5% {
@@ -1029,7 +1030,7 @@ summary:focus {
       0 2.5em 0 0 rgba(242, 140, 47, 0.2),
       -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.5),
       -2.6em 0 0 0 rgba(242, 140, 47, 0.7),
-      -1.8em -1.8em 0 0 var(--color-accent);
+      -1.8em -1.8em 0 0 var(--color-primary);
   }
 }
 .cookie-banner {
@@ -1142,7 +1143,7 @@ summary:focus {
   color: var(--white);
 }
 .site-footer a {
-  color: var(--color-accent);
+  color: var(--color-primary);
   margin: 0 0.5rem;
   text-decoration: none;
 }
@@ -1156,7 +1157,7 @@ summary:focus {
   text-align: center;
 }
 .page-nav a {
-  color: var(--color-accent);
+  color: var(--color-primary);
   margin: 0 0.5rem;
   text-decoration: none;
 }
@@ -1173,7 +1174,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -1198,7 +1199,7 @@ select:focus-visible {
   cursor: pointer;
 }
 .range-buttons button.active {
-  background: var(--color-accent);
+  background: var(--color-primary);
   color: var(--black);
 }
 .sold-page .table-container {
@@ -1277,7 +1278,7 @@ select:focus-visible {
 .snapshot-card h3 {
   margin-bottom: 0.25rem;
   font-size: 1rem;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 
 .price-card p,
@@ -1307,7 +1308,7 @@ select:focus-visible {
   bottom: 1.5rem;
   right: 1.5rem;
   display: none;
-  background: var(--color-accent);
+  background: var(--color-primary);
   color: var(--black);
   border: none;
   border-radius: 50%;
