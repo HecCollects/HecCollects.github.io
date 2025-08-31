@@ -1,12 +1,5 @@
-/* Global color variables use a light palette by default */
-:root {
-  --black: #26536b;
-  --white: #f6f0ed;
-  --color-primary: #7ea8be;
-  --color-secondary: #bbb193;
-  --color-accent: #c2948a;
-  --navbar-height: calc(env(safe-area-inset-top) + 5rem);
-}
+/* Global styles */
+/* Color variables are defined in theme.css */
 /* ---------- Reset & Base ---------- */
 *,
 *::before,
@@ -28,14 +21,14 @@ body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(
     135deg,
-    var(--white),
-    var(--color-primary),
-    var(--white)
+    var(--color-bg),
+    var(--brand-primary),
+    var(--color-bg)
   );
   background-size: 100% 100%;
   background-repeat: no-repeat;
   animation: bg-shift 20s ease infinite;
-  color: var(--black);
+  color: var(--color-text);
   overflow-x: hidden;
 }
 @keyframes bg-shift {
