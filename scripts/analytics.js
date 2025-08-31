@@ -47,9 +47,9 @@
     });
   }
 
-  let storedTheme = 'dark';
+  let storedTheme = 'light';
   try {
-    storedTheme = localStorage.getItem('theme') || 'dark';
+    storedTheme = localStorage.getItem('theme') || 'light';
   } catch {}
   const applyTheme = (t) => {
     root.setAttribute('data-theme', t);

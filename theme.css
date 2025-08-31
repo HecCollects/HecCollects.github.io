@@ -1,21 +1,21 @@
 :root {
-  --bg-start: var(--color-primary);
+  --bg-start: var(--white);
   --bg-end: var(--color-secondary);
 }
 
-:root[data-theme="light"] {
-  --black: #ffffff;
-  --white: #151515;
-  --color-primary: #f5f5f5;
-  --color-secondary: #e0e0e0;
-  --color-accent: #1e3c72;
-  --bg-start: #ffffff;
-  --bg-end: #e0e0e0;
+:root[data-theme="dark"] {
+  --black: #f6f0ed;
+  --white: #26536b;
+  --color-primary: #26536b;
+  --color-secondary: #7ea8be;
+  --color-accent: #c2948a;
+  --bg-start: #26536b;
+  --bg-end: #7ea8be;
 }
 
 body {
   background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
-  color: var(--white);
+  color: var(--black);
   opacity: 0;
   position: relative;
   z-index: 0;
@@ -53,28 +53,36 @@ body.fade-out {
 
 /* Page-specific theme overrides */
 body.privacy-page {
-  --bg-start: #0b3d91;
-  --bg-end: #1e90ff;
+  --bg-start: #7ea8be;
+  --bg-end: #26536b;
 }
 
 body.returns-page {
-  --bg-start: #5e2e2e;
-  --bg-end: #b34747;
+  --bg-start: #c2948a;
+  --bg-end: #bbb193;
 }
 
 body.faq-page {
-  --bg-start: #005f73;
-  --bg-end: #0a9396;
+  --bg-start: #bbb193;
+  --bg-end: #7ea8be;
 }
 
-[data-theme="light"] .navbar {
-  background: rgba(255, 255, 255, 0.6);
+[data-theme="dark"] .navbar {
+  background: rgba(0, 0, 0, 0.45);
 }
 
-[data-theme="light"] .nav-menu {
-  background: rgba(255, 255, 255, 0.85);
+[data-theme="dark"] .nav-menu {
+  background: rgba(21, 21, 21, 0.85);
 }
 
-[data-theme="light"] .nav-menu a {
+[data-theme="dark"] .nav-menu a {
+  color: var(--white);
+}
+
+[data-theme="dark"] .line {
+  background: var(--white);
+}
+
+[data-theme="dark"] #theme-toggle {
   color: var(--white);
 }
