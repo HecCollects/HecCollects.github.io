@@ -4,6 +4,18 @@ import path from 'path';
 const filePath = path.resolve(__dirname, '../index.html');
 
 test('preloader is removed and ripple cleans up', async ({ page }) => {
+  await page.addInitScript(() => {
+    const originalFetch = window.fetch;
+    window.fetch = (url, options) => {
+      if (typeof url === 'string' && url.endsWith('items.json')) {
+        return Promise.resolve(
+          new Response('[]', { headers: { 'Content-Type': 'application/json' } })
+        );
+      }
+      return originalFetch(url, options);
+    };
+  });
+
   page.on('console', msg => {
     if (msg.type() === 'error') {
       throw new Error(msg.text());

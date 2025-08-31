@@ -6,6 +6,7 @@ const filePath = path.resolve(__dirname, '../sold.html');
 test('sold page layout should match snapshot', async ({ page }) => {
   test.setTimeout(60000);
   await page.addInitScript(() => {
+    try { localStorage.setItem('theme', 'dark'); } catch {}
     const sample = {
       items: [
         { title: 'A', price: { value: 100, currency: 'USD' }, date: '2099-04-10', condition: 'Near Mint' },
@@ -18,12 +19,19 @@ test('sold page layout should match snapshot', async ({ page }) => {
     };
     const originalFetch = window.fetch;
     window.fetch = (url, options) => {
-      if (typeof url === 'string' && url.endsWith('sold-items.json')) {
-        return Promise.resolve(
-          new Response(JSON.stringify(sample), {
-            headers: { 'Content-Type': 'application/json' }
-          })
-        );
+      if (typeof url === 'string') {
+        if (url.endsWith('sold-items.json')) {
+          return Promise.resolve(
+            new Response(JSON.stringify(sample), {
+              headers: { 'Content-Type': 'application/json' }
+            })
+          );
+        }
+        if (url.endsWith('items.json')) {
+          return Promise.resolve(
+            new Response('[]', { headers: { 'Content-Type': 'application/json' } })
+          );
+        }
       }
       return originalFetch(url, options);
     };
@@ -38,7 +46,8 @@ test('sold page layout should match snapshot', async ({ page }) => {
 
   await page.goto('file://' + filePath);
   await page.evaluate(() => (document as any).fonts.ready);
-    await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
+  await page.waitForSelector('#preloader', { state: 'detached' });
   const main = page.locator('main');
   await main.waitFor();
   expect(await main.screenshot()).toMatchSnapshot('sold-layout.png', { maxDiffPixelRatio: 0.01 });
