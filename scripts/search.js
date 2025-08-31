@@ -27,11 +27,6 @@ if (input && suggestions) {
   };
 
   const loadItems = () => {
-    if (location.protocol === 'file:' && typeof fetch === 'function') {
-      window.searchIndexLoaded = true;
-      return Promise.resolve();
-    }
-
     if (typeof fetch !== 'function') {
       console.warn('Search index not loaded: fetch is unavailable');
       window.searchIndexLoaded = true;
