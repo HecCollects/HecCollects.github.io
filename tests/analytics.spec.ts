@@ -7,6 +7,15 @@ const filePath = path.resolve(__dirname, '../index.html');
 test('GA script loads and configures GA', async ({ page }) => {
   await page.addInitScript(() => {
     (window as any).GA_ID = 'G-TESTID';
+    const originalFetch = window.fetch;
+    window.fetch = (url, options) => {
+      if (typeof url === 'string' && url.endsWith('items.json')) {
+        return Promise.resolve(
+          new Response('[]', { headers: { 'Content-Type': 'application/json' } })
+        );
+      }
+      return originalFetch(url, options);
+    };
   });
 
   await page.route('https://www.googletagmanager.com/**', route => {

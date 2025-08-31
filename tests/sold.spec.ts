@@ -274,7 +274,8 @@ test('debounces render on rapid search input', async ({ page }) => {
   });
 
   await page.type('#sold-search', 'abc', { delay: 50 });
-  await page.waitForFunction(() => (window as any).__renderCallCount === 1);
-  const count = await page.evaluate(() => (window as any).__renderCallCount);
-  expect(count).toBe(1);
+  await expect.poll(
+    () => page.evaluate(() => (window as any).__renderCallCount),
+    { timeout: 5000 }
+  ).toBe(1);
 });
