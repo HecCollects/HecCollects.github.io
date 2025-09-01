@@ -72,7 +72,7 @@ if (input && suggestions) {
         li.id = `search-option-${count}`;
         const a = document.createElement('a');
         a.href = item.link;
-        a.textContent = item.label;
+        a.innerHTML = `${item.label} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>`;
         a.addEventListener('mousedown', e => e.preventDefault());
         a.addEventListener('click', e => {
           e.preventDefault();
@@ -91,6 +91,7 @@ if (input && suggestions) {
       li.setAttribute('aria-disabled', 'true');
       li.textContent = 'No results found';
       suggestions.appendChild(li);
+      console.info('No search results for', query);
     }
     updateHighlight();
   });
