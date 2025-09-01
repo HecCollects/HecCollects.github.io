@@ -145,9 +145,9 @@ Brand colors are centralized as CSS variables in `style.css`. Adjust the values 
 
 ```css
 :root {
-  --color-primary: #1e3c72;
-  --color-secondary: #2a5298;
-  --color-accent: #f28c2f;
+  --color-primary: #2563eb;
+  --color-secondary: #14b8a6;
+  --color-accent: #f97316;
 }
 ```
 
