@@ -124,4 +124,42 @@
       });
     }
   }
+  // Scroll depth tracking
+  const scrollMarks = [25, 50, 75, 100];
+  const seenMarks = new Set();
+  const reportScroll = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    const percent = Math.round((scrollTop / docHeight) * 100);
+    scrollMarks.forEach(mark => {
+      if (percent >= mark && !seenMarks.has(mark)) {
+        seenMarks.add(mark);
+        if (window.gtag) {
+          window.gtag('event', 'scroll', {
+            event_category: 'engagement',
+            event_label: `${mark}%`,
+          });
+        }
+      }
+    });
+    if (seenMarks.size === scrollMarks.length) {
+      window.removeEventListener('scroll', reportScroll);
+    }
+  };
+  window.addEventListener('scroll', reportScroll, { passive: true });
+
+  // Time-on-page tracking
+  const start = performance.now();
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      const duration = Math.round((performance.now() - start) / 1000);
+      if (window.gtag) {
+        window.gtag('event', 'time_on_page', {
+          event_category: 'engagement',
+          value: duration,
+        });
+      }
+    }
+  });
 })();
