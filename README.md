@@ -141,13 +141,13 @@ The prototype uses `VANTA.NET` to render a low-poly particle network behind the 
 
 ## Theme Customization
 
-Brand colors are centralized as CSS variables in `style.css`. Adjust the values in the `:root` block to tweak colors across the site:
+Brand colors are centralized as CSS variables in `theme.css`. They follow a 60/30/10 distribution (neutrals/branding/accent) described in [DESIGN.md](DESIGN.md).
 
 ```css
 :root {
-  --color-primary: #2563eb;
-  --color-secondary: #14b8a6;
-  --color-accent: #f97316;
+  --brand-primary: #2563eb;
+  --brand-secondary: #0f766e;
+  --accent: #b45309;
 }
 ```
 
