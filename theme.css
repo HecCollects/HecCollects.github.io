@@ -1,16 +1,16 @@
 :root {
   /* 60% grayscale foundation */
-  --color-bg: #f6f0ed;
-  --color-surface: #ffffff;
+  --color-bg: #ffffff;
+  --color-surface: #f5f5f5;
   --color-text: #111111;
-  --color-muted: #bbb193;
+  --color-muted: #666666;
 
   /* 30% brand colors */
-  --brand-primary: #26536b;
-  --brand-secondary: var(--color-muted);
+  --brand-primary: #1e3a8a;
+  --brand-secondary: #0d9488;
 
   /* 10% accent color */
-  --accent: #c2948a;
+  --accent: #f59e0b;
 
   --navbar-height: calc(env(safe-area-inset-top) + 5rem);
 
@@ -24,13 +24,13 @@
 
 :root[data-theme="dark"] {
   --color-bg: #111111;
-  --color-surface: #1a1a1a;
-  --color-text: #f6f0ed;
-  --color-muted: #444444;
+  --color-surface: #1f1f1f;
+  --color-text: #f5f5f5;
+  --color-muted: #999999;
 
-  --brand-primary: #7ea8be;
-  --brand-secondary: var(--color-muted);
-  --accent: #e4b6ad;
+  --brand-primary: #60a5fa;
+  --brand-secondary: #5eead4;
+  --accent: #fbbf24;
 }
 
 body {
