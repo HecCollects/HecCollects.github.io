@@ -6,7 +6,7 @@
     <img src="logo.svg" alt="HecCollects logo" width="40" height="40">
   </a>
   <nav id="nav-menu" class="nav-menu" aria-hidden="true">
-        <a href="#testimonials">Success Stories</a>
+        <a href="#testimonials" data-analytics="nav-reviews">Customer Reviews</a>
         <a href="#story">Our Story</a>
         <a href="#approach">Built on Trust</a>
     <a href="#ebay">eBay</a>
