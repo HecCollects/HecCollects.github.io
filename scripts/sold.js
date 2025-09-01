@@ -303,26 +303,28 @@ function updateChart(items) {
   );
   const data = sorted.map(item => parsePrice(item.price));
 
-  if (chart) {
-    chart.data.labels = labels;
-    chart.data.datasets[0].data = data;
-    chart.update();
-  } else {
-    chart = new Chart(chartCtx, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Sale Price',
-            data,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            tension: 0.1,
-            fill: false
-          }
-        ]
-      },
-      options: {
+    if (chart) {
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = data;
+      chart.update();
+    } else {
+      const styles = getComputedStyle(document.documentElement);
+      const datasetColor = styles.getPropertyValue('--color-secondary').trim();
+      chart = new Chart(chartCtx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Sale Price',
+              data,
+              borderColor: datasetColor,
+              tension: 0.1,
+              fill: false
+            }
+          ]
+        },
+        options: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {

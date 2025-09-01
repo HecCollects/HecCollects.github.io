@@ -75,16 +75,16 @@ section::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(var(--black-rgb), 0.55);
   z-index: 0;
 }
 
 section + section {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(var(--white-rgb), 0.1);
 }
 
 section:nth-of-type(even)::after {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(var(--black-rgb), 0.45);
 }
 .section-content {
   position: relative;
@@ -110,15 +110,15 @@ section:nth-of-type(even)::after {
 }
 /* ---------- Card ---------- */
 .card {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(var(--white-rgb), 0.08);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 2px solid rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(var(--white-rgb), 0.18);
   border-radius: 1.6rem;
   padding: 2rem;
   width: 100%;
   max-width: 460px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 25px 50px rgba(var(--black-rgb), 0.35);
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   flex-direction: column;
@@ -187,7 +187,7 @@ section:nth-of-type(even)::after {
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 14px rgba(var(--black-rgb), 0.5);
 }
 h1,
 h2,
@@ -198,7 +198,7 @@ h3 {
 h1 {
   font-size: var(--font-size-h1);
   font-weight: 700;
-  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 3px 8px rgba(var(--black-rgb), 0.4);
 }
 h2 {
   font-size: var(--font-size-h2);
@@ -234,9 +234,9 @@ noscript p {
 details {
   margin: 1rem 0;
   padding: 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(var(--white-rgb), 0.18);
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(var(--white-rgb), 0.08);
   scroll-margin-top: var(--navbar-height);
 }
 summary {
@@ -258,9 +258,9 @@ summary:focus {
 .toc {
   margin: 1rem 0;
   padding: 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(var(--white-rgb), 0.18);
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(var(--white-rgb), 0.05);
   text-align: left;
   font-size: 0.95rem;
 }
@@ -315,7 +315,7 @@ summary:focus {
   background: var(--color-primary);
   color: var(--white);
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 24px rgba(var(--black-rgb), 0.2);
 }
 .btn:disabled {
   background: var(--color-muted);
@@ -345,7 +345,7 @@ summary:focus {
   content: "";
   position: absolute;
   inset: 0;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(var(--white-rgb), 0.4);
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.2s;
@@ -443,7 +443,7 @@ summary:focus {
 }
 .featured-items a:hover img {
   transform: scale(1.08);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 16px rgba(var(--black-rgb), 0.4);
 }
   .promo {
     margin-top: 0.8rem;
@@ -462,7 +462,7 @@ summary:focus {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(var(--black-rgb), 0.45);
   color: var(--white);
   border: none;
   border-radius: 50%;
@@ -473,7 +473,7 @@ summary:focus {
 }
 .carousel-btn:hover,
 .carousel-btn:focus {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(var(--black-rgb), 0.7);
   outline: none;
   transform: translateY(-50%) scale(1.1);
 }
@@ -521,7 +521,7 @@ summary:focus {
   pointer-events: none;
 }
 .testimonial-controls button {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(var(--black-rgb), 0.45);
   color: var(--white);
   border: none;
   border-radius: 50%;
@@ -541,7 +541,7 @@ summary:focus {
   height: 10px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(var(--white-rgb), 0.4);
   cursor: pointer;
 }
 .testimonial-pagination button[aria-selected="true"] {
@@ -604,7 +604,7 @@ summary:focus {
   padding: 0.8rem 1rem;
   border: 2px solid var(--color-accent);
   border-radius: 0.6rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(var(--white-rgb), 0.1);
   color: var(--white);
 }
 #search-suggestions {
@@ -615,8 +615,8 @@ summary:focus {
   margin: 0;
   padding: 0;
   list-style: none;
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(var(--black-rgb), 0.9);
+  border: 1px solid rgba(var(--white-rgb), 0.18);
   border-radius: 0.6rem;
   overflow: hidden;
   z-index: 10;
@@ -707,7 +707,7 @@ summary:focus {
   position: absolute;
   border-radius: 50%;
   transform: scale(0);
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(var(--white-rgb), 0.35);
   animation: ripple 0.6s linear;
 }
 @keyframes ripple {
@@ -750,11 +750,11 @@ summary:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(var(--white-rgb), 0.6);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 10000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(var(--black-rgb), 0.3);
 }
 .brand {
   font-size: 1.3rem;
@@ -815,10 +815,10 @@ summary:focus {
   gap: 2.4rem;
   overflow-y: auto;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(var(--white-rgb), 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 0 100vmax rgba(var(--black-rgb), 0.55);
   transform: translateY(-100%);
   pointer-events: none;
   opacity: 0;
@@ -1017,89 +1017,89 @@ summary:focus {
   100% {
     box-shadow:
       0 -2.6em 0 0 var(--color-accent),
-      1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2),
-      2.5em 0 0 0 rgba(242, 140, 47, 0.2),
-      1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
-      0 2.5em 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.2),
-      -2.6em 0 0 0 rgba(242, 140, 47, 0.5),
-      -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.7);
+      1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      2.5em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.75em 1.75em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      0 2.5em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em 1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -2.6em 0 0 0 rgba(var(--color-accent-rgb), 0.5),
+      -1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.7);
   }
   12.5% {
     box-shadow:
-      0 -2.6em 0 0 rgba(242, 140, 47, 0.7),
+      0 -2.6em 0 0 rgba(var(--color-accent-rgb), 0.7),
       1.8em -1.8em 0 0 var(--color-accent),
-      2.5em 0 0 0 rgba(242, 140, 47, 0.2),
-      1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
-      0 2.5em 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.2),
-      -2.6em 0 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.5);
+      2.5em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.75em 1.75em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      0 2.5em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em 1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -2.6em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.5);
   }
   25% {
     box-shadow:
-      0 -2.6em 0 0 rgba(242, 140, 47, 0.5),
-      1.8em -1.8em 0 0 rgba(242, 140, 47, 0.7),
+      0 -2.6em 0 0 rgba(var(--color-accent-rgb), 0.5),
+      1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.7),
       2.5em 0 0 0 var(--color-accent),
-      1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
-      0 2.5em 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.2),
-      -2.6em 0 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2);
+      1.75em 1.75em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      0 2.5em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em 1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -2.6em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2);
   }
   37.5% {
     box-shadow:
-      0 -2.6em 0 0 rgba(242, 140, 47, 0.2),
-      1.8em -1.8em 0 0 rgba(242, 140, 47, 0.5),
-      2.5em 0 0 0 rgba(242, 140, 47, 0.7),
+      0 -2.6em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.5),
+      2.5em 0 0 0 rgba(var(--color-accent-rgb), 0.7),
       1.75em 1.75em 0 0 var(--color-accent),
-      0 2.5em 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.2),
-      -2.6em 0 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2);
+      0 2.5em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em 1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -2.6em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2);
   }
   50% {
     box-shadow:
-      0 -2.6em 0 0 rgba(242, 140, 47, 0.2),
-      1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2),
-      2.5em 0 0 0 rgba(242, 140, 47, 0.5),
-      1.75em 1.75em 0 0 rgba(242, 140, 47, 0.7),
+      0 -2.6em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      2.5em 0 0 0 rgba(var(--color-accent-rgb), 0.5),
+      1.75em 1.75em 0 0 rgba(var(--color-accent-rgb), 0.7),
       0 2.5em 0 0 var(--color-accent),
-      -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.2),
-      -2.6em 0 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2);
+      -1.8em 1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -2.6em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2);
   }
   62.5% {
     box-shadow:
-      0 -2.6em 0 0 rgba(242, 140, 47, 0.2),
-      1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2),
-      2.5em 0 0 0 rgba(242, 140, 47, 0.2),
-      1.75em 1.75em 0 0 rgba(242, 140, 47, 0.5),
-      0 2.5em 0 0 rgba(242, 140, 47, 0.7),
+      0 -2.6em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      2.5em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.75em 1.75em 0 0 rgba(var(--color-accent-rgb), 0.5),
+      0 2.5em 0 0 rgba(var(--color-accent-rgb), 0.7),
       -1.8em 1.8em 0 0 var(--color-accent),
-      -2.6em 0 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2);
+      -2.6em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2);
   }
   75% {
     box-shadow:
-      0 -2.6em 0 0 rgba(242, 140, 47, 0.2),
-      1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2),
-      2.5em 0 0 0 rgba(242, 140, 47, 0.2),
-      1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
-      0 2.5em 0 0 rgba(242, 140, 47, 0.5),
-      -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.7),
+      0 -2.6em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      2.5em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.75em 1.75em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      0 2.5em 0 0 rgba(var(--color-accent-rgb), 0.5),
+      -1.8em 1.8em 0 0 rgba(var(--color-accent-rgb), 0.7),
       -2.6em 0 0 0 var(--color-accent),
-      -1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2);
+      -1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2);
   }
   87.5% {
     box-shadow:
-      0 -2.6em 0 0 rgba(242, 140, 47, 0.2),
-      1.8em -1.8em 0 0 rgba(242, 140, 47, 0.2),
-      2.5em 0 0 0 rgba(242, 140, 47, 0.2),
-      1.75em 1.75em 0 0 rgba(242, 140, 47, 0.2),
-      0 2.5em 0 0 rgba(242, 140, 47, 0.2),
-      -1.8em 1.8em 0 0 rgba(242, 140, 47, 0.5),
-      -2.6em 0 0 0 rgba(242, 140, 47, 0.7),
+      0 -2.6em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.8em -1.8em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      2.5em 0 0 0 rgba(var(--color-accent-rgb), 0.2),
+      1.75em 1.75em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      0 2.5em 0 0 rgba(var(--color-accent-rgb), 0.2),
+      -1.8em 1.8em 0 0 rgba(var(--color-accent-rgb), 0.5),
+      -2.6em 0 0 0 rgba(var(--color-accent-rgb), 0.7),
       -1.8em -1.8em 0 0 var(--color-accent);
   }
 }
@@ -1108,7 +1108,7 @@ summary:focus {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(var(--black-rgb), 0.85);
   color: var(--white);
   padding: 0.6rem calc(env(safe-area-inset-right) + 1rem)
     calc(env(safe-area-inset-bottom) + 0.6rem)
@@ -1286,7 +1286,7 @@ select:focus-visible {
 #sold-table td {
   padding: 0.5rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(var(--white-rgb), 0.2);
 }
 .sold-page #sales-chart {
   max-width: 100%;
@@ -1299,9 +1299,9 @@ select:focus-visible {
   width: 100%;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0.1)
+    rgba(var(--white-rgb), 0.1),
+    rgba(var(--white-rgb), 0.3),
+    rgba(var(--white-rgb), 0.1)
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
@@ -1336,8 +1336,8 @@ select:focus-visible {
 .price-card,
 .condition-card,
 .snapshot-card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(var(--white-rgb), 0.08);
+  border: 1px solid rgba(var(--white-rgb), 0.2);
   border-radius: 0.5rem;
   padding: 0.75rem;
   text-align: center;
