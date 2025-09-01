@@ -4,6 +4,7 @@
 
   const msg = document.getElementById('subscribe-msg');
   const btn = form.querySelector('button[type="submit"]');
+  const originalBtnHTML = btn?.innerHTML || '';
   const disableBtn = () => { if (btn) btn.disabled = true; };
   disableBtn();
   window.enableSubscribe = () => { if (btn) btn.disabled = false; };
@@ -24,6 +25,9 @@
       msg.textContent = '';
       msg.className = 'form-msg';
     }
+    if (btn) {
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>';
+    }
 
     const hp = form.querySelector('input[name="hp"]');
     if (hp && hp.value) {
@@ -31,7 +35,9 @@
         msg.textContent = 'Submission rejected.';
         msg.className = 'form-msg error';
       }
+      console.warn('Newsletter honeypot triggered');
       if (window.gtag) { window.gtag('event', 'subscribe_error'); }
+      if (btn) { btn.innerHTML = originalBtnHTML; }
       return;
     }
 
@@ -43,7 +49,9 @@
           msg.textContent = 'Please complete the captcha.';
           msg.className = 'form-msg error';
         }
+        console.warn('Captcha missing');
         if (window.gtag) { window.gtag('event', 'subscribe_error'); }
+        if (btn) { btn.innerHTML = originalBtnHTML; }
         return;
       }
     }
@@ -75,6 +83,7 @@
           msg.textContent = 'Thanks for subscribing!';
           msg.className = 'form-msg success';
         }
+        console.info('Subscription successful');
         if (window.gtag) {
           window.gtag('event', 'subscribe_success');
         }
@@ -88,6 +97,7 @@
           msg.textContent = 'Submission failed. Please try again later.';
           msg.className = 'form-msg error';
         }
+        console.warn('Subscription failed with status', res.status);
         if (window.gtag) { window.gtag('event', 'subscribe_error'); }
       }
     } catch {
@@ -95,7 +105,11 @@
         msg.textContent = 'Submission failed. Please try again later.';
         msg.className = 'form-msg error';
       }
+      console.warn('Subscription request errored');
       if (window.gtag) { window.gtag('event', 'subscribe_error'); }
+    }
+    if (btn) {
+      btn.innerHTML = originalBtnHTML;
     }
   });
 })();

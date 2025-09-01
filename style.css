@@ -52,6 +52,11 @@ body {
     background-position: 100% 50%;
   }
 }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 /* ---------- Sections ---------- */
 section {
   position: relative;
@@ -466,6 +471,12 @@ summary:focus {
   cursor: pointer;
   z-index: 2;
 }
+.carousel-btn:hover,
+.carousel-btn:focus {
+  background: rgba(0, 0, 0, 0.7);
+  outline: none;
+  transform: translateY(-50%) scale(1.1);
+}
 .carousel-prev {
   left: 0.2rem;
 }
@@ -660,10 +671,12 @@ summary:focus {
   }
   .form-msg.success {
     color: var(--color-primary);
+    animation: fade-in 0.3s ease;
   }
 .form-msg.error {
   color: var(--color-primary);
   font-weight: 700;
+  animation: fade-in 0.3s ease;
 }
 .checkbox-group {
   display: flex;
@@ -1374,6 +1387,11 @@ select:focus-visible {
   font-size: 1.2rem;
   cursor: pointer;
   z-index: 1000;
+}
+.back-to-top:hover,
+.back-to-top:focus {
+  background: var(--color-primary);
+  color: var(--white);
 }
 .back-to-top.show {
   display: flex;
