@@ -204,7 +204,7 @@ noscript p {
   margin: 1rem;
   padding: 1rem;
   text-align: center;
-  background: var(--color-secondary);
+  background: var(--color-primary);
   color: var(--white);
 }
 details {
@@ -277,8 +277,8 @@ summary:focus {
   padding: 0.85rem 1.3rem;
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--white);
-  background: var(--color-primary);
+  color: var(--color-text);
+  background: var(--color-accent);
   border: none;
   border-radius: 1rem;
   text-decoration: none;
@@ -288,16 +288,13 @@ summary:focus {
   cursor: pointer;
 }
 .btn:hover {
-  background: var(--color-accent);
-  color: var(--color-text);
+  background: var(--color-primary);
+  color: var(--white);
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
 }
-[data-theme="dark"] .btn:hover {
-  color: var(--color-bg);
-}
 .btn:disabled {
-  background: gray;
+  background: var(--color-muted);
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -534,7 +531,7 @@ summary:focus {
   border-inline-start: 4px solid var(--color-accent);
 }
 #approach .card {
-  border-inline-start: 4px solid var(--color-secondary);
+  border-inline-start: 4px solid var(--color-muted);
 }
 #approach .how-list {
   list-style: none;
@@ -624,13 +621,14 @@ summary:focus {
   }
   .form-msg {
     font-size: 0.9rem;
-    color: var(--color-primary);
+    color: var(--color-muted);
   }
   .form-msg.success {
     color: var(--color-primary);
   }
 .form-msg.error {
-  color: var(--color-secondary);
+  color: var(--color-primary);
+  font-weight: 700;
 }
 .checkbox-group {
   display: flex;

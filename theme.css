@@ -7,7 +7,7 @@
 
   /* 30% brand colors */
   --brand-primary: #26536b;
-  --brand-secondary: #7ea8be;
+  --brand-secondary: var(--color-muted);
 
   /* 10% accent color */
   --accent: #c2948a;
@@ -29,7 +29,7 @@
   --color-muted: #444444;
 
   --brand-primary: #7ea8be;
-  --brand-secondary: #26536b;
+  --brand-secondary: var(--color-muted);
   --accent: #e4b6ad;
 }
 
