@@ -16,12 +16,12 @@ This palette allocates roughly 60% grayscale neutrals, 30% brand colors and 10% 
 | Variable | Hex | Usage |
 | --- | --- | --- |
 | `--brand-primary` | `#2563EB` | Primary actions and interactive elements. |
-| `--brand-secondary` | `#14B8A6` | Secondary actions and hover states. |
+| `--brand-secondary` | `#0F766E` | Secondary actions and hover states. |
 
 ## Accent Color (~10%)
 
 | Variable | Hex | Usage |
 | --- | --- | --- |
-| `--accent` | `#F97316` | Highlights and status indicators. |
+| `--accent` | `#B45309` | Highlights and status indicators. |
 
 Dark theme variants mirror these hues with darker neutrals and lighter brand tones to preserve contrast.
