@@ -317,6 +317,22 @@ summary:focus {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.primary-cta {
+  padding: 1.1rem 1.5rem;
+  font-size: 1.2rem;
+}
+
+.secondary-cta {
+  background: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+}
+
+.secondary-cta:hover {
+  background: var(--color-accent);
+  color: var(--color-text);
+}
 .border-fade {
   position: relative;
 }
