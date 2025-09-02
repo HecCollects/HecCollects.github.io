@@ -1,16 +1,22 @@
 [
   {
     "source": "eBay",
+    "reviewer": "John D.",
+    "badge": "eBay Buyer",
     "text": "Item arrived exactly as described and very fast!",
     "rating": 5
   },
   {
     "source": "OfferUp",
+    "reviewer": "Alex P.",
+    "badge": "OfferUp Buyer",
     "text": "Great seller, easy pickup.",
     "rating": 5
   },
   {
     "source": "eBay",
+    "reviewer": "Maria L.",
+    "badge": "eBay Buyer",
     "text": "Smooth transaction, would buy again.",
     "rating": 4
   }
