@@ -503,8 +503,14 @@ summary:focus {
   opacity: 1;
 }
 .testimonials blockquote {
-  font-style: italic;
+  font-style: normal;
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-base);
   margin-bottom: 0.4rem;
+  padding: 0.75rem 1rem;
+  background: rgba(var(--color-surface-rgb), 0.5);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0.25rem;
 }
   .testimonials figcaption {
     font-size: 0.9rem;
@@ -549,7 +555,9 @@ summary:focus {
 }
 /* Rating */
   .rating {
-    color: var(--color-primary);
+    display: inline-flex;
+    gap: 0.1rem;
+    color: var(--color-accent);
     margin-bottom: 0.4rem;
   }
 /* Trust badges */
