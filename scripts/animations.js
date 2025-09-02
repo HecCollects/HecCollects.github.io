@@ -244,7 +244,14 @@
         }
         fig.appendChild(rating);
         const cap = document.createElement('figcaption');
-        cap.textContent = '— ' + (rev.source || '');
+        const parts = [];
+        if (rev.reviewer) parts.push(rev.reviewer);
+        if (rev.badge) {
+          parts.push(rev.badge);
+        } else if (rev.source) {
+          parts.push(rev.source);
+        }
+        cap.textContent = parts.length ? '— ' + parts.join(', ') : '';
         fig.appendChild(cap);
         track.appendChild(fig);
       });
