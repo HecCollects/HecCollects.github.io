@@ -698,11 +698,11 @@ summary:focus {
     color: var(--color-muted);
   }
   .form-msg.success {
-    color: var(--color-primary);
+    color: var(--color-success);
     animation: fade-in 0.3s ease;
   }
 .form-msg.error {
-  color: var(--color-primary);
+  color: var(--color-error);
   font-weight: 700;
   animation: fade-in 0.3s ease;
 }
