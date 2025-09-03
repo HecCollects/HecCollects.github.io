@@ -108,21 +108,30 @@
       const next = carousel.querySelector('.carousel-next');
       const items = track ? Array.from(track.querySelectorAll('a')) : [];
       if (!items.length) return;
+      track.setAttribute('aria-live', 'polite');
       let idx = 0;
+      const updateAria = () => {
+        items.forEach((el, i) => el.setAttribute('aria-hidden', i !== idx));
+        track.setAttribute('aria-label', `Slide ${idx + 1} of ${items.length}`);
+      };
       const go = (i) => {
         idx = (i + items.length) % items.length;
         const item = items[idx];
         const offset = item.offsetLeft + item.offsetWidth / 2 - track.clientWidth / 2;
         track.scrollTo({ left: offset, behavior: 'smooth' });
+        updateAria();
       };
-      prev?.addEventListener('click', () => {
+      updateAria();
+      prev?.addEventListener('click', (e) => {
         go(idx - 1);
+        e.currentTarget.focus();
         if (window.gtag) {
           window.gtag('event','carousel_nav',{event_label:'prev'});
         }
       });
-      next?.addEventListener('click', () => {
+      next?.addEventListener('click', (e) => {
         go(idx + 1);
+        e.currentTarget.focus();
         if (window.gtag) {
           window.gtag('event','carousel_nav',{event_label:'next'});
         }
