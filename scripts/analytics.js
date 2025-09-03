@@ -49,8 +49,12 @@
 
   let storedTheme = 'light';
   try {
-    storedTheme = localStorage.getItem('theme') || 'light';
-  } catch {}
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    storedTheme = localStorage.getItem('theme') || (systemDark ? 'dark' : 'light');
+  } catch {
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    storedTheme = systemDark ? 'dark' : 'light';
+  }
   const applyTheme = (t) => {
     root.setAttribute('data-theme', t);
     if (themeToggle) {
