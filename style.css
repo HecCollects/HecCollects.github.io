@@ -43,6 +43,26 @@ body {
   color: var(--color-text);
   overflow-x: hidden;
 }
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+  .story-bg-animate,
+  .approach-bg-animate {
+    animation: none;
+    background-size: 100% 100%;
+  }
+  .scroll-cue,
+  .dotted-loader,
+  .feature-marquee li,
+  .skeleton-chart,
+  .skeleton-table,
+  .ripple,
+  .form-msg.success,
+  .form-msg.error {
+    animation: none;
+  }
+}
 @keyframes bg-shift {
   0%,
   100% {
