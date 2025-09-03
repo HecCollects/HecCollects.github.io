@@ -116,15 +116,26 @@
   });
   const cookieBanner = document.getElementById('cookie-banner');
   const cookieBtn = document.getElementById('cookie-btn');
-  if(cookieBanner && cookieBtn){
-    if(localStorage.getItem('cookieConsent')){
+  if (cookieBanner && cookieBtn) {
+    if (localStorage.getItem('cookieConsent')) {
       cookieBanner.remove();
-    }else{
+    } else {
+      const prevFocus = document.activeElement;
       cookieBanner.classList.remove('hidden');
+      cookieBtn.focus();
+      const trapFocus = (e) => {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          cookieBtn.focus();
+        }
+      };
+      document.addEventListener('keydown', trapFocus);
       cookieBtn.addEventListener('click', () => {
-        localStorage.setItem('cookieConsent','yes');
+        localStorage.setItem('cookieConsent', 'yes');
+        document.removeEventListener('keydown', trapFocus);
         cookieBanner.remove();
-        if(window.gtag){ window.gtag('event','cookie_consent'); }
+        prevFocus?.focus?.();
+        if (window.gtag) { window.gtag('event', 'cookie_consent'); }
       });
     }
   }
