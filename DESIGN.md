@@ -32,6 +32,14 @@ Use the CSS variables below to keep styles consistent across components and to e
 | --- | --- | --- |
 | `--accent` | `#B45309` | Highlights and status indicators. |
 
+### Status Colors
+
+| Variable | Hex | Usage |
+| --- | --- | --- |
+| `--color-success` | `#16A34A` | Success messages and positive indicators. |
+| `--color-warning` | `#D97706` | Cautionary notes or items needing attention. |
+| `--color-error` | `#DC2626` | Errors and destructive actions. |
+
 Neutrals keep layouts readable while the brand colors guide focus. The accent is intentionally sparing so callouts remain noticeable.
 
 ## Usage
