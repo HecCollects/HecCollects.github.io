@@ -47,26 +47,35 @@
     });
   }
 
+  const themes = ['light', 'dark', 'hc'];
   let storedTheme = 'light';
   try {
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     storedTheme = localStorage.getItem('theme') || (systemDark ? 'dark' : 'light');
+    if (!themes.includes(storedTheme)) storedTheme = 'light';
   } catch {
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     storedTheme = systemDark ? 'dark' : 'light';
   }
+  const nextIcon = {
+    light: '🌙',
+    dark: '🔳',
+    hc: '☀️',
+  };
   const applyTheme = (t) => {
     root.setAttribute('data-theme', t);
     if (themeToggle) {
-      themeToggle.textContent = t === 'light' ? '🌙' : '☀️';
+      themeToggle.textContent = nextIcon[t];
     }
   };
   applyTheme(storedTheme);
   themeToggle?.addEventListener('click', () => {
-    const current = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    applyTheme(current);
+    const current = root.getAttribute('data-theme') || 'light';
+    const index = themes.indexOf(current);
+    const next = themes[(index + 1) % themes.length];
+    applyTheme(next);
     try {
-      localStorage.setItem('theme', current);
+      localStorage.setItem('theme', next);
     } catch {}
   });
 
