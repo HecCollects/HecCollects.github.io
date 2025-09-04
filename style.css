@@ -95,7 +95,7 @@ section::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(var(--black-rgb), 0.55);
+  background: rgba(var(--black-rgb), 0.7);
   z-index: 0;
 }
 
@@ -104,7 +104,7 @@ section + section {
 }
 
 section:nth-of-type(even)::after {
-  background: rgba(var(--black-rgb), 0.45);
+  background: rgba(var(--black-rgb), 0.6);
 }
 .section-content {
   position: relative;
@@ -130,10 +130,10 @@ section:nth-of-type(even)::after {
 }
 /* ---------- Card ---------- */
 .card {
-  background: rgba(var(--white-rgb), 0.08);
+  background: rgba(var(--white-rgb), 0.15);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 2px solid rgba(var(--white-rgb), 0.18);
+  border: 2px solid rgba(var(--white-rgb), 0.25);
   border-radius: 1.6rem;
   padding: 2rem;
   width: 100%;
@@ -482,7 +482,7 @@ summary:focus {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(var(--black-rgb), 0.45);
+  background: rgba(var(--black-rgb), 0.65);
   color: var(--white);
   border: none;
   border-radius: 50%;
@@ -493,7 +493,7 @@ summary:focus {
 }
 .carousel-btn:hover,
 .carousel-btn:focus {
-  background: rgba(var(--black-rgb), 0.7);
+  background: rgba(var(--black-rgb), 0.85);
   outline: none;
   transform: translateY(-50%) scale(1.1);
 }
@@ -547,7 +547,7 @@ summary:focus {
   pointer-events: none;
 }
 .testimonial-controls button {
-  background: rgba(var(--black-rgb), 0.45);
+  background: rgba(var(--black-rgb), 0.65);
   color: var(--white);
   border: none;
   border-radius: 50%;
