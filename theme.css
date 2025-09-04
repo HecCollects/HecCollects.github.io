@@ -66,6 +66,17 @@
   --color-error-rgb: 239, 68, 68;
 }
 
+:root[data-theme="hc"] {
+  --color-bg: #000;
+  --color-bg-rgb: 0, 0, 0;
+  --color-surface: #000;
+  --color-surface-rgb: 0, 0, 0;
+  --color-text: #fff;
+  --color-text-rgb: 255, 255, 255;
+  --color-muted: #fff;
+  --color-muted-rgb: 255, 255, 255;
+}
+
 body {
   background: linear-gradient(
     to bottom,
@@ -114,23 +125,28 @@ body.fade-out {
   opacity: 0;
 }
 
-[data-theme="dark"] .navbar {
+[data-theme="dark"] .navbar,
+[data-theme="hc"] .navbar {
   background: rgba(var(--black-rgb), 0.45);
 }
 
-[data-theme="dark"] .nav-menu {
+[data-theme="dark"] .nav-menu,
+[data-theme="hc"] .nav-menu {
   background: rgba(var(--color-surface-rgb), 0.85);
 }
 
-[data-theme="dark"] .nav-menu a {
+[data-theme="dark"] .nav-menu a,
+[data-theme="hc"] .nav-menu a {
   color: var(--color-text);
 }
 
-[data-theme="dark"] .line {
+[data-theme="dark"] .line,
+[data-theme="hc"] .line {
   background: var(--color-text);
 }
 
-[data-theme="dark"] #theme-toggle {
+[data-theme="dark"] #theme-toggle,
+[data-theme="hc"] #theme-toggle {
   color: var(--color-text);
 }
 
