@@ -40,6 +40,13 @@ Use the CSS variables below to keep styles consistent across components and to e
 | `--color-warning` | `#D97706` | Cautionary notes or items needing attention. |
 | `--color-error` | `#DC2626` | Errors and destructive actions. |
 
+### Category Colors
+
+| Category | Color | Rationale |
+| --- | --- | --- |
+| Limited | `#DC2626` | Bold red communicates scarcity and urgency. |
+| Refurbished | `#16A34A` | Green reinforces sustainability and renewed quality. |
+
 Neutrals keep layouts readable while the brand colors guide focus. The accent is intentionally sparing so callouts remain noticeable.
 
 ## Usage

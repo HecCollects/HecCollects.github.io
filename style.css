@@ -434,6 +434,7 @@ summary:focus {
   overflow: hidden;
   border-radius: 0.6rem;
   position: relative;
+  border: 0.2rem solid transparent;
 }
 .featured-items img {
   width: 100%;
