@@ -207,7 +207,12 @@
               const meta = document.createElement('span');
               meta.className = 'item-meta';
               meta.textContent = item.badge ? item.badge : `Only ${item.stock} left`;
+              if (item.tagColor) {
+                meta.style.backgroundColor = item.tagColor;
+              }
               link.appendChild(meta);
+            } else if (item.tagColor) {
+              link.style.border = `0.2rem solid ${item.tagColor}`;
             }
             container.appendChild(link);
           });

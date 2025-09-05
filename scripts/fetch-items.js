@@ -19,6 +19,13 @@ function addUtm(url) {
   }
 }
 
+function getTagColor(tag = '', stock = 0) {
+  const t = tag.toLowerCase();
+  if (/limited|only/.test(t) || stock === 1) return '#DC2626';
+  if (t.includes('refurbished')) return '#16A34A';
+  return '#2563EB';
+}
+
 async function fetchEbay() {
   const appId = process.env.EBAY_APP_ID;
   if (!appId) {
@@ -32,13 +39,18 @@ async function fetchEbay() {
   }
   const json = await res.json();
   const items = json?.findItemsByKeywordsResponse?.[0]?.searchResult?.[0]?.item || [];
-  return items.slice(0, LIMIT).map(item => ({
-    image: item.galleryURL?.[0],
-    link: addUtm(item.viewItemURL?.[0]),
-    alt: item.title?.[0],
-    badge: item.condition?.[0]?.conditionDisplayName?.[0] || '',
-    stock: Number(item.sellingStatus?.[0]?.quantity || 1)
-  }));
+  return items.slice(0, LIMIT).map(item => {
+    const badge = item.condition?.[0]?.conditionDisplayName?.[0] || '';
+    const stock = Number(item.sellingStatus?.[0]?.quantity || 1);
+    return {
+      image: item.galleryURL?.[0],
+      link: addUtm(item.viewItemURL?.[0]),
+      alt: item.title?.[0],
+      badge,
+      stock,
+      tagColor: getTagColor(badge, stock)
+    };
+  });
 }
 
 async function fetchOfferUp() {
@@ -49,13 +61,17 @@ async function fetchOfferUp() {
   }
   const json = await res.json();
   const items = json?.data?.items || json?.response?.sections?.[0]?.items || [];
-  return items.slice(0, LIMIT).map(it => ({
-    image: it?.images?.[0]?.images?.[0]?.url || it?.image?.url || it?.picture?.url,
-    link: addUtm(it?.web_url || `https://offerup.com/item/detail/${it?.id}`),
-    alt: it?.title || '',
-    badge: it?.badges?.[0]?.name || '',
-    stock: 1
-  }));
+  return items.slice(0, LIMIT).map(it => {
+    const badge = it?.badges?.[0]?.name || '';
+    return {
+      image: it?.images?.[0]?.images?.[0]?.url || it?.image?.url || it?.picture?.url,
+      link: addUtm(it?.web_url || `https://offerup.com/item/detail/${it?.id}`),
+      alt: it?.title || '',
+      badge,
+      stock: 1,
+      tagColor: getTagColor(badge, 1)
+    };
+  });
 }
 
 async function main() {
