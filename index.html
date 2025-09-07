@@ -295,7 +295,8 @@
           <p>Join the mailing list for new drops and exclusive deals.</p>
           <p class="incentive">Subscribers get early access and exclusive discounts.</p>
           <form action="https://usX.api.mailchimp.com/3.0/lists/YOUR_LIST_ID/members" method="POST" class="subscribe-form">
-            <input type="email" name="email" placeholder="Email address" required>
+            <label for="subscribe-email">Email address</label>
+            <input type="email" name="email" placeholder="Email address" required id="subscribe-email" autocomplete="email">
             <div class="checkbox-group">
               <label><input type="checkbox" name="interests" value="trading-cards"> Trading Cards</label>
               <label><input type="checkbox" name="interests" value="electronics"> Electronics</label>
