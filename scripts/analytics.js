@@ -66,6 +66,7 @@
     root.setAttribute('data-theme', t);
     if (themeToggle) {
       themeToggle.textContent = nextIcon[t];
+      themeToggle.setAttribute('aria-pressed', t === 'light' ? 'false' : 'true');
     }
   };
   applyTheme(storedTheme);
