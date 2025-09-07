@@ -9,6 +9,7 @@ if (input && suggestions) {
     suggestions.innerHTML = '';
     highlighted = -1;
     input.removeAttribute('aria-activedescendant');
+    input.setAttribute('aria-expanded', 'false');
   };
 
   const updateHighlight = () => {
@@ -94,6 +95,9 @@ if (input && suggestions) {
       console.info('No search results for', query);
     }
     updateHighlight();
+      if (suggestions.childElementCount > 0) {
+        input.setAttribute('aria-expanded', 'true');
+      }
   });
 
   input.addEventListener('blur', () => setTimeout(clearSuggestions, 100));
