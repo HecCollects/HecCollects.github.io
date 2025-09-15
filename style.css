@@ -44,6 +44,10 @@ body {
   overflow-x: hidden;
 }
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
   body {
     animation: none;
   }
