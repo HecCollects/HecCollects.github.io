@@ -2,21 +2,21 @@
   const isHome = location.pathname === '/' || location.pathname.endsWith('/index.html');
   const templates = {
     'partials/navbar.html': `<header class="navbar">
-  <a href="#home" class="brand">
+  <a href="#home" class="brand" data-analytics="nav-home">
     <img src="logo.svg" alt="HecCollects logo" width="40" height="40">
   </a>
-  <nav id="nav-menu" class="nav-menu" aria-hidden="true">
+  <nav id="nav-menu" class="nav-menu">
         <a href="#testimonials" data-analytics="nav-reviews">Customer Reviews</a>
-        <a href="#story">Our Story</a>
-        <a href="#approach">Built on Trust</a>
-    <a href="#ebay">eBay</a>
-    <a href="#offerup">OfferUp</a>
-    <a href="#subscribe">Subscribe</a>
-    <a href="#contact">Business Inquiries</a>
-    <a href="sold.html">Sold Listings</a>
-    <a href="faq.html">FAQ</a>
-    <a href="returns.html">Returns</a>
-    <a href="privacy.html">Privacy Policy</a>
+        <a href="#story" data-analytics="nav-story">Our Story</a>
+        <a href="#approach" data-analytics="nav-approach">Built on Trust</a>
+    <a href="#ebay" data-analytics="nav-ebay">eBay</a>
+    <a href="#offerup" data-analytics="nav-offerup">OfferUp</a>
+    <a href="#subscribe" data-analytics="nav-subscribe">Subscribe</a>
+    <a href="#contact" data-analytics="nav-contact">Business Inquiries</a>
+    <a href="sold.html" data-analytics="nav-sold">Sold Listings</a>
+    <a href="faq.html" data-analytics="nav-faq">FAQ</a>
+    <a href="returns.html" data-analytics="nav-returns">Returns</a>
+    <a href="privacy.html" data-analytics="nav-privacy">Privacy Policy</a>
   </nav>
   <button id="theme-toggle" aria-label="Toggle theme" aria-pressed="false"></button>
   <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">

@@ -2,8 +2,13 @@
   const burger = document.querySelector('.nav-toggle');
   const navMenu = document.getElementById('nav-menu');
 
+  if (navMenu) {
+    navMenu.classList.add('nav-menu-ready');
+  }
+
   if (burger && navMenu) {
     const links = Array.from(navMenu.querySelectorAll('a'));
+    let currentLinkIndex = -1;
     const mql = window.matchMedia('(min-width: 1024px)');
 
     const openMenu = () => {
@@ -13,6 +18,7 @@
       navMenu.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       links[0]?.focus();
+      currentLinkIndex = links.length ? 0 : -1;
       if (window.gtag) {
         window.gtag('event', 'menu_open');
       }
@@ -25,6 +31,7 @@
       navMenu.classList.remove('open');
       burger.setAttribute('aria-expanded', 'false');
       navMenu.setAttribute('aria-hidden', 'true');
+      currentLinkIndex = -1;
       if (focusBurger) burger.focus();
       if (window.gtag) {
         window.gtag('event', 'menu_close');
@@ -39,7 +46,10 @@
       }
     });
 
-    links.forEach(link => {
+    links.forEach((link, index) => {
+      link.addEventListener('focus', () => {
+        currentLinkIndex = index;
+      });
       link.addEventListener('click', () => {
         closeMenu(false);
         if (window.gtag) {
@@ -57,15 +67,17 @@
       if (e.key === 'Escape') {
         closeMenu();
       } else if (e.key === 'Tab' && links.length) {
-        const first = links[0];
-        const last = links[links.length - 1];
+        e.preventDefault();
+        const activeIndex = currentLinkIndex >= 0 ? currentLinkIndex : links.findIndex(link => link === document.activeElement);
 
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
+        if (e.shiftKey) {
+          const prevIndex = activeIndex > 0 ? activeIndex - 1 : links.length - 1;
+          links[prevIndex]?.focus();
+          currentLinkIndex = prevIndex;
+        } else {
+          const nextIndex = activeIndex >= 0 && activeIndex < links.length - 1 ? activeIndex + 1 : 0;
+          links[nextIndex]?.focus();
+          currentLinkIndex = nextIndex;
         }
       }
     });
