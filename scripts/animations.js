@@ -163,8 +163,17 @@
       .then(data => {
         const buildItems = (key, containerId) => {
           const container = document.getElementById(containerId);
-          if (!container || !data[key]) return;
-          data[key].forEach((item, i) => {
+          if (!container) return;
+          const items = Array.isArray(data[key]) ? data[key] : [];
+          container.innerHTML = '';
+          if (!items.length) {
+            const fallback = document.createElement('p');
+            fallback.className = 'featured-empty';
+            fallback.textContent = 'No featured items available.';
+            container.appendChild(fallback);
+            return;
+          }
+          items.forEach((item, i) => {
             const link = document.createElement('a');
             link.href = item.link;
             link.target = '_blank';
