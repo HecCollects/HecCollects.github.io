@@ -1,6 +1,11 @@
 (() => {
   const canHover = window.matchMedia('(hover: hover)').matches;
   const webglSupported = !!window.WebGLRenderingContext;
+  const preloader = document.getElementById('preloader');
+
+  if (preloader) {
+    preloader.classList.add('js-preloader');
+  }
 
   const initListClones = () => {
     if (window.__listClonesInitialized) return;
@@ -82,10 +87,12 @@
 
   // Preloader
   window.addEventListener('load', () => {
-    const pre = document.getElementById('preloader');
-    if (pre) {
-      pre.classList.add('hide');
-      setTimeout(() => pre.remove(), 600);
+    if (preloader) {
+      preloader.classList.add('hide');
+      setTimeout(() => {
+        preloader.classList.remove('js-preloader');
+        preloader.remove();
+      }, 600);
     }
   });
 
