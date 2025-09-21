@@ -89,5 +89,7 @@
         }
       });
     }
+
+    document.dispatchEvent(new CustomEvent('includes:loaded'));
   });
 })();
