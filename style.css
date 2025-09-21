@@ -748,7 +748,22 @@ summary:focus {
     calc(env(safe-area-inset-left) + 2rem);
   max-width: 800px;
   margin: auto;
-  color: var(--white);
+  color: var(--color-text);
+  background: rgba(var(--color-bg-rgb), 0.92);
+  border-radius: 1.5rem;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.policy-content a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.policy-content a:hover,
+.policy-content a:focus-visible {
+  text-decoration: underline;
 }
 /* Ripple */
 .ripple {
