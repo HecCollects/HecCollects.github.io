@@ -85,21 +85,9 @@ body {
     var(--color-bg)
   );
   color: var(--color-text);
-  opacity: 0;
+  opacity: 1;
   position: relative;
   z-index: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body {
-    transition: none;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  body {
-    transition: background 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  }
 }
 
 body::before {
@@ -117,12 +105,34 @@ body::before {
   opacity: 0.6;
 }
 
-body.fade-in {
-  opacity: 1;
+body.js-has-transition::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg),
+    var(--color-surface),
+    var(--color-bg)
+  );
+  opacity: 0;
+  pointer-events: none;
 }
 
-body.fade-out {
-  opacity: 0;
+@media (prefers-reduced-motion: reduce) {
+  body.js-has-transition::after {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body.js-has-transition::after {
+    transition: opacity 0.4s ease-in-out;
+  }
+}
+
+body.js-has-transition.fade-out::after {
+  opacity: 1;
 }
 
 [data-theme="dark"] .navbar,
