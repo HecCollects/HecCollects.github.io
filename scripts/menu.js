@@ -11,6 +11,7 @@
       navMenu.classList.add('open');
       burger.setAttribute('aria-expanded', 'true');
       navMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
       links[0]?.focus();
       if (window.gtag) {
         window.gtag('event', 'menu_open');
@@ -18,6 +19,7 @@
     };
 
     const closeMenu = (focusBurger = true) => {
+      document.body.style.overflow = '';
       if (mql.matches) return;
       burger.classList.remove('open');
       navMenu.classList.remove('open');
@@ -70,12 +72,14 @@
 
     const handleBreakpoint = (e) => {
       if (e.matches) {
+        document.body.style.overflow = '';
         navMenu.classList.add('open');
         navMenu.setAttribute('aria-hidden', 'false');
         burger.classList.add('hidden');
         burger.setAttribute('aria-hidden', 'true');
         burger.tabIndex = -1;
       } else {
+        document.body.style.overflow = '';
         navMenu.classList.remove('open');
         navMenu.setAttribute('aria-hidden', 'true');
         burger.classList.remove('hidden');
