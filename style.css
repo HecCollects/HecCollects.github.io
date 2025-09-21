@@ -839,10 +839,15 @@ summary:focus {
 }
 /* Overlay Menu (desktop & mobile) */
 .nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+.nav-menu.nav-menu-ready {
   position: fixed;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2.4rem;
@@ -860,7 +865,7 @@ summary:focus {
     opacity 0.3s;
   z-index: 10001;
 }
-.nav-menu.open {
+.nav-menu.nav-menu-ready.open {
   transform: translateY(0);
   pointer-events: auto;
   opacity: 1;
@@ -928,13 +933,16 @@ summary:focus {
     display: none;
   }
   .nav-menu {
+    flex-direction: row;
+    gap: 2rem;
+    background: none;
+    padding: 0;
+  }
+  .nav-menu.nav-menu-ready {
     position: static;
     transform: none;
     opacity: 1;
     pointer-events: auto;
-    flex-direction: row;
-    gap: 2rem;
-    background: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     box-shadow: none;
