@@ -72,14 +72,16 @@
 
   Promise.all(includePromises).then(() => {
     if (!isHome) {
-      document.querySelectorAll('a[href^="#"]').forEach(a => {
-        const href = a.getAttribute('href');
-        if (href === '#home') {
-          a.setAttribute('href', a.classList.contains('brand') ? 'index.html#home' : 'index.html');
-        } else {
-          a.setAttribute('href', `index.html${href}`);
-        }
-      });
+      document
+        .querySelectorAll('.navbar .brand[href^="#"], .nav-menu a[href^="#"], .site-footer a[href^="#"]')
+        .forEach(a => {
+          const href = a.getAttribute('href');
+          if (href === '#home') {
+            a.setAttribute('href', a.classList.contains('brand') ? 'index.html#home' : 'index.html');
+          } else {
+            a.setAttribute('href', `index.html${href}`);
+          }
+        });
       const currentPage = location.pathname.split('/').pop();
       document.querySelectorAll('.nav-menu a').forEach(a => {
         if (a.getAttribute('href') === currentPage) {
