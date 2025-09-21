@@ -1,12 +1,52 @@
 (() => {
-  const burger = document.querySelector('.nav-toggle');
-  const navMenu = document.getElementById('nav-menu');
+  let sectionsObserved = false;
 
-  if (navMenu) {
+  const initSectionObserver = () => {
+    if (sectionsObserved) return;
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    if (!sections.length || !navLinks.length) return;
+
+    const sectionObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            const isActive = link.getAttribute('href') === `#${entry.target.id}`;
+            link.classList.toggle('active', isActive);
+            if (isActive) {
+              link.setAttribute('aria-current', 'page');
+            } else {
+              link.removeAttribute('aria-current');
+            }
+          });
+          if (entry.target.id === 'story') {
+            entry.target.classList.add('story-bg-animate');
+          } else if (entry.target.id === 'approach') {
+            entry.target.classList.add('approach-bg-animate');
+          }
+        } else {
+          if (entry.target.id === 'story') {
+            entry.target.classList.remove('story-bg-animate');
+          } else if (entry.target.id === 'approach') {
+            entry.target.classList.remove('approach-bg-animate');
+          }
+        }
+      });
+    }, { threshold: 0.6 });
+
+    sections.forEach(sec => sectionObs.observe(sec));
+    sectionsObserved = true;
+  };
+
+  const initMenu = () => {
+    const navMenu = document.getElementById('nav-menu');
+    if (!navMenu) return false;
+
     navMenu.classList.add('nav-menu-ready');
-  }
 
-  if (burger && navMenu) {
+    const burger = document.querySelector('.nav-toggle');
+    if (!burger) return false;
+
     const links = Array.from(navMenu.querySelectorAll('a'));
     let currentLinkIndex = -1;
     const mql = window.matchMedia('(min-width: 1024px)');
@@ -38,50 +78,6 @@
       }
     };
 
-    burger.addEventListener('click', () => {
-      if (navMenu.classList.contains('open')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    links.forEach((link, index) => {
-      link.addEventListener('focus', () => {
-        currentLinkIndex = index;
-      });
-      link.addEventListener('click', () => {
-        closeMenu(false);
-        if (window.gtag) {
-          window.gtag('event', 'navigate', {
-            event_category: 'nav',
-            event_label: link.textContent?.trim() || ''
-          });
-        }
-      });
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (!navMenu.classList.contains('open') || mql.matches) return;
-
-      if (e.key === 'Escape') {
-        closeMenu();
-      } else if (e.key === 'Tab' && links.length) {
-        e.preventDefault();
-        const activeIndex = currentLinkIndex >= 0 ? currentLinkIndex : links.findIndex(link => link === document.activeElement);
-
-        if (e.shiftKey) {
-          const prevIndex = activeIndex > 0 ? activeIndex - 1 : links.length - 1;
-          links[prevIndex]?.focus();
-          currentLinkIndex = prevIndex;
-        } else {
-          const nextIndex = activeIndex >= 0 && activeIndex < links.length - 1 ? activeIndex + 1 : 0;
-          links[nextIndex]?.focus();
-          currentLinkIndex = nextIndex;
-        }
-      }
-    });
-
     const handleBreakpoint = (e) => {
       if (e.matches) {
         document.body.style.overflow = '';
@@ -92,49 +88,79 @@
         burger.tabIndex = -1;
       } else {
         document.body.style.overflow = '';
-        navMenu.classList.remove('open');
-        navMenu.setAttribute('aria-hidden', 'true');
+        closeMenu(false);
         burger.classList.remove('hidden');
         burger.setAttribute('aria-hidden', 'false');
         burger.tabIndex = 0;
       }
     };
-    handleBreakpoint(mql);
-    if (typeof mql.addEventListener === 'function') {
-      mql.addEventListener('change', handleBreakpoint);
-    } else if (mql.addListener) {
-      mql.addListener(handleBreakpoint);
-    }
-  }
 
-  // Active nav link
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-menu a');
-  const sectionObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        navLinks.forEach(link => {
-          const isActive = link.getAttribute('href') === `#${entry.target.id}`;
-          link.classList.toggle('active', isActive);
-          if (isActive) {
-            link.setAttribute('aria-current', 'page');
-          } else {
-            link.removeAttribute('aria-current');
+    handleBreakpoint(mql);
+
+    if (navMenu.dataset.menuInitialized !== 'true') {
+      navMenu.dataset.menuInitialized = 'true';
+
+      burger.addEventListener('click', () => {
+        if (navMenu.classList.contains('open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      links.forEach((link, index) => {
+        link.addEventListener('focus', () => {
+          currentLinkIndex = index;
+        });
+        link.addEventListener('click', () => {
+          closeMenu(false);
+          if (window.gtag) {
+            window.gtag('event', 'navigate', {
+              event_category: 'nav',
+              event_label: link.textContent?.trim() || ''
+            });
           }
         });
-        if(entry.target.id === 'story'){
-          entry.target.classList.add('story-bg-animate');
-        } else if(entry.target.id === 'approach'){
-          entry.target.classList.add('approach-bg-animate');
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!navMenu.classList.contains('open') || mql.matches) return;
+
+        if (e.key === 'Escape') {
+          closeMenu();
+        } else if (e.key === 'Tab' && links.length) {
+          e.preventDefault();
+          const activeIndex = currentLinkIndex >= 0 ? currentLinkIndex : links.findIndex(link => link === document.activeElement);
+
+          if (e.shiftKey) {
+            const prevIndex = activeIndex > 0 ? activeIndex - 1 : links.length - 1;
+            links[prevIndex]?.focus();
+            currentLinkIndex = prevIndex;
+          } else {
+            const nextIndex = activeIndex >= 0 && activeIndex < links.length - 1 ? activeIndex + 1 : 0;
+            links[nextIndex]?.focus();
+            currentLinkIndex = nextIndex;
+          }
         }
-      } else {
-        if(entry.target.id === 'story'){
-          entry.target.classList.remove('story-bg-animate');
-        } else if(entry.target.id === 'approach'){
-          entry.target.classList.remove('approach-bg-animate');
-        }
+      });
+
+      if (typeof mql.addEventListener === 'function') {
+        mql.addEventListener('change', handleBreakpoint);
+      } else if (mql.addListener) {
+        mql.addListener(handleBreakpoint);
       }
-    });
-  }, { threshold:0.6 });
-  sections.forEach(sec => sectionObs.observe(sec));
+    }
+
+    initSectionObserver();
+    return true;
+  };
+
+  if (!initMenu()) {
+    const onIncludesLoaded = () => {
+      if (initMenu()) {
+        document.removeEventListener('includes:loaded', onIncludesLoaded);
+      }
+    };
+    document.addEventListener('includes:loaded', onIncludesLoaded);
+  }
 })();
