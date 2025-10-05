@@ -152,6 +152,45 @@ body.js-has-transition.fade-out::after {
   background: rgba(var(--black-rgb), 0.45);
 }
 
+[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar),
+[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) {
+  background: transparent;
+}
+
+[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .navbar__surface {
+  background: rgba(var(--color-surface-rgb), 0.22);
+  border-color: rgba(var(--color-text-rgb), 0.18);
+  box-shadow: 0 28px 54px rgba(var(--black-rgb), 0.45);
+}
+
+[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .navbar__surface {
+  background: rgba(var(--color-surface-rgb), 0.35);
+  border-color: rgba(var(--color-text-rgb), 0.32);
+  box-shadow: 0 32px 64px rgba(var(--black-rgb), 0.55);
+}
+
+[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .nav-menu a:focus-visible::after,
+[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .nav-menu a:focus-visible::after,
+[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .dropdown-toggle:focus-visible::after,
+[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .dropdown-toggle:focus-visible::after {
+  background: rgba(var(--color-text-rgb), 0.6);
+}
+
+[data-theme="dark"] .policy-page,
+[data-theme="hc"] .policy-page {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .policy-hero .policy-lede,
+[data-theme="hc"] .policy-hero .policy-lede {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .policy-accordion__summary-text,
+[data-theme="hc"] .policy-accordion__summary-text {
+  color: var(--color-text);
+}
+
 [data-theme="dark"] .nav-menu,
 [data-theme="hc"] .nav-menu {
   background: rgba(var(--color-surface-rgb), 0.85);

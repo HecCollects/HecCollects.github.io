@@ -10,7 +10,7 @@ const expected = [
   'eBay',
   'OfferUp',
   'Subscribe',
-  'Business Inquiries',
+  'Support',
 ];
 
 test('navbar links are in expected order', async ({ page }) => {
