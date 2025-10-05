@@ -30,11 +30,8 @@
 | | How we use information | Low | Legal requirement |
 | | Cookie usage & analytics tools | Low | Compliance |
 | | Data sharing, opt‑out, retention, rights | Low | Compliance |
-| **Sold Listings** (`sold.html`) | Sales filters & chart | Low | Nice-to-have credibility |
-| | Sold items table | Low | Archive content; demote or remove if maintenance heavy |
-
 ### Grouping & Demotion Recommendations
-- **Marketplace Access**: Hero, eBay, OfferUp, Featured item, Sold listings. Focus navigation around these; consider removing low-traffic Sold page.
+- **Marketplace Access**: Hero, eBay, OfferUp, Featured item. Focus navigation around these.
 - **Trust & Brand**: Our Story, Built on Trust, Testimonials. Keep but streamline copy for faster scanning.
 - **Engagement**: Subscribe and Contact. Highlight contact; move subscribe below fold.
 - **Policies & Support**: FAQ, Returns, Privacy. Merge overlapping FAQ/Returns content and demote legal/privacy items.
@@ -64,5 +61,4 @@ Home (highest)
 2. **Establish Trust**: Our Story / Built on Trust / Testimonials reassure before purchase.
 3. **Stay Engaged**: Subscribe form captures interested visitors for future offers.
 4. **Seek Support**: Contact links, FAQ, and Returns pages handle post‑purchase questions.
-5. **Reference Past Sales**: Sold listings page offers credibility but is optional for core flows.
 

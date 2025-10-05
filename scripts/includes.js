@@ -13,7 +13,6 @@
     <a href="#offerup" data-analytics="nav-offerup">OfferUp</a>
     <a href="#subscribe" data-analytics="nav-subscribe">Subscribe</a>
     <a href="#contact" data-analytics="nav-contact">Business Inquiries</a>
-    <a href="sold.html" data-analytics="nav-sold">Sold Listings</a>
     <a href="faq.html" data-analytics="nav-faq">FAQ</a>
     <a href="returns.html" data-analytics="nav-returns">Returns</a>
     <a href="privacy.html" data-analytics="nav-privacy">Privacy Policy</a>
@@ -27,7 +26,6 @@
 </header>`,
     'partials/footer.html': `<footer class="site-footer">
   <a href="#home">Home</a>
-  <a href="sold.html">Sold Listings</a>
   <a href="faq.html">FAQ</a>
   <a href="returns.html">Returns</a>
   <a href="privacy.html">Privacy Policy</a>
