@@ -40,52 +40,19 @@ The Node utilities for fetching external data exit with a non-zero code if a req
 
 - `npm run fetch-items`
 - `npm run update-reviews`
-- `npm run update-sold`
 
 In CI or other automated environments, these failures will surface in the build logs.
-
-## Updating Sold Items
-
-`scripts/update-sold.js` pulls recent sales data from eBay and TCGplayer and
-writes `sold-items.json`.
-
-Each entry in `sold-items.json` contains:
-
-- `title` – item title.
-- `image` – thumbnail image URL.
-- `url` – link to the listing.
-- `price` – object with `value` and `currency`.
-- `date` – sale completion date.
-- `location` – item location.
-- `platform` – source marketplace (`ebay` or `tcgplayer`).
-- `condition` – item condition when available.
-- `quantitySold` – number of units sold when available.
-- `sellerCount` – number of sellers offering the item if provided by the API, otherwise `null`.
-
-Set the following environment variables before running the script:
-
-- `EBAY_APP_ID` – eBay developer application ID.
-- `TCG_PUBLIC_KEY` and `TCG_PRIVATE_KEY` – TCGplayer API credentials.
-- `SOLD_SEARCH_TERM` – optional keyword to search for (default `collectible`).
-- `SOLD_LIMIT` – optional maximum number of results to fetch (default `10`).
-
-Run the script with:
-
-```bash
-npm run update-sold
-```
 
 ## Newsletter Workflow
 
 The `#subscribe` form posts signups to a Mailchimp list via `scripts/newsletter.js`.
 User interests and a hidden `source` field are sent alongside the email address for tracking.
 
-`scripts/send-newsletter.js` composes update emails from `items.json` and `sold-items.json`.
+`scripts/send-newsletter.js` composes update emails from `items.json`.
 Run it with:
 
 ```bash
-npm run send-newsletter            # new arrivals
-npm run send-newsletter sales     # recent sales
+npm run send-newsletter
 ```
 
 The command exits with a non-zero status if the Mailchimp request fails, ensuring send errors appear in CI logs.

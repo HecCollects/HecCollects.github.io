@@ -6,7 +6,6 @@
     "pretest": "node scripts/decode-font.js && node scripts/decode-logo.js && node scripts/decode-snapshots.js && playwright install --with-deps",
     "test": "playwright test",
     "fetch-items": "node scripts/fetch-items.js",
-    "update-sold": "node scripts/update-sold.js",
     "update-reviews": "node scripts/fetch-reviews.js",
     "apply-env": "node scripts/apply-env.js",
     "validate-env": "node scripts/validate-env.js",
