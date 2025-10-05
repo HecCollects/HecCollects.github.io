@@ -1,16 +1,36 @@
-<header class="navbar">
+<header class="navbar" role="banner">
   <a href="#home" class="brand" data-analytics="nav-home">
-    <img src="logo.svg" alt="HecCollects logo" width="40" height="40">
+    <img src="logo.svg" alt="HecCollects logo" width="44" height="44">
+    <span class="brand-text">
+      <span class="brand-title">HecCollects</span>
+      <span class="brand-tagline">Collectibles · Community · Care</span>
+    </span>
   </a>
-  <nav id="nav-menu" class="nav-menu">
-        <a href="#testimonials" data-analytics="nav-reviews">Customer Reviews</a>
-        <a href="#story" data-analytics="nav-story">Our Story</a>
-        <a href="#approach" data-analytics="nav-approach">Built on Trust</a>
-    <a href="#ebay" data-analytics="nav-ebay">eBay</a>
-    <a href="#offerup" data-analytics="nav-offerup">OfferUp</a>
-    <a href="#subscribe" data-analytics="nav-subscribe">Subscribe</a>
-    <a href="#contact" data-analytics="nav-contact">Business Inquiries</a>
-    <a href="#support-resources" data-analytics="nav-support">Support</a>
+  <nav id="nav-menu" class="nav-menu" aria-label="Primary">
+    <ul class="nav-links" role="list">
+      <li class="nav-item"><a href="#testimonials" data-analytics="nav-reviews" data-nav-link>Customer Reviews</a></li>
+      <li class="nav-item"><a href="#story" data-analytics="nav-story" data-nav-link>Our Story</a></li>
+      <li class="nav-item"><a href="#approach" data-analytics="nav-approach" data-nav-link>Built on Trust</a></li>
+      <li class="nav-item"><a href="#ebay" data-analytics="nav-ebay" data-nav-link>eBay</a></li>
+      <li class="nav-item"><a href="#offerup" data-analytics="nav-offerup" data-nav-link>OfferUp</a></li>
+      <li class="nav-item"><a href="#subscribe" data-analytics="nav-subscribe" data-nav-link>Subscribe</a></li>
+      <li class="nav-item"><a href="#support-resources" data-analytics="nav-support" data-nav-link>Support</a></li>
+      <li class="nav-item has-dropdown">
+        <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="resources-menu">
+          Resources
+          <span class="dropdown-icon" aria-hidden="true"></span>
+        </button>
+        <ul id="resources-menu" class="dropdown-menu" role="menu" hidden>
+          <li role="none"><a role="menuitem" href="faq.html" data-analytics="nav-faq">FAQ</a></li>
+          <li role="none"><a role="menuitem" href="returns.html" data-analytics="nav-returns">Returns</a></li>
+          <li role="none"><a role="menuitem" href="privacy.html" data-analytics="nav-privacy">Privacy</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn nav-cta" href="https://ebay.us/m/HoUY1I?utm_source=site&amp;utm_medium=referral" target="_blank" rel="noopener noreferrer" data-analytics="nav-shop">Shop eBay</a>
+      <a class="nav-link-ghost" href="#contact" data-analytics="nav-contact" data-nav-link>Contact</a>
+    </div>
   </nav>
   <button id="theme-toggle" aria-label="Toggle theme" aria-pressed="false"></button>
   <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
