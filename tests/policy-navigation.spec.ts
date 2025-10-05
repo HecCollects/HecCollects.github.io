@@ -10,13 +10,16 @@ const expectedNavAnchors = [
   'index.html#ebay',
   'index.html#offerup',
   'index.html#subscribe',
-  'index.html#contact',
+  'index.html#support-resources',
 ];
 
 test.describe('policy page navigation', () => {
   for (const pageName of pages) {
     test(`${pageName} keeps in-page anchors local`, async ({ page }) => {
       const filePath = path.resolve(__dirname, `../${pageName}`);
+      await page.addInitScript(() => {
+        document.documentElement.setAttribute('data-nav-variant', 'floating');
+      });
       await page.goto('file://' + filePath);
 
       await page.waitForSelector('header.navbar .brand');
@@ -28,7 +31,7 @@ test.describe('policy page navigation', () => {
       const skipHref = await page.getAttribute('.skip-link', 'href');
       expect(skipHref).toBe('#main');
 
-      const tocHrefs = await page.$$eval('.toc a', anchors => anchors.map(a => a.getAttribute('href')));
+      const tocHrefs = await page.$$eval('.policy-toc a, .toc a', anchors => anchors.map(a => a.getAttribute('href')));
       expect(tocHrefs.length).toBeGreaterThan(0);
       tocHrefs.forEach(href => expect(href).toBeTruthy());
       tocHrefs.forEach(href => expect(href?.startsWith('#')).toBeTruthy());

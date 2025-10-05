@@ -3,10 +3,10 @@ import path from 'path';
 
 const pages = ['faq.html', 'returns.html', 'privacy.html'] as const;
 const selectors = [
-  { selector: '.policy-content p', label: 'paragraph' },
-  { selector: '.policy-content h1', label: 'h1 heading' },
-  { selector: '.policy-content h2', label: 'h2 heading' },
-  { selector: '.policy-content summary', label: 'details summary' },
+  { selector: '.policy-page p', label: 'paragraph' },
+  { selector: '.policy-page h1', label: 'h1 heading' },
+  { selector: '.policy-page h2', label: 'h2 heading' },
+  { selector: '.policy-page .policy-accordion__summary-text', label: 'details summary' },
 ];
 
 const themes = [
@@ -37,7 +37,7 @@ for (const pageName of pages) {
 
       const filePath = path.resolve(__dirname, `../${pageName}`);
       await page.goto('file://' + filePath);
-      await page.waitForSelector('.policy-content');
+      await page.waitForSelector('.policy-page');
 
       const results = await page.evaluate((selectorData) => {
         const parseColor = (input) => {
@@ -161,7 +161,17 @@ for (const pageName of pages) {
           for (const element of elements) {
             if (!(element instanceof HTMLElement)) continue;
             const style = window.getComputedStyle(element);
-            const textColor = parseColor(style.color);
+            let colorString = style.color;
+            let textColor = parseColor(colorString);
+            const textFill = style.getPropertyValue('-webkit-text-fill-color');
+            const parsedTextFill = parseColor(textFill);
+            if (
+              parsedTextFill &&
+              (!textColor || textFill.trim().toLowerCase() !== colorString.trim().toLowerCase())
+            ) {
+              textColor = parsedTextFill;
+              colorString = textFill;
+            }
             if (!textColor) continue;
             const background = effectiveBackground(element);
             const contrast = contrastRatio(textColor, background);
@@ -170,7 +180,7 @@ for (const pageName of pages) {
               selector,
               tag: element.tagName.toLowerCase(),
               contrast,
-              textColor: style.color,
+              textColor: colorString,
               backgroundColor: toColorString(background),
             });
           }

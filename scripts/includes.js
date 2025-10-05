@@ -1,19 +1,20 @@
 (() => {
   const isHome = location.pathname === '/' || location.pathname.endsWith('/index.html');
   const templates = {
-    'partials/navbar.html': `<header class="navbar" role="banner">
-  <a href="#home" class="brand" data-analytics="nav-home">
-    <img src="logo.svg" alt="HecCollects logo" width="44" height="44">
-    <span class="brand-text">
-      <span class="brand-title">HecCollects</span>
-      <span class="brand-tagline">Collectibles · Community · Care</span>
-    </span>
-  </a>
-  <nav id="nav-menu" class="nav-menu" aria-label="Primary">
-    <ul class="nav-links" role="list">
-      <li class="nav-item"><a href="#testimonials" data-analytics="nav-reviews" data-nav-link>Customer Reviews</a></li>
-      <li class="nav-item"><a href="#story" data-analytics="nav-story" data-nav-link>Our Story</a></li>
-      <li class="nav-item"><a href="#approach" data-analytics="nav-approach" data-nav-link>Built on Trust</a></li>
+    'partials/navbar.html': `<header class="navbar navbar--floating" role="banner">
+  <div class="navbar__surface">
+    <a href="#home" class="brand" data-analytics="nav-home">
+      <img src="logo.svg" alt="HecCollects logo" width="44" height="44">
+      <span class="brand-text">
+        <span class="brand-title">HecCollects</span>
+        <span class="brand-tagline">Collectibles · Community · Care</span>
+      </span>
+    </a>
+    <nav id="nav-menu" class="nav-menu" aria-label="Primary">
+      <ul class="nav-links" role="list">
+        <li class="nav-item"><a href="#testimonials" data-analytics="nav-reviews" data-nav-link>Customer Reviews</a></li>
+        <li class="nav-item"><a href="#story" data-analytics="nav-story" data-nav-link>Our Story</a></li>
+        <li class="nav-item"><a href="#approach" data-analytics="nav-approach" data-nav-link>Built on Trust</a></li>
       <li class="nav-item"><a href="#ebay" data-analytics="nav-ebay" data-nav-link>eBay</a></li>
       <li class="nav-item"><a href="#offerup" data-analytics="nav-offerup" data-nav-link>OfferUp</a></li>
       <li class="nav-item"><a href="#subscribe" data-analytics="nav-subscribe" data-nav-link>Subscribe</a></li>
@@ -30,17 +31,18 @@
         </ul>
       </li>
     </ul>
-    <div class="nav-actions">
-      <a class="btn nav-cta" href="https://ebay.us/m/HoUY1I?utm_source=site&amp;utm_medium=referral" target="_blank" rel="noopener noreferrer" data-analytics="nav-shop">Shop eBay</a>
-      <a class="nav-link-ghost" href="#contact" data-analytics="nav-contact" data-nav-link>Contact</a>
-    </div>
-  </nav>
-  <button id="theme-toggle" aria-label="Toggle theme" aria-pressed="false"></button>
-  <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-    <span class="line" aria-hidden="true"></span>
-    <span class="line" aria-hidden="true"></span>
-    <span class="line" aria-hidden="true"></span>
-  </button>
+      <div class="nav-actions">
+        <a class="btn nav-cta" href="https://ebay.us/m/HoUY1I?utm_source=site&amp;utm_medium=referral" target="_blank" rel="noopener noreferrer" data-analytics="nav-shop">Shop eBay</a>
+        <a class="nav-link-ghost" href="#contact" data-analytics="nav-contact" data-nav-link>Contact</a>
+      </div>
+    </nav>
+    <button id="theme-toggle" aria-label="Toggle theme" aria-pressed="false"></button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+      <span class="line" aria-hidden="true"></span>
+      <span class="line" aria-hidden="true"></span>
+      <span class="line" aria-hidden="true"></span>
+    </button>
+  </div>
 </header>`,
     'partials/footer.html': `<footer class="site-footer">
   <a href="#home">Home</a>
@@ -87,6 +89,18 @@
   });
 
   Promise.all(includePromises).then(() => {
+    const navVariantAttr =
+      document.body?.dataset.navVariant ||
+      document.documentElement.dataset.navVariant;
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+      if (navVariantAttr === 'classic') {
+        navbar.classList.remove('navbar--floating');
+      } else if (navVariantAttr === 'floating') {
+        navbar.classList.add('navbar--floating');
+      }
+    }
+
     if (!isHome) {
       document
         .querySelectorAll('.navbar .brand[href^="#"], .nav-menu a[href^="#"], .site-footer a[href^="#"]')
