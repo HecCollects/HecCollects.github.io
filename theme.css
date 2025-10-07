@@ -30,7 +30,7 @@
   --color-error: #dc2626;
   --color-error-rgb: 220, 38, 38;
 
-  --navbar-height: calc(env(safe-area-inset-top) + 5rem);
+  --navbar-height: calc(env(safe-area-inset-top) + 4.5rem);
 
   /* legacy aliases */
   --black: var(--color-text);
@@ -152,27 +152,29 @@ body.js-has-transition.fade-out::after {
   background: rgba(var(--black-rgb), 0.45);
 }
 
-[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar),
-[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) {
-  background: transparent;
+[data-theme="dark"] :is(.navbar--compact, [data-nav-variant="compact"] .navbar),
+[data-theme="hc"] :is(.navbar--compact, [data-nav-variant="compact"] .navbar) {
+  background: rgba(var(--black-rgb), 0.55);
+  box-shadow: 0 12px 28px rgba(var(--black-rgb), 0.45);
+  border-bottom-color: rgba(var(--color-text-rgb), 0.25);
 }
 
-[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .navbar__surface {
-  background: rgba(var(--color-surface-rgb), 0.22);
-  border-color: rgba(var(--color-text-rgb), 0.18);
-  box-shadow: 0 28px 54px rgba(var(--black-rgb), 0.45);
+[data-theme="dark"] :is(.navbar--compact, [data-nav-variant="compact"] .navbar) .navbar__surface {
+  background: rgba(var(--color-surface-rgb), 0.3);
+  border-color: rgba(var(--color-text-rgb), 0.2);
+  box-shadow: 0 20px 40px rgba(var(--black-rgb), 0.5);
 }
 
-[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .navbar__surface {
-  background: rgba(var(--color-surface-rgb), 0.35);
-  border-color: rgba(var(--color-text-rgb), 0.32);
-  box-shadow: 0 32px 64px rgba(var(--black-rgb), 0.55);
+[data-theme="hc"] :is(.navbar--compact, [data-nav-variant="compact"] .navbar) .navbar__surface {
+  background: rgba(var(--color-surface-rgb), 0.55);
+  border-color: rgba(var(--color-text-rgb), 0.45);
+  box-shadow: 0 24px 48px rgba(var(--black-rgb), 0.65);
 }
 
-[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .nav-menu a:focus-visible::after,
-[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .nav-menu a:focus-visible::after,
-[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .dropdown-toggle:focus-visible::after,
-[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .dropdown-toggle:focus-visible::after {
+[data-theme="dark"] :is(.navbar--compact, [data-nav-variant="compact"] .navbar) .nav-menu a:focus-visible::after,
+[data-theme="hc"] :is(.navbar--compact, [data-nav-variant="compact"] .navbar) .nav-menu a:focus-visible::after,
+[data-theme="dark"] :is(.navbar--compact, [data-nav-variant="compact"] .navbar) .dropdown-toggle:focus-visible::after,
+[data-theme="hc"] :is(.navbar--compact, [data-nav-variant="compact"] .navbar) .dropdown-toggle:focus-visible::after {
   background: rgba(var(--color-text-rgb), 0.6);
 }
 
