@@ -1,14 +1,12 @@
 (() => {
   const isHome = location.pathname === '/' || location.pathname.endsWith('/index.html');
   const templates = {
-    'partials/navbar.html': `<header class="navbar navbar--floating" role="banner">
+    'partials/navbar.html': `<header class="navbar" role="banner">
   <div class="navbar__surface">
     <a href="#home" class="brand" data-analytics="nav-home">
       <img src="logo.svg" alt="HecCollects logo" width="44" height="44">
-      <span class="brand-text">
-        <span class="brand-title">HecCollects</span>
-        <span class="brand-tagline">Collectibles · Community · Care</span>
-      </span>
+      <span class="brand-title">HecCollects</span>
+      <span class="sr-only">Collectibles · Community · Care</span>
     </a>
     <nav id="nav-menu" class="nav-menu" aria-label="Primary">
       <ul class="nav-links" role="list">
@@ -93,12 +91,8 @@
       document.body?.dataset.navVariant ||
       document.documentElement.dataset.navVariant;
     const navbar = document.querySelector('.navbar');
-    if (navbar) {
-      if (navVariantAttr === 'classic') {
-        navbar.classList.remove('navbar--floating');
-      } else if (navVariantAttr === 'floating') {
-        navbar.classList.add('navbar--floating');
-      }
+    if (navbar && navVariantAttr === 'floating') {
+      navbar.classList.add('navbar--floating');
     }
 
     if (!isHome) {

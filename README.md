@@ -36,15 +36,10 @@ Playwright Test will execute the browser-based tests.
 
 ## Navbar Variants
 
-The floating navbar layout is enabled by default through the `navbar--floating` class added to the shared header partial.
-To preview the classic bar instead, set `data-nav-variant="classic"` on either `<html>` or `<body>` (the include script will remove the floating class) or drop the modifier class from the rendered markup.
-You can also force the floating variant without editing the partial by setting `data-nav-variant="floating"` before includes hydrate:
-
-```js
-document.documentElement.setAttribute('data-nav-variant', 'floating');
-```
-
-The Playwright specs follow this pattern so reviewers can toggle between layouts from the browser console without editing templates.
+The header now renders in the classic flat style by default.
+If you need to re-introduce the legacy floating modifier for experiments or downstream builds, set `data-nav-variant="floating"` on either `<html>` or `<body>` before the includes hydrate.
+The loader will attach the `navbar--floating` class so custom CSS can hook into it, but the project no longer ships floating-specific styles out of the box.
+The Playwright specs still follow this pattern so reviewers can toggle classes from the browser console without editing templates.
 
 ## Data Fetch Scripts
 

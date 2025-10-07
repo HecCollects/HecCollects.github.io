@@ -149,31 +149,7 @@ body.js-has-transition.fade-out::after {
 
 [data-theme="dark"] .navbar,
 [data-theme="hc"] .navbar {
-  background: rgba(var(--black-rgb), 0.45);
-}
-
-[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar),
-[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) {
-  background: transparent;
-}
-
-[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .navbar__surface {
-  background: rgba(var(--color-surface-rgb), 0.22);
-  border-color: rgba(var(--color-text-rgb), 0.18);
-  box-shadow: 0 28px 54px rgba(var(--black-rgb), 0.45);
-}
-
-[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .navbar__surface {
-  background: rgba(var(--color-surface-rgb), 0.35);
-  border-color: rgba(var(--color-text-rgb), 0.32);
-  box-shadow: 0 32px 64px rgba(var(--black-rgb), 0.55);
-}
-
-[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .nav-menu a:focus-visible::after,
-[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .nav-menu a:focus-visible::after,
-[data-theme="dark"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .dropdown-toggle:focus-visible::after,
-[data-theme="hc"] :is(.navbar--floating, [data-nav-variant="floating"] .navbar) .dropdown-toggle:focus-visible::after {
-  background: rgba(var(--color-text-rgb), 0.6);
+  background: var(--color-surface);
 }
 
 [data-theme="dark"] .policy-page,
@@ -203,11 +179,6 @@ body.js-has-transition.fade-out::after {
 [data-theme="dark"] .nav-link-ghost,
 [data-theme="hc"] .nav-link-ghost {
   color: var(--color-text);
-}
-
-[data-theme="dark"] .brand-tagline,
-[data-theme="hc"] .brand-tagline {
-  color: rgba(var(--color-text-rgb), 0.7);
 }
 
 [data-theme="dark"] .nav-link-ghost,
