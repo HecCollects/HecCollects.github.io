@@ -18,7 +18,7 @@ test.describe('policy page navigation', () => {
     test(`${pageName} keeps in-page anchors local`, async ({ page }) => {
       const filePath = path.resolve(__dirname, `../${pageName}`);
       await page.addInitScript(() => {
-        document.documentElement.setAttribute('data-nav-variant', 'floating');
+        document.documentElement.setAttribute('data-nav-variant', 'compact');
       });
       await page.goto('file://' + filePath);
 

@@ -7,7 +7,7 @@ const filePath = path.resolve(__dirname, '../index.html');
 
 test('menu supports keyboard navigation', async ({ page }) => {
   await page.addInitScript(() => {
-    document.documentElement.setAttribute('data-nav-variant', 'floating');
+    document.documentElement.setAttribute('data-nav-variant', 'compact');
   });
   await page.goto('file://' + filePath);
 

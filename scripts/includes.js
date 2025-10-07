@@ -1,7 +1,7 @@
 (() => {
   const isHome = location.pathname === '/' || location.pathname.endsWith('/index.html');
   const templates = {
-    'partials/navbar.html': `<header class="navbar navbar--floating" role="banner">
+    'partials/navbar.html': `<header class="navbar navbar--compact" role="banner">
   <div class="navbar__surface">
     <a href="#home" class="brand" data-analytics="nav-home">
       <img src="logo.svg" alt="HecCollects logo" width="44" height="44">
@@ -95,9 +95,9 @@
     const navbar = document.querySelector('.navbar');
     if (navbar) {
       if (navVariantAttr === 'classic') {
-        navbar.classList.remove('navbar--floating');
-      } else if (navVariantAttr === 'floating') {
-        navbar.classList.add('navbar--floating');
+        navbar.classList.remove('navbar--compact');
+      } else if (navVariantAttr === 'compact') {
+        navbar.classList.add('navbar--compact');
       }
     }
 
