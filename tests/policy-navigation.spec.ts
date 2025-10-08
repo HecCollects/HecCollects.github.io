@@ -17,12 +17,12 @@ test.describe('policy page navigation', () => {
   for (const pageName of pages) {
     test(`${pageName} keeps in-page anchors local`, async ({ page }) => {
       const filePath = path.resolve(__dirname, `../${pageName}`);
-      await page.addInitScript(() => {
-        document.documentElement.setAttribute('data-nav-variant', 'compact');
-      });
       await page.goto('file://' + filePath);
 
       await page.waitForSelector('header.navbar .brand');
+      const header = page.locator('header.navbar');
+      await expect(header).toHaveClass(/\bnavbar--compact\b/);
+      await expect(header).not.toHaveClass(/\bnavbar--floating\b/);
       await page.waitForFunction(() => {
         const brand = document.querySelector<HTMLAnchorElement>('header.navbar .brand');
         return brand?.getAttribute('href')?.startsWith('index.html');

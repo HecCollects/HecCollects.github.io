@@ -1,7 +1,7 @@
 (() => {
   const isHome = location.pathname === '/' || location.pathname.endsWith('/index.html');
   const templates = {
-    'partials/navbar.html': `<header class="navbar navbar--compact" role="banner">
+    'partials/navbar.html': `<header class="navbar navbar--floating" role="banner">
   <div class="navbar__surface">
     <a href="#home" class="brand" data-analytics="nav-home">
       <img src="logo.svg" alt="HecCollects logo" width="44" height="44">
@@ -15,22 +15,22 @@
         <li class="nav-item"><a href="#testimonials" data-analytics="nav-reviews" data-nav-link>Customer Reviews</a></li>
         <li class="nav-item"><a href="#story" data-analytics="nav-story" data-nav-link>Our Story</a></li>
         <li class="nav-item"><a href="#approach" data-analytics="nav-approach" data-nav-link>Built on Trust</a></li>
-      <li class="nav-item"><a href="#ebay" data-analytics="nav-ebay" data-nav-link>eBay</a></li>
-      <li class="nav-item"><a href="#offerup" data-analytics="nav-offerup" data-nav-link>OfferUp</a></li>
-      <li class="nav-item"><a href="#subscribe" data-analytics="nav-subscribe" data-nav-link>Subscribe</a></li>
-      <li class="nav-item"><a href="#support-resources" data-analytics="nav-support" data-nav-link>Support</a></li>
-      <li class="nav-item has-dropdown">
-        <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="resources-menu">
-          Resources
-          <span class="dropdown-icon" aria-hidden="true"></span>
-        </button>
-        <ul id="resources-menu" class="dropdown-menu" role="menu" hidden>
-          <li role="none"><a role="menuitem" href="faq.html" data-analytics="nav-faq">FAQ</a></li>
-          <li role="none"><a role="menuitem" href="returns.html" data-analytics="nav-returns">Returns</a></li>
-          <li role="none"><a role="menuitem" href="privacy.html" data-analytics="nav-privacy">Privacy</a></li>
-        </ul>
-      </li>
-    </ul>
+        <li class="nav-item"><a href="#ebay" data-analytics="nav-ebay" data-nav-link>eBay</a></li>
+        <li class="nav-item"><a href="#offerup" data-analytics="nav-offerup" data-nav-link>OfferUp</a></li>
+        <li class="nav-item"><a href="#subscribe" data-analytics="nav-subscribe" data-nav-link>Subscribe</a></li>
+        <li class="nav-item"><a href="#support-resources" data-analytics="nav-support" data-nav-link>Support</a></li>
+        <li class="nav-item has-dropdown">
+          <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="resources-menu">
+            Resources
+            <span class="dropdown-icon" aria-hidden="true"></span>
+          </button>
+          <ul id="resources-menu" class="dropdown-menu" role="menu" hidden>
+            <li role="none"><a role="menuitem" href="faq.html" data-analytics="nav-faq">FAQ</a></li>
+            <li role="none"><a role="menuitem" href="returns.html" data-analytics="nav-returns">Returns</a></li>
+            <li role="none"><a role="menuitem" href="privacy.html" data-analytics="nav-privacy">Privacy</a></li>
+          </ul>
+        </li>
+      </ul>
       <div class="nav-actions">
         <a class="btn nav-cta" href="https://ebay.us/m/HoUY1I?utm_source=site&amp;utm_medium=referral" target="_blank" rel="noopener noreferrer" data-analytics="nav-shop">Shop eBay</a>
         <a class="nav-link-ghost" href="#contact" data-analytics="nav-contact" data-nav-link>Contact</a>
@@ -94,10 +94,17 @@
       document.documentElement.dataset.navVariant;
     const navbar = document.querySelector('.navbar');
     if (navbar) {
-      if (navVariantAttr === 'classic') {
-        navbar.classList.remove('navbar--compact');
-      } else if (navVariantAttr === 'compact') {
+      const variant =
+        navVariantAttr === 'classic'
+          ? 'floating'
+          : navVariantAttr || navbar.dataset.navVariant || 'floating';
+
+      navbar.classList.remove('navbar--floating', 'navbar--compact');
+
+      if (variant === 'compact') {
         navbar.classList.add('navbar--compact');
+      } else {
+        navbar.classList.add('navbar--floating');
       }
     }
 

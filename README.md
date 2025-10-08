@@ -36,14 +36,14 @@ Playwright Test will execute the browser-based tests.
 
 ## Navbar Variants
 
-The compact navbar layout is enabled by default through the `navbar--compact` class added to the shared header partial.
-To preview the classic bar instead, set `data-nav-variant="classic"` on either `<html>` or `<body>` (the include script will remove the compact class) or drop the modifier class from the rendered markup.
-You can also force the compact variant without editing the partial by setting `data-nav-variant="compact"` before includes hydrate:
+The floating navbar layout is restored as the default via the `navbar--floating` class that ships with the shared header partial.
+To force the compact layout without editing the markup, set `data-nav-variant="compact"` on either `<html>` or `<body>` before the includes script hydrates the partial:
 
 ```js
 document.documentElement.setAttribute('data-nav-variant', 'compact');
 ```
 
+Setting `data-nav-variant="floating"` (or the legacy `classic`) re-applies the floating modifier if a page needs to override a previously stored preference.
 The Playwright specs follow this pattern so reviewers can toggle between layouts from the browser console without editing templates.
 
 ## Data Fetch Scripts
