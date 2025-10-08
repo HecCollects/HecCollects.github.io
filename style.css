@@ -20,9 +20,8 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
-@media (max-width: 640px) {
+@media (pointer: coarse) {
   html {
     scroll-snap-type: y proximity;
   }
@@ -84,7 +83,7 @@ body {
 /* ---------- Sections ---------- */
 section {
   position: relative;
-  min-height: 100dvh;
+  min-height: clamp(520px, 100vh, max-content);
   scroll-snap-align: start;
   display: flex;
   align-items: center;
