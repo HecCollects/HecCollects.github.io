@@ -30,7 +30,7 @@
   --color-error: #dc2626;
   --color-error-rgb: 220, 38, 38;
 
-  --navbar-height: calc(env(safe-area-inset-top) + 4.5rem);
+  --navbar-height: calc(env(safe-area-inset-top) + 3.75rem);
 
   /* legacy aliases */
   --black: var(--color-text);
