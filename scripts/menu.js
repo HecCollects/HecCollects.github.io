@@ -53,6 +53,9 @@
     let currentLinkIndex = -1;
     const mql = window.matchMedia('(min-width: 1024px)');
 
+    burger.setAttribute('aria-expanded', 'false');
+    navMenu.setAttribute('aria-hidden', 'true');
+
     const closeDropdowns = (exception) => {
       dropdownToggles.forEach(toggle => {
         if (exception && toggle === exception) return;
@@ -99,6 +102,7 @@
     };
 
     const openMenu = () => {
+      if (navMenu.classList.contains('open')) return;
       burger.classList.add('open');
       navMenu.classList.add('open');
       burger.setAttribute('aria-expanded', 'true');
@@ -112,35 +116,38 @@
       }
     };
 
-    const closeMenu = (focusBurger = true) => {
-      document.body.style.overflow = '';
+    const closeMenu = (focusBurger = true, { silent = false } = {}) => {
+      const wasOpen = navMenu.classList.contains('open');
       closeDropdowns();
       currentLinkIndex = -1;
-      if (mql.matches) return;
-      burger.classList.remove('open');
-      navMenu.classList.remove('open');
+      if (wasOpen) {
+        burger.classList.remove('open');
+        navMenu.classList.remove('open');
+      } else {
+        burger.classList.remove('open');
+      }
       burger.setAttribute('aria-expanded', 'false');
       navMenu.setAttribute('aria-hidden', 'true');
-      if (focusBurger) burger.focus();
-      if (window.gtag) {
+      document.body.style.overflow = '';
+      if (wasOpen && focusBurger) {
+        burger.focus();
+      }
+      if (wasOpen && !silent && window.gtag) {
         window.gtag('event', 'menu_close');
       }
     };
 
     const handleBreakpoint = (e) => {
-      if (e.matches) {
-        document.body.style.overflow = '';
-        navMenu.classList.add('open');
-        navMenu.setAttribute('aria-hidden', 'false');
-        burger.classList.add('hidden');
-        burger.setAttribute('aria-hidden', 'true');
-        burger.tabIndex = -1;
-      } else {
-        document.body.style.overflow = '';
-        closeMenu(false);
-        burger.classList.remove('hidden');
-        burger.setAttribute('aria-hidden', 'false');
-        burger.tabIndex = 0;
+      closeMenu(false, { silent: true });
+      burger.classList.remove('hidden');
+      burger.removeAttribute('aria-hidden');
+      burger.tabIndex = 0;
+      if (!navMenu.classList.contains('open')) {
+        navMenu.setAttribute('aria-hidden', 'true');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+      if (e.matches && document.activeElement && navMenu.contains(document.activeElement)) {
+        burger.focus();
       }
     };
 
@@ -179,7 +186,7 @@
       });
 
       document.addEventListener('keydown', (e) => {
-        if (!navMenu.classList.contains('open') || mql.matches) {
+        if (!navMenu.classList.contains('open')) {
           if (e.key === 'Escape') {
             closeDropdowns();
           }

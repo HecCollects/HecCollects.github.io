@@ -31,6 +31,7 @@ for (const variant of variants) {
       new RegExp(`\\b${variant.expectedClass}\\b`)
     );
 
+    await expect(page.locator('.nav-menu')).not.toHaveClass(/open/);
     await page.click('.nav-toggle');
     await page.locator('.nav-menu.open').waitFor();
 
@@ -62,22 +63,42 @@ for (const variant of variants) {
 test.describe('desktop floating navbar', () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test('floating variant stays within viewport width', async ({ page }) => {
+  test('floating variant stays collapsed until toggled', async ({ page }) => {
     const filePath = path.resolve(__dirname, '../index.html');
     await page.goto('file://' + filePath);
 
     const header = page.locator('header.navbar');
     await expect(header).toHaveClass(/\bnavbar--floating\b/);
 
-    const hasOverflow = await page.evaluate(() => {
-      const { scrollWidth, clientWidth } = document.documentElement;
-      return scrollWidth - clientWidth;
-    });
-    expect(Math.abs(hasOverflow)).toBeLessThanOrEqual(1);
+    const navMenu = page.locator('#nav-menu');
+    const toggle = page.locator('.nav-toggle');
+
+    await expect(toggle).toBeVisible();
+    await expect(navMenu).not.toHaveClass(/open/);
+    await expect(navMenu).toHaveAttribute('aria-hidden', 'true');
+
+    const horizontalOverflow = async () => {
+      return page.evaluate(() => {
+        const { scrollWidth, clientWidth } = document.documentElement;
+        return Math.abs(scrollWidth - clientWidth);
+      });
+    };
+
+    expect(await horizontalOverflow()).toBeLessThanOrEqual(1);
+
+    await toggle.click();
+    await expect(navMenu).toHaveClass(/open/);
+    await expect(navMenu).toHaveAttribute('aria-hidden', 'false');
+    expect(await horizontalOverflow()).toBeLessThanOrEqual(1);
 
     const navLinksWrap = await page.locator('.nav-links').evaluate(el => {
       return getComputedStyle(el).flexWrap;
     });
     expect(navLinksWrap).toBe('wrap');
+
+    await toggle.click();
+    await expect(navMenu).not.toHaveClass(/open/);
+    await expect(navMenu).toHaveAttribute('aria-hidden', 'true');
+    expect(await horizontalOverflow()).toBeLessThanOrEqual(1);
   });
 });

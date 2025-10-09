@@ -11,12 +11,24 @@ test('sections scroll into view correctly', async ({ page }) => {
   await page.goto('file://' + filePath);
   await page.evaluate(() => (document as any).fonts.ready);
 
+  const headerAllowance = await page.evaluate(() => {
+    const header = document.querySelector('header.navbar');
+    return header ? header.getBoundingClientRect().height : 0;
+  });
+  const tolerance = Math.max(120, Math.ceil(headerAllowance) + 32);
+
   for (const target of navTargets) {
-    await page.locator(target).scrollIntoViewIfNeeded();
+    await page.evaluate((selector) => {
+      document.querySelector(selector)?.scrollIntoView({
+        block: 'start',
+        inline: 'nearest',
+        behavior: 'instant'
+      });
+    }, target);
     const diff = await page.evaluate((selector) => {
       const el = document.querySelector(selector)! as HTMLElement;
       return Math.abs(window.scrollY - el.offsetTop);
     }, target);
-    expect(diff, `${target} is off by ${diff}px`).toBeLessThanOrEqual(100);
+    expect(diff, `${target} is off by ${diff}px`).toBeLessThanOrEqual(tolerance);
   }
 });

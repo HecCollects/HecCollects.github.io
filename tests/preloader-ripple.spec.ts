@@ -31,6 +31,12 @@ test('preloader is removed and ripple cleans up', async ({ page }) => {
   await page.waitForSelector('#preloader', { state: 'detached' });
   await expect(page.locator('#preloader')).toHaveCount(0);
 
+  const toggle = page.locator('.nav-toggle');
+  if (await toggle.isVisible()) {
+    await toggle.click();
+    await expect(page.locator('.nav-menu')).toHaveClass(/open/);
+  }
+
   const btn = page.locator('.btn').first();
   await btn.click();
 
