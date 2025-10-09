@@ -15,9 +15,13 @@ test('featured items are in viewport and clickable', async ({ page }) => {
       if (!container || !items[key]) return;
       items[key].forEach((item: any) => {
         const link = document.createElement('a');
+        link.className = 'featured-card';
         link.href = item.link;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
+
+        const media = document.createElement('div');
+        media.className = 'featured-media';
         const img = document.createElement('img');
         const small = item.imageSmall || item.imageLarge;
         const large = item.imageLarge || item.imageSmall;
@@ -36,8 +40,9 @@ test('featured items are in viewport and clickable', async ({ page }) => {
           img.srcset = `${small} ${smallW}w, ${large} ${largeW}w`;
           img.sizes = `(max-width: ${largeW}px) 100vw, ${largeW}px`;
         }
+        media.appendChild(img);
+        link.appendChild(media);
         container.appendChild(link);
-        link.appendChild(img);
       });
     };
     build('ebay', 'ebay-items');
