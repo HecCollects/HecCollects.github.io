@@ -186,6 +186,7 @@
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
             link.setAttribute('data-analytics', `${key}-item-${i + 1}`);
+            link.classList.add('featured-card');
             link.addEventListener('click', () => {
               const label = link.getAttribute('data-analytics');
               if (window.gtag) {

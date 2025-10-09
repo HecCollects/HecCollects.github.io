@@ -8,6 +8,96 @@
     if (!display || !btn) return;
 
     let items = [];
+    const buildCard = (item) => {
+      const card = document.createElement('a');
+      card.className = 'featured-card featured-card--weekly';
+      const ratio = 4 / 5;
+      const label = item.alt || item.title || item.caption || 'Featured item';
+      card.setAttribute('aria-label', label);
+      if (item.link) {
+        card.href = item.link;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        card.addEventListener('click', () => {
+          if (window.gtag) {
+            window.gtag('event', 'featured_week_open', { event_label: item.link || label });
+          }
+        });
+      } else {
+        card.href = '#';
+        card.addEventListener('click', evt => evt.preventDefault());
+      }
+
+      if (item.tagColor) {
+        card.style.setProperty('--featured-border-color', item.tagColor);
+      }
+
+      const media = document.createElement('div');
+      media.className = 'featured-media';
+
+      const img = document.createElement('img');
+      const small = item.imageSmall || item.imageLarge || item.image || '';
+      const large = item.imageLarge || item.imageSmall || item.image || '';
+      if (small) {
+        img.src = small;
+      }
+      img.alt = item.alt || item.title || '';
+      img.loading = 'lazy';
+      try {
+        const getWidth = (u) => {
+          try {
+            return parseInt(new URL(u).searchParams.get('width') || '0', 10);
+          } catch {
+            return 0;
+          }
+        };
+        const smallW = getWidth(small);
+        const largeW = getWidth(large);
+        if (smallW && largeW) {
+          img.width = largeW;
+          img.height = Math.round(largeW * ratio);
+          img.srcset = `${small} ${smallW}w, ${large} ${largeW}w`;
+          img.sizes = `(max-width: ${largeW}px) 100vw, ${largeW}px`;
+        }
+      } catch {}
+
+      media.appendChild(img);
+
+      if (item.badge || item.stock) {
+        const meta = document.createElement('span');
+        meta.className = 'item-meta';
+        meta.textContent = item.badge ? item.badge : `Only ${item.stock} left`;
+        if (item.tagColor) {
+          meta.style.backgroundColor = item.tagColor;
+        }
+        media.appendChild(meta);
+      }
+
+      card.appendChild(media);
+
+      const details = document.createElement('div');
+      details.className = 'featured-details';
+
+      const title = document.createElement('span');
+      title.className = 'featured-title';
+      title.textContent = item.title || item.caption || item.alt || 'Featured find';
+      details.appendChild(title);
+
+      const priceText = item.price || item.priceText || item.priceLabel || '';
+      const price = document.createElement('span');
+      price.className = 'featured-price';
+      if (priceText) {
+        price.textContent = priceText;
+      } else {
+        price.textContent = 'View listing ↗';
+        price.classList.add('featured-price--placeholder');
+      }
+      details.appendChild(price);
+
+      card.appendChild(details);
+
+      return card;
+    };
     const loadItems = async () => {
       if (location.protocol === 'file:') {
         display.textContent = 'Unable to load item.';
@@ -31,36 +121,8 @@
       }
       const item = items[Math.floor(Math.random() * items.length)];
       display.innerHTML = '';
-      const link = document.createElement('a');
-      link.href = item.link;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.setAttribute('aria-label', item.alt || 'Featured item');
-      const img = document.createElement('img');
-      const small = item.imageSmall || item.imageLarge || '';
-      const large = item.imageLarge || item.imageSmall || '';
-      img.src = small;
-      img.alt = item.alt || '';
-      img.loading = 'lazy';
-      try {
-        const getWidth = (u) => {
-          try {
-            return parseInt(new URL(u).searchParams.get('width') || '0', 10);
-          } catch {
-            return 0;
-          }
-        };
-        const smallW = getWidth(small);
-        const largeW = getWidth(large);
-        if (smallW && largeW) {
-          img.width = largeW;
-          img.height = Math.round(largeW * 9 / 16);
-          img.srcset = `${small} ${smallW}w, ${large} ${largeW}w`;
-          img.sizes = `(max-width: ${largeW}px) 100vw, ${largeW}px`;
-        }
-      } catch {}
-      link.appendChild(img);
-      display.appendChild(link);
+      const card = buildCard(item);
+      display.appendChild(card);
       if (window.gtag) {
         window.gtag('event', 'featured_week_view', { event_label: item.link || item.alt || '' });
       }
