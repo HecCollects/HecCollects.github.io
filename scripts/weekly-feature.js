@@ -32,10 +32,18 @@
       const item = items[Math.floor(Math.random() * items.length)];
       display.innerHTML = '';
       const link = document.createElement('a');
+      link.className = 'featured-card featured-card--weekly';
       link.href = item.link;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       link.setAttribute('aria-label', item.alt || 'Featured item');
+      if (item.tagColor) {
+        link.style.setProperty('--featured-border-color', item.tagColor);
+      }
+
+      const media = document.createElement('div');
+      media.className = 'featured-media';
+
       const img = document.createElement('img');
       const small = item.imageSmall || item.imageLarge || '';
       const large = item.imageLarge || item.imageSmall || '';
@@ -59,7 +67,38 @@
           img.sizes = `(max-width: ${largeW}px) 100vw, ${largeW}px`;
         }
       } catch {}
-      link.appendChild(img);
+      media.appendChild(img);
+      if (item.badge || item.stock) {
+        const meta = document.createElement('span');
+        meta.className = 'item-meta';
+        meta.textContent = item.badge ? item.badge : `Only ${item.stock} left`;
+        if (item.tagColor) {
+          meta.style.backgroundColor = item.tagColor;
+        }
+        media.appendChild(meta);
+      }
+      link.appendChild(media);
+
+      const details = document.createElement('div');
+      details.className = 'featured-details';
+
+      const title = document.createElement('span');
+      title.className = 'featured-title';
+      title.textContent = item.title || item.caption || item.alt || 'Featured find';
+      details.appendChild(title);
+
+      const priceText = item.price || item.priceText || item.priceLabel || '';
+      const price = document.createElement('span');
+      price.className = 'featured-price';
+      if (priceText) {
+        price.textContent = priceText;
+      } else {
+        price.textContent = 'View listing ↗';
+        price.classList.add('featured-price--placeholder');
+      }
+      details.appendChild(price);
+
+      link.appendChild(details);
       display.appendChild(link);
       if (window.gtag) {
         window.gtag('event', 'featured_week_view', { event_label: item.link || item.alt || '' });
