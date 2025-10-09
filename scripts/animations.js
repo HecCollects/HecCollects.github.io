@@ -195,11 +195,15 @@
                 });
               }
             });
+
+            const media = document.createElement('div');
+            media.className = 'featured-media';
+
             const img = document.createElement('img');
             const small = item.imageSmall || item.imageLarge || '';
             const large = item.imageLarge || item.imageSmall || '';
             img.src = small;
-            img.alt = item.alt;
+            img.alt = item.alt || '';
             img.loading = 'lazy';
             try {
               const getWidth = (u) => {
@@ -218,7 +222,11 @@
                 img.sizes = `(max-width: ${largeW}px) 100vw, ${largeW}px`;
               }
             } catch {}
-            link.appendChild(img);
+            media.appendChild(img);
+            link.appendChild(media);
+            if (item.tagColor) {
+              link.style.setProperty('--featured-border-color', item.tagColor);
+            }
             if (item.badge || item.stock) {
               const meta = document.createElement('span');
               meta.className = 'item-meta';
@@ -226,10 +234,27 @@
               if (item.tagColor) {
                 meta.style.backgroundColor = item.tagColor;
               }
-              link.appendChild(meta);
-            } else if (item.tagColor) {
-              link.style.border = `0.2rem solid ${item.tagColor}`;
+              media.appendChild(meta);
             }
+            const details = document.createElement('div');
+            details.className = 'featured-details';
+            const title = document.createElement('span');
+            title.className = 'featured-title';
+            title.textContent = item.title || item.caption || item.alt || 'Featured find';
+            details.appendChild(title);
+
+            const priceText = item.price || item.priceText || item.priceLabel || '';
+            const price = document.createElement('span');
+            price.className = 'featured-price';
+            if (priceText) {
+              price.textContent = priceText;
+            } else {
+              price.textContent = 'View listing ↗';
+              price.classList.add('featured-price--placeholder');
+            }
+            details.appendChild(price);
+
+            link.appendChild(details);
             container.appendChild(link);
           });
         };
