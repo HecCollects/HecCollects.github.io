@@ -1455,11 +1455,17 @@ noscript p {
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
+  align-items: stretch;
+  align-content: flex-start;
+  justify-content: flex-start;
+  row-gap: clamp(2rem, 6vw, 3rem);
+  column-gap: clamp(2.5rem, 7vw, 4rem);
+  min-height: 100vh;
+  width: min(1180px, calc(100vw - 4rem));
+  margin-inline: auto;
   overflow-y: auto;
-  padding: clamp(2rem, 6vw, 3rem);
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  padding-inline: clamp(2rem, 6vw, 3rem);
   background: rgba(var(--white-rgb), 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -1702,9 +1708,9 @@ noscript p {
   .nav-menu.nav-menu-ready.open {
     gap: clamp(2rem, 4vw, 3rem);
     padding: clamp(2.5rem, 5vw, 3.5rem);
-    max-width: min(960px, 92vw);
-    margin: 0 auto;
-    align-items: center;
+    max-width: min(1180px, 96vw);
+    margin: clamp(1rem, 3vw, 2.5rem) auto;
+    justify-content: flex-start;
   }
   .navbar--floating .nav-menu.nav-menu-ready.open,
   [data-nav-variant="floating"] .navbar .nav-menu.nav-menu-ready.open,
@@ -1719,9 +1725,9 @@ noscript p {
   .nav-menu.nav-menu-ready.open .nav-links {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    column-gap: clamp(1.25rem, 2.5vw, 2.5rem);
-    row-gap: 0.75rem;
+    justify-content: flex-start;
+    column-gap: clamp(1.75rem, 3vw, 3.5rem);
+    row-gap: clamp(1rem, 2.5vw, 2rem);
   }
   .navbar--floating .nav-menu.nav-menu-ready.open .nav-links,
   [data-nav-variant="floating"] .navbar .nav-menu.nav-menu-ready.open .nav-links,
