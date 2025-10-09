@@ -22,8 +22,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+      - name: Install dependencies
+        run: npm ci
       - name: Decode logo assets
         run: node scripts/decode-logo.js
+      - name: Decode font assets
+        run: node scripts/decode-font.js
       - uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
