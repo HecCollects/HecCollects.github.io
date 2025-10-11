@@ -3,30 +3,35 @@ import path from 'path';
 
 const filePath = path.resolve(__dirname, '../index.html');
 
-const mailchimpEndpoint = /https:\/\/.*\.api\.mailchimp\.com\/.*/;
+const subscribeEndpoint = 'https://example.com/.netlify/functions/subscribe';
 
-test('newsletter form handles successful Mailchimp response', async ({ page }) => {
-  let requestHandled = false;
-  await page.route(mailchimpEndpoint, async route => {
-    requestHandled = true;
-    const request = route.request();
-    const payload = JSON.parse(request.postData() || '{}');
-    expect(payload.email_address).toBe('tester@example.com');
-
-    await route.fulfill({
+test('newsletter form handles successful serverless response', async ({ page }) => {
+  await page.addInitScript((endpoint) => {
+    window.SUBSCRIBE_ENDPOINT = endpoint;
+    window.__newsletterRequests = [];
+    const successResponse = {
+      ok: true,
       status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({ id: 'test-id' })
-    });
-  });
-
-  await page.addInitScript(() => {
-    window.MAILCHIMP_API_KEY = 'test-key';
-  });
+      json: async () => ({ success: true, message: 'Subscription successful.' })
+    };
+    const originalFetch = window.fetch.bind(window);
+    window.fetch = async (input, init) => {
+      const url = typeof input === 'string' ? input : input?.url || '';
+      if (url === endpoint) {
+        try {
+          const raw = init?.body ? JSON.parse(init.body) : {};
+          window.__newsletterRequests.push(raw);
+        } catch (error) {
+          console.error('Failed to parse newsletter payload', error);
+        }
+        return successResponse;
+      }
+      return originalFetch(input, init);
+    };
+  }, subscribeEndpoint);
 
   await page.goto('file://' + filePath);
   await page.waitForSelector('.subscribe-form');
-
   const emailInput = page.locator('#subscribe-email');
   await emailInput.fill('tester@example.com');
 
@@ -37,6 +42,9 @@ test('newsletter form handles successful Mailchimp response', async ({ page }) =
 
   await submitButton.click();
 
-  await expect(message).toHaveText('Thanks for subscribing!');
-  expect(requestHandled).toBeTruthy();
+  await expect(message).toHaveText(/Subscription/);
+  const requests = await page.evaluate(() => window.__newsletterRequests || []);
+  expect(requests.length).toBe(1);
+  expect(requests[0].email_address).toBe('tester@example.com');
+  expect(requests[0].honeypot).toBe('');
 });

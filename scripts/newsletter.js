@@ -5,6 +5,11 @@
   const msg = document.getElementById('subscribe-msg');
   const btn = form.querySelector('button[type="submit"]');
   const originalBtnHTML = btn?.innerHTML || '';
+  const endpoint = window.SUBSCRIBE_ENDPOINT || form.getAttribute('action') || '';
+  if (!endpoint || /^%.*%$/.test(endpoint)) {
+    console.error('Newsletter endpoint is not configured.');
+    return;
+  }
   const disableBtn = () => { if (btn) btn.disabled = true; };
   disableBtn();
   window.enableSubscribe = () => { if (btn) btn.disabled = false; };
@@ -61,26 +66,25 @@
       email_address: formData.get('email'),
       status: 'subscribed',
       source: formData.get('source') || 'website',
-      interests: formData.getAll('interests')
+      interests: formData.getAll('interests'),
+      honeypot: formData.get('hp') || ''
     };
     if (recaptchaEnabled) {
       payload['g-recaptcha-response'] = token;
     }
 
     const headers = { 'Content-Type': 'application/json' };
-    if (window.MAILCHIMP_API_KEY) {
-      headers['Authorization'] = 'Basic ' + btoa('any:' + window.MAILCHIMP_API_KEY);
-    }
 
     try {
-      const res = await fetch(form.action, {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers,
         body: JSON.stringify(payload)
       });
-      if (res.ok) {
+      const responseData = await res.json().catch(() => ({}));
+      if (res.ok && responseData?.success !== false) {
         if (msg) {
-          msg.textContent = 'Thanks for subscribing!';
+          msg.textContent = responseData?.message || 'Thanks for subscribing!';
           msg.className = 'form-msg success';
         }
         console.info('Subscription successful');
@@ -94,10 +98,11 @@
         }
       } else {
         if (msg) {
-          msg.textContent = 'Submission failed. Please try again later.';
+          const errorMsg = responseData?.error || 'Submission failed. Please try again later.';
+          msg.textContent = errorMsg;
           msg.className = 'form-msg error';
         }
-        console.warn('Subscription failed with status', res.status);
+        console.warn('Subscription failed with status', res.status, responseData);
         if (window.gtag) { window.gtag('event', 'subscribe_error'); }
       }
     } catch {

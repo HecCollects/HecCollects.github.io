@@ -299,7 +299,7 @@
           <h2 id="get-updates">Get Updates</h2>
           <p>Join the mailing list for new drops and exclusive deals.</p>
           <p class="incentive">Subscribers get early access and exclusive discounts.</p>
-          <form action="https://usX.api.mailchimp.com/3.0/lists/YOUR_LIST_ID/members" method="POST" class="subscribe-form">
+          <form action="/.netlify/functions/subscribe" method="POST" class="subscribe-form" novalidate>
             <label for="subscribe-email">Email address</label>
             <input type="email" name="email" placeholder="Email address" required id="subscribe-email" autocomplete="email">
             <div class="checkbox-group">
@@ -309,7 +309,7 @@
             <input type="hidden" name="source" value="homepage">
             <input type="hidden" name="referrer" id="referrer-field">
             <p class="privacy">We’ll never sell your data. <a href="privacy.html">Privacy Policy</a></p>
-            <input type="text" name="hp" class="honeypot" autocomplete="off" tabindex="-1">
+            <input type="text" name="hp" class="honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
             <div class="g-recaptcha" data-sitekey="" data-callback="enableSubscribe"></div>
             <button type="submit" class="btn primary-cta" disabled>
               Subscribe <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>

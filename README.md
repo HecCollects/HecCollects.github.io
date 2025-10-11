@@ -57,10 +57,27 @@ In CI or other automated environments, these failures will surface in the build 
 
 ## Newsletter Workflow
 
-The `#subscribe` form posts signups to a Mailchimp list via `scripts/newsletter.js`.
-User interests and a hidden `source` field are sent alongside the email address for tracking.
+The `#subscribe` form now posts signups to a Netlify Function (`/.netlify/functions/subscribe`).
+`scripts/newsletter.js` serializes the form, forwards the submission to the serverless endpoint, and
+expects a JSON response describing success or failure. A honeypot field (`hp`) and Google reCAPTCHA v2
+token are both validated server-side to block bots without exposing the Mailchimp API key to the
+browser.
 
-`scripts/send-newsletter.js` composes update emails from `items.json`.
+Serverless environment variables required by `netlify/functions/subscribe.js`:
+
+- `MAILCHIMP_API_KEY` – Mailchimp API key with audience permissions.
+- `MAILCHIMP_AUDIENCE_ID` – Audience/list identifier for newsletter signups.
+- `MAILCHIMP_SERVER_PREFIX` – Mailchimp data center prefix (e.g., `us10`).
+- `RECAPTCHA_SECRET_KEY` – Secret key paired with the public site key. If omitted, captcha checks are skipped.
+
+Expose the client-side endpoint and public site key during the build by setting:
+
+- `SUBSCRIBE_ENDPOINT` – Optional override for the subscribe function URL (defaults to `/.netlify/functions/subscribe`).
+- `RECAPTCHA_SITE_KEY` – Public key loaded by the form widget.
+
+Run `npm run build` before deploying so `env.js` receives the final values.
+
+`scripts/send-newsletter.js` composes update emails from `items.json` and sends them via Mailchimp.
 Run it with:
 
 ```bash
