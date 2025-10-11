@@ -94,6 +94,26 @@
       }
       details.appendChild(price);
 
+      if (Array.isArray(item.valueProps) && item.valueProps.length) {
+        const list = document.createElement('ul');
+        list.className = 'featured-value-props';
+        item.valueProps.filter(Boolean).forEach(value => {
+          const li = document.createElement('li');
+          li.textContent = value;
+          list.appendChild(li);
+        });
+        if (list.childElementCount) {
+          details.appendChild(list);
+        }
+      }
+
+      if (item.bonus) {
+        const bonus = document.createElement('span');
+        bonus.className = 'featured-bonus';
+        bonus.textContent = item.bonus;
+        details.appendChild(bonus);
+      }
+
       card.appendChild(details);
 
       return card;
