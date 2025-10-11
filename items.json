@@ -1,52 +1,100 @@
 {
   "ebay": [
     {
+      "title": "PSA 10 Pikachu VMAX · Flash Drop",
       "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=375",
       "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=750",
       "link": "https://www.ebay.com/itm/376470178564",
-      "alt": "Featured eBay collectible",
-      "badge": "Only 1 left",
-      "tagColor": "#DC2626"
+      "alt": "PSA 10 Pikachu VMAX card in a protective case",
+      "price": "$279 · free insured shipping",
+      "valueProps": [
+        "$32 under recent sold comp",
+        "Includes UV magnetic display case",
+        "Covered by 30-day collector guarantee"
+      ],
+      "bonus": "Drop Kit members get bundle math worksheet",
+      "badge": "Drop ends Friday",
+      "tagColor": "#F97316"
     },
     {
+      "title": "Nintendo Switch OLED · Travel Bundle",
       "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=375",
       "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=750",
       "link": "https://ebay.us/m/vs5p1e",
-      "alt": "Featured eBay collectible 2",
+      "alt": "Nintendo Switch OLED console bundle on display",
+      "price": "$319 · tracked 2-day ship",
+      "valueProps": [
+        "Ships in 1 business day",
+        "Extra Joy-Con straps + travel case",
+        "Pre-disinfected & function tested"
+      ],
+      "bonus": "Bundle with any game for extra 12% off",
       "stock": 1,
       "tagColor": "#16A34A"
     },
     {
+      "title": "Charizard UPC Sealed Case",
       "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=350",
       "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=700",
       "link": "https://ebay.us/m/VTMaDx",
-      "alt": "Featured eBay collectible 3",
+      "alt": "Sealed Charizard Ultra Premium Collection",
+      "price": "$97 · signature delivery",
+      "valueProps": [
+        "Heat-sealed wrap verified on video",
+        "Signature confirmation + insurance",
+        "Eligible for bundle builder"
+      ],
+      "bonus": "Members unlock free tamper seals",
       "badge": "Only 1 left",
       "tagColor": "#DC2626"
     }
   ],
   "offerup": [
     {
+      "title": "Vintage Game Boy Color Lot",
       "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=375",
       "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-9709.jpg?v=1753801631&width=750",
       "link": "https://offerup.co/44T5cRnMIVb",
-      "alt": "Featured OfferUp item",
+      "alt": "Game Boy Color bundle ready for pickup",
+      "price": "$145 · test on-site",
+      "valueProps": [
+        "3 consoles + 5 games",
+        "Battery contacts restored",
+        "Includes meet-up checklist"
+      ],
+      "bonus": "Hold for 6 hours when you claim the kit",
       "stock": 1,
       "tagColor": "#16A34A"
     },
     {
+      "title": "PSA 9 Kobe Rookie · Local Pickup",
       "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=375",
       "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-9710.jpg?v=1753801627&width=750",
       "link": "https://offerup.co/UR4k8b1RIVb",
-      "alt": "Featured OfferUp item 2",
+      "alt": "PSA graded Kobe Bryant rookie card",
+      "price": "$210 · cash or Zelle",
+      "valueProps": [
+        "$28 under latest slab comp",
+        "Tamper seal applied during meetup",
+        "Instant comp sheet provided"
+      ],
+      "bonus": "Bundle with any Lakers lot for +15% off",
       "badge": "Only 1 left",
       "tagColor": "#DC2626"
     },
     {
+      "title": "Meta Quest 2 • Ready Tonight",
       "imageSmall": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=350",
       "imageLarge": "https://www.marchingdogs.com/cdn/shop/files/IMG-4266.png?v=1751830730&width=700",
       "link": "https://offerup.co/iAT3Vh4RIVb",
-      "alt": "Featured OfferUp item 3",
+      "alt": "Meta Quest 2 VR headset with controllers",
+      "price": "$235 · same-day handoff",
+      "valueProps": [
+        "Factory reset & sanitized",
+        "Demo the headset before buying",
+        "Includes spare face cover"
+      ],
+      "bonus": "Members get a free accessory organizer",
       "stock": 1,
       "tagColor": "#16A34A"
     }

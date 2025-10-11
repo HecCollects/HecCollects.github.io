@@ -194,6 +194,139 @@ section:nth-of-type(even)::after {
   text-align: left;
   overflow: hidden;
 }
+.hero-card {
+  gap: 1.25rem;
+}
+.lead-list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.lead-list li {
+  margin-bottom: 0.35rem;
+}
+.lead-list strong {
+  color: var(--color-primary);
+}
+.urgency-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.9rem;
+  background: rgba(var(--brand-secondary-rgb), 0.28);
+  font-weight: 600;
+  color: var(--white);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+.urgency-spots {
+  color: var(--color-accent);
+}
+.credibility-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+.credibility-tile {
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: rgba(var(--black-rgb), 0.35);
+  border: 1px solid rgba(var(--white-rgb), 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.credibility-tile h3 {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+.resource-card .links {
+  flex-wrap: wrap;
+}
+.approach-card .approach-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.approach-card .approach-cta .btn {
+  flex: 1 1 180px;
+  text-align: center;
+}
+.testimonial-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+}
+.testimonial-summary div {
+  padding: 0.9rem;
+  border-radius: 1rem;
+  background: rgba(var(--white-rgb), 0.14);
+  border: 1px solid rgba(var(--white-rgb), 0.2);
+}
+.summary-metric {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  display: block;
+}
+.testimonials-card .links {
+  flex-wrap: wrap;
+}
+.urgency-card {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: rgba(var(--white-rgb), 0.14);
+  border: 1px solid rgba(var(--white-rgb), 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.featured-value-props {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  color: rgba(var(--white-rgb), 0.86);
+}
+.featured-value-props li {
+  margin-bottom: 0.25rem;
+}
+.featured-bonus {
+  display: inline-flex;
+  margin-top: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(var(--brand-primary-rgb), 0.24);
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.testimonial-headline {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  margin-bottom: 0.4rem;
+}
+.testimonial-value-props {
+  margin: 0.6rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  color: rgba(var(--white-rgb), 0.85);
+}
+.testimonial-value-props li {
+  margin-bottom: 0.25rem;
+}
+@media (max-width: 640px) {
+  .urgency-banner {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .approach-card .approach-cta {
+    flex-direction: column;
+  }
+}
 .card::before {
   content: "";
   position: absolute;

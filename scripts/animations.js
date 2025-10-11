@@ -255,6 +255,26 @@
             }
             details.appendChild(price);
 
+            if (Array.isArray(item.valueProps) && item.valueProps.length) {
+              const list = document.createElement('ul');
+              list.className = 'featured-value-props';
+              item.valueProps.filter(Boolean).forEach(value => {
+                const li = document.createElement('li');
+                li.textContent = value;
+                list.appendChild(li);
+              });
+              if (list.childElementCount) {
+                details.appendChild(list);
+              }
+            }
+
+            if (item.bonus) {
+              const bonus = document.createElement('span');
+              bonus.className = 'featured-bonus';
+              bonus.textContent = item.bonus;
+              details.appendChild(bonus);
+            }
+
             link.appendChild(details);
             container.appendChild(link);
           });
@@ -285,6 +305,12 @@
       reviews.forEach((rev, i) => {
         const fig = document.createElement('figure');
         fig.id = 'testimonial-' + (i + 1);
+        if (rev.headline) {
+          const heading = document.createElement('h3');
+          heading.className = 'testimonial-headline';
+          heading.textContent = rev.headline;
+          fig.appendChild(heading);
+        }
         const quote = document.createElement('blockquote');
         quote.textContent = '“' + rev.text + '”';
         fig.appendChild(quote);
@@ -299,6 +325,18 @@
           rating.appendChild(star);
         }
         fig.appendChild(rating);
+        if (Array.isArray(rev.valueProps) && rev.valueProps.length) {
+          const list = document.createElement('ul');
+          list.className = 'testimonial-value-props';
+          rev.valueProps.filter(Boolean).forEach(value => {
+            const li = document.createElement('li');
+            li.textContent = value;
+            list.appendChild(li);
+          });
+          if (list.childElementCount) {
+            fig.appendChild(list);
+          }
+        }
         const cap = document.createElement('figcaption');
         const parts = [];
         if (rev.reviewer) parts.push(rev.reviewer);

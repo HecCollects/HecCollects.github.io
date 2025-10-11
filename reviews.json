@@ -1,23 +1,54 @@
 [
   {
     "source": "eBay",
-    "reviewer": "John D.",
-    "badge": "eBay Buyer",
-    "text": "Item arrived exactly as described and very fast!",
-    "rating": 5
+    "reviewer": "Jamie L.",
+    "badge": "Bundle Buyer",
+    "headline": "Saved $42 versus sold comps",
+    "text": "Hector walked me through a three-card bundle and showed every comp before invoicing. The cards landed in two days with tamper seals and a signed checklist.",
+    "rating": 5,
+    "valueProps": [
+      "$42 below eBay sold average",
+      "Insured USPS Priority in 48 hours",
+      "Checklist proving pack-fresh condition"
+    ]
   },
   {
     "source": "OfferUp",
     "reviewer": "Alex P.",
-    "badge": "OfferUp Buyer",
-    "text": "Great seller, easy pickup.",
-    "rating": 5
+    "badge": "Local Pickup",
+    "headline": "Met up, tested, and left with extras",
+    "text": "We tested the Meta Quest in his office, and he handed over a cleaning kit plus Discord access for future drops. Smoothest OfferUp meetup I’ve had.",
+    "rating": 5,
+    "valueProps": [
+      "On-site functionality test",
+      "Bonus accessories for kit members",
+      "Discord follow-up with new drop alerts"
+    ]
   },
   {
     "source": "eBay",
     "reviewer": "Maria L.",
-    "badge": "eBay Buyer",
-    "text": "Smooth transaction, would buy again.",
-    "rating": 4
+    "badge": "Repeat Buyer",
+    "headline": "Proactive updates beat Amazon",
+    "text": "I received tracking within minutes and even a DM when the carrier scanned it. Packaging was bulletproof and under market compared to other Charizard UPCs.",
+    "rating": 5,
+    "valueProps": [
+      "Tracking + personal DM updates",
+      "Foam-insert packaging",
+      "Priced 11% under last three sold"
+    ]
+  },
+  {
+    "source": "OfferUp",
+    "reviewer": "Chris W.",
+    "badge": "Collector Club",
+    "headline": "Bundle builder made local deal easy",
+    "text": "I brought a trade-in list and Hector prepped comps before I arrived. Left with a binder, cash difference, and the drop kit binder tab system.",
+    "rating": 5,
+    "valueProps": [
+      "15% bundle discount honored",
+      "Trade-in comps printed ahead",
+      "Drop kit organizer included"
+    ]
   }
 ]
