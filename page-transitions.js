@@ -26,9 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const href = link.getAttribute('href');
     const sameHost = link.host === window.location.host;
     if (sameHost && target !== '_blank' && href && !href.startsWith('#')) {
-      link.addEventListener('click', e => {
+      link.addEventListener('click', event => {
         if (reducedMotion.matches) return;
-        e.preventDefault();
+        if (event.defaultPrevented) return;
+        if (event.button !== undefined && event.button !== 0) return;
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
         ensureTransitions();
         body.classList.remove('fade-in');
         body.classList.add('fade-out');
