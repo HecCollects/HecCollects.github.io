@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Landing page for HecCollects featuring marketplace links and contact info.">
-  <meta name="keywords" content="HecCollects, collectibles, marketplace, eBay, OfferUp, contact">
+  <meta name="description" content="HecCollects connects collectors with vetted drops, loyalty rewards, and concierge support across eBay, OfferUp, and local meetups.">
+  <meta name="keywords" content="HecCollects, collectibles, loyalty program, marketplace, eBay, OfferUp, concierge support">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com https://www.google.com https://www.gstatic.com; img-src 'self' https://www.marchingdogs.com data:; frame-src 'self' https://challenges.cloudflare.com https://www.google.com https://www.gstatic.com; connect-src 'self' https://*.api.mailchimp.com; style-src 'self'; font-src 'self' data:">
   <meta property="og:title" content="HecCollects – Landing Page">
-  <meta property="og:description" content="Landing page for HecCollects featuring marketplace links and contact info.">
+  <meta property="og:description" content="Shop vetted HecCollects drops, unlock loyalty perks, and tap into concierge post-purchase support.">
   <meta property="og:url" content="https://heccollects.github.io/">
   <meta property="og:image" content="logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="HecCollects – Landing Page">
-  <meta name="twitter:description" content="Landing page for HecCollects featuring marketplace links and contact info.">
+  <meta name="twitter:description" content="Shop vetted HecCollects drops, unlock loyalty perks, and tap into concierge post-purchase support.">
   <meta name="twitter:url" content="https://heccollects.github.io/">
   <meta name="twitter:image" content="logo.png">
   <meta name="theme-color" content="#2563eb">
@@ -43,6 +43,54 @@
         "sameAs": [
           "https://ebay.us/m/HoUY1I",
           "https://offerup.co/xluJorjDIVb"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "mailto:hectorsandoval1402@gmail.com",
+          "areaServed": "US",
+          "availableLanguage": ["English", "Spanish"]
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Collector Drops",
+          "itemListElement": [
+            {
+              "@type": "OfferCatalog",
+              "name": "eBay Vault",
+              "itemListOrder": "https://schema.org/ItemListOrderDescending"
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "OfferUp Meetups",
+              "itemListOrder": "https://schema.org/ItemListOrderDescending"
+            }
+          ]
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://heccollects.github.io/",
+        "name": "HecCollects",
+        "description": "Collector drops, loyalty rewards, and concierge buying support.",
+        "potentialAction": [
+          {
+            "@type": "SubscribeAction",
+            "name": "Join the Collector's Drop Kit",
+            "target": "https://heccollects.github.io/index.html#subscribe",
+            "result": {
+              "@type": "Thing",
+              "name": "Collector's Drop Kit"
+            }
+          },
+          {
+            "@type": "ContactAction",
+            "name": "Contact Hector",
+            "target": "https://heccollects.github.io/index.html#contact"
+          }
         ]
       }
     </script>
@@ -50,6 +98,7 @@
       {
         "@context": "https://schema.org",
         "@type": "ItemList",
+        "name": "Featured Drops",
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -142,6 +191,36 @@
             }
           }
         ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LoyaltyProgram",
+        "name": "Collector Continuum",
+        "url": "https://heccollects.github.io/index.html#loyalty",
+        "description": "Tiered perks that reward HecCollects buyers with faster shipping, private drops, and appraisal credits.",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Loyalty Tiers",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Starter Tier",
+              "description": "Welcome checklist and $5 bundle credit"
+            },
+            {
+              "@type": "Offer",
+              "name": "Pro Tier",
+              "description": "10% bundle stacking and rush shipping"
+            },
+            {
+              "@type": "Offer",
+              "name": "Elite Tier",
+              "description": "Private drops and appraisal credits"
+            }
+          ]
+        }
       }
     </script>
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -264,6 +343,8 @@
         </div>
       </section>
 
+      <div data-include="partials/trust-hub.html"></div>
+
       <!-- TESTIMONIALS -->
       <section id="testimonials">
       <div class="section-content">
@@ -363,19 +444,68 @@
         <div class="card reveal">
           <p class="heading-eyebrow">Lead Magnet</p>
           <h2 id="get-updates">Claim your Collector's Drop Kit</h2>
-          <p class="heading-subtitle">Instant download + weekly alerts. No spam, just curated drops and price intel.</p>
-          <ul class="how-list">
-            <li><strong>Pricing cheatsheet:</strong> Updated comps for trending cards &amp; consoles.</li>
-            <li><strong>Condition checklist:</strong> Use it during meetups to avoid surprises.</li>
-            <li><strong>Early-drop pings:</strong> Reserve inventory before it hits public feeds.</li>
-          </ul>
+          <p class="heading-subtitle">Instant download + weekly alerts tailored to your collecting lane. Pick the magnet that fits you best.</p>
+          <div class="segment-grid" role="list">
+            <article class="segment-card" role="listitem">
+              <h3>Modern Collectors</h3>
+              <ul class="how-list">
+                <li>PSA-ready photo angles &amp; population reports</li>
+                <li>Drop reminders for sealed product re-stocks</li>
+                <li>Care guides for unpacking slabs and comics</li>
+              </ul>
+              <p class="segment-note">Best for hobbyists chasing new releases and limited drops.</p>
+            </article>
+            <article class="segment-card" role="listitem">
+              <h3>Resellers &amp; Flippers</h3>
+              <ul class="how-list">
+                <li>Negotiation scripts with margin targets</li>
+                <li>Bundle math worksheet for local pickups</li>
+                <li>Exclusive wholesale ping every Thursday</li>
+              </ul>
+              <p class="segment-note">Great for power sellers who need fresh stock and quick comps.</p>
+            </article>
+            <article class="segment-card" role="listitem">
+              <h3>Gift Givers</h3>
+              <ul class="how-list">
+                <li>Curated gift pairings under $100</li>
+                <li>Presentation checklist for consoles &amp; collectibles</li>
+                <li>Personalized note templates from Hector</li>
+              </ul>
+              <p class="segment-note">Perfect for parents, partners, and friends hunting thoughtful surprises.</p>
+            </article>
+          </div>
           <form action="/.netlify/functions/subscribe" method="POST" class="subscribe-form" novalidate>
             <label for="subscribe-email">Email address</label>
             <input type="email" name="email" placeholder="Email address" required id="subscribe-email" autocomplete="email">
+            <fieldset class="segment-fieldset">
+              <legend>Choose your Drop Kit magnet</legend>
+              <label>
+                <input type="radio" name="segment" value="modern-collectors" required>
+                Modern Collectors (cards, comics, sealed product)
+              </label>
+              <label>
+                <input type="radio" name="segment" value="resellers">
+                Resellers &amp; Flippers (inventory sourcing intel)
+              </label>
+              <label>
+                <input type="radio" name="segment" value="gift-givers">
+                Gift Givers (curated bundles &amp; presentation tips)
+              </label>
+            </fieldset>
             <div class="checkbox-group">
+              <span class="checkbox-group__title">What should we send first?</span>
               <label><input type="checkbox" name="interests" value="trading-cards"> Trading Cards</label>
               <label><input type="checkbox" name="interests" value="electronics"> Electronics</label>
+              <label><input type="checkbox" name="interests" value="memorabilia"> Memorabilia</label>
             </div>
+            <label for="subscribe-goal" class="sr-only">Purchase goal</label>
+            <select name="goal" id="subscribe-goal">
+              <option value="" selected>Select your next buying goal</option>
+              <option value="first-purchase">Planning my first purchase</option>
+              <option value="bundle-upgrade">Building a bundle</option>
+              <option value="collection-appraisal">Looking for appraisal help</option>
+              <option value="gift-shopping">Shopping for a gift</option>
+            </select>
             <input type="hidden" name="source" value="homepage">
             <input type="hidden" name="referrer" id="referrer-field">
             <p class="privacy">We’ll never sell your data. <a href="privacy.html">Privacy Policy</a></p>
@@ -386,6 +516,10 @@
             </button>
             <p id="subscribe-msg" class="form-msg" aria-live="polite"></p>
           </form>
+          <div class="links">
+            <a href="#loyalty" class="btn secondary-cta" data-analytics="subscribe-loyalty">Preview loyalty rewards</a>
+            <a href="returns.html#post-purchase-support" class="btn secondary-cta" data-analytics="subscribe-support">See post-purchase care</a>
+          </div>
         </div>
       </div>
     </section>
