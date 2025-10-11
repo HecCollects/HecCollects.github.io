@@ -6,7 +6,7 @@ tests/**/*.png
 
 logo.png
 logo-apple-touch.png
-fonts/poppins.css
+fonts/inter.css
 vendor/fontawesome/all.min.css
 vendor/webfonts/*.woff2
 vendor/webfonts/*.ttf
