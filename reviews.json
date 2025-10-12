@@ -2,39 +2,39 @@
   {
     "source": "eBay",
     "reviewer": "Jamie L.",
-    "badge": "Bundle Buyer",
-    "headline": "Saved $42 versus sold comps",
-    "text": "Hector walked me through a three-card bundle and showed every comp before invoicing. The cards landed in two days with tamper seals and a signed checklist.",
+    "badge": "Booster Box Buyer",
+    "headline": "151 case arrived minty fresh",
+    "text": "Hector filmed the seal checks before shipping and added silica packs inside the shipper. The booster box case showed up flawless and already beat the last three sold comps.",
     "rating": 5,
     "valueProps": [
-      "$42 below eBay sold average",
-      "Insured USPS Priority in 48 hours",
-      "Checklist proving pack-fresh condition"
+      "$34 below eBay sealed case average",
+      "Video proof of wrap + label match",
+      "Insured USPS Priority in 48 hours"
     ]
   },
   {
     "source": "OfferUp",
     "reviewer": "Alex P.",
-    "badge": "Local Pickup",
-    "headline": "Met up, tested, and left with extras",
-    "text": "We tested the Meta Quest in his office, and he handed over a cleaning kit plus Discord access for future drops. Smoothest OfferUp meetup I’ve had.",
+    "badge": "Meetup Verified",
+    "headline": "Shrink-wrap inspection on the spot",
+    "text": "Met up for Hidden Fates ETBs and he brought a UV light plus tamper tape. We checked every seam before cash changed hands and I flipped one the same night.",
     "rating": 5,
     "valueProps": [
-      "On-site functionality test",
-      "Bonus accessories for kit members",
-      "Discord follow-up with new drop alerts"
+      "On-site wrap verification kit",
+      "Tamper tape applied after inspection",
+      "Resold in under 12 hours"
     ]
   },
   {
     "source": "eBay",
     "reviewer": "Maria L.",
     "badge": "Repeat Buyer",
-    "headline": "Proactive updates beat Amazon",
-    "text": "I received tracking within minutes and even a DM when the carrier scanned it. Packaging was bulletproof and under market compared to other Charizard UPCs.",
+    "headline": "Packaging is collector-grade",
+    "text": "My Crown Zenith premium box was double-boxed with corner protectors and labeled \"do not crush.\" Tracking updates hit my inbox and Discord before the carrier scans posted.",
     "rating": 5,
     "valueProps": [
-      "Tracking + personal DM updates",
-      "Foam-insert packaging",
+      "Double-boxed with corner guards",
+      "Live tracking pings via email + Discord",
       "Priced 11% under last three sold"
     ]
   },
@@ -42,13 +42,13 @@
     "source": "OfferUp",
     "reviewer": "Chris W.",
     "badge": "Collector Club",
-    "headline": "Bundle builder made local deal easy",
-    "text": "I brought a trade-in list and Hector prepped comps before I arrived. Left with a binder, cash difference, and the drop kit binder tab system.",
+    "headline": "Case builder made the flip easy",
+    "text": "I pre-ordered an Obsidian Flames bundle through Hector and he had comps printed, sleeves ready, and meetup notes in the Drop Kit. Listed the extras and they were gone within 48 hours.",
     "rating": 5,
     "valueProps": [
-      "15% bundle discount honored",
+      "15% sealed lot credit honored",
       "Trade-in comps printed ahead",
-      "Drop kit organizer included"
+      "Resale guide included in Drop Kit"
     ]
   }
 ]
