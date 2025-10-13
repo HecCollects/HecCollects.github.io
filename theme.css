@@ -59,17 +59,21 @@
   /* Semantic tokens */
   --gradient-canvas: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--brand-primary-50) 65%, white) 0%,
-    color-mix(in srgb, var(--neutral-50) 80%, white) 42%,
+    var(--neutral-0) 0%,
+    var(--neutral-50) 50%,
     var(--neutral-100) 100%
   );
   --gradient-brand: linear-gradient(135deg, var(--brand-primary-400), var(--accent-400));
-  --gradient-overlay: linear-gradient(160deg, rgba(var(--brand-primary-rgb), 0.1), rgba(var(--accent-rgb), 0.08));
+  --gradient-overlay: linear-gradient(
+    160deg,
+    rgba(var(--neutral-900-rgb), 0.04),
+    rgba(var(--neutral-900-rgb), 0.08)
+  );
 
   --surface-canvas: var(--neutral-0);
   --surface-muted: color-mix(in srgb, var(--neutral-100) 75%, var(--neutral-0) 25%);
-  --surface-raised: color-mix(in srgb, var(--neutral-0) 82%, var(--brand-primary-50) 18%);
-  --surface-frosted: color-mix(in srgb, var(--neutral-0) 70%, rgba(var(--brand-primary-rgb), 0.08));
+  --surface-raised: color-mix(in srgb, var(--neutral-0) 85%, var(--neutral-100) 15%);
+  --surface-frosted: color-mix(in srgb, var(--neutral-0) 70%, rgba(var(--neutral-900-rgb), 0.06));
   --surface-overlay: rgba(var(--neutral-900-rgb), 0.08);
   --surface-backdrop: rgba(var(--neutral-900-rgb), 0.18);
 
