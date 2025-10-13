@@ -4,13 +4,13 @@ import path from 'path';
 const filePath = path.resolve(__dirname, '../index.html');
 
 const expected = [
-  'Customer Reviews',
-  'Our Story',
-  'Built on Trust',
-  'eBay',
-  'OfferUp',
-  'Subscribe',
-  'Support',
+  'Lead Magnet',
+  'Credibility',
+  'Guarantees',
+  'Social Proof',
+  'eBay Vault',
+  'OfferUp Fast Pass',
+  'Buyer Guides',
 ];
 
 test('navbar links are in expected order', async ({ page }) => {

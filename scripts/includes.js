@@ -20,7 +20,6 @@
         <li class="nav-item"><a href="#testimonials" data-analytics="nav-reviews" data-nav-link>Social Proof</a></li>
         <li class="nav-item"><a href="#ebay" data-analytics="nav-ebay" data-nav-link>eBay Vault</a></li>
         <li class="nav-item"><a href="#offerup" data-analytics="nav-offerup" data-nav-link>OfferUp Fast Pass</a></li>
-        <li class="nav-item"><a href="#subscribe" data-analytics="nav-subscribe" data-nav-link>Claim the Kit</a></li>
         <li class="nav-item"><a href="#buyer-guides" data-analytics="nav-guides" data-nav-link>Buyer Guides</a></li>
         <li class="nav-item has-dropdown">
           <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="resources-menu">
@@ -35,8 +34,7 @@
         </li>
       </ul>
       <div class="nav-actions">
-        <a class="btn nav-cta" href="#subscribe" data-analytics="nav-drop-kit">Claim Drop Kit</a>
-        <a class="nav-link-ghost" href="#contact" data-analytics="nav-contact" data-nav-link>Concierge</a>
+        <a class="btn nav-cta" href="#contact" data-analytics="nav-contact-primary">Contact Hector</a>
       </div>
     </nav>
     <button id="theme-toggle" aria-label="Toggle theme" aria-pressed="false"></button>
@@ -53,7 +51,6 @@
     <a href="#home" data-analytics="footer-home">Lead Magnet</a>
     <a href="#story" data-analytics="footer-credibility">Credibility</a>
     <a href="#approach" data-analytics="footer-guarantees">Guarantees</a>
-    <a href="#subscribe" data-analytics="footer-kit">Claim the Kit</a>
     <a href="#contact" data-analytics="footer-concierge">Concierge</a>
   </div>
   <nav
@@ -91,6 +88,38 @@
     </ul>
   </nav>
 </footer>
+`,
+    'partials/trust-hub.html': `<section id="nurture" class="trust-section">
+  <div class="section-content">
+    <div class="card reveal">
+      <p class="heading-eyebrow">Post-Purchase Nurture</p>
+      <h2 id="post-purchase">What happens after you click “Buy”</h2>
+      <p class="heading-subtitle">Every order triggers concierge updates so you always know the status, care tips, and loyalty rewards applied.</p>
+      <ol class="timeline">
+        <li>
+          <h3>Hour 0 – Confirmation</h3>
+          <p>Instant email + SMS (opt-in) summarizing comps, authenticity photos, and loyalty points earned.</p>
+        </li>
+        <li>
+          <h3>Hour 12 – Prep &amp; Packaging</h3>
+          <p>Behind-the-scenes packout shots and a care guide specific to your category (cards, electronics, or memorabilia).</p>
+        </li>
+        <li>
+          <h3>Delivery Day – Welcome Back</h3>
+          <p>Automated check-in with setup tips, condition checklist reminders, and a concierge button for follow-up support.</p>
+        </li>
+        <li>
+          <h3>Day 7 – Loyalty Boost</h3>
+          <p>Personalized offer for your next milestone plus links to leave feedback or request a trade appraisal.</p>
+        </li>
+      </ol>
+      <div class="links">
+        <a href="returns.html#post-purchase-support" class="btn secondary-cta" data-analytics="nurture-support">Read the full support policy</a>
+        <a href="#contact" class="btn secondary-cta" data-analytics="nurture-contact">Message Hector directly</a>
+      </div>
+    </div>
+  </div>
+</section>
 `
   };
 

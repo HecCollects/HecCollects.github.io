@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import path from 'path';
 
 const filePath = path.resolve(__dirname, '../index.html');
-const sections = ['home', 'testimonials', 'story', 'approach', 'ebay', 'offerup', 'subscribe', 'contact'];
+const sections = ['home', 'testimonials', 'story', 'approach', 'ebay', 'offerup', 'contact', 'nurture'];
 
 for (const section of sections) {
   test(`section ${section} is visible`, async ({ page }) => {

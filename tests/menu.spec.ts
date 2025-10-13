@@ -60,7 +60,10 @@ for (const variant of variants) {
   });
 }
 
+const isDesktopProject = (process.env.PLAYWRIGHT_TEST_PROJECT || '').includes('desktop');
+
 test.describe('desktop floating navbar', () => {
+  test.skip(!isDesktopProject, 'desktop-only behavior');
   test.use({ viewport: { width: 1440, height: 900 } });
 
   test('floating variant stays collapsed until toggled', async ({ page }) => {

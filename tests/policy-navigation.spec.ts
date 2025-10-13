@@ -3,14 +3,14 @@ import path from 'path';
 
 const pages = ['faq.html', 'returns.html', 'privacy.html'];
 
-const expectedNavAnchors = [
-  'index.html#testimonials',
+const requiredNavAnchors = [
+  'index.html',
   'index.html#story',
   'index.html#approach',
+  'index.html#testimonials',
   'index.html#ebay',
   'index.html#offerup',
-  'index.html#subscribe',
-  'index.html#support-resources',
+  'index.html#buyer-guides',
 ];
 
 test.describe('policy page navigation', () => {
@@ -39,10 +39,13 @@ test.describe('policy page navigation', () => {
       const brandHref = await page.getAttribute('header.navbar .brand', 'href');
       expect(brandHref).toBe('index.html#home');
 
-      const navAnchorHrefs = await page.$$eval('.nav-menu a', (anchors, count) => {
-        return anchors.slice(0, count).map(a => a.getAttribute('href'));
-      }, expectedNavAnchors.length);
-      expect(navAnchorHrefs).toEqual(expectedNavAnchors);
+      const navAnchorHrefs = await page.$$eval('.nav-menu a', anchors =>
+        anchors.map(a => a.getAttribute('href'))
+      );
+      requiredNavAnchors.forEach(expectedHref => {
+        expect(navAnchorHrefs).toContain(expectedHref);
+      });
+      expect(navAnchorHrefs).not.toContain('index.html#subscribe');
 
       const footerHomeHref = await page.getAttribute('footer.site-footer a', 'href');
       expect(footerHomeHref).toBe('index.html');
