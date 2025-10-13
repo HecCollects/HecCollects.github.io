@@ -82,7 +82,7 @@
         body: JSON.stringify(payload)
       });
       const responseData = await res.json().catch(() => ({}));
-      if (res.ok && responseData?.success !== false) {
+      if (res.status === 200 && responseData?.success !== false) {
         if (msg) {
           msg.textContent = responseData?.message || 'Thanks for subscribing!';
           msg.className = 'form-msg success';
@@ -98,19 +98,22 @@
         }
       } else {
         if (msg) {
-          const errorMsg = responseData?.error || 'Submission failed. Please try again later.';
+          const serviceError = !res.ok
+            ? `Subscription service returned ${res.status}. Please try again later.`
+            : responseData?.error || 'Submission failed. Please try again later.';
+          const errorMsg = responseData?.error && res.ok ? responseData.error : serviceError;
           msg.textContent = errorMsg;
           msg.className = 'form-msg error';
         }
         console.warn('Subscription failed with status', res.status, responseData);
         if (window.gtag) { window.gtag('event', 'subscribe_error'); }
       }
-    } catch {
+    } catch (error) {
       if (msg) {
-        msg.textContent = 'Submission failed. Please try again later.';
+        msg.textContent = 'Unable to reach the subscription service. Please try again later.';
         msg.className = 'form-msg error';
       }
-      console.warn('Subscription request errored');
+      console.warn('Subscription request errored', error);
       if (window.gtag) { window.gtag('event', 'subscribe_error'); }
     }
     if (btn) {

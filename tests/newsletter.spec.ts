@@ -3,7 +3,7 @@ import path from 'path';
 
 const filePath = path.resolve(__dirname, '../index.html');
 
-const subscribeEndpoint = 'https://example.com/.netlify/functions/subscribe';
+const subscribeEndpoint = 'https://heccollects-newsletter.netlify.app/.netlify/functions/subscribe';
 
 test('newsletter form handles successful serverless response', async ({ page }) => {
   await page.addInitScript((endpoint) => {
@@ -42,9 +42,29 @@ test('newsletter form handles successful serverless response', async ({ page }) 
 
   await submitButton.click();
 
-  await expect(message).toHaveText(/Subscription/);
+  await expect(message).toHaveText('Subscription successful.');
   const requests = await page.evaluate(() => window.__newsletterRequests || []);
   expect(requests.length).toBe(1);
   expect(requests[0].email_address).toBe('tester@example.com');
   expect(requests[0].honeypot).toBe('');
+});
+
+test('newsletter form surfaces service availability issues', async ({ page }) => {
+  await page.addInitScript((endpoint) => {
+    window.SUBSCRIBE_ENDPOINT = endpoint;
+    const failureResponse = {
+      ok: false,
+      status: 503,
+      json: async () => ({ error: 'Service unavailable' })
+    };
+    window.fetch = async () => failureResponse;
+  }, subscribeEndpoint);
+
+  await page.goto('file://' + filePath);
+  await page.waitForSelector('.subscribe-form');
+  await page.locator('#subscribe-email').fill('tester@example.com');
+  const submitButton = page.locator('.subscribe-form button[type="submit"]');
+  await submitButton.click();
+  const message = page.locator('#subscribe-msg');
+  await expect(message).toHaveText('Subscription service returned 503. Please try again later.');
 });
