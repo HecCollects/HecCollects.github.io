@@ -6,7 +6,7 @@ const replacements = {
   '%GA_ID%': process.env.GA_ID || '',
   '%RECAPTCHA_SITE_KEY%': process.env.RECAPTCHA_SITE_KEY || '',
   '%PHONE_NUMBER%': process.env.PHONE_NUMBER || '',
-  '%SUBSCRIBE_ENDPOINT%': process.env.SUBSCRIBE_ENDPOINT || '/.netlify/functions/subscribe',
+  '%SUBSCRIBE_ENDPOINT%': process.env.SUBSCRIBE_ENDPOINT || 'https://heccollects-newsletter.netlify.app/.netlify/functions/subscribe',
 };
 
 let content = fs.readFileSync(envPath, 'utf8');

@@ -57,7 +57,7 @@ In CI or other automated environments, these failures will surface in the build 
 
 ## Newsletter Workflow
 
-The `#subscribe` form now posts signups to a Netlify Function (`/.netlify/functions/subscribe`).
+The `#subscribe` form now posts signups to a Netlify Function (`https://heccollects-newsletter.netlify.app/.netlify/functions/subscribe`).
 `scripts/newsletter.js` serializes the form, forwards the submission to the serverless endpoint, and
 expects a JSON response describing success or failure. A honeypot field (`hp`) and Google reCAPTCHA v2
 token are both validated server-side to block bots without exposing the Mailchimp API key to the
@@ -72,7 +72,7 @@ Serverless environment variables required by `netlify/functions/subscribe.js`:
 
 Expose the client-side endpoint and public site key during the build by setting:
 
-- `SUBSCRIBE_ENDPOINT` – Optional override for the subscribe function URL (defaults to `/.netlify/functions/subscribe`).
+- `SUBSCRIBE_ENDPOINT` – Optional override for the subscribe function URL (defaults to `https://heccollects-newsletter.netlify.app/.netlify/functions/subscribe`).
 - `RECAPTCHA_SITE_KEY` – Public key loaded by the form widget.
 
 Run `npm run build` before deploying so `env.js` receives the final values.
