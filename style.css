@@ -110,7 +110,6 @@ body {
 /* ---------- Sections ---------- */
 section {
   position: relative;
-  min-height: clamp(520px, 100vh, max-content);
   scroll-snap-align: start;
   display: flex;
   justify-content: center;
@@ -120,6 +119,11 @@ section {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: scroll;
+}
+
+#home,
+#story {
+  min-height: clamp(520px, 100vh, max-content);
 }
 section::after {
   content: "";
