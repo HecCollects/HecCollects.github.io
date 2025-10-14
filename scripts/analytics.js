@@ -47,38 +47,6 @@
     });
   };
 
-  const setupSubscribeForm = () => {
-    const subscribeForm = document.querySelector('#subscribe form');
-    if (!subscribeForm) return;
-    const refField = subscribeForm.querySelector('#referrer-field');
-    try {
-      if (refField && refCode) {
-        refField.value = refCode;
-      }
-    } catch {}
-    if (subscribeForm.dataset.analyticsBound === 'true') return;
-    subscribeForm.dataset.analyticsBound = 'true';
-    subscribeForm.addEventListener('submit', () => {
-      if (refField && !refField.value) {
-        try {
-          refField.value = localStorage.getItem('ref') || '';
-        } catch {}
-      }
-    });
-  };
-
-  const setupRecaptcha = () => {
-    const recaptcha = document.querySelector('.g-recaptcha');
-    if (!recaptcha) return;
-    if (window.RECAPTCHA_SITE_KEY) {
-      recaptcha.setAttribute('data-sitekey', window.RECAPTCHA_SITE_KEY);
-      recaptcha.style.minHeight = '78px';
-      recaptcha.style.minWidth = '302px';
-    } else {
-      recaptcha.classList.add('hidden');
-    }
-  };
-
   const setupPhoneLink = () => {
     const phoneLink = document.getElementById('phone-link');
     if (!phoneLink) return;
@@ -199,8 +167,6 @@
     enforceSingleTheme();
     ensureRefCode();
     updateShareLinks();
-    setupSubscribeForm();
-    setupRecaptcha();
     setupPhoneLink();
     setupDetails();
     setupTrackables();

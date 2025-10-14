@@ -55,60 +55,21 @@ The Node utilities for fetching external data exit with a non-zero code if a req
 
 In CI or other automated environments, these failures will surface in the build logs.
 
-## Newsletter Workflow
+## Communications
 
-The `#subscribe` form now posts signups to a Netlify Function (`https://heccollects-newsletter.netlify.app/.netlify/functions/subscribe`).
-`scripts/newsletter.js` serializes the form, forwards the submission to the serverless endpoint, and
-expects a JSON response describing success or failure. A honeypot field (`hp`) and Google reCAPTCHA v2
-token are both validated server-side to block bots without exposing the Mailchimp API key to the
-browser.
+The newsletter and membership signup flow has been retired. Visitors now connect directly through the
+contact options on the landing page (email, Instagram, or concierge phone line). Serverless scripts and
+Mailchimp integrations that previously handled subscriptions have been removed to simplify the stack.
 
-Serverless environment variables required by `netlify/functions/subscribe.js`:
-
-- `MAILCHIMP_API_KEY` – Mailchimp API key with audience permissions.
-- `MAILCHIMP_AUDIENCE_ID` – Audience/list identifier for newsletter signups.
-- `MAILCHIMP_SERVER_PREFIX` – Mailchimp data center prefix (e.g., `us10`).
-- `RECAPTCHA_SECRET_KEY` – Secret key paired with the public site key. If omitted, captcha checks are skipped.
-
-Expose the client-side endpoint and public site key during the build by setting:
-
-- `SUBSCRIBE_ENDPOINT` – Optional override for the subscribe function URL (defaults to `https://heccollects-newsletter.netlify.app/.netlify/functions/subscribe`).
-- `RECAPTCHA_SITE_KEY` – Public key loaded by the form widget.
-
-Run `npm run build` before deploying so `env.js` receives the final values.
-
-`scripts/send-newsletter.js` composes update emails from `items.json` and sends them via Mailchimp.
-Run it with:
-
-```bash
-npm run send-newsletter
-```
-
-The command exits with a non-zero status if the Mailchimp request fails, ensuring send errors appear in CI logs.
-
-Set environment variables before running:
-
-- `MAILCHIMP_API_KEY` – Mailchimp API key.
-- `MAILCHIMP_CAMPAIGN_URL` – endpoint that accepts `{ subject, html }` payloads.
-
-### Scheduling
-
-To deliver newsletters regularly, schedule the script via cron or a CI workflow.
-Example cron entry sending Monday at 9 AM:
-
-```
-0 9 * * 1 cd /path/to/repo && npm run send-newsletter
-```
-
-In GitHub Actions, use a `schedule` trigger with the same command to automate delivery.
+Run `npm run build` before deploying so `env.js` receives the final analytics and contact values.
 
 ## Referral Codes
 
-Visitors can share a `ref` code by appending `?ref=CODE` to the site URL. The code is stored in `localStorage`, included with `#subscribe` form submissions via a hidden `referrer` field, and appended to outbound links marked with `data-share-link`. This allows referrals to persist across sessions and be tracked when links are shared.
+Visitors can share a `ref` code by appending `?ref=CODE` to the site URL. The code is stored in `localStorage` and appended to outbound links marked with `data-share-link` so referrals persist across sessions and when links are shared.
 
 Visiting the site with an empty `?ref=` parameter clears any previously stored code.
 
-Rewards can be granted when a referral leads to a newsletter signup or purchase. For example, a user might earn a discount or credit after a set number of successful referrals.
+Rewards can be granted when a referral leads to a purchase or concierge booking. For example, a user might earn a discount or credit after a set number of successful referrals.
 
 ## Configuration
 
