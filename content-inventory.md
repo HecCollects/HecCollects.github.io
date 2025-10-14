@@ -12,7 +12,7 @@
 | | Testimonials carousel | High | Social proof driving conversions |
 | | eBay marketplace section | High | Primary conversion path |
 | | OfferUp marketplace section | High | Alternate conversion path |
-| | Subscribe form | Medium | Supports retention; not required for purchase |
+| | Legacy subscribe CTA (retired) | Low | Subscription workflow removed in favor of direct contact |
 | | Contact links | High | Critical support and lead channel |
 | | Footer & back-to-top | Low | Utility navigation |
 | | Cookie banner | Low | Compliance, keep unobtrusive |
@@ -33,7 +33,7 @@
 ### Grouping & Demotion Recommendations
 - **Marketplace Access**: Hero, eBay, OfferUp, Featured item. Focus navigation around these.
 - **Trust & Brand**: Our Story, Built on Trust, Testimonials. Keep but streamline copy for faster scanning.
-- **Engagement**: Subscribe and Contact. Highlight contact; move subscribe below fold.
+- **Engagement**: Contact methods. Keep concierge details prominent for quick outreach.
 - **Policies & Support**: FAQ, Returns, Privacy. Merge overlapping FAQ/Returns content and demote legal/privacy items.
 - **Miscellaneous**: Footer, cookie banner, back-to-top. Keep minimal.
 
@@ -59,6 +59,6 @@ Home (highest)
 ## Alignment with User Flows
 1. **Discover & Purchase**: Hero → eBay/OfferUp sections → external checkout.
 2. **Establish Trust**: Our Story / Built on Trust / Testimonials reassure before purchase.
-3. **Stay Engaged**: Subscribe form captures interested visitors for future offers.
+3. **Stay Engaged**: Direct contact links capture interested visitors for concierge follow-ups.
 4. **Seek Support**: Contact links, FAQ, and Returns pages handle post‑purchase questions.
 
