@@ -1,20 +1,15 @@
 (() => {
   const root = document.documentElement;
-  const themes = ['light', 'dark', 'hc'];
-  const nextIcon = {
-    light: '🌙',
-    dark: '🔳',
-    hc: '☀️',
+  const enforceSingleTheme = () => {
+    if (root.getAttribute('data-theme') !== 'dark') {
+      root.setAttribute('data-theme', 'dark');
+    }
+    try {
+      localStorage.setItem('theme', 'dark');
+    } catch {}
   };
-  let storedTheme = 'light';
-  try {
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    storedTheme = localStorage.getItem('theme') || (systemDark ? 'dark' : 'light');
-    if (!themes.includes(storedTheme)) storedTheme = 'light';
-  } catch {
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    storedTheme = systemDark ? 'dark' : 'light';
-  }
+
+  enforceSingleTheme();
 
   let refCode = '';
   let refComputed = false;
@@ -70,33 +65,6 @@
         } catch {}
       }
     });
-  };
-
-  const setTheme = (theme, toggle) => {
-    root.setAttribute('data-theme', theme);
-    if (toggle) {
-      toggle.textContent = nextIcon[theme];
-      toggle.setAttribute('aria-pressed', theme === 'light' ? 'false' : 'true');
-    }
-  };
-
-  const bindThemeToggle = () => {
-    const themeToggle = document.getElementById('theme-toggle');
-    setTheme(storedTheme, themeToggle);
-    if (!themeToggle) return false;
-    if (themeToggle.dataset.analyticsBound === 'true') return true;
-    themeToggle.dataset.analyticsBound = 'true';
-    themeToggle.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme') || storedTheme;
-      const index = themes.indexOf(current);
-      const next = themes[(index + 1) % themes.length];
-      setTheme(next, themeToggle);
-      storedTheme = next;
-      try {
-        localStorage.setItem('theme', next);
-      } catch {}
-    });
-    return true;
   };
 
   const setupRecaptcha = () => {
@@ -228,10 +196,10 @@
   };
 
   const initAnalytics = () => {
+    enforceSingleTheme();
     ensureRefCode();
     updateShareLinks();
     setupSubscribeForm();
-    const hasThemeToggle = bindThemeToggle();
     setupRecaptcha();
     setupPhoneLink();
     setupDetails();
@@ -239,7 +207,7 @@
     setupCookieBanner();
     bindScrollTracking();
     bindTimeOnPage();
-    return hasThemeToggle || !!document.getElementById('nav-menu');
+    return !!document.getElementById('nav-menu');
   };
 
   if (!initAnalytics()) {

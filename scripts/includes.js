@@ -37,7 +37,6 @@
         <a class="btn nav-cta" href="#contact" data-analytics="nav-contact-primary">Contact Hector</a>
       </div>
     </nav>
-    <button id="theme-toggle" aria-label="Toggle theme" aria-pressed="false"></button>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
       <span class="line" aria-hidden="true"></span>
       <span class="line" aria-hidden="true"></span>

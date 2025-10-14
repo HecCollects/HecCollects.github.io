@@ -10,7 +10,6 @@ const selectors = [
 ];
 
 const themes = [
-  { name: 'light', value: 'light' },
   { name: 'dark', value: 'dark' },
 ] as const;
 
