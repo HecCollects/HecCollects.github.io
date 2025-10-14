@@ -96,16 +96,25 @@
     }
   });
 
+  if (document.body) {
+    document.body.classList.add('js-reveal');
+  }
+
   // Reveal on scroll
   const revealEls = document.querySelectorAll('.reveal');
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold:0.3 });
-  revealEls.forEach(el => revealObs.observe(el));
+
+  if ('IntersectionObserver' in window) {
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+    revealEls.forEach(el => revealObs.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
 
   const initFeaturedCarousels = () => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
