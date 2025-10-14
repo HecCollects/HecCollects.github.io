@@ -84,12 +84,12 @@ body {
   }
   .card,
   .btn,
-  .reveal {
+  .js-reveal .reveal {
     transition-duration: 0s;
   }
   .card:hover,
   .btn:hover,
-  .reveal {
+  .js-reveal .reveal {
     transform: none;
   }
   .scroll-cue,
@@ -427,16 +427,24 @@ section:nth-of-type(even)::after {
 .tilt:hover {
   transform: none;
 }
-.reveal {
+.js-reveal .reveal {
   opacity: 0;
   transform: translateY(40px);
   transition:
     opacity var(--transition-slow),
     transform var(--transition-slow);
 }
-.reveal.visible {
+.js-reveal .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 .hidden {
   display: none !important;
