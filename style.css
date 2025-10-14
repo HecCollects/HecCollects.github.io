@@ -1580,31 +1580,6 @@ noscript p {
     transform 0.3s,
     opacity 0.3s;
 }
-#theme-toggle {
-  background: rgba(var(--black-rgb), 0.05);
-  border: 1px solid rgba(var(--black-rgb), 0.12);
-  color: var(--black);
-  cursor: pointer;
-  font-size: 1.2rem;
-  margin-left: auto;
-  border-radius: 999px;
-  width: 2.5rem;
-  height: 2.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-#theme-toggle:hover,
-#theme-toggle:focus-visible {
-  background: rgba(var(--black-rgb), 0.1);
-  transform: translateY(-1px);
-  box-shadow: 0 0 0 3px rgba(var(--brand-primary-rgb), 0.25);
-}
-.navbar--compact #theme-toggle,
-[data-nav-variant="compact"] .navbar #theme-toggle {
-  margin-left: clamp(0.5rem, 2.5vw, 1rem);
-}
 .nav-toggle.open .line:nth-child(1) {
   transform: translateY(9px) rotate(45deg);
 }
@@ -1951,11 +1926,6 @@ noscript p {
   }
   .nav-item {
     position: relative;
-  }
-  .navbar--compact #theme-toggle,
-  [data-nav-variant="compact"] .navbar #theme-toggle {
-    justify-self: end;
-    margin-left: clamp(0.75rem, 2vw, 1.25rem);
   }
   .card {
     max-width: 900px;

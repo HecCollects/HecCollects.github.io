@@ -411,17 +411,3 @@ body.js-has-transition.fade-out::after {
   background: var(--color-text);
 }
 
-[data-theme="dark"] #theme-toggle,
-[data-theme="hc"] #theme-toggle {
-  color: var(--color-text);
-  border-color: rgba(var(--color-text-rgb), 0.4);
-  background: rgba(var(--color-text-rgb), 0.1);
-}
-
-[data-theme="dark"] #theme-toggle:hover,
-[data-theme="dark"] #theme-toggle:focus-visible,
-[data-theme="hc"] #theme-toggle:hover,
-[data-theme="hc"] #theme-toggle:focus-visible {
-  background: rgba(var(--color-text-rgb), 0.18);
-  box-shadow: 0 0 0 3px rgba(var(--color-text-rgb), 0.3);
-}
