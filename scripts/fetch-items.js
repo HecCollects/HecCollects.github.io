@@ -26,6 +26,35 @@ function getTagColor(tag = '', stock = 0) {
   return '#2563EB';
 }
 
+async function fetchWithRetries(url, options = {}, retries = 2) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(url, options);
+      if (res.ok) return res;
+      if (res.status === 403) {
+        console.warn(`Request to ${url} returned 403 (forbidden).`);
+        return null;
+      }
+      if (res.status === 429 || (res.status >= 500 && res.status < 600)) {
+        const waitMs = Math.pow(2, attempt) * 500;
+        await new Promise(r => setTimeout(r, waitMs));
+        continue;
+      }
+      console.warn(`Request to ${url} failed with status ${res.status}`);
+      return null;
+    } catch (err) {
+      if (attempt < retries) {
+        const waitMs = Math.pow(2, attempt) * 500;
+        await new Promise(r => setTimeout(r, waitMs));
+        continue;
+      }
+      console.warn(`Network error fetching ${url}: ${err.message}`);
+      return null;
+    }
+  }
+  return null;
+}
+
 async function fetchEbay() {
   const appId = process.env.EBAY_APP_ID;
   if (!appId) {
@@ -55,10 +84,16 @@ async function fetchEbay() {
 
 async function fetchOfferUp() {
   const url = `https://api.offerup.com/api/webapi/browse/search/?search=${encodeURIComponent(SEARCH_TERM)}&limit=${LIMIT}`;
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`OfferUp request failed: ${res.status}`);
+  const headers = {
+    'Accept': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (compatible; heccollects-bot/1.0)'
+  };
+
+  const res = await fetchWithRetries(url, { headers }, 2);
+  if (!res) {
+    return [];
   }
+
   const json = await res.json();
   const items = json?.data?.items || json?.response?.sections?.[0]?.items || [];
   return items.slice(0, LIMIT).map(it => {
@@ -75,7 +110,10 @@ async function fetchOfferUp() {
 }
 
 async function main() {
-  const [ebay, offerup] = await Promise.all([fetchEbay(), fetchOfferUp()]);
+  const results = await Promise.allSettled([fetchEbay(), fetchOfferUp()]);
+  const ebay = results[0].status === 'fulfilled' ? results[0].value : [];
+  const offerup = results[1].status === 'fulfilled' ? results[1].value : [];
+
   const data = { ebay, offerup };
   await fs.writeFile(OUTPUT, JSON.stringify(data, null, 2));
   console.log(`Wrote ${OUTPUT}`);
