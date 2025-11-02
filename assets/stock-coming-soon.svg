@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">Stock coming soon</title>
+  <desc id="desc">Circular badge with arrow wrapped around a sealed box icon</desc>
+  <defs>
+    <linearGradient id="badgeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="58" fill="url(#badgeGradient)" opacity="0.2"/>
+  <circle cx="60" cy="60" r="44" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/>
+  <path d="M38 60a22 22 0 1 1 7 16.2" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M38 60l-4 15 15-4" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="46" y="46" width="36" height="30" rx="4" ry="4" fill="#1d4ed8"/>
+  <path d="M46 56h36" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+  <path d="M64 46v30" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+</svg>

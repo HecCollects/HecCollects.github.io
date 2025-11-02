@@ -1073,6 +1073,50 @@ noscript p {
   font-style: italic;
   letter-spacing: 0.02em;
 }
+
+.featured-description {
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text-secondary) 85%, transparent);
+}
+
+.featured-card--coming-soon {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--surface-frosted) 70%, rgba(var(--brand-primary-rgb), 0.25));
+  cursor: default;
+}
+
+.featured-card--coming-soon .featured-media {
+  --featured-media-ratio: 1;
+  display: grid;
+  place-items: center;
+  background: rgba(var(--brand-primary-rgb), 0.08);
+}
+
+.featured-card--coming-soon .featured-media::after {
+  content: none;
+}
+
+.featured-card--coming-soon img {
+  width: 65%;
+  max-width: 160px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  transform: none;
+}
+
+.featured-card--coming-soon:hover,
+.featured-card--coming-soon:focus-visible {
+  transform: none;
+  box-shadow: var(--shadow-xs);
+  border-color: color-mix(in srgb, var(--border-subtle) 80%, transparent);
+}
+
+.featured-card--coming-soon:hover img,
+.featured-card--coming-soon:focus-visible img {
+  transform: none;
+}
+
 .featured-card:hover,
 .featured-card:focus-visible {
   transform: translateY(-4px);

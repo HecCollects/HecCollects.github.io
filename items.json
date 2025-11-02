@@ -47,6 +47,20 @@
       "bonus": "Members unlock free tamper seals",
       "badge": "Only 1 left",
       "tagColor": "#DC2626"
+    },
+    {
+      "title": "Vault refresh coming soon",
+      "description": "The next wave of graded and sealed drops is being verified—lock in alerts to shop it first.",
+      "comingSoon": true,
+      "comingSoonLabel": "Restock in progress",
+      "price": "Be first when the vault opens",
+      "valueProps": [
+        "DM @heccollects for the priority alert list",
+        "Includes sealed-case provenance photos",
+        "Members can request bundle pricing early"
+      ],
+      "bonus": "Concierge clients receive a timestamped hold confirmation",
+      "tagColor": "#FACC15"
     }
   ],
   "offerup": [
@@ -97,6 +111,20 @@
       "bonus": "Members get a free display riser",
       "stock": 1,
       "tagColor": "#16A34A"
+    },
+    {
+      "title": "Next sealed drop • Waitlist open",
+      "description": "We are refreshing the Local Fast Pass inventory—save your spot now to be first when the restock lands.",
+      "comingSoon": true,
+      "comingSoonLabel": "Stock coming soon",
+      "price": "Concierge ping list available",
+      "valueProps": [
+        "Message @heccollects to join the restock queue",
+        "Get verification photos before meetup",
+        "Members unlock early pickup windows"
+      ],
+      "bonus": "Waitlist confirmations include timestamped DM receipts",
+      "tagColor": "#FACC15"
     }
   ]
 }

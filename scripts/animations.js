@@ -140,7 +140,7 @@
       const track = carousel.querySelector('.featured-items');
       const prev = carousel.querySelector('.carousel-prev');
       const next = carousel.querySelector('.carousel-next');
-      const items = track ? Array.from(track.querySelectorAll('a')) : [];
+      const items = track ? Array.from(track.querySelectorAll('.featured-card')) : [];
       if (!items.length) return;
       track.setAttribute('aria-live', 'polite');
       let idx = 0;
@@ -208,30 +208,41 @@
             return;
           }
           items.forEach((item, i) => {
-            const link = document.createElement('a');
-            link.href = item.link;
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-            link.setAttribute('data-analytics', `${key}-item-${i + 1}`);
-            link.classList.add('featured-card');
-            link.addEventListener('click', () => {
-              const label = link.getAttribute('data-analytics');
-              if (window.gtag) {
-                window.gtag('event', 'click', {
-                  event_category: 'featured',
-                  event_label: label,
-                });
-              }
-            });
+            const isComingSoon = item.comingSoon || item.status === 'comingSoon';
+            const isInteractive = Boolean(item.link) && !isComingSoon;
+            const card = document.createElement(isInteractive ? 'a' : 'article');
+            card.classList.add('featured-card');
+            if (isComingSoon) {
+              card.classList.add('featured-card--coming-soon');
+            }
+            if (isInteractive) {
+              card.href = item.link;
+              card.target = '_blank';
+              card.rel = 'noopener noreferrer';
+              card.setAttribute('data-analytics', `${key}-item-${i + 1}`);
+              card.addEventListener('click', () => {
+                const label = card.getAttribute('data-analytics');
+                if (window.gtag) {
+                  window.gtag('event', 'click', {
+                    event_category: 'featured',
+                    event_label: label,
+                  });
+                }
+              });
+            } else {
+              card.setAttribute('role', 'group');
+              card.setAttribute('aria-label', item.alt || item.title || 'Coming soon');
+            }
 
             const media = document.createElement('div');
             media.className = 'featured-media';
 
             const img = document.createElement('img');
-            const small = item.imageSmall || item.imageLarge || '';
-            const large = item.imageLarge || item.imageSmall || '';
+            const fallbackImage = item.placeholderImage || 'assets/stock-coming-soon.svg';
+            const small = item.imageSmall || item.imageLarge || fallbackImage;
+            const large = item.imageLarge || item.imageSmall || fallbackImage;
             img.src = small;
-            img.alt = item.alt || '';
+            img.alt = item.alt || (isComingSoon ? 'Stock coming soon placeholder' : '');
             img.loading = 'lazy';
             try {
               const getWidth = (u) => {
@@ -251,14 +262,21 @@
               }
             } catch {}
             media.appendChild(img);
-            link.appendChild(media);
+            card.appendChild(media);
             if (item.tagColor) {
-              link.style.setProperty('--featured-border-color', item.tagColor);
+              card.style.setProperty('--featured-border-color', item.tagColor);
             }
-            if (item.badge || item.stock) {
+            const metaLabel = item.badge
+              ? item.badge
+              : item.stock
+                ? `Only ${item.stock} left`
+                : isComingSoon
+                  ? (item.comingSoonLabel || 'Stock coming soon')
+                  : '';
+            if (metaLabel) {
               const meta = document.createElement('span');
               meta.className = 'item-meta';
-              meta.textContent = item.badge ? item.badge : `Only ${item.stock} left`;
+              meta.textContent = metaLabel;
               if (item.tagColor) {
                 meta.style.backgroundColor = item.tagColor;
               }
@@ -270,6 +288,13 @@
             title.className = 'featured-title';
             title.textContent = item.title || item.caption || item.alt || 'Featured find';
             details.appendChild(title);
+
+            if (item.description) {
+              const description = document.createElement('p');
+              description.className = 'featured-description';
+              description.textContent = item.description;
+              details.appendChild(description);
+            }
 
             const priceText = item.price || item.priceText || item.priceLabel || '';
             const price = document.createElement('span');
@@ -302,8 +327,8 @@
               details.appendChild(bonus);
             }
 
-            link.appendChild(details);
-            container.appendChild(link);
+            card.appendChild(details);
+            container.appendChild(card);
           });
         };
         buildItems('ebay', 'ebay-items');
