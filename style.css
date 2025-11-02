@@ -1982,6 +1982,10 @@ noscript p {
     border-left: none;
     min-width: 13rem;
     z-index: 10002;
+    display: none;
+  }
+  .dropdown-menu.dropdown-menu--open {
+    display: flex;
   }
   .nav-item {
     position: relative;

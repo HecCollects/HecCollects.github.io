@@ -26,7 +26,7 @@
             Resources
             <span class="dropdown-icon" aria-hidden="true"></span>
           </button>
-          <ul id="resources-menu" class="dropdown-menu" role="menu" hidden>
+          <ul id="resources-menu" class="dropdown-menu" role="menu">
             <li role="none"><a role="menuitem" href="faq.html" data-analytics="nav-faq">FAQ</a></li>
             <li role="none"><a role="menuitem" href="returns.html" data-analytics="nav-returns">Returns</a></li>
             <li role="none"><a role="menuitem" href="privacy.html" data-analytics="nav-privacy">Privacy</a></li>
