@@ -56,6 +56,22 @@
     burger.setAttribute('aria-expanded', 'false');
     navMenu.setAttribute('aria-hidden', 'true');
 
+    const isDesktop = () => mql.matches;
+
+    const setMenuVisibility = (menu, isOpen) => {
+      if (!menu) return;
+      menu.classList.toggle('dropdown-menu--open', isOpen);
+      if (isDesktop()) {
+        menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      } else {
+        menu.removeAttribute('aria-hidden');
+      }
+    };
+
+    const hideMenu = (menu) => setMenuVisibility(menu, false);
+
+    const showMenu = (menu) => setMenuVisibility(menu, true);
+
     const closeDropdowns = (exception) => {
       dropdownToggles.forEach(toggle => {
         if (exception && toggle === exception) return;
@@ -63,34 +79,41 @@
         const menuId = toggle.getAttribute('aria-controls');
         if (!menuId) return;
         const menu = document.getElementById(menuId);
-        if (menu && !menu.hasAttribute('hidden')) {
-          menu.setAttribute('hidden', '');
-        }
+        hideMenu(menu);
       });
     };
 
     dropdownToggles.forEach(toggle => {
       const menuId = toggle.getAttribute('aria-controls');
       const menu = menuId ? document.getElementById(menuId) : null;
-      if (menu && !menu.hasAttribute('hidden')) {
-        menu.setAttribute('hidden', '');
-      }
+      hideMenu(menu);
       toggle.addEventListener('click', (event) => {
         event.stopPropagation();
         const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
         if (isExpanded) {
           toggle.setAttribute('aria-expanded', 'false');
-          menu?.setAttribute('hidden', '');
+          hideMenu(menu);
         } else {
           closeDropdowns(toggle);
           toggle.setAttribute('aria-expanded', 'true');
-          menu?.removeAttribute('hidden');
+          showMenu(menu);
         }
       });
       toggle.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
+        if (event.key === 'Tab' && !event.shiftKey) {
+          closeDropdowns(toggle);
+          toggle.setAttribute('aria-expanded', 'true');
+          showMenu(menu);
+        } else if (event.key === 'Escape') {
           closeDropdowns();
           toggle.blur();
+        }
+      });
+      menu?.addEventListener('focusout', (event) => {
+        const next = event.relatedTarget;
+        if (!next || (!menu.contains(next) && next !== toggle)) {
+          toggle.setAttribute('aria-expanded', 'false');
+          hideMenu(menu);
         }
       });
     });
